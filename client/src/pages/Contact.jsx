@@ -1,13 +1,32 @@
 import ContactForm from '../components/ContactForm';
+import Grid3 from '../components/Grid3';
+import '../App.css';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithub, faLinkedin, faFacebook } from '@fortawesome/free-brands-svg-icons';
-import { faEnvelope, faSquare } from '@fortawesome/free-solid-svg-icons';
+import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 
 export default function Contact() {
   return (
     <div className="contact-container">
       <h1>Contact Me</h1>
+
+
+
+
+
+
+
+      <div className="grid-wrapper">
+        <div className="white-box">
+      <Grid3 />
+      </div>
+      </div>
+
+
+
+
+
 
       <div className="separator-line"></div>
 

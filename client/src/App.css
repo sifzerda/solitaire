@@ -42,7 +42,32 @@ body {
 
 
 
+.grid-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Adjust height as needed */
+}
 
+.white-box {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(10, 30px); /* Adjust cell width as needed */
+}
+
+.cell.mine {
+  background-color: #d4001c; /* Example background color for alive cells */
+}
+
+.cell.safe {
+  background-color: white; /* Example background color for dead cells */
+}
 
 
 
