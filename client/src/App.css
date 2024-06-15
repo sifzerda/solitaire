@@ -62,27 +62,54 @@ body {
   grid-template-columns: repeat(10, 30px); /* Adjust cell width as needed */
 }
 
-.cell.mine {
-  background-color: #d4001c; /* Example background color for alive cells */
+.cell {
+  background-color: #e0e0e0; /* Default background color for cells */
+  border: 1px solid #ccc; /* Border color */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-.cell.safe {
-  background-color: white; /* Example background color for dead cells */
+.cell.checked {
+  background-color: lightgreen; /* Green background for checked cells */
+  color: #000; /* Black text color */
+}
+
+.cell.bomb {
+  background-color:  #ccc;
+}
+
+.clicked-bomb {
+  background-color: #f00!important;  
+  color: #fcf8f8; /* Black text color */
+}
+
+.bomb {
+  background-color: #ffcdd2; /* Background color for bomb cells */
+  color: #f44336; /* Text color */
+}
+
+.cell:hover {
+  background-color: #f0f0f0; /* Background color on hover */
+}
+
+.checked {
+  background-color: #a5d6a7; /* Background color for checked cells */
+  color: #4caf50; /* Text color */
 }
 
 .reset-button {
-  background-color: #f44336; /* Red background color */
-  color: white; /* White text color */
-  border: none; /* No border */
-  padding: 10px 20px; /* Padding */
-  font-size: 16px; /* Font size */
-  cursor: pointer; /* Cursor style on hover */
-  border-radius: 4px; /* Rounded corners */
-  margin-bottom: 10px; /* Margin bottom */
+  margin-top: 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
 }
 
 .reset-button:hover {
-  background-color: #d32f2f; /* Darker red on hover */
+  background-color: #ddd; /* Light gray background on hover */
 }
 
 
