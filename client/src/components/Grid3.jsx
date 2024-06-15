@@ -4,7 +4,7 @@ import '../App.css'; // Assuming you have a CSS file for styling
 function Grid() {
   const numRows = 10;
   const numCols = 10;
-  const numCheckmarks = 50;
+  const numCheckmarks = 70;
   const numBombs = numRows * numCols - numCheckmarks; // Calculate number of bombs
 
   // Initialize grid with 10 rows and 10 columns
