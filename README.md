@@ -48,9 +48,10 @@ Others:
 [x] Clicking a mine = game over
 [x] Remove id visibility, switch to single number
 [] non value cells (currently blank) update with styling change when clicked
-[] blocks of non value cells get selected if one is 
+[x] blocks of non value cells get selected if one is 
 [] CSS styling (bomb cell red, button depressed)
 [] 3 difficulties, or difficulty options:
 - mimic actual game difficulty options 
 - grid size
 - mine number
+[] right click applies flag, another removes flag

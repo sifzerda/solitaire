@@ -40,7 +40,7 @@ body {
 }
 
 
-
+/* ------------------------- minesweeper -------------------------*/
 
 .grid-wrapper {
   display: flex;
@@ -73,47 +73,17 @@ body {
   transition: background-color 0.3s ease;
 }
 
-.cell.checked {
-  background-color: lightgreen; /* Green background for checked cells */
-  color: #000; /* Black text color */
+.cell.revealed {
+  background-color: lightblue!important; /* Color for revealed cells */
+}
+
+.cell.inactive {
+  pointer-events: none!important; /* Disable clicking on inactive cells */
 }
 
 .cell.bomb {
-  background-color:  #ccc;
+  background-color: red!important; /* Color for bomb cells */
 }
-
-.clicked-bomb {
-  background-color: #f00!important;  
-  color: #fcf8f8; /* Black text color */
-}
-
-.bomb {
-  background-color: #ffcdd2; /* Background color for bomb cells */
-  color: #f44336; /* Text color */
-}
-
-.cell:hover {
-  background-color: #f0f0f0; /* Background color on hover */
-}
-
-.checked {
-  background-color: #a5d6a7; /* Background color for checked cells */
-  color: #4caf50; /* Text color */
-}
-
-.reset-button {
-  margin-top: 10px;
-  padding: 10px 20px;
-  font-size: 16px;
-  cursor: pointer;
-}
-
-.reset-button:hover {
-  background-color: #ddd; /* Light gray background on hover */
-}
-
-
-
 
 
 /* ------- main header title --------*/

@@ -17,7 +17,8 @@ const Grid = () => {
         id: rowIndex * cols + colIndex + 1,
         active: true,
         content: '',
-        revealed: false // Track if cell content has been revealed
+        revealed: false, // Track if cell content has been revealed
+        flagged: false // Track if cell has been flagged
       }))
     );
   };
@@ -25,47 +26,62 @@ const Grid = () => {
   const [grid, setGrid] = useState(generateInitialGrid());
 
   const handleClick = (row, col) => {
-    if (grid[row][col].active && !grid[row][col].revealed) {
-      const newGrid = [...grid];
-      if (newGrid[row][col].content === 'X') {
-        // Change all bomb cells to reveal bombs
-        newGrid.forEach((row, rowIndex) => {
-          row.forEach((cell, colIndex) => {
-            if (cell.content === 'X') {
-              newGrid[rowIndex][colIndex].content = '💣';
-              newGrid[rowIndex][colIndex].active = false;
-              newGrid[rowIndex][colIndex].revealed = true;
+    const cell = grid[row][col];
+
+    if (!cell.active || cell.revealed) {
+      return; // Do nothing if cell is inactive or already revealed
+    }
+
+    const newGrid = [...grid];
+
+    if (cell.content === 'X') {
+      // Clicked on a bomb
+      newGrid.forEach((row, rowIndex) => {
+        row.forEach((cell, colIndex) => {
+          if (cell.content === 'X') {
+            newGrid[rowIndex][colIndex].content = '💣';
+            newGrid[rowIndex][colIndex].active = false;
+            newGrid[rowIndex][colIndex].revealed = true;
+          }
+        });
+      });
+
+      setGrid(newGrid);
+
+      setTimeout(() => {
+        alert('You clicked a bomb! Game over.');
+        generateNewGrid();
+      }, 500);
+    } else {
+      // Clicked on a non-bomb cell
+      const revealEmptyCells = (r, c) => {
+        if (newGrid[r][c].revealed) return;
+        newGrid[r][c].revealed = true;
+        if (newGrid[r][c].content === '') {
+          directions.forEach(([dRow, dCol]) => {
+            const newRow = r + dRow;
+            const newCol = c + dCol;
+            if (newRow >= 0 && newRow < rows && newCol >= 0 && newCol < cols) {
+              revealEmptyCells(newRow, newCol);
             }
           });
-        });
-
-        setGrid(newGrid);
-
-        setTimeout(() => {
-          alert('You clicked a bomb! Game over.');
-          generateNewGrid();
-        }, 500);
-      } else {
-        // Recursively reveal cells if content is empty (0 bombs nearby)
-        const revealEmptyCells = (r, c) => {
-          if (newGrid[r][c].revealed) return;
-          newGrid[r][c].revealed = true;
-          if (newGrid[r][c].content === '') {
-            directions.forEach(([dRow, dCol]) => {
-              const newRow = r + dRow;
-              const newCol = c + dCol;
-              if (newRow >= 0 && newRow < rows && newCol >= 0 && newCol < cols) {
-                revealEmptyCells(newRow, newCol);
-              }
-            });
-          }
-        };
-
-        revealEmptyCells(row, col);
-
-        setGrid(newGrid);
-      }
+        }
+      };
+      revealEmptyCells(row, col);
+      setGrid(newGrid);
     }
+  };
+
+  const handleRightClick = (event, row, col) => {
+    event.preventDefault(); // Prevent the context menu from showing up
+
+    if (!grid[row][col].active || grid[row][col].revealed) {
+      return; // Do nothing if cell is inactive or already revealed
+    }
+
+    const newGrid = [...grid];
+    newGrid[row][col].flagged = !newGrid[row][col].flagged;
+    setGrid(newGrid);
   };
 
   const generateNewGrid = () => {
@@ -115,8 +131,9 @@ const Grid = () => {
                 key={colIndex}
                 className={`cell ${!cell.active ? 'inactive' : ''}`}
                 onClick={() => handleClick(rowIndex, colIndex)}
+                onContextMenu={(event) => handleRightClick(event, rowIndex, colIndex)}
               >
-                {cell.revealed ? cell.content : ''}
+                {cell.revealed ? cell.content : cell.flagged ? '🚩' : ''}
               </div>
             ))}
           </div>
