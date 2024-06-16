@@ -1,7 +1,16 @@
 # gamestack
 
+This is a personal project to create a react MERN stack app which has a number of simple games. Currently has minesweeper.
 
 
+Others:
+
+- solitaire
+- pacman
+- frogger
+- poker
+- pool (?)
+- pinball (?)
 
 
 ## Steps to creating Minesweeper:
@@ -21,4 +30,18 @@
 11. h
 12. h
 13. h
-14. 
+
+## TO DO: 
+
+[x] Grid
+[x] Event listening
+[x] Bombs
+[x] Proximity dynamic
+[] Remove Xs
+[x] Clicking a bomb = game over
+[] Remove id visibility, switch to single number
+[] CSS styling (bomb cell red, button depressed)
+[] 3 difficulties, or difficulty options:
+- mimic actual game difficulty options 
+- grid size
+- bomb number

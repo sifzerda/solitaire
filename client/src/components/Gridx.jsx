@@ -25,6 +25,14 @@ const Grid = () => {
       const newGrid = [...grid];
       if (newGrid[row][col].content === 'X') {
         newGrid[row][col].content = '💣'; // Change 'X' to bomb
+      
+////////// game over if bomb clicked:////////////
+        setGrid(newGrid); // Update the state with the new grid
+        setTimeout(() => {
+          alert('You clicked a bomb! Game over.'); // Alert after displaying bomb emoji
+          generateNewGrid(); // Reset the grid after game over
+        }, 500);
+//////////////////////////////////
       } else {
         newGrid[row][col].content = newGrid[row][col].id.toString();
       }
