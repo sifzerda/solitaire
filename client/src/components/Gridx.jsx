@@ -22,9 +22,12 @@ const Grid = () => {
   // Function to handle cell click
   const handleClick = (row, col) => {
     if (grid[row][col].active) {
-      // Update grid to display cell's id and mark it as inactive
       const newGrid = [...grid];
-      newGrid[row][col].content = newGrid[row][col].id.toString();
+      if (newGrid[row][col].content === 'X') {
+        newGrid[row][col].content = '💣'; // Change 'X' to bomb
+      } else {
+        newGrid[row][col].content = newGrid[row][col].id.toString();
+      }
       newGrid[row][col].active = false;
       setGrid(newGrid);
     }
