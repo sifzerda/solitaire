@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../App.css'; // Assuming App.css is your stylesheet for styling
 
 const Grid = () => {
@@ -24,6 +24,12 @@ const Grid = () => {
   };
 
   const [grid, setGrid] = useState(generateInitialGrid());
+  const [nonBombCellsCount, setNonBombCellsCount] = useState(rows * cols - 3); // Total cells minus 3 bombs
+  const [revealedNonBombCount, setRevealedNonBombCount] = useState(0);
+
+  useEffect(() => {
+    checkWinCondition();
+  }, [revealedNonBombCount]);
 
   const handleClick = (row, col) => {
     const cell = grid[row][col];
@@ -57,6 +63,7 @@ const Grid = () => {
       const revealEmptyCells = (r, c) => {
         if (newGrid[r][c].revealed) return;
         newGrid[r][c].revealed = true;
+        setRevealedNonBombCount(prevCount => prevCount + 1); // Increment count of revealed non-bomb cells
         if (newGrid[r][c].content === '') {
           directions.forEach(([dRow, dCol]) => {
             const newRow = r + dRow;
@@ -119,6 +126,13 @@ const Grid = () => {
     });
 
     setGrid(newGrid);
+    setRevealedNonBombCount(0);
+  };
+
+  const checkWinCondition = () => {
+    if (revealedNonBombCount === nonBombCellsCount) {
+      alert('You won!');
+    }
   };
 
   return (

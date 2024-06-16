@@ -55,3 +55,4 @@ Others:
 - grid size
 - mine number
 [] right click applies flag, another removes flag
+[] win alert triggers when all cells (minus bomb cells) have been revealed
