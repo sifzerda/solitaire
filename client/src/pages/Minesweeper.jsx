@@ -5,7 +5,7 @@ import '../App.css';
 export default function About () {
   return (
     <div>
-      <h1>About Me</h1>
+      <h1>Minesweeper</h1>
 
       <p className="separator-line"></p>
 
@@ -27,7 +27,7 @@ export default function About () {
 
 
 
- 
+
       <div className='grid-wrapper'>  
       <div className='white-box'>
       <Minesweeper />
