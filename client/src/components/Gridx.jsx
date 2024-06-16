@@ -21,8 +21,18 @@ const Grid = () => {
     if (grid[row][col].active) {
       const newGrid = [...grid];
       if (newGrid[row][col].content === 'X') {
-        newGrid[row][col].content = '💣';
+        // Change all bomb cells to reveal bombs
+        newGrid.forEach((row, rowIndex) => {
+          row.forEach((cell, colIndex) => {
+            if (cell.content === 'X') {
+              newGrid[rowIndex][colIndex].content = '💣';
+              newGrid[rowIndex][colIndex].active = false;
+            }
+          });
+        });
+
         setGrid(newGrid);
+
         setTimeout(() => {
           alert('You clicked a bomb! Game over.');
           generateNewGrid();
