@@ -5,17 +5,19 @@ const Grid = () => {
   const rows = 5;
   const cols = 5;
 
-  // Initialize grid with cells containing id and active properties
-  const initialGrid = Array(rows).fill().map((row, rowIndex) =>
-    Array(cols).fill().map((cell, colIndex) => ({
-      id: rowIndex * cols + colIndex + 1,
-      active: true, // true means cell is active (clickable)
-      content: null
-    }))
-  );
+  // Function to generate initial grid with cells containing id and active properties
+  const generateInitialGrid = () => {
+    return Array(rows).fill().map((row, rowIndex) =>
+      Array(cols).fill().map((cell, colIndex) => ({
+        id: rowIndex * cols + colIndex + 1,
+        active: true, // true means cell is active (clickable)
+        content: null
+      }))
+    );
+  };
 
   // State to hold the grid and manage updates
-  const [grid, setGrid] = useState(initialGrid);
+  const [grid, setGrid] = useState(generateInitialGrid());
 
   // Function to handle cell click
   const handleClick = (row, col) => {
@@ -28,8 +30,11 @@ const Grid = () => {
     }
   };
 
-  // Effect to randomly select three cells and mark them as 'X'
-  useEffect(() => {
+  // Function to generate new random 'X' cells and update the grid
+  const generateNewGrid = () => {
+    const newGrid = generateInitialGrid();
+
+    // Randomly select three cells and mark them as 'X'
     const randomCells = [];
     while (randomCells.length < 3) {
       const randomRow = Math.floor(Math.random() * rows);
@@ -39,8 +44,6 @@ const Grid = () => {
       }
     }
 
-    // Update grid to mark selected cells with 'X'
-    const newGrid = [...grid];
     randomCells.forEach(cell => {
       newGrid[cell.row][cell.col].content = 'X';
     });
@@ -64,7 +67,7 @@ const Grid = () => {
       });
     };
 
-    // Iterate through the grid to update adjacent cells
+    // Iterate through the new grid to update adjacent cells
     newGrid.forEach((row, rowIndex) => {
       row.forEach((cell, colIndex) => {
         if (cell.content === 'X') {
@@ -74,23 +77,26 @@ const Grid = () => {
     });
 
     setGrid(newGrid);
-  }, []); // Empty dependency array ensures this effect runs only once on component mount
+  };
 
   return (
-    <div className="grid-container">
-      {grid.map((row, rowIndex) => (
-        <div key={rowIndex} className="row">
-          {row.map((cell, colIndex) => (
-            <div
-              key={colIndex}
-              className={`cell ${!cell.active ? 'inactive' : ''}`}
-              onClick={() => handleClick(rowIndex, colIndex)}
-            >
-              {cell.content}
-            </div>
-          ))}
-        </div>
-      ))}
+    <div>
+      <div className="grid-container">
+        {grid.map((row, rowIndex) => (
+          <div key={rowIndex} className="row">
+            {row.map((cell, colIndex) => (
+              <div
+                key={colIndex}
+                className={`cell ${!cell.active ? 'inactive' : ''}`}
+                onClick={() => handleClick(rowIndex, colIndex)}
+              >
+                {cell.content}
+              </div>
+            ))}
+          </div>
+        ))}
+      </div>
+      <button onClick={generateNewGrid}>New Grid</button>
     </div>
   );
 };
