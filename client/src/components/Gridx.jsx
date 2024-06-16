@@ -1,11 +1,11 @@
-import { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import '../App.css'; // Assuming App.css is your stylesheet for styling
 
 const Grid = () => {
   const rows = 5;
   const cols = 5;
 
-  // STEP ONE: Function to generate initial grid with cells containing id and active properties
+  // Function to generate initial grid with cells containing id and active properties
   const generateInitialGrid = () => {
     return Array(rows).fill().map((row, rowIndex) =>
       Array(cols).fill().map((cell, colIndex) => ({
@@ -25,19 +25,18 @@ const Grid = () => {
       const newGrid = [...grid];
       if (newGrid[row][col].content === 'X') {
         newGrid[row][col].content = '💣'; // Change 'X' to bomb
-      
 ////////// game over if bomb clicked:////////////
-        setGrid(newGrid); // Update the state with the new grid
-        setTimeout(() => {
-          alert('You clicked a bomb! Game over.'); // Alert after displaying bomb emoji
-          generateNewGrid(); // Reset the grid after game over
-        }, 500);
+setGrid(newGrid); // Update the state with the new grid
+setTimeout(() => {
+  alert('You clicked a bomb! Game over.'); // Alert after displaying bomb emoji
+  generateNewGrid(); // Reset the grid after game over
+}, 500);
 //////////////////////////////////
       } else {
         newGrid[row][col].content = newGrid[row][col].id.toString();
+        newGrid[row][col].active = false;
+        setGrid(newGrid);
       }
-      newGrid[row][col].active = false;
-      setGrid(newGrid);
     }
   };
 
@@ -58,6 +57,18 @@ const Grid = () => {
     randomCells.forEach(cell => {
       newGrid[cell.row][cell.col].content = 'X';
     });
+
+    // A const that holds all cells minus the Bomb
+    const nonBombCells = [];
+    newGrid.forEach((row, rowIndex) => {
+      row.forEach((cell, colIndex) => {
+        if (!randomCells.some(randomCell => randomCell.row === rowIndex && randomCell.col === colIndex)) {
+          nonBombCells.push(cell);
+        }
+      });
+    });
+
+    console.log('Non-bomb cells:', nonBombCells); // For debugging or further usage
 
     // Function to check adjacent cells (including diagonals) and modify their id
     const updateAdjacentCells = (row, col) => {
