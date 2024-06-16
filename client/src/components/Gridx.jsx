@@ -5,33 +5,28 @@ const Grid = () => {
   const rows = 5;
   const cols = 5;
 
-  // Function to generate initial grid with cells containing id and active properties
   const generateInitialGrid = () => {
     return Array(rows).fill().map((row, rowIndex) =>
       Array(cols).fill().map((cell, colIndex) => ({
         id: rowIndex * cols + colIndex + 1,
-        active: true, // true means cell is active (clickable)
+        active: true,
         content: null
       }))
     );
   };
 
-  // State to hold the grid and manage updates
   const [grid, setGrid] = useState(generateInitialGrid());
 
-  // Function to handle cell click
   const handleClick = (row, col) => {
     if (grid[row][col].active) {
       const newGrid = [...grid];
       if (newGrid[row][col].content === 'X') {
-        newGrid[row][col].content = '💣'; // Change 'X' to bomb
-////////// game over if bomb clicked:////////////
-setGrid(newGrid); // Update the state with the new grid
-setTimeout(() => {
-  alert('You clicked a bomb! Game over.'); // Alert after displaying bomb emoji
-  generateNewGrid(); // Reset the grid after game over
-}, 500);
-//////////////////////////////////
+        newGrid[row][col].content = '💣';
+        setGrid(newGrid);
+        setTimeout(() => {
+          alert('You clicked a bomb! Game over.');
+          generateNewGrid();
+        }, 500);
       } else {
         newGrid[row][col].content = newGrid[row][col].id.toString();
         newGrid[row][col].active = false;
@@ -40,11 +35,9 @@ setTimeout(() => {
     }
   };
 
-  // Function to generate new random 'X' cells and update the grid
   const generateNewGrid = () => {
     const newGrid = generateInitialGrid();
 
-    // Randomly select three cells and mark them as 'X'
     const randomCells = [];
     while (randomCells.length < 3) {
       const randomRow = Math.floor(Math.random() * rows);
@@ -58,43 +51,26 @@ setTimeout(() => {
       newGrid[cell.row][cell.col].content = 'X';
     });
 
-    // A const that holds all cells minus the Bomb
-    const nonBombCells = [];
+    const directions = [
+      [-1, -1], [-1, 0], [-1, 1],
+      [0, -1], /* mine */ [0, 1],
+      [1, -1], [1, 0], [1, 1]
+    ];
+
     newGrid.forEach((row, rowIndex) => {
       row.forEach((cell, colIndex) => {
-        if (!randomCells.some(randomCell => randomCell.row === rowIndex && randomCell.col === colIndex)) {
-          nonBombCells.push(cell);
-        }
-      });
-    });
-
-    console.log('Non-bomb cells:', nonBombCells); // For debugging or further usage
-
-    // Function to check adjacent cells (including diagonals) and modify their id
-    const updateAdjacentCells = (row, col) => {
-      const directions = [
-        [-1, -1], [-1, 0], [-1, 1],  // Diagonals and Up
-        [0, -1],           [0, 1],   // Left and Right
-        [1, -1],  [1, 0],   [1, 1]    // Diagonals and Down
-      ];
-
-      directions.forEach(([dRow, dCol]) => {
-        const newRow = row + dRow;
-        const newCol = col + dCol;
-        if (newRow >= 0 && newRow < rows && newCol >= 0 && newCol < cols) {
-          const adjacentCell = newGrid[newRow][newCol];
-          if (adjacentCell.content === null) {
-            adjacentCell.id += 'a';
-          }
-        }
-      });
-    };
-
-    // Iterate through the new grid to update adjacent cells
-    newGrid.forEach((row, rowIndex) => {
-      row.forEach((cell, colIndex) => {
-        if (cell.content === 'X') {
-          updateAdjacentCells(rowIndex, colIndex);
+        if (cell.content !== 'X') {
+          let bombCount = 0;
+          directions.forEach(([dRow, dCol]) => {
+            const newRow = rowIndex + dRow;
+            const newCol = colIndex + dCol;
+            if (newRow >= 0 && newRow < rows && newCol >= 0 && newCol < cols) {
+              if (newGrid[newRow][newCol].content === 'X') {
+                bombCount++;
+              }
+            }
+          });
+          cell.content = bombCount > 0 ? bombCount.toString() : '';
         }
       });
     });
