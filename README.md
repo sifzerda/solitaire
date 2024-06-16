@@ -1,6 +1,8 @@
-# gamestack
+# Gamestack
 
-This is a personal project to create a react MERN stack app which has a number of simple games. Currently has minesweeper.
+This is a personal project to create a react MERN stack app which has a number of simple games. These were built from scratch (i.e. no code derived from elsewhere) with ChatGPT help. 
+
+Currently has minesweeper.
 
 
 Others:
@@ -26,11 +28,12 @@ Others:
    -   ↖️ ⬆️ ↗️
    -   ⬅️ 💣 ➡️
    -   ↙️ ⬇️ ↘️
+   -   All above directional cells will get update of proximity values once mines are randomly inserted into grid
 7. <u>'const handleClick'</u>: check which cells hold 'X's (mines) and switch the X to a 💣 if clicked
 8. <u>'const nonBombCells'</u>: Create a constant that holds all cells minus the X/mine cells 
 9.  <u>' setTimeout ' </u>: create an alert one clicking a mine creating 'game over screen' and game restarts
 10. <u>'const handleClick'</u>: if one mine cell is clicked, all mine cells are revealed
-11. <u>
+11. <u>'generateInitialGrid' [...] content: '' revealed: false:</u>cells blank and unclicked at game start, <u>newGrid[rowIndex][colIndex].revealed = true:</u> once clicked, cell reveals proximity value
 12. h
 13. h
 14. h
@@ -41,9 +44,11 @@ Others:
 [x] Event listening
 [x] Mines
 [x] Proximity dynamic
-[] Remove Xs
+[x] Remove Xs from mine cells
 [x] Clicking a mine = game over
-[] Remove id visibility, switch to single number
+[x] Remove id visibility, switch to single number
+[] non value cells (currently blank) update with styling change when clicked
+[] blocks of non value cells get selected if one is 
 [] CSS styling (bomb cell red, button depressed)
 [] 3 difficulties, or difficulty options:
 - mimic actual game difficulty options 

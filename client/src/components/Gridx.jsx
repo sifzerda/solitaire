@@ -5,6 +5,12 @@ const Grid = () => {
   const rows = 5;
   const cols = 5;
 
+  const directions = [
+    [-1, -1], [-1, 0], [-1, 1],
+    [0, -1], /* mine */ [0, 1],
+    [1, -1], [1, 0], [1, 1]
+  ];
+
   const generateInitialGrid = () => {
     return Array(rows).fill().map((_, rowIndex) =>
       Array(cols).fill().map((_, colIndex) => ({
@@ -77,12 +83,6 @@ const Grid = () => {
     randomCells.forEach(cell => {
       newGrid[cell.row][cell.col].content = 'X';
     });
-
-    const directions = [
-      [-1, -1], [-1, 0], [-1, 1],
-      [0, -1], /* mine */ [0, 1],
-      [1, -1], [1, 0], [1, 1]
-    ];
 
     newGrid.forEach((row, rowIndex) => {
       row.forEach((cell, colIndex) => {
