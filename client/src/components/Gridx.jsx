@@ -6,11 +6,12 @@ const Grid = () => {
   const cols = 5;
 
   const generateInitialGrid = () => {
-    return Array(rows).fill().map((row, rowIndex) =>
-      Array(cols).fill().map((cell, colIndex) => ({
+    return Array(rows).fill().map((_, rowIndex) =>
+      Array(cols).fill().map((_, colIndex) => ({
         id: rowIndex * cols + colIndex + 1,
         active: true,
-        content: null
+        content: '',
+        revealed: false // Track if cell content has been revealed
       }))
     );
   };
@@ -18,7 +19,7 @@ const Grid = () => {
   const [grid, setGrid] = useState(generateInitialGrid());
 
   const handleClick = (row, col) => {
-    if (grid[row][col].active) {
+    if (grid[row][col].active && !grid[row][col].revealed) {
       const newGrid = [...grid];
       if (newGrid[row][col].content === 'X') {
         // Change all bomb cells to reveal bombs
@@ -27,6 +28,7 @@ const Grid = () => {
             if (cell.content === 'X') {
               newGrid[rowIndex][colIndex].content = '💣';
               newGrid[rowIndex][colIndex].active = false;
+              newGrid[rowIndex][colIndex].revealed = true;
             }
           });
         });
@@ -38,8 +40,23 @@ const Grid = () => {
           generateNewGrid();
         }, 500);
       } else {
-        newGrid[row][col].content = newGrid[row][col].id.toString();
-        newGrid[row][col].active = false;
+        // Recursively reveal cells if content is empty (0 bombs nearby)
+        const revealEmptyCells = (r, c) => {
+          if (newGrid[r][c].revealed) return;
+          newGrid[r][c].revealed = true;
+          if (newGrid[r][c].content === '') {
+            directions.forEach(([dRow, dCol]) => {
+              const newRow = r + dRow;
+              const newCol = c + dCol;
+              if (newRow >= 0 && newRow < rows && newCol >= 0 && newCol < cols) {
+                revealEmptyCells(newRow, newCol);
+              }
+            });
+          }
+        };
+
+        revealEmptyCells(row, col);
+
         setGrid(newGrid);
       }
     }
@@ -99,7 +116,7 @@ const Grid = () => {
                 className={`cell ${!cell.active ? 'inactive' : ''}`}
                 onClick={() => handleClick(rowIndex, colIndex)}
               >
-                {cell.content}
+                {cell.revealed ? cell.content : ''}
               </div>
             ))}
           </div>
