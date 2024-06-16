@@ -33,13 +33,10 @@ const Grid = () => {
 
   const handleClick = (row, col) => {
     const cell = grid[row][col];
-
     if (!cell.active || cell.revealed) {
       return; // Do nothing if cell is inactive or already revealed
     }
-
     const newGrid = [...grid];
-
     if (cell.content === 'X') {
       // Clicked on a bomb
       newGrid.forEach((row, rowIndex) => {
@@ -48,6 +45,7 @@ const Grid = () => {
             newGrid[rowIndex][colIndex].content = '💣';
             newGrid[rowIndex][colIndex].active = false;
             newGrid[rowIndex][colIndex].revealed = true;
+            newGrid[rowIndex][colIndex].isBombClicked = true; // Mark bomb cell as clicked
           }
         });
       });
@@ -81,13 +79,14 @@ const Grid = () => {
 
   const handleRightClick = (event, row, col) => {
     event.preventDefault(); // Prevent the context menu from showing up
-
+  
     if (!grid[row][col].active || grid[row][col].revealed) {
       return; // Do nothing if cell is inactive or already revealed
     }
-
+  
     const newGrid = [...grid];
-    newGrid[row][col].flagged = !newGrid[row][col].flagged;
+    newGrid[row][col].flagged = !newGrid[row][col].flagged; // Toggle flagged status
+  
     setGrid(newGrid);
   };
 
@@ -143,7 +142,7 @@ const Grid = () => {
             {row.map((cell, colIndex) => (
               <div
                 key={colIndex}
-                className={`cell ${!cell.active ? 'inactive' : ''}`}
+                className={`cell ${!cell.active ? 'inactive' : ''} ${cell.revealed ? 'revealed' : ''} ${cell.flagged ? 'flag' : ''}`}
                 onClick={() => handleClick(rowIndex, colIndex)}
                 onContextMenu={(event) => handleRightClick(event, rowIndex, colIndex)}
               >

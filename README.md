@@ -54,5 +54,6 @@ Others:
 - mimic actual game difficulty options 
 - grid size
 - mine number
+- probably adjusted by user through radio switch (if 'easy' then render game with 6x6 and xx # bombs etc)
 [] right click applies flag, another removes flag
 [] win alert triggers when all cells (minus bomb cells) have been revealed
