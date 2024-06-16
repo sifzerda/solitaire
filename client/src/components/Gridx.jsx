@@ -5,7 +5,7 @@ const Grid = () => {
   const rows = 5;
   const cols = 5;
 
-  // Function to generate initial grid with cells containing id and active properties
+  // STEP ONE: Function to generate initial grid with cells containing id and active properties
   const generateInitialGrid = () => {
     return Array(rows).fill().map((row, rowIndex) =>
       Array(cols).fill().map((cell, colIndex) => ({
@@ -54,8 +54,9 @@ const Grid = () => {
     // Function to check adjacent cells (including diagonals) and modify their id
     const updateAdjacentCells = (row, col) => {
       const directions = [
-        [-1, 0], [1, 0], [0, -1], [0, 1], // Up, Down, Left, Right
-        [-1, -1], [-1, 1], [1, -1], [1, 1] // Diagonals
+        [-1, -1], [-1, 0], [-1, 1],  // Diagonals and Up
+        [0, -1],           [0, 1],   // Left and Right
+        [1, -1],  [1, 0],   [1, 1]    // Diagonals and Down
       ];
 
       directions.forEach(([dRow, dCol]) => {
@@ -99,7 +100,7 @@ const Grid = () => {
           </div>
         ))}
       </div>
-      <button onClick={generateNewGrid}>New Grid</button>
+      <button onClick={generateNewGrid}>Restart</button>
     </div>
   );
 };
