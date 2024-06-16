@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import '../App.css'; // Assuming App.css is your stylesheet for styling
 
 const Grid = () => {
-  const rows = 5;
-  const cols = 5;
+  const rows = 10;
+  const cols = 10;
+  const maxReveal = 3; // Maximum surrounding safe cells to reveal
 
   const directions = [
     [-1, -1], [-1, 0], [-1, 1],
@@ -24,7 +25,7 @@ const Grid = () => {
   };
 
   const [grid, setGrid] = useState(generateInitialGrid());
-  const [nonBombCellsCount, setNonBombCellsCount] = useState(rows * cols - 3); // Total cells minus 3 bombs
+  const [nonBombCellsCount, setNonBombCellsCount] = useState(rows * cols - 20); // Total cells minus 5 bombs
   const [revealedNonBombCount, setRevealedNonBombCount] = useState(0);
 
   useEffect(() => {
@@ -58,21 +59,25 @@ const Grid = () => {
       }, 500);
     } else {
       // Clicked on a non-bomb cell
-      const revealEmptyCells = (r, c) => {
-        if (newGrid[r][c].revealed) return;
+      const revealSafeCells = (r, c, cellsToReveal) => {
+        if (newGrid[r][c].revealed || cellsToReveal === 0) return;
+
         newGrid[r][c].revealed = true;
         setRevealedNonBombCount(prevCount => prevCount + 1); // Increment count of revealed non-bomb cells
+        cellsToReveal--;
+
         if (newGrid[r][c].content === '') {
           directions.forEach(([dRow, dCol]) => {
             const newRow = r + dRow;
             const newCol = c + dCol;
             if (newRow >= 0 && newRow < rows && newCol >= 0 && newCol < cols) {
-              revealEmptyCells(newRow, newCol);
+              revealSafeCells(newRow, newCol, cellsToReveal);
             }
           });
         }
       };
-      revealEmptyCells(row, col);
+
+      revealSafeCells(row, col, maxReveal);
       setGrid(newGrid);
     }
   };
@@ -94,7 +99,7 @@ const Grid = () => {
     const newGrid = generateInitialGrid();
 
     const randomCells = [];
-    while (randomCells.length < 3) {
+    while (randomCells.length < 20) {
       const randomRow = Math.floor(Math.random() * rows);
       const randomCol = Math.floor(Math.random() * cols);
       if (!randomCells.some(cell => cell.row === randomRow && cell.col === randomCol)) {

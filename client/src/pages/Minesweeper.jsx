@@ -1,5 +1,5 @@
 import profilePic from '../../public/images/propic.jpg';
-import Grid from '../components/Grid';
+import Minesweeper from '../components/Minesweeper';
 import '../App.css';
 
 export default function About () {
@@ -22,20 +22,21 @@ export default function About () {
         in. Sed rhoncus mollis diam, sit amet facilisis lectus blandit at.
       </p>
 
-      <div style={{ backgroundColor: 'white', padding: '20px', borderRadius: '10px', boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)' }}>
+ 
 
-      <Grid />
 
+
+
+ 
+      <div className='grid-wrapper'>  
+      <div className='white-box'>
+      <Minesweeper />
+</div>
 </div>
 
-            {/* Include the Minesweeper game component */}
-            <div style={{ backgroundColor: 'white', padding: '20px', borderRadius: '10px', boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)' }}>
-        {/* Put the Minesweeper game component inside the white box */}
 
 
-
-      </div>
-
+ 
 
 
       <div className="separator-line"></div>

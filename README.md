@@ -15,6 +15,21 @@ Others:
 - pinball (?)
 
 
+# MINESWEEPER
+
+Difficulty:
+
+To change difficulty inside the game, you can change:
+- GRID SIZE:
+- const rows = 10; const cols = 10 (change this to how big you want the grid to be)
+- SAFE CELL REVEAL:
+- const maxReveal: default '3', change to alter how many blocks of cells get revealed when a safe cell is clicked
+- MINE #:
+- to edit number of mines change quantity in:
+  -   const [nonBombCellsCount, setNonBombCellsCount] = useState(rows * cols - 5); <---- change the 5
+  -       while (randomCells.length < 5) <----- change the 5
+
+
 ## Steps to creating Minesweeper:
 
 1. <u>'const Grid'</u>: Create 5 x 5 grid

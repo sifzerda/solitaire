@@ -1,5 +1,4 @@
 import profilePic from '../../public/images/propic.jpg';
-import Grid from '../components/Grid';
 import '../App.css';
 
 export default function About () {
@@ -24,7 +23,6 @@ export default function About () {
 
       <div style={{ backgroundColor: 'white', padding: '20px', borderRadius: '10px', boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)' }}>
 
-      <Grid />
 
 </div>
 

@@ -76,7 +76,7 @@ body {
 }
 
 .cell.revealed {
-  background-color: rgb(165, 255, 91);
+  background-color: rgb(245, 245, 245);
 }
 
 .cell.inactive {

@@ -1,115 +1,142 @@
-import React, { useState } from 'react';
-import '../App.css';
+import { useState, useEffect } from 'react';
+import '../App.css'; // Assuming App.css is your stylesheet for styling
 
 const Grid = () => {
-  const rows = 5;
-  const cols = 5;
-  const totalCells = rows * cols;
-  const totalBombs = 3;
+  const rows = 10;
+  const cols = 10;
+  const maxReveal = 3; // Maximum surrounding safe cells to reveal
+
+  const directions = [
+    [-1, -1], [-1, 0], [-1, 1],
+    [0, -1], /* mine */ [0, 1],
+    [1, -1], [1, 0], [1, 1]
+  ];
 
   const generateInitialGrid = () => {
-    return Array(rows).fill().map((row, rowIndex) =>
-      Array(cols).fill().map((cell, colIndex) => ({
+    return Array(rows).fill().map((_, rowIndex) =>
+      Array(cols).fill().map((_, colIndex) => ({
         id: rowIndex * cols + colIndex + 1,
         active: true,
-        isBomb: false,
-        bombsAround: 0,
-        content: null
+        content: '',
+        revealed: false, // Track if cell content has been revealed
+        flagged: false // Track if cell has been flagged
       }))
     );
   };
 
   const [grid, setGrid] = useState(generateInitialGrid());
-  const [gameOver, setGameOver] = useState(false);
+  const [nonBombCellsCount, setNonBombCellsCount] = useState(rows * cols - 20); // Total cells minus 5 bombs
+  const [revealedNonBombCount, setRevealedNonBombCount] = useState(0);
+
+  useEffect(() => {
+    checkWinCondition();
+  }, [revealedNonBombCount]);
 
   const handleClick = (row, col) => {
-    if (!grid[row][col].active || gameOver) return;
-  
+    const cell = grid[row][col];
+    if (!cell.active || cell.revealed) {
+      return; // Do nothing if cell is inactive or already revealed
+    }
     const newGrid = [...grid];
-    if (newGrid[row][col].isBomb) {
-      newGrid[row][col].content = '💣';
+    if (cell.content === 'X') {
+      // Clicked on a bomb
+      newGrid.forEach((row, rowIndex) => {
+        row.forEach((cell, colIndex) => {
+          if (cell.content === 'X') {
+            newGrid[rowIndex][colIndex].content = '💣';
+            newGrid[rowIndex][colIndex].active = false;
+            newGrid[rowIndex][colIndex].revealed = true;
+            newGrid[rowIndex][colIndex].isBombClicked = true; // Mark bomb cell as clicked
+          }
+        });
+      });
+
       setGrid(newGrid);
-      setGameOver(true);
+
       setTimeout(() => {
         alert('You clicked a bomb! Game over.');
         generateNewGrid();
-        setGameOver(false);
       }, 500);
     } else {
-      uncoverCell(newGrid, row, col);
+      // Clicked on a non-bomb cell
+      const revealSafeCells = (r, c, cellsToReveal) => {
+        if (newGrid[r][c].revealed || cellsToReveal === 0) return;
+
+        newGrid[r][c].revealed = true;
+        setRevealedNonBombCount(prevCount => prevCount + 1); // Increment count of revealed non-bomb cells
+        cellsToReveal--;
+
+        if (newGrid[r][c].content === '') {
+          directions.forEach(([dRow, dCol]) => {
+            const newRow = r + dRow;
+            const newCol = c + dCol;
+            if (newRow >= 0 && newRow < rows && newCol >= 0 && newCol < cols) {
+              revealSafeCells(newRow, newCol, cellsToReveal);
+            }
+          });
+        }
+      };
+
+      revealSafeCells(row, col, maxReveal);
       setGrid(newGrid);
-  
-      // Check win condition
-      const remainingActiveCells = newGrid.reduce((count, row) => {
-        return count + row.filter(cell => cell.active && !cell.isBomb).length;
-      }, 0);
-  
-      if (remainingActiveCells === 0) {
-        setTimeout(() => {
-          alert('Congratulations! You win!');
-          generateNewGrid(); // Regenerate the grid for the next game
-        }, 500);
-      }
     }
+  };
+
+  const handleRightClick = (event, row, col) => {
+    event.preventDefault(); // Prevent the context menu from showing up
+  
+    if (!grid[row][col].active || grid[row][col].revealed) {
+      return; // Do nothing if cell is inactive or already revealed
+    }
+  
+    const newGrid = [...grid];
+    newGrid[row][col].flagged = !newGrid[row][col].flagged; // Toggle flagged status
+  
+    setGrid(newGrid);
   };
 
   const generateNewGrid = () => {
     const newGrid = generateInitialGrid();
 
-    let bombsPlaced = 0;
-    while (bombsPlaced < totalBombs) {
+    const randomCells = [];
+    while (randomCells.length < 20) {
       const randomRow = Math.floor(Math.random() * rows);
       const randomCol = Math.floor(Math.random() * cols);
-      if (!newGrid[randomRow][randomCol].isBomb) {
-        newGrid[randomRow][randomCol].isBomb = true;
-        bombsPlaced++;
+      if (!randomCells.some(cell => cell.row === randomRow && cell.col === randomCol)) {
+        randomCells.push({ row: randomRow, col: randomCol });
       }
     }
 
+    randomCells.forEach(cell => {
+      newGrid[cell.row][cell.col].content = 'X';
+    });
+
     newGrid.forEach((row, rowIndex) => {
       row.forEach((cell, colIndex) => {
-        if (!cell.isBomb) {
-          cell.bombsAround = countBombsAround(newGrid, rowIndex, colIndex);
-          if (cell.bombsAround > 0) {
-            cell.content = cell.bombsAround.toString();
-          }
+        if (cell.content !== 'X') {
+          let bombCount = 0;
+          directions.forEach(([dRow, dCol]) => {
+            const newRow = rowIndex + dRow;
+            const newCol = colIndex + dCol;
+            if (newRow >= 0 && newRow < rows && newCol >= 0 && newCol < cols) {
+              if (newGrid[newRow][newCol].content === 'X') {
+                bombCount++;
+              }
+            }
+          });
+          cell.content = bombCount > 0 ? bombCount.toString() : '';
         }
       });
     });
 
     setGrid(newGrid);
+    setRevealedNonBombCount(0);
   };
 
-  const countBombsAround = (grid, row, col) => {
-    let count = 0;
-    for (let i = Math.max(0, row - 1); i <= Math.min(rows - 1, row + 1); i++) {
-      for (let j = Math.max(0, col - 1); j <= Math.min(cols - 1, col + 1); j++) {
-        if (grid[i][j].isBomb) {
-          count++;
-        }
-      }
+  const checkWinCondition = () => {
+    if (revealedNonBombCount === nonBombCellsCount) {
+      alert('You won!');
     }
-    return count;
-  };
-
-  const uncoverCell = (grid, row, col) => {
-    if (!grid[row][col].active) return;
-
-    grid[row][col].active = false;
-
-    if (grid[row][col].bombsAround === 0) {
-      for (let i = Math.max(0, row - 1); i <= Math.min(rows - 1, row + 1); i++) {
-        for (let j = Math.max(0, col - 1); j <= Math.min(cols - 1, col + 1); j++) {
-          if (grid[i][j].active && !grid[i][j].isBomb) {
-            uncoverCell(grid, i, j);
-          }
-        }
-      }
-    }
-  };
-
-  const handleRestart = () => {
-    window.location.reload();
   };
 
   return (
@@ -120,16 +147,17 @@ const Grid = () => {
             {row.map((cell, colIndex) => (
               <div
                 key={colIndex}
-                className={`cell ${!cell.active ? 'inactive' : ''}`}
+                className={`cell ${!cell.active ? 'inactive' : ''} ${cell.revealed ? 'revealed' : ''} ${cell.flagged ? 'flag' : ''}`}
                 onClick={() => handleClick(rowIndex, colIndex)}
+                onContextMenu={(event) => handleRightClick(event, rowIndex, colIndex)}
               >
-                {cell.content}
+                {cell.revealed ? cell.content : cell.flagged ? '🚩' : ''}
               </div>
             ))}
           </div>
         ))}
       </div>
-      <button onClick={handleRestart}>Restart</button>
+      <button onClick={generateNewGrid}>Restart</button>
     </div>
   );
 };

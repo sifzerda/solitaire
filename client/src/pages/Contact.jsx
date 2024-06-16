@@ -1,7 +1,4 @@
 import ContactForm from '../components/ContactForm';
-import Grid3 from '../components/Grid3';
-import Gridx from '../components/Gridx';
-import Minesweeper from '../components/Minesweeper';
 import '../App.css';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -21,30 +18,9 @@ export default function Contact() {
 
       <div className="grid-wrapper">
         <div className="white-box">
-      <Grid3 />
       </div>
       </div>
 
-
-
-
-
-
-      <div className="grid-wrapper">
-        <div className="white-box">
-      <Gridx />
-      </div>
-      </div>
-
-
-
-
-
-      <div className="grid-wrapper">
-        <div className="white-box">
-      <Minesweeper />
-      </div>
-      </div>
 
 
 
