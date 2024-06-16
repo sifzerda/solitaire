@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import '../App.css'; // Assuming App.css is your stylesheet for styling
 
 const Grid = () => {
@@ -9,13 +9,24 @@ const Grid = () => {
   const initialGrid = Array(rows).fill().map((row, rowIndex) =>
     Array(cols).fill().map((cell, colIndex) => ({
       id: rowIndex * cols + colIndex + 1,
-      active: false,
+      active: true, // true means cell is active (clickable)
       content: null
     }))
   );
 
   // State to hold the grid and manage updates
   const [grid, setGrid] = useState(initialGrid);
+
+  // Function to handle cell click
+  const handleClick = (row, col) => {
+    if (grid[row][col].active) {
+      // Update grid to display cell's id and mark it as inactive
+      const newGrid = [...grid];
+      newGrid[row][col].content = newGrid[row][col].id.toString();
+      newGrid[row][col].active = false;
+      setGrid(newGrid);
+    }
+  };
 
   // Effect to randomly select three cells and mark them as 'X'
   useEffect(() => {
@@ -70,8 +81,12 @@ const Grid = () => {
       {grid.map((row, rowIndex) => (
         <div key={rowIndex} className="row">
           {row.map((cell, colIndex) => (
-            <div key={colIndex} className="cell">
-              {cell.content || cell.id}
+            <div
+              key={colIndex}
+              className={`cell ${!cell.active ? 'inactive' : ''}`}
+              onClick={() => handleClick(rowIndex, colIndex)}
+            >
+              {cell.content}
             </div>
           ))}
         </div>
