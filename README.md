@@ -22,14 +22,18 @@ Others:
 5. <u>'const updateAdjacentCells'</u>: Iterate through cell array again, check which # cell ids contain 'X's and attach an 'a' to cells that are X+1 or X-1 (e.g. if X is 15, then cells 14 and 16 will become 14a and 16a) these will be numerical 'proximity cells' 
    1. If cell is adjacent to two X/mines it will get two 'a's, i.e. 3 becomes 3aa
 6. <u>'const updateAdjacentCells'</u>: For diagonal proximity cells
-   1. Create diagonal relations between cells and modify cell id based on diagonal link
+   1. Create diagonal relations  between cells and modify cell id based on diagonal link:
+   -   ↖️ ⬆️ ↗️
+   -   ⬅️ 💣 ➡️
+   -   ↙️ ⬇️ ↘️
 7. <u>'const handleClick'</u>: check which cells hold 'X's (mines) and switch the X to a 💣 if clicked
 8. <u>'const nonBombCells'</u>: Create a constant that holds all cells minus the X/mine cells 
-9.  d
-10. hh
-11. h
+9.  <u>' setTimeout ' </u>: create an alert one clicking a mine creating 'game over screen' and game restarts
+10. <u>'const handleClick'</u>: if one mine cell is clicked, all mine cells are revealed
+11. <u>
 12. h
 13. h
+14. h
 
 ## TO DO: 
 
