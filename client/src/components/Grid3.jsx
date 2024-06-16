@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import '../App.css'; // Assuming you have a CSS file for styling
+import '../App.css';  
 
 function Grid() {
   const numRows = 10;

@@ -1,5 +1,6 @@
 import ContactForm from '../components/ContactForm';
 import Grid3 from '../components/Grid3';
+import Gridx from '../components/Gridx';
 import '../App.css';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -24,6 +25,15 @@ export default function Contact() {
       </div>
 
 
+
+
+
+
+      <div className="grid-wrapper">
+        <div className="white-box">
+      <Gridx />
+      </div>
+      </div>
 
 
 
