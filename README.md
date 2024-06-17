@@ -89,10 +89,23 @@ To change difficulty inside the game, you can change:
 
 # SOLITAIRE ♤ ♡ ♢ ♧ 
 
-(ONE) Create the StockPile component:
-- make an event handler which on click cycles through 52 values;
-- 
+(ONE) STOCKPILE COMPONENT
+- make an event handler (twin boxes) which on click cycles through 52 values (i.e. click counter)
 
+
+(TWO) FOUNDATIONS COMPONENT
+
+- create 4 boxes which cards (from the stockpile) can be dropped/slotted into
+- configure to only accept ace cards
+  - configure to only accept a 1 card if an ace present
+    - configure 1s to accept only 2s
+      - " " 2s to only accept 3s
+        - " " 3s to only accept 4s
+          - ["..."] queens to only accept kings
+
+(THREE) TABLEAU
+
+- 
 
 
 
