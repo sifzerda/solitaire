@@ -84,3 +84,5 @@ To change difficulty inside the game, you can change:
 - [ ] if user logged in, can save high score (post to user array)
 - [ ] profile page where scores can be displayed
 - [ ] create a 'start game' landing screen with 'new game', 'set difficulty' and 'high scores' buttons
+- [ ] have 8-bit chiptune stylized music play during game (with button that starts and stops music, maybe a speaker pic that gets struck through)
+- [ ] volume increase/decrease for music
