@@ -1,6 +1,7 @@
 import profilePic from '../../public/images/propic.jpg';
 import Minesweeper from '../components/Minesweeper';
 import '../App.css';
+import '../minesweeper.css';
 
 export default function About () {
   return (

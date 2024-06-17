@@ -1,0 +1,81 @@
+/* ------------------------- solitaire -------------------------*/
+
+/* TwoBoxes.css */
+.two-boxes-container {
+    display: flex;
+  }
+  
+  .box {
+    width: 50%;
+    height: 200px;
+    border: 1px solid #000;
+    box-sizing: border-box;
+  }
+  
+  .box1 {
+    background-color: lightblue;
+  }
+  
+  .box2 {
+    background-color: lightgreen;
+  }
+
+
+
+
+
+
+
+
+
+
+
+.solitaire-board {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+    background-color: green;
+  }
+  
+  .column {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .card {
+    background-color: white;
+    border: 1px solid black;
+    width: 80px;
+    height: 120px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    text-align: center;
+    line-height: 120px;
+    font-size: 16px;
+    font-weight: bold;
+  }
+
+  .card.face-down {
+    background-color: #999;
+    color: #fff;
+  }
+  
+  .card.face-up {
+    background-color: #fff;
+    color: #000;
+  }
+
+  .tableau {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+  }
+  
+  .tableau-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+
+

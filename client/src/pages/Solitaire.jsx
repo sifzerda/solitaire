@@ -1,6 +1,7 @@
 import profilePic from '../../public/images/propic.jpg';
-import Solitaire from '../components/Solitaire';
+import StockPile from '../components/StockPile';
 import '../App.css';
+import '../solitaire.css';
 
 export default function About () {
   return (
@@ -25,7 +26,7 @@ export default function About () {
 
       <div className='grid-wrapper'>  
       <div className='white-box'>
-      <Solitaire />
+      <StockPile />
 </div>
 </div>
 

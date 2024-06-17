@@ -89,6 +89,13 @@ To change difficulty inside the game, you can change:
 
 # SOLITAIRE ♤ ♡ ♢ ♧ 
 
+(ONE) Create the StockPile component:
+- make an event handler which on click cycles through 52 values;
+- 
+
+
+
+
 Components:
 
 SolitaireGame (Main Component):
