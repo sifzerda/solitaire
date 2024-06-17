@@ -15,18 +15,18 @@ Others:
 - pinball (?)
 
 
-# MINESWEEPER
+# MINESWEEPER 💣 🚩
 
 Difficulty:
 
 To change difficulty inside the game, you can change:
 - GRID SIZE:
-- const rows = 10; const cols = 10 (change this to how big you want the grid to be)
+-         const rows = 10; const cols = 10 (change this to how big you want the grid to be)
 - SAFE CELL REVEAL:
-- const maxReveal: default '3', change to alter how many blocks of cells get revealed when a safe cell is clicked
+-         const maxReveal: default '3', change to alter how many blocks of cells get revealed when a safe cell is clicked
 - MINE #:
 - to edit number of mines change quantity in:
-  -   const [nonBombCellsCount, setNonBombCellsCount] = useState(rows * cols - 5); <---- change the 5
+  -       const [nonBombCellsCount, setNonBombCellsCount] = useState(rows * cols - 5); <---- change the 5
   -       while (randomCells.length < 5) <----- change the 5
 
 
@@ -49,26 +49,28 @@ To change difficulty inside the game, you can change:
 9.  <u>' setTimeout ' </u>: create an alert one clicking a mine creating 'game over screen' and game restarts
 10. <u>'const handleClick'</u>: if one mine cell is clicked, all mine cells are revealed
 11. <u>'generateInitialGrid' [...] content: '' revealed: false:</u>cells blank and unclicked at game start, <u>newGrid[rowIndex][colIndex].revealed = true:</u> once clicked, cell reveals proximity value
-12. h
-13. h
-14. h
 
 ## TO DO: 
 
-[x] Grid
-[x] Event listening
-[x] Mines
-[x] Proximity dynamic
-[x] Remove Xs from mine cells
-[x] Clicking a mine = game over
-[x] Remove id visibility, switch to single number
-[] non value cells (currently blank) update with styling change when clicked
-[x] blocks of non value cells get selected if one is 
-[] CSS styling (bomb cell red, button depressed)
-[] 3 difficulties, or difficulty options:
-- mimic actual game difficulty options 
-- grid size
-- mine number
-- probably adjusted by user through radio switch (if 'easy' then render game with 6x6 and xx # bombs etc)
-[] right click applies flag, another removes flag
-[] win alert triggers when all cells (minus bomb cells) have been revealed
+- [x] Grid
+- [x] Event listening
+- [x] Mines
+- [x] Proximity dynamic
+- [x] Remove Xs from mine cells
+- [x] Clicking a mine = game over
+- [x] Remove id visibility, switch to single number
+- [x] non value cells (currently blank) update with styling change when clicked
+- [x] blocks of non value cells get selected if one is 
+- [x] CSS styling (bomb cell red, button depressed)
+- [ ] 3 difficulties, or difficulty options:
+  - mimic actual game difficulty options 
+  - grid size
+  - mine number
+  - probably adjusted by user through radio switch (if 'easy' then render game with 6x6 and xx # bombs etc)
+- [x] right click applies flag, another removes flag
+- [x] win alert triggers when all cells (minus bomb cells) have been revealed
+- [ ] point accumulation system in-play, + calc points per safe cells revealed, 
+- [ ] button to show high scores
+- [ ] if user logged in, can save high score (post to user array)
+- [ ] profile page where scores can be displayed
+- [ ] create a 'start game' landing screen with 'new game', 'set difficulty' and 'high scores' buttons
