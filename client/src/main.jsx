@@ -13,7 +13,10 @@ import Profile from './pages/Profile.jsx';
 // subjects
 
 import Minesweeper from './pages/Minesweeper.jsx';
-import Techniques from './pages/Techniques.jsx';
+
+import Solitaire from './pages/Solitaire.jsx';
+
+import Techniques from './pages/Solitaire.jsx';
 import Tropes from './pages/Tropes.jsx';
 import Scenes from './pages/Scenes.jsx';
 import Types from './pages/Types.jsx';
@@ -51,8 +54,8 @@ const router = createBrowserRouter([
       },
 
       {
-        path: '/Techniques',
-        element: <Techniques />,
+        path: '/Solitaire',
+        element: <Solitaire />,
       },
       {
         path: '/Types',

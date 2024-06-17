@@ -29,7 +29,7 @@ function Hrefs() {
                 <ol>
                     <li><Link to="/Minesweeper" onMouseDown={handleLinkClick}>Minesweeper</Link></li>
                     <li><Link to="/Types" onMouseDown={handleLinkClick}>Types</Link></li>
-                    <li><Link to="/Techniques" onMouseDown={handleLinkClick}>Techniques</Link></li>
+                    <li><Link to="/Solitaire" onMouseDown={handleLinkClick}>Solitaire</Link></li>
                     <li><Link to="/Tropes" onMouseDown={handleLinkClick}>Tropes</Link></li>
                     <li><Link to="/Scenes" onMouseDown={handleLinkClick}>Scenes</Link></li>
                     <li><Link to="/ScaryWords" onMouseDown={handleLinkClick}>Scary Words</Link></li>

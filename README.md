@@ -79,6 +79,10 @@ To change difficulty inside the game, you can change:
   - probably adjusted by user through radio switch (if 'easy' then render game with 6x6 and xx # bombs etc)
 - [x] right click applies flag, another removes flag
 - [x] win alert triggers when all cells (minus bomb cells) have been revealed
+
+
+
+## FOR ALL GAMES
 - [ ] point accumulation system in-play, + calc points per safe cells revealed, 
 - [ ] button to show high scores
 - [ ] if user logged in, can save high score (post to user array)
