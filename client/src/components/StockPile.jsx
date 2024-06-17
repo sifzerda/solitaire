@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import '../App.css'; // Assuming these are global stylesheets
 import '../solitaire.css'; // Additional stylesheet if needed
 
