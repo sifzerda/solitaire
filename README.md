@@ -86,3 +86,4 @@ To change difficulty inside the game, you can change:
 - [ ] create a 'start game' landing screen with 'new game', 'set difficulty' and 'high scores' buttons
 - [ ] have 8-bit chiptune stylized music play during game (with button that starts and stops music, maybe a speaker pic that gets struck through)
 - [ ] volume increase/decrease for music
+- [ ] play through DL (self-titled, FN, RO) albums as 8-bit, and can play next song in list
