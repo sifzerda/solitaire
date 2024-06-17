@@ -24,6 +24,13 @@ Others:
 Optional:
 - type of virtual reward shop where you trade points for virtual stuff, e.g. user avatars, 'trophies'
 
+# INDEX
+
+# Minesweeper
+# Solitaire
+#
+#
+#
 
 # MINESWEEPER 💣 🚩
 
@@ -80,6 +87,37 @@ To change difficulty inside the game, you can change:
 - [x] right click applies flag, another removes flag
 - [x] win alert triggers when all cells (minus bomb cells) have been revealed
 
+# SOLITAIRE ♤ ♡ ♢ ♧ 
+
+Components:
+
+SolitaireGame (Main Component):
+
+Manages the overall state of the game.
+Renders the tableau, foundations, and stock pile.
+Tableau:
+
+Represents the main playing area where cards are laid out in columns.
+Contains multiple TableauColumn components.
+TableauColumn:
+
+Represents a single column in the tableau.
+Can contain multiple Card components.
+Foundations:
+
+Represents the foundation piles where cards are built up by suit.
+FoundationPile:
+
+Represents a single foundation pile.
+Can contain multiple Card components.
+StockPile:
+
+Represents the stock pile from which cards are drawn.
+Can be clicked to draw cards into the waste pile.
+Card:
+
+Represents a single playing card.
+Displays the card's suit, rank, and face status (face up or face down).
 
 
 ## FOR ALL GAMES
