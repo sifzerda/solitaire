@@ -13,6 +13,7 @@ Others:
 - slot machine
 - 'bad toys' type simple shooting game with reticule/flashpoint, 
   - Or sideshow type shooting gallery
+- fly swat type game, 'gun' is a flyswatter
 - pacman
 - frogger
 
