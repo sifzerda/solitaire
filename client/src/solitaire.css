@@ -1,11 +1,11 @@
 /* ------------------------- solitaire -------------------------*/
 
 /* TwoBoxes.css */
-.two-boxes-container {
+.stockpile-container {
     display: flex;
   }
   
-  .box {
+  .sp {
     width: 50%;
     height: 200px;
     border: 1px solid #000;
