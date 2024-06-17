@@ -8,11 +8,19 @@ Currently has minesweeper.
 Others:
 
 - solitaire
+- chess
+- poker
+- slot machine
+- 'bad toys' type simple shooting game with reticule/flashpoint, 
+  - Or sideshow type shooting gallery
 - pacman
 - frogger
-- poker
+
 - pool (?)
 - pinball (?)
+
+Optional:
+- type of virtual reward shop where you trade points for virtual stuff, e.g. user avatars, 'trophies'
 
 
 # MINESWEEPER 💣 🚩
