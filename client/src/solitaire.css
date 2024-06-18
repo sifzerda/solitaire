@@ -87,6 +87,23 @@
     font-weight: bold;
   }
 
+  .card-shaped {
+    width: 100px; /* Adjust card width as needed */
+    height: 150px; /* Adjust card height as needed */
+    border: 2px dashed #ccc; /* Dashed border */
+    border-radius: 8px; /* Rounded corners */
+    display: inline-block;
+    margin: 10px; /* Adjust margin as needed */
+    position: relative;
+    overflow: hidden;
+  }
+
+  .playing-card {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
   .card-shaped-box {
     width: 150px; /* Adjust width as needed */
     height: 200px; /* Adjust height as needed */
@@ -100,6 +117,10 @@
     align-items: center;
     font-size: 18px;
     font-weight: bold;
+  }
+
+  .card-shaped-box.show {
+    display: block;
   }
   
   /* Adjust these styles for the card stacking effect */
