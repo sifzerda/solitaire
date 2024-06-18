@@ -1,59 +1,67 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import '../App.css'; // global style
 import '../solitaire.css';  
 
 import cardBack from '../../public/images/cardBack.jpg';
-
 import heartA from '../../public/images/heartA.jpg';
- 
-
 import clubA from '../../public/images/clubA.jpg';
- 
-
 import diamondA from '../../public/images/diamondA.jpg';
 import diamond2 from '../../public/images/diamond2.jpg';
 import diamond3 from '../../public/images/diamond3.jpg';
 import diamond4 from '../../public/images/diamond4.jpg';
-
 import spadeA from '../../public/images/spadeA.jpg';
- 
+
 const StockPile = () => {
   const numberOfCards = 20;
   const topCardIndex = numberOfCards - 1;
 
-  const [boxClicked, setBoxClicked] = useState(false);
-  const [currentImageIndex, setCurrentImageIndex] = useState(0); // Index to track the current image
+  const [box1Clicked, setBox1Clicked] = useState(false);
+  const [box2Visible, setBox2Visible] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(null); // Initialize with null for no image
+
+  // Effect to set Box 2 visible when component mounts
+  useEffect(() => {
+    setBox2Visible(true);
+  }, []);
+
   const handleClickBox1 = () => {
-    setBoxClicked(true);
-  };
-  const handleClickBox2 = () => {
-    setCurrentImageIndex((currentImageIndex + 1) % 8); // Cycle through 0, 1, 2, 3 (indices of images)
+    if (!box1Clicked) {
+      setBox1Clicked(true); // Set box1Clicked to true on first click
+    }
+    handleClickBox2(); // Cycle images for Box 2 on each click of Box 1
   };
 
-const getImageForBox2 = () => {
-  switch (currentImageIndex) {
-    case 0:
-      return heartA;
-    case 1:
-      return clubA;
-    case 2:
-      return diamondA;  
-    case 3:
-      return spadeA;
-    case 4:
-      return diamond2;
-    case 5:
-      return diamond3;
-    case 6:
-      return diamond4;
-    default:
-      return heartA; // Default to heartA.jpg if index is out of range (though it shouldn't happen)
-  }
-};
+  const handleClickBox2 = () => {
+    setCurrentImageIndex((currentImageIndex === null ? 0 : currentImageIndex + 1) % 7); // Cycle through 0 to 6 (indices of images)
+  };
+
+  const getImageForBox2 = () => {
+    if (currentImageIndex === null) {
+      return null; // Return null if currentImageIndex is null
+    }
+    switch (currentImageIndex) {
+      case 0:
+        return heartA;
+      case 1:
+        return clubA;
+      case 2:
+        return diamondA;
+      case 3:
+        return spadeA;
+      case 4:
+        return diamond2;
+      case 5:
+        return diamond3;
+      case 6:
+        return diamond4;
+      default:
+        return heartA; // Default to heartA.jpg if index is out of range
+    }
+  };
 
   return (
     <div className="card-stack-container">
-            <h5>Stock Pile</h5>
+      <h5>Stock Pile</h5>
       <div className="card-stack" onClick={handleClickBox1}>
         {Array.from({ length: numberOfCards }, (_, index) => (
           <div
@@ -76,32 +84,27 @@ const getImageForBox2 = () => {
       </div>*/}
 
 
-      {boxClicked && (
+{box2Visible && (
         <div className="card-shaped-box" onClick={handleClickBox2}>
-          {/* Dynamic image for Box 2 styled like a playing card */}
           <img src={getImageForBox2()} alt="Box 2 Image" className="card-image" />
         </div>
       )}
 
-
-
-<div className="card-stack-container">
-      <h5>Foundations</h5>
-      <div className="card-shaped-box">
-        Box 1
+      <div className="card-stack-container">
+        <h5>Foundations</h5>
+        <div className="card-shaped-box">
+          F 1
+        </div>
+        <div className="card-shaped-box">
+          F 3
+        </div>
+        <div className="card-shaped-box">
+          F 3
+        </div>
+        <div className="card-shaped-box">
+          F 4
+        </div>
       </div>
-      <div className="card-shaped-box">
-        Box 2
-      </div>
-      <div className="card-shaped-box">
-        Box 3
-      </div>
-      <div className="card-shaped-box">
-        Box 4
-      </div>
-    </div>
-
-
 
     </div>
   );
