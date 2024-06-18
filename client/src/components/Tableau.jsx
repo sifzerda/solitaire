@@ -53,10 +53,11 @@ const Tableau = () => {
           </div>
         ))}
       </div>
-              {/* image for Box 1 */}
+
+              {/* image for Box 1 
       <div className="card-shaped-box">
         Box 2
-      </div>
+      </div>*/}
 
 
       {boxClicked && (
