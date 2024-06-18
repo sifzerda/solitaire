@@ -24,17 +24,18 @@ const StockPile = () => {
     setBox2Visible(true);
   }, []);
 
+  // Handle click on Box 1 to cycle images in Box 2
   const handleClickBox1 = () => {
-    if (!box1Clicked) {
-      setBox1Clicked(true); // Set box1Clicked to true on first click
-    }
-    handleClickBox2(); // Cycle images for Box 2 on each click of Box 1
+    setBox1Clicked(!box1Clicked); // Toggle box1Clicked state on each click
+    handleClickBox2(); // Cycle images for Box 2
   };
 
+  // Cycle through images for Box 2
   const handleClickBox2 = () => {
     setCurrentImageIndex((currentImageIndex === null ? 0 : currentImageIndex + 1) % 7); // Cycle through 0 to 6 (indices of images)
   };
 
+  // Determine which image to display in Box 2 based on currentImageIndex
   const getImageForBox2 = () => {
     if (currentImageIndex === null) {
       return null; // Return null if currentImageIndex is null
@@ -84,28 +85,20 @@ const StockPile = () => {
       </div>*/}
 
 
-{box2Visible && (
-        <div className="card-shaped-box" onClick={handleClickBox2}>
+      {/* Render image for Box 2 */}
+      {box2Visible && (
+        <div className="card-shaped-box">
           <img src={getImageForBox2()} alt="Box 2 Image" className="card-image" />
         </div>
       )}
 
       <div className="card-stack-container">
         <h5>Foundations</h5>
-        <div className="card-shaped-box">
-          F 1
-        </div>
-        <div className="card-shaped-box">
-          F 3
-        </div>
-        <div className="card-shaped-box">
-          F 3
-        </div>
-        <div className="card-shaped-box">
-          F 4
-        </div>
+        <div className="card-shaped-box">F 1</div>
+        <div className="card-shaped-box">F 2</div>
+        <div className="card-shaped-box">F 3</div>
+        <div className="card-shaped-box">F 4</div>
       </div>
-
     </div>
   );
 };
