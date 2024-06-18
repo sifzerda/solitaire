@@ -1,4 +1,5 @@
 import ContactForm from '../components/ContactForm';
+import Drag from '../components/Drag';
 import '../App.css';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -18,6 +19,10 @@ export default function Contact() {
 
       <div className="grid-wrapper">
         <div className="white-box">
+
+
+<Drag />
+
       </div>
       </div>
 
