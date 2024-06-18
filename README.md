@@ -2,7 +2,18 @@
 
 This is a personal project to create a react MERN stack app which has a number of simple games. These were built from scratch (i.e. no code derived from elsewhere) with ChatGPT help. 
 
-Currently has minesweeper.
+Games:
+- [x] Minesweeper
+- [ ] Solitaire
+- [ ] Chess - would need an AI PC opponent
+- [ ] Poker
+- [ ] Slot Machine
+- [ ] Pacman
+- [ ] Frogger
+- [ ] Flyswatting game
+- [ ] Bad Toys 
+- [ ] SideShow shooting gallery
+- [ ] Go Fish, Uno, etc (would need AI PC opponent)
 
 
 Others:
@@ -89,13 +100,20 @@ To change difficulty inside the game, you can change:
 
 # SOLITAIRE ♤ ♡ ♢ ♧ 
 
+Parts of the game:
+- Tableau: Main game cards in 7 cols, card number = col number
+- Stock Pile: Remainder cards not in Tableau, cycles
+- Foundations: 4 places where cards stack by  
+
 (ONE) STOCKPILE COMPONENT
-- make an event handler (twin boxes) which on click cycles through 52 values (i.e. click counter)
+- make twin boxes (box 1 = facedown card stack, box 2 = face up card cycle)
+- make box 1 an event listener, on-click box 2 cycles through max 52 values (i.e. click counter reset at 52)
+- 
 
 
 (TWO) FOUNDATIONS COMPONENT
 
-- create 4 boxes which cards (from the stockpile) can be dropped/slotted into
+- create 4 boxes which cards will go into
 - configure to only accept ace cards
   - configure to only accept a 1 card if an ace present
     - configure 1s to accept only 2s
