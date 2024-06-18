@@ -39,6 +39,8 @@
 
   .card-stack-container {
     display: flex;
+    padding: 10px;
+    transition: border-color 0.3s ease;
   }
 
   .card-stack {
@@ -58,7 +60,11 @@
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s ease;
+    padding: 10px;
+    margin: 5px;
+    cursor: pointer;
   }
+  
 
   .card-image {
     width: 100%;

@@ -1,4 +1,3 @@
-// CardStack.js
 import { useState } from 'react';
 import '../App.css'; // Assuming these are global stylesheets
 import '../solitaire.css'; // Additional stylesheet if needed
@@ -8,6 +7,7 @@ import cardBack from '../../public/images/cardBack.jpg';
 const Tableau = ({ onClick }) => {
   const numberOfCards = 20;
   const [topCardIndex, setTopCardIndex] = useState(numberOfCards - 1);
+  const [isHovered, setIsHovered] = useState(false); // State to track hover
 
   const handleCardClick = () => {
     if (topCardIndex > 0) {
@@ -18,7 +18,11 @@ const Tableau = ({ onClick }) => {
 
   return (
     <div className="card-stack-container">
-      <div className="card-stack">
+      <div
+        className="card-stack"
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
         {Array.from({ length: numberOfCards }, (_, index) => (
           <div
             key={index}
@@ -34,7 +38,7 @@ const Tableau = ({ onClick }) => {
           </div>
         ))}
       </div>
-      <div className="card-shaped-box">
+      <div className={`card-shaped-box ${isHovered ? 'hovered' : ''}`}>
         Box 2
       </div>
     </div>
