@@ -1,92 +1,57 @@
-import '../App.css'; // Stylesheet for the solitaire game
-import '../solitaire.css';
+import cardBack from '../../public/images/cardBack.jpg';
 
-// Main SolitaireGame component
-const SolitaireGame = () => {
-  return (
-    <div className="solitaire-game">
-      <Tableau />
-      <Foundations />
-      <StockPile />
-    </div>
-  );
-};
+import heartA from '../../public/images/heartA.jpg';
+import heart2 from '../../public/images/heart2.jpg';
+import heart3 from '../../public/images/heart3.jpg';
+import heart4 from '../../public/images/heart4.jpg';
+import heart5 from '../../public/images/heart5.jpg';
+import heart6 from '../../public/images/heart6.jpg';
+import heart7 from '../../public/images/heart7.jpg';
+import heart8 from '../../public/images/heart8.jpg';
+import heart9 from '../../public/images/heart9.jpg';
+import heart10 from '../../public/images/heart10.jpg';
+import heartJ from '../../public/images/heartJ.jpg';
+import heartQ from '../../public/images/heartQ.jpg';
+import heartK from '../../public/images/heartK.jpg';
 
-// Tableau component
-const Tableau = () => {
-  // Example: 7 tableau columns
-  const columns = Array.from({ length: 7 }, (_, index) => <TableauColumn key={index} />);
+import clubA from '../../public/images/clubA.jpg';
+import club2 from '../../public/images/club2.jpg';
+import club3 from '../../public/images/club3.jpg';
+import club4 from '../../public/images/club4.jpg';
+import club5 from '../../public/images/club5.jpg';
+import club6 from '../../public/images/club6.jpg';
+import club7 from '../../public/images/club7.jpg';
+import club8 from '../../public/images/club8.jpg';
+import club9 from '../../public/images/club9.jpg';
+import club10 from '../../public/images/club10.jpg';
+import clubJ from '../../public/images/clubJ.jpg';
+import clubQ from '../../public/images/clubQ.jpg';
+import clubK from '../../public/images/clubK.jpg';
 
-  return <div className="tableau">{columns}</div>;
-};
+import diamondA from '../../public/images/diamondA.jpg';
+import diamond2 from '../../public/images/diamond2.jpg';
+import diamond3 from '../../public/images/diamond3.jpg';
+import diamond4 from '../../public/images/diamond4.jpg';
+import diamond5 from '../../public/images/diamond5.jpg';
+import diamond6 from '../../public/images/diamond6.jpg';
+import diamond7 from '../../public/images/diamond7.jpg';
+import diamond8 from '../../public/images/diamond8.jpg';
+import diamond9 from '../../public/images/diamond9.jpg';
+import diamond10 from '../../public/images/diamond10.jpg';
+import diamondJ from '../../public/images/diamondJ.jpg';
+import diamondQ from '../../public/images/diamondQ.jpg';
+import diamondK from '../../public/images/diamondK.jpg';
 
-// TableauColumn component
-const TableauColumn = () => {
-  // Placeholder for cards (you would manage the cards state here)
-  const cards = [];
-
-  return (
-    <div className="tableau-column">
-      {cards.map((card, index) => (
-        <Card key={index} {...card} />
-      ))}
-    </div>
-  );
-};
-
-// Foundations component
-const Foundations = () => {
-  // Placeholder for foundation piles (you would manage the piles state here)
-  const piles = Array.from({ length: 4 }, (_, index) => <FoundationPile key={index} />);
-
-  return <div className="foundations">{piles}</div>;
-};
-
-// FoundationPile component
-const FoundationPile = () => {
-  // Placeholder for cards in the foundation pile (you would manage the cards state here)
-  const cards = [];
-
-  return (
-    <div className="foundation-pile">
-      {cards.map((card, index) => (
-        <Card key={index} {...card} />
-      ))}
-    </div>
-  );
-};
-
-// StockPile component
-const StockPile = () => {
-  // Placeholder for stock pile and waste pile (you would manage the cards state here)
-  const stockCards = [];
-  const wasteCards = [];
-
-  const handleStockClick = () => {
-    // Handle drawing cards from stock pile to waste pile
-  };
-
-  return (
-    <div className="stock-pile" onClick={handleStockClick}>
-      {/* Render top card of stock pile */}
-      {stockCards.length > 0 && <Card {...stockCards[stockCards.length - 1]} />}
-      {/* Render waste pile */}
-      <div className="waste-pile">
-        {wasteCards.map((card, index) => (
-          <Card key={index} {...card} />
-        ))}
-      </div>
-    </div>
-  );
-};
-
-// Card component
-const Card = ({ suit, rank, isFaceUp }) => {
-  // Example card rendering (you would use actual card data)
-  const cardClassName = `card ${isFaceUp ? 'face-up' : 'face-down'}`;
-  const cardLabel = isFaceUp ? `${rank} of ${suit}` : 'Card Back';
-
-  return <div className={cardClassName}>{cardLabel}</div>;
-};
-
-export default SolitaireGame;
+import spadeA from '../../public/images/spadeA.jpg';
+import spade2 from '../../public/images/spade2.jpg';
+import spade3 from '../../public/images/spade3.jpg';
+import spade4 from '../../public/images/spade4.jpg';
+import spade5 from '../../public/images/spade5.jpg';
+import spade6 from '../../public/images/spade6.jpg';
+import spade7 from '../../public/images/spade7.jpg';
+import spade8 from '../../public/images/spade8.jpg';
+import spade9 from '../../public/images/spade9.jpg';
+import spade10 from '../../public/images/spade10.jpg';
+import spadeJ from '../../public/images/spadeJ.jpg';
+import spadeQ from '../../public/images/spadeQ.jpg';
+import spadeK from '../../public/images/spadeK.jpg';
