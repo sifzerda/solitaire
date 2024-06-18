@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import '../App.css'; // Global stylesheets
+import '../App.css'; // Assuming these are global stylesheets
 import '../solitaire.css'; // Additional stylesheet if needed
 
 import cardBack from '../../public/images/cardBack.jpg';
@@ -11,13 +11,12 @@ import spadeA from '../../public/images/spadeA.jpg';
 const StockPile = () => {
   const numberOfCards = 20;
   const topCardIndex = numberOfCards - 1;
+
   const [boxClicked, setBoxClicked] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0); // Index to track the current image
-
   const handleClickBox1 = () => {
     setBoxClicked(true);
   };
-
   const handleClickBox2 = () => {
     setCurrentImageIndex((currentImageIndex + 1) % 4); // Cycle through 0, 1, 2, 3 (indices of images)
   };
@@ -40,7 +39,7 @@ const StockPile = () => {
   return (
     <div className="card-stack-container">
       <div className="card-stack" onClick={handleClickBox1}>
-      {Array.from({ length: numberOfCards }, (_, index) => (
+        {Array.from({ length: numberOfCards }, (_, index) => (
           <div
             key={index}
             className="card"
@@ -53,16 +52,23 @@ const StockPile = () => {
             <div className="card-index">{index + 1}</div>
           </div>
         ))}
-        {/* image for Box 1 */}
-        <img src={cardBack} alt="Box 1 Image" className="card-image"  />
       </div>
-      
+
+              {/* image for Box 1 
+      <div className="card-shaped-box">
+        Box 2
+      </div>*/}
+
+
       {boxClicked && (
-        <div className="sp box2 card-shaped" onClick={handleClickBox2}>
+        <div className="card-shaped-box" onClick={handleClickBox2}>
           {/* Dynamic image for Box 2 styled like a playing card */}
           <img src={getImageForBox2()} alt="Box 2 Image" className="card-image" />
         </div>
       )}
+
+
+
     </div>
   );
 };

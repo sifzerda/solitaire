@@ -1,6 +1,5 @@
 import profilePic from '../../public/images/propic.jpg';
 import StockPile from '../components/StockPile';
-import Tableau from '../components/Tableau';
 import '../App.css';
 import '../solitaire.css';
 
@@ -21,23 +20,14 @@ export default function About () {
 
  
 
-
-
-
-
-      <div className='grid-wrapper'>  
-      <div className='white-box'>
-      <StockPile />
-</div>
-</div>
-
+ 
 
 
 
 
 <div className='grid-wrapper'>  
       <div className='white-box'>
-      <Tableau />
+      <StockPile />
 </div>
 </div>
 
