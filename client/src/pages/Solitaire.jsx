@@ -18,11 +18,6 @@ export default function About () {
         Nunc pharetra finibus est at efficitur. Praesent sed congue diam.
       </p>
 
- 
-
- 
-
-
 
 
 <div className='grid-wrapper'>  
@@ -31,11 +26,6 @@ export default function About () {
 </div>
 </div>
 
-
-
-
-
- 
 
 
       <div className="separator-line"></div>
