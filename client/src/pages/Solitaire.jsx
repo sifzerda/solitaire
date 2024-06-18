@@ -11,29 +11,31 @@ export default function About () {
 
       <p className="separator-line"></p>
 
-      <img className="profile-picture" src={profilePic} alt="Profile"  />
-
-      <div className="separator-line"></div>
-
-      <p className='portfolio-bio'>
-        Nunc pharetra finibus est at efficitur. Praesent sed congue diam.
-      </p>
 
 
+      <div className="solitaire-box">
+      {/* Content for the solitaire box can be added here */}
 
-      <div className='grid-wrapper'>  
-      <div className='white-box'>
-      <Foundations />
-</div>
-</div>
-
-
-
-<div className='grid-wrapper'>  
       <div className='white-box'>
       <StockPile />
-</div>
-</div>
+      </div>
+
+      <div className='white-box'>
+      <Foundations /> 
+      </div>
+
+
+
+
+
+
+
+    </div>
+
+
+
+
+
 
 
 
@@ -41,7 +43,6 @@ export default function About () {
 
 
       <div className="separator-line"></div>
-
 
     </div>
   );

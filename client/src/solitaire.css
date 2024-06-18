@@ -1,5 +1,24 @@
 /* ------------------------- solitaire -------------------------*/
 
+.solitaire-box {
+  width: 1400px;
+  height: 900px;
+  background-color: #2ecc71; /* Green color */
+  border: 1px solid #27ae60; /* Darker green border */
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); /* Shadow effect */
+  border-radius: 8px;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 24px;
+  text-align: center;
+}
+
+
+
+
 /* TwoBoxes.css */
 .card-shaped {
   width: 150px; /* Adjust width as needed */
