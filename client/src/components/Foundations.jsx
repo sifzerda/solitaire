@@ -12,10 +12,10 @@ const Foundations = () => {
         Box 2
       </div>
       <div className="card-shaped-box">
-        Box 4
+        Box 3
       </div>
       <div className="card-shaped-box">
-        Box 5
+        Box 4
       </div>
     </div>
   );

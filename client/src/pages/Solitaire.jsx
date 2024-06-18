@@ -1,6 +1,4 @@
-import profilePic from '../../public/images/propic.jpg';
 import StockPile from '../components/StockPile';
-import Foundations from '../components/Foundations';
 import '../App.css';
 import '../solitaire.css';
 
@@ -14,15 +12,15 @@ export default function About () {
 
 
       <div className="solitaire-box">
-      {/* Content for the solitaire box can be added here */}
+ 
 
       <div className='white-box'>
       <StockPile />
       </div>
 
-      <div className='white-box'>
+       {/*<div className='white-box'>
       <Foundations /> 
-      </div>
+      </div>*/}
 
 
 
