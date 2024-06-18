@@ -90,6 +90,7 @@ const StockPile = () => {
 
   return (
     <div className="card-stack-container">
+            <h5>Stock Pile</h5>
       <div className="card-stack" onClick={handleClickBox1}>
         {Array.from({ length: numberOfCards }, (_, index) => (
           <div

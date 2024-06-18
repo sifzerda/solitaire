@@ -1,39 +1,24 @@
-import '../App.css'; // Stylesheet for the solitaire game
-import '../solitaire.css';
+import '../App.css'; // Assuming these are global stylesheets
+import '../solitaire.css'; // Additional stylesheet if needed
 
 const Foundations = () => {
-  // Placeholder data for foundation piles
-  const foundationData = [
-    [{ suit: 'hearts', rank: 'A', isFaceUp: true }],
-    [],
-    [],
-    []
-  ];
-
   return (
-    <div className="foundations">
-      {foundationData.map((pile, pileIndex) => (
-        <FoundationPile key={pileIndex} cards={pile} />
-      ))}
+    <div className="card-stack-container">
+      <h5>Foundations</h5>
+      <div className="card-shaped-box">
+        Box 1
+      </div>
+      <div className="card-shaped-box">
+        Box 2
+      </div>
+      <div className="card-shaped-box">
+        Box 4
+      </div>
+      <div className="card-shaped-box">
+        Box 5
+      </div>
     </div>
   );
-};
-
-const FoundationPile = ({ cards }) => {
-  return (
-    <div className="foundation-pile">
-      {cards.map((card, index) => (
-        <Card key={index} {...card} />
-      ))}
-    </div>
-  );
-};
-
-const Card = ({ suit, rank, isFaceUp }) => {
-  const cardClassName = `card ${isFaceUp ? 'face-up' : 'face-down'}`;
-  const cardLabel = isFaceUp ? `${rank} of ${suit}` : 'Card Back';
-
-  return <div className={cardClassName}>{cardLabel}</div>;
 };
 
 export default Foundations;
