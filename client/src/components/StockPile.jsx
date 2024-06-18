@@ -9,6 +9,8 @@ import diamondA from '../../public/images/diamondA.jpg';
 import spadeA from '../../public/images/spadeA.jpg';
 
 const StockPile = () => {
+  const numberOfCards = 20;
+  const topCardIndex = numberOfCards - 1;
   const [boxClicked, setBoxClicked] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0); // Index to track the current image
 
@@ -36,15 +38,29 @@ const StockPile = () => {
   };
 
   return (
-    <div className="stockpile-container">
-      <div className="sp box1 card-shaped" onClick={handleClickBox1}>
-        {/* Example image for Box 1 */}
-        <img src={cardBack} alt="Box 1 Image" />
+    <div className="card-stack-container">
+      <div className="card-stack" onClick={handleClickBox1}>
+      {Array.from({ length: numberOfCards }, (_, index) => (
+          <div
+            key={index}
+            className="card"
+            style={{
+              zIndex: numberOfCards - index,
+              transform: index === topCardIndex ? `translate(-5px, -5px)` : `none`,
+            }}
+          >
+            <img src={cardBack} alt="Card Back" className="card-image" />
+            <div className="card-index">{index + 1}</div>
+          </div>
+        ))}
+        {/* image for Box 1 */}
+        <img src={cardBack} alt="Box 1 Image" className="card-image"  />
       </div>
+      
       {boxClicked && (
         <div className="sp box2 card-shaped" onClick={handleClickBox2}>
           {/* Dynamic image for Box 2 styled like a playing card */}
-          <img src={getImageForBox2()} alt="Box 2 Image" className="playing-card" />
+          <img src={getImageForBox2()} alt="Box 2 Image" className="card-image" />
         </div>
       )}
     </div>
