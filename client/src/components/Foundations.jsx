@@ -1,5 +1,5 @@
-import '../App.css'; // Assuming these are global stylesheets
-import '../solitaire.css'; // Additional stylesheet if needed
+import '../App.css';  
+import '../solitaire.css';  
 
 const Foundations = () => {
   return (
