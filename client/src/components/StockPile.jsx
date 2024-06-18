@@ -20,16 +20,16 @@ const StockPile = () => {
 
   return (
     <div className="stockpile-container">
-      <div className="sp box1" onClick={handleClickBox1}>
+      <div className="sp box1 card-shaped" onClick={handleClickBox1}>
         Box 1
       </div>
       {boxClicked && (
-        <div className="sp box2" onClick={handleClickBox2}>
+        <div className="sp box2 card-shaped" onClick={handleClickBox2}>
           {currentNumber}
         </div>
       )}
     </div>
   );
-}
+};
 
 export default StockPile;

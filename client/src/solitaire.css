@@ -1,9 +1,26 @@
 /* ------------------------- solitaire -------------------------*/
 
 /* TwoBoxes.css */
+.card-shaped {
+  width: 150px; /* Adjust width as needed */
+  height: 200px; /* Adjust height as needed */
+  border: 2px dashed #999; /* Dashed border */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  font-weight: bold;
+}
+
 .stockpile-container {
-    display: flex;
-  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px; /* Adjust gap between boxes as needed */
+}
   
   .sp {
     width: 50%;
@@ -20,7 +37,9 @@
     background-color: lightgreen;
   }
 
-
+  .card-stack-container {
+    display: flex;
+  }
 
   .card-stack {
     position: relative;
@@ -46,6 +65,10 @@
     height: 100%;
     border-radius: 6px;
   }
+
+  .card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
   
   .card-index {
     position: absolute;
@@ -55,6 +78,21 @@
     padding: 3px 8px;
     border-radius: 3px;
     font-size: 12px;
+    font-weight: bold;
+  }
+
+  .card-shaped-box {
+    width: 150px; /* Adjust width as needed */
+    height: 200px; /* Adjust height as needed */
+    margin-left: 20px; /* Adjust margin as needed */
+    border: 2px dashed #999; /* Dashed border */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
     font-weight: bold;
   }
   
