@@ -103,7 +103,7 @@ To change difficulty inside the game, you can change:
 Parts of the game:
 - Tableau: Main game cards in 7 cols, card number = col number
 - Stock Pile: Remainder cards not in Tableau, cycles
-- Foundations: 4 places where cards stack by  
+- Foundations: 4 places where cards stack by suit 
 
 (ONE) STOCKPILE COMPONENT
 - make twin boxes (box 1 = facedown card stack, box 2 = face up card cycle)
