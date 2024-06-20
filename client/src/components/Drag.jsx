@@ -67,9 +67,10 @@ const initialCards = [
 ];
 
 const initialDecks = [
-  { id: 'deck-1', cards: [] },
-  { id: 'deck-2', cards: [] },
-  // Add more decks as needed
+  { id: 'hearts', cards: [] },
+  { id: 'diamonds', cards: [] },
+  { id: 'clubs', cards: [] },
+  { id: 'spades', cards: [] },
 ];
 
 const DragAndDropComponent = () => {
@@ -142,27 +143,29 @@ const DragAndDropComponent = () => {
           </Droppable>
         </div>
         <div className="decks">
-          <h2>Decks</h2>
-          {decks.map((deck) => (
-            <div key={deck.id} className="deck">
-              <Droppable droppableId={deck.id}>
-                {(provided, snapshot) => (
-                  <div
-                    className={`deck-content ${snapshot.isDraggingOver ? 'dragging-over' : ''}`}
-                    {...provided.droppableProps}
-                    ref={provided.innerRef}
-                  >
-                    {deck.cards.map((card, index) => (
-                      <div key={card.id} className="card-in-deck">
-                        {card.rank} of {card.suit}
-                      </div>
-                    ))}
-                    {provided.placeholder}
-                  </div>
-                )}
-              </Droppable>
-            </div>
-          ))}
+          <h2>Foundation Decks</h2>
+          <div className="foundation-decks">
+            {decks.map((deck) => (
+              <div key={deck.id} className="foundation-deck">
+                <Droppable droppableId={deck.id}>
+                  {(provided, snapshot) => (
+                    <div
+                      className={`deck-content ${snapshot.isDraggingOver ? 'dragging-over' : ''}`}
+                      {...provided.droppableProps}
+                      ref={provided.innerRef}
+                    >
+                      {deck.cards.map((card, index) => (
+                        <div key={card.id} className="card-in-deck">
+                          {card.rank} of {card.suit}
+                        </div>
+                      ))}
+                      {provided.placeholder}
+                    </div>
+                  )}
+                </Droppable>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </DragDropContext>
