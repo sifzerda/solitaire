@@ -1,6 +1,5 @@
 import  { useState } from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-import  '../Drag.css'; // Import CSS for styling (create this file if necessary)
 
 // Define initial squares and boxes data
 const initialCards = [
