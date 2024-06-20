@@ -1,9 +1,9 @@
-import  { useState } from 'react';
+import { useState } from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 // Define initial squares and boxes data
 const initialCards = [
-    // HEARTS 
+  // HEARTS 
   { id: 'card-1', suit: 'Hearts', rank: 'Ace' },
   { id: 'card-2', suit: 'Hearts', rank: '2' },
   { id: 'card-3', suit: 'Hearts', rank: '3' },
@@ -48,7 +48,7 @@ const initialCards = [
   { id: 'card-38', suit: 'Clubs', rank: 'Queen' },
   { id: 'card-39', suit: 'Clubs', rank: 'King' },
 
-    // SPADES
+  // SPADES
   { id: 'card-40', suit: 'Spades', rank: 'Ace' },
   { id: 'card-41', suit: 'Spades', rank: '2' },
   { id: 'card-42', suit: 'Spades', rank: '3' },
@@ -62,7 +62,6 @@ const initialCards = [
   { id: 'card-50', suit: 'Spades', rank: 'Jack' },
   { id: 'card-51', suit: 'Spades', rank: 'Queen' },
   { id: 'card-52', suit: 'Spades', rank: 'King' },
-
 ];
 
 const initialDecks = [
@@ -75,6 +74,11 @@ const initialDecks = [
 const DragAndDropComponent = () => {
   const [cards, setCards] = useState(initialCards);
   const [decks, setDecks] = useState(initialDecks);
+  const [currentCardIndex, setCurrentCardIndex] = useState(0);
+
+  const nextCard = () => {
+    setCurrentCardIndex((prevIndex) => (prevIndex + 1) % cards.length);
+  };
 
   const onDragEnd = (result) => {
     const { source, destination } = result;
@@ -119,23 +123,24 @@ const DragAndDropComponent = () => {
       <div className="container">
         <div className="cards">
           <h2>Cards</h2>
+          <div className="card-navigation">
+            <button onClick={nextCard}>Next Card</button>
+          </div>
           <Droppable droppableId="all-cards" direction="horizontal">
             {(provided) => (
               <div className="card-list" {...provided.droppableProps} ref={provided.innerRef}>
-                {cards.map((card, index) => (
-                  <Draggable key={card.id} draggableId={card.id} index={index}>
-                    {(provided) => (
-                      <div
-                        className="card"
-                        {...provided.draggableProps}
-                        {...provided.dragHandleProps}
-                        ref={provided.innerRef}
-                      >
-                        {card.rank} of {card.suit}
-                      </div>
-                    )}
-                  </Draggable>
-                ))}
+                <Draggable key={cards[currentCardIndex].id} draggableId={cards[currentCardIndex].id} index={currentCardIndex}>
+                  {(provided) => (
+                    <div
+                      className="card"
+                      {...provided.draggableProps}
+                      {...provided.dragHandleProps}
+                      ref={provided.innerRef}
+                    >
+                      {cards[currentCardIndex].rank} of {cards[currentCardIndex].suit}
+                    </div>
+                  )}
+                </Draggable>
                 {provided.placeholder}
               </div>
             )}
