@@ -1,4 +1,4 @@
-Consider making solitaire with Vue or Angular, or with help of Canvas API
+Consider making solitaire with Vue or Angular, or GUI with help of Canvas API
 Vue may be easiest, apparently Angular has a bigger learning curve
 
 # SOLITAIRE ♤ ♡ ♢ ♧
