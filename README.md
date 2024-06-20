@@ -1,3 +1,7 @@
+Consider making solitaire with Vue or Angular, or with help of Canvas API
+Vue may be easiest, apparently Angular has a bigger learning curve
+
+
 # Gamestack
 
 This is a personal project to create a react MERN stack app which has a number of simple games. These were built from scratch (i.e. no code derived from elsewhere) with ChatGPT help. 
