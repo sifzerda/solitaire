@@ -1,13 +1,30 @@
 Consider making solitaire with Vue or Angular, or with help of Canvas API
 Vue may be easiest, apparently Angular has a bigger learning curve
 
+# SOLITAIRE ♤ ♡ ♢ ♧
 
-# Gamestack
+#2 in gamestack.
 
-This is a personal project to create a react MERN stack app which has a number of simple games. These were built from scratch (i.e. no code derived from elsewhere) with ChatGPT help. 
+## Table of Contents
+
+- [SOLITAIRE ♤ ♡ ♢ ♧](#solitaire----)
+  - [Table of Contents](#table-of-contents)
+  - [Description](#description)
+  - [Badges](#badges)
+  - [Visuals](#visuals)
+  - [Installation](#installation)
+  - [Usage](#usage)
+  - [Building:](#building)
+  - [To do:](#to-do)
+  - [To do for all games](#to-do-for-all-games)
+
+## Description
+
+This is a personal project to create a react MERN stack app which has a number of simple games. These were built with ChatGPT help only. 
 
 Games:
-- [x] Minesweeper
+
+- [ ] Minesweeper
 - [x] Solitaire
 - [ ] Chess - would need an AI PC opponent
 - [ ] Poker
@@ -19,13 +36,12 @@ Games:
 - [ ] SideShow shooting gallery
 - [ ] Go Fish, Uno, etc (would need AI PC opponent)
 
-
 Others:
 
- 
- 
- 
-- slot machine:
+- solitaire
+- chess
+- poker
+- slot machine
   - This would require points from other games to pay to play
 - 'bad toys' type simple shooting game with reticule/flashpoint, 
   - Or sideshow type shooting gallery
@@ -39,30 +55,53 @@ Others:
 Optional:
 - type of virtual reward shop where you trade points for virtual stuff, e.g. user avatars, 'trophies'
 
-# INDEX
+## Badges
 
-# Minesweeper 
-# Solitaire
-#
-#
-#
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) 
 
-# SOLITAIRE ♤ ♡ ♢ ♧ 
+![Visual Studio Code](https://img.shields.io/badge/Visual%20Studio%20Code-0078d7.svg?style=for-the-badge&logo=visual-studio-code&logoColor=white) 
+![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white) 
+![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E) 
+![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
+![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB) 
+![ESLint](https://img.shields.io/badge/ESLint-4B3263?style=for-the-badge&logo=eslint&logoColor=white)
+![Vite](https://img.shields.io/badge/vite-%23646CFF.svg?style=for-the-badge&logo=vite&logoColor=white) 
+![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
+![React Router](https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white) 
+![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white)
+![Apollo-GraphQL](https://img.shields.io/badge/-ApolloGraphQL-311C87?style=for-the-badge&logo=apollo-graphql)
+![FontAwesome](https://img.shields.io/badge/Font%20Awesome-538DD7.svg?style=for-the-badge&logo=Font-Awesome&logoColor=white) 
+![Heroku](https://img.shields.io/badge/heroku-%23430098.svg?style=for-the-badge&logo=heroku&logoColor=white)
 
-Difficulty:
+## Visuals
 
-To change difficulty inside the game, you can change:
-- GRID SIZE:
--         const rows = 10; const cols = 10 (change this to how big you want the grid to be)
-- SAFE CELL REVEAL:
--         const maxReveal: default '3', change to alter how many blocks of cells get revealed when a safe cell is clicked
-- MINE #:
-- to edit number of mines change quantity in:
-  -       const [nonBombCellsCount, setNonBombCellsCount] = useState(rows * cols - 5); <---- change the 5
-  -       while (randomCells.length < 5) <----- change the 5
+INSERT SCREENSHOTS
 
+[Visit App deployed to Heroku](https://minesweeper10-611b154e8013.herokuapp.com/)
 
-## Steps to creating Solitaire:
+## Installation
+
+```bash
+git clone https://github.com/yourusername/project.git
+cd project
+npm install
+```
+
+## Usage
+
+A Solitaire gameboard has 3 main parts: the Stock Pile, the Foundations, and the Tableau.
+
+Tableau: main game cards in 7 cols, card numbers = col number, e.g. col 7 contains 7 cards
+
+Stockpile: Remainder cards not in Tableau, cycles
+
+Foundations: 4 places where cards stack by suit. 
+
+ Each of these form a separate component in the app. There is also a landing screen to start game, a high scores page, win and loss screens, and score submission page.
+
+## Building:
 
 1. <u>Initial dnd</u>: Create 4 boxes (initial card stockpile) which can be dragged and dropped into 4 bordered areas (the foundations)
 2. <u>'const initialCards'</u>: replace boxes with 52 cards of traditional playing deck, give each card id, rank and suit
@@ -92,7 +131,7 @@ To change difficulty inside the game, you can change:
 16. <u>'const handleClick'</u>: if one mine cell is clicked, all mine cells are revealed
 17. <u>'generateInitialGrid' [...] content: '' revealed: false:</u>cells blank and unclicked at game start, <u>newGrid[rowIndex][colIndex].revealed = true:</u> once clicked, cell reveals proximity value
 
-## TO DO: 
+## To do: 
 
 - [x] Create Foundation < /> area/boxes for cards to slot/stack into
 - [x] Create Stockpile < /> of free cards
@@ -114,71 +153,11 @@ To change difficulty inside the game, you can change:
 - [ ] highscores comp
 - [ ] submit score/time if logged in
 - [ ] user profile page shows how many games user has won, and quickest (least time) wins
+- [ ] Make each part of the game a separate component
 - [ ] OPTIONAL: Some kind of animation upon winning game
 - [ ] 
 
-
-# SOLITAIRE ♤ ♡ ♢ ♧ 
-
-Parts of the game:
-- Tableau: Main game cards in 7 cols, card number = col number
-- Stock Pile: Remainder cards not in Tableau, cycles
-- Foundations: 4 places where cards stack by suit 
-
-(ONE) STOCKPILE COMPONENT
-- make twin boxes (box 1 = facedown card stack, box 2 = face up card cycle)
-- make box 1 an event listener, on-click box 2 cycles through max 52 values (i.e. click counter reset at 52)
-- 
-
-
-(TWO) FOUNDATIONS COMPONENT
-
-- create 4 boxes which cards will go into
-- configure to only accept ace cards
-  - configure to only accept a 1 card if an ace present
-    - configure 1s to accept only 2s
-      - " " 2s to only accept 3s
-        - " " 3s to only accept 4s
-          - ["..."] queens to only accept kings
-
-(THREE) TABLEAU
-
-- 
-
-
-
-Components:
-
-SolitaireGame (Main Component):
-
-Manages the overall state of the game.
-Renders the tableau, foundations, and stock pile.
-Tableau:
-
-Represents the main playing area where cards are laid out in columns.
-Contains multiple TableauColumn components.
-TableauColumn:
-
-Represents a single column in the tableau.
-Can contain multiple Card components.
-Foundations:
-
-Represents the foundation piles where cards are built up by suit.
-FoundationPile:
-
-Represents a single foundation pile.
-Can contain multiple Card components.
-StockPile:
-
-Represents the stock pile from which cards are drawn.
-Can be clicked to draw cards into the waste pile.
-Card:
-
-Represents a single playing card.
-Displays the card's suit, rank, and face status (face up or face down).
-
-
-## FOR ALL GAMES
+## To do for all games
 - [ ] point accumulation system in-play, + calc points per safe cells revealed, 
 - [ ] button to show high scores
 - [ ] if user logged in, can save high score (post to user array)
