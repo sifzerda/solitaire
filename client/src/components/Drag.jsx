@@ -1,25 +1,26 @@
+import '../scss.css';
+
 import  { useState } from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import  '../Drag.css'; // Import CSS for styling (create this file if necessary)
 
 // Define initial squares and boxes data
-const initialSquares = [
-  { id: 'square-1', content: 'Square 1' },
-  { id: 'square-2', content: 'Square 2' },
-  { id: 'square-3', content: 'Square 3' },
-  { id: 'square-4', content: 'Square 4' },
+const initialCards = [
+  { id: 'card-1', suit: 'Hearts', rank: 'Ace' },
+  { id: 'card-2', suit: 'Diamonds', rank: 'King' },
+  { id: 'card-3', suit: 'Clubs', rank: 'Queen' },
+  // Add more cards as needed
 ];
 
-const initialBoxes = [
-  { id: 'box-1', squares: [] },
-  { id: 'box-2', squares: [] },
-  { id: 'box-3', squares: [] },
-  { id: 'box-4', squares: [] },
+const initialDecks = [
+  { id: 'deck-1', cards: [] },
+  { id: 'deck-2', cards: [] },
+  // Add more decks as needed
 ];
 
 const DragAndDropComponent = () => {
-  const [squares, setSquares] = useState(initialSquares);
-  const [boxes, setBoxes] = useState(initialBoxes);
+  const [cards, setCards] = useState(initialCards);
+  const [decks, setDecks] = useState(initialDecks);
 
   const onDragEnd = (result) => {
     const { source, destination } = result;
@@ -34,49 +35,49 @@ const DragAndDropComponent = () => {
       return;
     }
 
-    // Update squares state
-    const updatedSquares = [...squares];
-    const [draggedSquare] = updatedSquares.splice(source.index, 1);
-    updatedSquares.splice(destination.index, 0, draggedSquare);
-    setSquares(updatedSquares);
+    // Update cards state
+    const updatedCards = [...cards];
+    const [draggedCard] = updatedCards.splice(source.index, 1);
+    updatedCards.splice(destination.index, 0, draggedCard);
+    setCards(updatedCards);
 
-    // Update boxes state
-    const updatedBoxes = boxes.map((box) => {
-      if (box.id === destination.droppableId) {
+    // Update decks state
+    const updatedDecks = decks.map((deck) => {
+      if (deck.id === destination.droppableId) {
         return {
-          ...box,
-          squares: [...box.squares, draggedSquare],
+          ...deck,
+          cards: [...deck.cards, draggedCard],
         };
-      } else if (box.id === source.droppableId) {
+      } else if (deck.id === source.droppableId) {
         return {
-          ...box,
-          squares: box.squares.filter((sq) => sq.id !== draggedSquare.id),
+          ...deck,
+          cards: deck.cards.filter((card) => card.id !== draggedCard.id),
         };
       }
-      return box;
+      return deck;
     });
 
-    setBoxes(updatedBoxes);
+    setDecks(updatedDecks);
   };
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <div className="container">
-        <div className="squares">
-          <h2>Squares</h2>
-          <Droppable droppableId="all-squares" direction="horizontal">
+        <div className="cards">
+          <h2>Cards</h2>
+          <Droppable droppableId="all-cards" direction="horizontal">
             {(provided) => (
-              <div className="square-list" {...provided.droppableProps} ref={provided.innerRef}>
-                {squares.map((square, index) => (
-                  <Draggable key={square.id} draggableId={square.id} index={index}>
+              <div className="card-list" {...provided.droppableProps} ref={provided.innerRef}>
+                {cards.map((card, index) => (
+                  <Draggable key={card.id} draggableId={card.id} index={index}>
                     {(provided) => (
                       <div
-                        className="square"
+                        className="card"
                         {...provided.draggableProps}
                         {...provided.dragHandleProps}
                         ref={provided.innerRef}
                       >
-                        {square.content}
+                        {card.rank} of {card.suit}
                       </div>
                     )}
                   </Draggable>
@@ -86,20 +87,20 @@ const DragAndDropComponent = () => {
             )}
           </Droppable>
         </div>
-        <div className="boxes">
-          <h2>Boxes</h2>
-          {boxes.map((box) => (
-            <div key={box.id} className="box">
-              <Droppable droppableId={box.id}>
+        <div className="decks">
+          <h2>Decks</h2>
+          {decks.map((deck) => (
+            <div key={deck.id} className="deck">
+              <Droppable droppableId={deck.id}>
                 {(provided, snapshot) => (
                   <div
-                    className={`box-content ${snapshot.isDraggingOver ? 'dragging-over' : ''}`}
+                    className={`deck-content ${snapshot.isDraggingOver ? 'dragging-over' : ''}`}
                     {...provided.droppableProps}
                     ref={provided.innerRef}
                   >
-                    {box.squares.map((sq, index) => (
-                      <div key={sq.id} className="square-in-box">
-                        {sq.content}
+                    {deck.cards.map((card, index) => (
+                      <div key={card.id} className="card-in-deck">
+                        {card.rank} of {card.suit}
                       </div>
                     ))}
                     {provided.placeholder}

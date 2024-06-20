@@ -1,6 +1,7 @@
-import { useState, useEffect } from 'react';
+import  { useState, useEffect } from 'react';
+import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import '../App.css'; // global style
-import '../solitaire.css';  
+import '../solitaire.css';
 
 import cardBack from '../../public/images/cardBack.jpg';
 import heartA from '../../public/images/heartA.jpg';
@@ -19,21 +20,19 @@ const StockPile = () => {
   const [box2Visible, setBox2Visible] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(null); // Initialize with null for no image
 
-  // Effect to set Box 2 visible when component mounts
   useEffect(() => {
     setBox2Visible(true);
   }, []);
 
-  // Handle click on Box 1 to cycle images in Box 2
   const handleClickBox1 = () => {
-    setBox1Clicked(!box1Clicked); // Toggle box1Clicked state on each click
-    handleClickBox2(); // Cycle images for Box 2
+    setBox1Clicked(!box1Clicked);
+    handleClickBox2();
   };
 
-  // Cycle through images for Box 2
   const handleClickBox2 = () => {
-    setCurrentImageIndex((currentImageIndex === null ? 0 : currentImageIndex + 1) % 7); // Cycle through 0 to 6 (indices of images)
+    setCurrentImageIndex((currentImageIndex === null ? 0 : currentImageIndex + 1) % 7);
   };
+
 
   // Determine which image to display in Box 2 based on currentImageIndex
   const getImageForBox2 = () => {
@@ -78,12 +77,6 @@ const StockPile = () => {
           </div>
         ))}
       </div>
-
-              {/* image for Box 1 
-      <div className="card-shaped-box">
-        Box 2
-      </div>*/}
-
 
       {/* Render image for Box 2 */}
       {box2Visible && (
