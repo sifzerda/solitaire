@@ -71,7 +71,7 @@ const initialDecks = [
   { id: 'spades', cards: [] },
 ];
 
-const DragAndDropComponent = () => {
+const Solitaire = () => {
   const [cards, setCards] = useState(initialCards);
   const [decks, setDecks] = useState(initialDecks);
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
@@ -83,33 +83,21 @@ const DragAndDropComponent = () => {
   const onDragEnd = (result) => {
     const { source, destination } = result;
 
-    // Dropped outside the list
     if (!destination) {
       return;
     }
 
-    // Dropped in the same position
-    if (source.droppableId === destination.droppableId && source.index === destination.index) {
-      return;
-    }
-
-    // Update cards state
-    const updatedCards = [...cards];
-    const [draggedCard] = updatedCards.splice(source.index, 1);
-    updatedCards.splice(destination.index, 0, draggedCard);
-    setCards(updatedCards);
-
-    // Update decks state
     const updatedDecks = decks.map((deck) => {
       if (deck.id === destination.droppableId) {
+        const draggedCard = cards[currentCardIndex];
+        setCards((prevCards) => {
+          const updated = [...prevCards];
+          updated.splice(currentCardIndex, 1);
+          return updated;
+        });
         return {
           ...deck,
           cards: [...deck.cards, draggedCard],
-        };
-      } else if (deck.id === source.droppableId) {
-        return {
-          ...deck,
-          cards: deck.cards.filter((card) => card.id !== draggedCard.id),
         };
       }
       return deck;
@@ -126,22 +114,23 @@ const DragAndDropComponent = () => {
           <div className="card-navigation">
             <button onClick={nextCard}>Next Card</button>
           </div>
-          <Droppable droppableId="all-cards" direction="horizontal">
+          <Droppable droppableId="revealed-cards">
             {(provided) => (
               <div className="card-list" {...provided.droppableProps} ref={provided.innerRef}>
-                <Draggable key={cards[currentCardIndex].id} draggableId={cards[currentCardIndex].id} index={currentCardIndex}>
-                  {(provided) => (
-                    <div
-                      className="card"
-                      {...provided.draggableProps}
-                      {...provided.dragHandleProps}
-                      ref={provided.innerRef}
-                    >
-                      {cards[currentCardIndex].rank} of {cards[currentCardIndex].suit}
-                    </div>
-                  )}
-                </Draggable>
-                {provided.placeholder}
+                {currentCardIndex < cards.length && (
+                  <Draggable draggableId={cards[currentCardIndex].id} index={currentCardIndex}>
+                    {(provided) => (
+                      <div
+                        className="card"
+                        {...provided.draggableProps}
+                        {...provided.dragHandleProps}
+                        ref={provided.innerRef}
+                      >
+                        {cards[currentCardIndex].rank} of {cards[currentCardIndex].suit}
+                      </div>
+                    )}
+                  </Draggable>
+                )}
               </div>
             )}
           </Droppable>
@@ -176,4 +165,4 @@ const DragAndDropComponent = () => {
   );
 };
 
-export default DragAndDropComponent;
+export default Solitaire;
