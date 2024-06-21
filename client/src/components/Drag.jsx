@@ -66,11 +66,12 @@ const initialCards = [
 
 // create and initialize Foundation decks with suit id, and empty 
 const initialDecks = [
-  { id: 'hearts', cards: [] },    // Hearts foundation deck
-  { id: 'diamonds', cards: [] },  // Diamonds foundation deck
-  { id: 'clubs', cards: [] },     // Clubs foundation deck
-  { id: 'spades', cards: [] },    // Spades foundation deck
+  { id: 'hearts', cards: [] },   
+  { id: 'diamonds', cards: [] }, 
+  { id: 'clubs', cards: [] },    
+  { id: 'spades', cards: [] },   
 ];
+
 // Emoji on empty foundation decks
 const suitEmojis = {
   hearts: '♡',
