@@ -80,15 +80,15 @@ const suitEmojis = {
   spades: '♤',
 };
 
-// Initial tableau cards (7 static cards)
+// Initial tableau cards with stacks (adjust as needed)
 const initialTableau = [
-  { id: 'tableau-1', suit: 'Hearts', rank: '10' },
-  { id: 'tableau-2', suit: 'Diamonds', rank: '9' },
-  { id: 'tableau-3', suit: 'Clubs', rank: '8' },
-  { id: 'tableau-4', suit: 'Spades', rank: '7' },
-  { id: 'tableau-5', suit: 'Hearts', rank: '6' },
-  { id: 'tableau-6', suit: 'Diamonds', rank: '5' },
-  { id: 'tableau-7', suit: 'Clubs', rank: '4' },
+  { id: 'tableau-1', stacks: initialCards.slice(0, 1) },   // 1 card in tableau 1
+  { id: 'tableau-2', stacks: initialCards.slice(1, 3) },   // 2 cards in tableau 2
+  { id: 'tableau-3', stacks: initialCards.slice(3, 6) },   // 3 cards in tableau 3
+  { id: 'tableau-4', stacks: initialCards.slice(6, 10) },  // 4 cards in tableau 4
+  { id: 'tableau-5', stacks: initialCards.slice(10, 15) }, // 5 cards in tableau 5
+  { id: 'tableau-6', stacks: initialCards.slice(15, 21) }, // 6 cards in tableau 6
+  { id: 'tableau-7', stacks: initialCards.slice(21, 28) }, // 7 cards in tableau 7
 ];
 
 const Solitaire = () => {
@@ -193,58 +193,93 @@ else if (draggedCard.rank === 'King') {
     setDecks(updatedDecks);
   };
 
-  /* -------------------------------------------------------------*/
+/* -------------------------------------------------------------*/
 
-  return (
-    <DragDropContext onDragEnd={onDragEnd}>
-      <div className="s-container">
-        <div className="cards">
-          <h2>Cards</h2>
-          <div className="card-navigation">
-            <button onClick={nextCard}>Next Card</button>
-          </div>
-          <Droppable droppableId="revealed-cards">
-            {(provided) => (
-              <div className="card-list" {...provided.droppableProps} ref={provided.innerRef}>
-                {currentCardIndex < cards.length && (
-                  <Draggable draggableId={cards[currentCardIndex].id} index={currentCardIndex}>
-                    {(provided) => (
-                      <div
-                        className="card"
-                        {...provided.draggableProps}
-                        {...provided.dragHandleProps}
-                        ref={provided.innerRef}
-                      >
-                        {cards[currentCardIndex].rank} of {cards[currentCardIndex].suit}
-                      </div>
-                    )}
-                  </Draggable>
-                )}
-              </div>
-            )}
-          </Droppable>
+return (
+  <DragDropContext onDragEnd={onDragEnd}>
+    {/* --------- CARDS ----------------------------------------------*/}
+    <div className="s-container">
+      <div className="cards">
+        <h2>Cards</h2>
+        <div className="card-navigation">
+          <button onClick={nextCard}>Next Card</button>
         </div>
-        <div className="decks">
-          <h2>Foundation Decks</h2>
-          <div className="foundation-decks">
-            {decks.map((deck) => (
-              <div key={deck.id} className="foundation-deck">
-                <Droppable droppableId={deck.id}>
-                  {(provided, snapshot) => (
+        <Droppable droppableId="revealed-cards">
+          {(provided) => (
+            <div className="card-list" {...provided.droppableProps} ref={provided.innerRef}>
+              {currentCardIndex < cards.length && (
+                <Draggable draggableId={cards[currentCardIndex].id} index={currentCardIndex}>
+                  {(provided) => (
                     <div
-                      className={`deck-content ${snapshot.isDraggingOver ? 'dragging-over' : ''}`}
-                      {...provided.droppableProps}
+                      className="card"
+                      {...provided.draggableProps}
+                      {...provided.dragHandleProps}
                       ref={provided.innerRef}
                     >
-                      {deck.cards.length === 0 ? (
-                        <div className="empty-deck-emoji">{suitEmojis[deck.id]}</div>
-                      ) : (
-                        deck.cards.map((card, index) => (
-                          <div key={card.id} className="card-in-deck">
-                            {card.rank} of {card.suit}
-                          </div>
-                        ))
-                      )}
+                      {cards[currentCardIndex].rank} of {cards[currentCardIndex].suit}
+                    </div>
+                  )}
+                </Draggable>
+              )}
+            </div>
+          )}
+        </Droppable>
+      </div>
+
+      {/* --------- DECKS ----------------------------------------------*/}
+      <div className="decks">
+        <h2>Foundation Decks</h2>
+        <div className="foundation-decks">
+          {decks.map((deck) => (
+            <div key={deck.id} className="foundation-deck">
+              <Droppable droppableId={deck.id}>
+                {(provided, snapshot) => (
+                  <div
+                    className={`deck-content ${snapshot.isDraggingOver ? 'dragging-over' : ''}`}
+                    {...provided.droppableProps}
+                    ref={provided.innerRef}
+                  >
+                    {deck.cards.length === 0 ? (
+                      <div className="empty-deck-emoji">{suitEmojis[deck.id]}</div>
+                    ) : (
+                      deck.cards.map((card, index) => (
+                        <div key={card.id} className="card-in-deck">
+                          {card.rank} of {card.suit}
+                        </div>
+                      ))
+                    )}
+                    {provided.placeholder}
+                  </div>
+                )}
+              </Droppable>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* --------- TABLEAU ----------------------------------------------*/}
+      <div className="tableau">
+          <h2>Tableau</h2>
+          <div className="tableau-cards">
+            {tableau.map((pile) => (
+              <div key={pile.id} className="tableau-pile">
+                <Droppable droppableId={pile.id}>
+                  {(provided) => (
+                    <div className="tableau-inner" {...provided.droppableProps} ref={provided.innerRef}>
+                      {pile.stacks.map((card, idx) => (
+                        <Draggable key={card.id} draggableId={card.id} index={idx}>
+                          {(provided) => (
+                            <div
+                              className="tableau-card"
+                              {...provided.draggableProps}
+                              {...provided.dragHandleProps}
+                              ref={provided.innerRef}
+                            >
+                              {card.rank} of {card.suit}
+                            </div>
+                          )}
+                        </Draggable>
+                      ))}
                       {provided.placeholder}
                     </div>
                   )}
@@ -252,16 +287,6 @@ else if (draggedCard.rank === 'King') {
               </div>
             ))}
           </div>
-        </div>
-      </div>
-      <div className="tableau">
-        <h2>Tableau</h2>
-        <div className="tableau-cards">
-          {tableau.map((card) => (
-            <div key={card.id} className="tableau-card">
-              {card.rank} of {card.suit}
-            </div>
-          ))}
         </div>
       </div>
     </DragDropContext>

@@ -120,7 +120,8 @@
   }
 
   .card:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
   }
   
   .card-index {
@@ -210,21 +211,34 @@
     padding: 10px;
   }
 
-  .tableau {
-    border: 1px solid #ccc;
-    padding: 10px;
-    margin-top: 20px;
-  }
-  
-  .tableau-cards {
-    display: flex;
-    justify-content: space-around;
-  }
-  
-  .tableau-card {
-    flex: 1;
-    margin: 0 5px;
-    border: 1px solid #ccc;
-    padding: 10px;
-    background-color: #fff;
-  }
+/* Styling for the tableau section */
+/* Tableau section */
+/* Tableau */
+.tableau {
+  margin-top: 20px;
+}
+
+.tableau-cards {
+  display: flex;
+  justify-content: space-between;
+}
+
+.tableau-pile {
+  width: 150px;
+  height: auto; /* Adjust as needed */
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.tableau-inner {
+  min-height: 150px; /* Adjust as needed */
+}
+
+.tableau-card {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  padding: 8px;
+  margin-bottom: 5px;
+}
