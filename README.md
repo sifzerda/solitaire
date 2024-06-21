@@ -123,7 +123,7 @@ Each of these form a separate component in the app. There is also a landing scre
   - Tableau = Tableau, 
   - Cards = Stockpile
   - Decks = Foundations
-Will update to remove cards dropped into foundation so they don't reappear in Stockpile or Tableau.
+Will update to remove cards dropped into foundation so they don't reappear in Stockpile or Tableau. This ensures once cards are dropped into Foundations, they become non-playable.
 12. <u></u>
 13. <u></u>
 14. <u></u>
