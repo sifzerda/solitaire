@@ -17,8 +17,12 @@
 }
 
 .empty-deck-emoji {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-size: 4em; /* Adjust size as needed */
   margin-bottom: 20px; /* Optional: Add margin for spacing */
+  height: 100%; /* Ensure the emoji container fills its parent */
 }
 
 /* TwoBoxes.css */

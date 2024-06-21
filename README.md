@@ -29,12 +29,13 @@ Games:
 - [ ] Chess - would need an AI PC opponent
 - [ ] Poker
 - [ ] Slot Machine
-- [ ] Pacman
+- [ ] Pacman (similar to snake)
 - [ ] Frogger
 - [ ] Flyswatting game
 - [ ] Bad Toys 
 - [ ] SideShow shooting gallery
 - [ ] Go Fish, Uno, etc (would need AI PC opponent)
+- [ ] snake (snake eats and gets bigger)
 
 Others:
 
