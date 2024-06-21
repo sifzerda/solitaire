@@ -107,6 +107,7 @@ const Solitaire = () => {
       // Retrieve the dragged card
   const draggedCard = cards[currentCardIndex];
 
+  // ------------------- ORDERED FOUNDATION RECEIVE ------------------------------->
    // Check if the card being dropped is an Ace
    if (draggedCard.rank === 'Ace') {
     const destDeck = decks.find((deck) => deck.id === destination.droppableId);
@@ -119,12 +120,6 @@ const Solitaire = () => {
     if (topCard?.rank !== 'Ace' || draggedCard.suit !== topCard.suit) {
       return;
     }
-  } else if (draggedCard.rank === '3') {
-    const destDeck = decks.find((deck) => deck.id === destination.droppableId);
-    const topCard = destDeck.cards.slice(-1)[0];
-    if (topCard?.rank !== '2' || draggedCard.suit !== topCard.suit) {
-      return;
-    }
   } else {
     // If the card being dropped is not an Ace or 2, check for rank 3 onward
     const destDeck = decks.find((deck) => deck.id === destination.droppableId);
@@ -133,6 +128,8 @@ const Solitaire = () => {
       return;
     }
   }
+
+    // ------------------------------------------------------------------------->
 
     // Update cards state
     const updatedCards = [...cards];

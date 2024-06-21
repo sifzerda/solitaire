@@ -1,13 +1,13 @@
 Consider making solitaire with Vue or Angular, or GUI with help of Canvas API
 Vue may be easiest, apparently Angular has a bigger learning curve
 
-# SOLITAIRE ♤ ♡ ♢ ♧
+# SOLITAIRE 🂡
 
 #2 in gamestack.
 
 ## Table of Contents
 
-- [SOLITAIRE ♤ ♡ ♢ ♧](#solitaire----)
+- [SOLITAIRE 🂡](#solitaire-)
   - [Table of Contents](#table-of-contents)
   - [Description](#description)
   - [Badges](#badges)
@@ -78,10 +78,12 @@ Optional:
 
 ## Visuals
 
+[Visit App deployed to Heroku](https://minesweeper10-611b154e8013.herokuapp.com/)
+
 ![minescreen3](https://github.com/sifzerda/minesweeper/assets/139626561/0d09ac37-ce4f-480c-ad35-8a1c61b1464c)
 ![minesweeper 5](https://github.com/sifzerda/minesweeper/assets/139626561/e1d21645-ff92-44ed-8bc4-57f8eb47ef13)
 
-[Visit App deployed to Heroku](https://minesweeper10-611b154e8013.herokuapp.com/)
+
 
 ## Installation
 
@@ -102,17 +104,28 @@ Stockpile: Remainder cards not in Tableau, cycles
 
 Foundations: 4 places where cards stack by suit. 
 
- Each of these form a separate component in the app. There is also a landing screen to start game, a high scores page, win and loss screens, and score submission page.
+Each of these form a separate component in the app. There is also a landing screen to start game, a high scores page, win and loss screens, and score submission page. Registered users can also view the number of games they've won and play times on their profile page.
 
 ## Building:
 
-1. <u>Initial dnd</u>: Create 4 boxes (initial card stockpile) which can be dragged and dropped into 4 bordered areas (the foundations)
+1. <u>Initial dnd</u>: Create 4 boxes (initial card stockpile) which can be dragged and dropped into 4 bordered areas (the Foundations)
 2. <u>'const initialCards'</u>: replace boxes with 52 cards of traditional playing deck, give each card id, rank and suit
 3. <u>'const onDragEnd', Card stack CSS</u>: Make cards stack when dropped into Foundations
 4. <u>'const nextCard' + onClick={nextCard} </u>: Create button which cycles to next card in Card stock pile
-5. <u>Conflict between nextCard button and droppable StockPile:</u> Had to rework Stockpile into a one-card display on nextCard click, rather than a pre-formed pile. Now you click 'next card' and get one droppable card per click (rather than cycling through a pile)
+5. <u>Conflict between nextCard button and droppable StockPile:</u> Had to rework Stockpile into a one-card display on nextCard click, rather than a pre-formed pile. Now you click 'next card' and get one droppable card displayed per click (rather than cycling through a facedown pile with top card faceup)
 6. <u></u> Assign each foundation deck a suit identity, so it can only accept one suit
-7. <u></u> The state of each foundation suit deck is trackable separately
+7. <u>'const updatedCards', 'const updatedDecks'</u> The state of each foundation suit deck is trackable separately and updated per card dropped
+8. <u>'const onDragEnd'....if (draggedCard.rank ==== '')</u> If statements check whether dropped card matches Foundation deck suit, and match correct rank order from A --> K
+9. <u></u>
+10. <u></u>
+11. <u></u>
+12. <u></u>
+13. <u></u>
+14. <u></u>
+15. <u></u>
+16. <u></u>
+17. <u></u>
+18. <u></u>
 
 ........up to here.........
 
@@ -145,9 +158,11 @@ Foundations: 4 places where cards stack by suit.
 - [ ] Drag n Drop mechanics between tableau and foundation
 - [ ] Drag n Drop mechanics between stockpile and tableau
 - [ ] Drag n Drop of entire tableau groups of cards between cols
-- [ ] Foundation logic: accept cards in sequential order (A -> K)
+- [x] Foundation logic: accept cards in sequential order (A -> K)
   - [x] Will accept Ace per suit
   - [x] Will accept Ace - > 2 per suit
+  - [x] Will accept Ace - > 3 per suit
+  - [x] Will accept Ace -> K (all) per suit 
 - [ ]  
 - [ ]  
 - [ ] import card images
