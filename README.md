@@ -147,6 +147,7 @@ Foundations: 4 places where cards stack by suit.
 - [ ] Drag n Drop of entire tableau groups of cards between cols
 - [ ] Foundation logic: accept cards in sequential order (A -> K)
   - [x] Will accept Ace per suit
+  - [x] Will accept Ace - > 2 per suit
 - [ ]  
 - [ ]  
 - [ ] import card images
