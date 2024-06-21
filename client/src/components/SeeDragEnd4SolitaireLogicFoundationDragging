@@ -1,3 +1,5 @@
+// see onDragEnd function ---->
+
 import { useState } from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
@@ -89,6 +91,7 @@ const Solitaire = () => {
   };
 
   // onDragEnd = logic for dropping cards into foundation decks
+  // 
   const onDragEnd = (result) => {
     const { source, destination } = result;
    
@@ -108,6 +111,12 @@ const Solitaire = () => {
   const draggedCard = cards[currentCardIndex];
 
    // Check if the card being dropped is an Ace
+   // THESE COVER THE RULES FOR DRAGGING CARDS FROM STOCKPILE INTO FOUNDATION DECKS
+   // FIRST CHUNK COVERS FOUNDATION EMPTY -> ACE
+    // SECOND CHUNK COVERS FOUNDATION ACE -> 2
+    // THIRD CHUNK COVERS THE REST
+    // YOU COULD REPLACE THIRD CHUNK WITH MANUAL CHECKING AS DONE FOR ACE AND 2
+    // THIS IS HERE AS A GUIDE
    if (draggedCard.rank === 'Ace') {
     const destDeck = decks.find((deck) => deck.id === destination.droppableId);
     if (!destDeck || destDeck.cards.length > 0 || !destination.droppableId.includes(draggedCard.suit.toLowerCase())) {
