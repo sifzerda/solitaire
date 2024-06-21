@@ -39,7 +39,6 @@ Games:
 
 Others:
 
-- solitaire
 - chess
 - poker
 - slot machine
@@ -82,8 +81,6 @@ Optional:
 
 ![minescreen3](https://github.com/sifzerda/minesweeper/assets/139626561/0d09ac37-ce4f-480c-ad35-8a1c61b1464c)
 ![minesweeper 5](https://github.com/sifzerda/minesweeper/assets/139626561/e1d21645-ff92-44ed-8bc4-57f8eb47ef13)
-
-
 
 ## Installation
 
@@ -153,18 +150,24 @@ Each of these form a separate component in the app. There is also a landing scre
 
 - [x] Create Foundation < /> area/boxes for cards to slot/stack into
 - [x] Create Stockpile < /> of free cards
-- [ ] Create Tableau < /> of 7 cols with incrementally more card rows
 - [x] Drag n Drop mechanics between stockpile and foundation
-- [ ] Drag n Drop mechanics between tableau and foundation
-- [ ] Drag n Drop mechanics between stockpile and tableau
-- [ ] Drag n Drop of entire tableau groups of cards between cols
 - [x] Foundation logic: accept cards in sequential order (A -> K)
   - [x] Will accept Ace per suit
   - [x] Will accept Ace - > 2 per suit
   - [x] Will accept Ace - > 3 per suit
   - [x] Will accept Ace -> K (all) per suit 
-- [ ]  
-- [ ]  
+- [ ] Create Tableau < /> of 7 cols with incrementally more card rows
+- [ ] Drag n Drop mechanics between tableau and foundation
+- [ ] Drag n Drop mechanics between stockpile and tableau
+- [ ] Drag n Drop of entire tableau groups of cards between cols
+
+
+
+
+
+
+
+
 - [ ] import card images
 - [ ] reshuffle stockpile button, basically restarts game
 - [ ] timer: restarts on game refresh
