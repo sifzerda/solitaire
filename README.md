@@ -112,8 +112,8 @@ Each of these form a separate component in the app. There is also a landing scre
 5. <u>Conflict between nextCard button and droppable StockPile:</u> Had to rework Stockpile into a one-card display on nextCard click, rather than a pre-formed pile. Now you click 'next card' and get one droppable card displayed per click (rather than cycling through a facedown pile with top card faceup)
 6. <u></u> Assign each foundation deck a suit identity, so it can only accept one suit
 7. <u>'const updatedCards', 'const updatedDecks'</u> The state of each foundation suit deck is trackable separately and updated per card dropped
-8. <u>'const onDragEnd'....if (draggedCard.rank ==== '')</u> If statements check whether dropped card matches Foundation deck suit, and match correct rank order from A --> K
-9. <u></u>
+8. <u>'const onDragEnd'....if (draggedCard.rank ==== '')</u> If statements check whether dropped card matches Foundation deck suit, and match correct rank order from 2 --> 10
+9. <u>'onDragEnd':</u> A -> 2, 10 -> J, J -> Q, and Q -> K have manual stacking logic
 10. <u></u>
 11. <u></u>
 12. <u></u>
