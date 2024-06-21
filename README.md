@@ -164,8 +164,8 @@ Will update to remove cards dropped into foundation so they don't reappear in St
   - [x] Will accept Ace - > 2 per suit
   - [x] Will accept Ace - > 3 per suit
   - [x] Will accept Ace -> K (all) per suit 
-- [ ] Create Tableau < /> of 7 cols with incrementally more card rows
-- [ ] Drag n Drop mechanics between tableau and foundation
+- [x] Create Tableau < /> of 7 cols with incrementally more card rows
+- [x] Drag n Drop mechanics between tableau and foundation
 - [ ] Drag n Drop mechanics between stockpile and tableau
 - [ ] Drag n Drop of entire tableau groups of cards between cols
 
