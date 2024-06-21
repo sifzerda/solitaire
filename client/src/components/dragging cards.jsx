@@ -1,3 +1,6 @@
+// THIS IS A TEMPLATE FOR DRAGGING CARDS TO FOUNDATIONS BOXES
+// YOU CAN USE IT TO START UP A SIMILAR TYPE OF GAME
+
 import { useState } from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 

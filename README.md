@@ -105,9 +105,11 @@ Foundations: 4 places where cards stack by suit.
 
 1. <u>Initial dnd</u>: Create 4 boxes (initial card stockpile) which can be dragged and dropped into 4 bordered areas (the foundations)
 2. <u>'const initialCards'</u>: replace boxes with 52 cards of traditional playing deck, give each card id, rank and suit
-3. <u>Card stack CSS</u>: Make cards stack when dropped into Foundations
+3. <u>'const onDragEnd', Card stack CSS</u>: Make cards stack when dropped into Foundations
 4. <u>'const nextCard' + onClick={nextCard} </u>: Create button which cycles to next card in Card stock pile
 5. <u>Conflict between nextCard button and droppable StockPile:</u> Had to rework Stockpile into a one-card display on nextCard click, rather than a pre-formed pile. Now you click 'next card' and get one droppable card per click (rather than cycling through a pile)
+6. <u></u> Assign each foundation deck a suit identity, so it can only accept one suit
+7. <u></u> The state of each foundation suit deck is trackable separately
 
 ........up to here.........
 

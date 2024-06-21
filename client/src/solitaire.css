@@ -16,8 +16,10 @@
   text-align: center;
 }
 
-
-
+.empty-deck-emoji {
+  font-size: 4em; /* Adjust size as needed */
+  margin-bottom: 20px; /* Optional: Add margin for spacing */
+}
 
 /* TwoBoxes.css */
 .card-shaped {
