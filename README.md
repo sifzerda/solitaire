@@ -20,7 +20,11 @@ Vue may be easiest, apparently Angular has a bigger learning curve
 
 ## Description
 
-This is a personal project to create a react MERN stack app which has a number of simple games. These were built with ChatGPT help only. 
+This is a personal project to create a react MERN stack app which has a number of simple games. These were built with ChatGPT help only.
+
+I made a couple of first attempts at this and ran into problems. On the third attempt I realized it was easier to create basic working dnd structures and build the card game around them, rather than try to make a conditional click-based display and implement the dnd dynamic later.
+
+As with minesweeper the game had to be divided up into the smallest working components/units. It began as a simple dnd interface where one of 52 boxes (cards) could be dragged and dropped onto 4 rectangles (foundations). Then the dnd dynamic was configured to operate according to Solitaire rules, preventing dnd unless there was a match of card suit and rank.
 
 Games:
 
