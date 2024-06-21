@@ -124,13 +124,13 @@ Each of these form a separate component in the app. There is also a landing scre
   - Cards = Stockpile
   - Decks = Foundations
 Will update to remove cards dropped into foundation so they don't reappear in Stockpile or Tableau. This ensures once cards are dropped into Foundations, they become non-playable.
-12. <u></u>
-13. <u></u>
-14. <u></u>
-15. <u></u>
-16. <u></u>
-17. <u></u>
-18. <u></u>
+1.  <u>'const shuffleArray':</u> uses 'Fisher-Yates' algorithm to ensure (tableau and initial deck) cards are shuffled each page refresh.
+2.  <u>useEffect:</u> useEffect...const shuffledCards ensures tableau retains it's col structure even after card shuffle each game start/pagerefresh
+3.  <u></u>
+4.  <u></u>
+5.  <u></u>
+6.  <u></u>
+7.  <u></u>
 
 ........up to here.........
 
