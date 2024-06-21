@@ -117,9 +117,13 @@ Each of these form a separate component in the app. There is also a landing scre
 6. <u></u> Assign each foundation deck a suit identity, so it can only accept one suit
 7. <u>'const updatedCards', 'const updatedDecks'</u> The state of each foundation suit deck is trackable separately and updated per card dropped
 8. <u>'const onDragEnd'....if (draggedCard.rank ==== '')</u> If statements check whether dropped card matches Foundation deck suit, and match correct rank order from 2 --> 10
-9. <u>'onDragEnd':</u> A -> 2, 10 -> J, J -> Q, and Q -> K have manual stacking logic
-10. <u></u>
-11. <u></u>
+9. <u>'onDragEnd':</u> A -> 2, 10 -> J, J -> Q, and Q -> K have manual stacking logic via if/else statements
+10. <u>'const initialTableau':</u> create a Tableau with col # = row card quant (e.g. col 7 has 7 cards). Slices off cards from Stockpile 'initialCards', so they share cards. This means a card taken from Tableau is also 'taken' from the Stockpile and will 'respawn' in both.
+11. <u>'const updatedTableau', 'const updatedCards' and 'const updatedDecks':</u> 
+  - Tableau = Tableau, 
+  - Cards = Stockpile
+  - Decks = Foundations
+Will update to remove cards dropped into foundation so they don't reappear in Stockpile or Tableau.
 12. <u></u>
 13. <u></u>
 14. <u></u>

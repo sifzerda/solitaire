@@ -214,31 +214,31 @@
 /* Styling for the tableau section */
 /* Tableau section */
 /* Tableau */
+/* Tableau section */
 .tableau {
-  margin-top: 20px;
+  flex: 1;
 }
 
 .tableau-cards {
   display: flex;
-  justify-content: space-between;
+  gap: 10px;
 }
 
 .tableau-pile {
-  width: 150px;
-  height: auto; /* Adjust as needed */
+  flex: 1;
   border: 1px solid #ccc;
-  border-radius: 5px;
   padding: 10px;
 }
 
 .tableau-inner {
-  min-height: 150px; /* Adjust as needed */
+  min-height: 100px;
+  border: 1px dashed #ccc;
+  padding: 5px;
 }
 
 .tableau-card {
-  background-color: #fff;
+  background-color: #f0f0f0;
   border: 1px solid #ccc;
-  border-radius: 3px;
   padding: 8px;
   margin-bottom: 5px;
 }

@@ -121,7 +121,7 @@ const Solitaire = () => {
     // Retrieve the dragged card
     const draggedCard = cards[currentCardIndex];
 
-    // ------------------- ORDERED FOUNDATION RECEIVE ------------------------------->
+    // ------- FOUNDATION INTAKE ORDER: A, 2, 3, 4, 5, 6, 7, 8, 9, 10, J, Q, K ---------------->
  // Check if the card being dropped is a 10
  if (draggedCard.rank === '10') {
   const destDeck = decks.find((deck) => deck.id === destination.droppableId);
@@ -172,26 +172,32 @@ else if (draggedCard.rank === 'King') {
   }
 }
 
-    // ------------------------------------------------------------------------->
+    // ------------- (+) FOUNDATION ARE (-) FROM OTHER DECKS --------------->
+// check card rank/suit was added to foundation and remove it from stockpile and tableau
 
-    // Update cards state
-    const updatedCards = [...cards];
-    updatedCards.splice(currentCardIndex, 1); // Remove the card from the main cards list
-    setCards(updatedCards);
+// Update Tableau: remove dropped card from tableau
+  const updatedTableau = tableau.map((pile) => ({
+    ...pile,
+    stacks: pile.stacks.filter((card) => card.id !== draggedCard.id),
+  }));
+  setTableau(updatedTableau);
 
-    // Update decks state
-    const updatedDecks = decks.map((deck) => {
-      if (deck.id === destination.droppableId) {
-        return {
-          ...deck,
-          cards: [...deck.cards, draggedCard],
-        };
-      }
-      return deck;
-    });
+  // Update Stockpile: remove dropped card from stockpile
+  const updatedCards = cards.filter((card) => card.id !== draggedCard.id);
+  setCards(updatedCards);
 
-    setDecks(updatedDecks);
-  };
+  // Update Foundations state: add dropped card to foundation decks 
+  const updatedDecks = decks.map((deck) => {
+    if (deck.id === destination.droppableId) {
+      return {
+        ...deck,
+        cards: [...deck.cards, draggedCard],
+      };
+    }
+    return deck;
+  });
+  setDecks(updatedDecks);
+};
 
 /* -------------------------------------------------------------*/
 
