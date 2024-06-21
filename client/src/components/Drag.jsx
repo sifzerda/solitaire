@@ -120,56 +120,47 @@ const Solitaire = () => {
     }
     // Retrieve the dragged card
     const draggedCard = cards[currentCardIndex];
+    const destDeck = decks.find((deck) => deck.id === destination.droppableId);
+    const topCard = destDeck.cards.slice(-1)[0];
 
     // ------- FOUNDATION INTAKE ORDER: A, 2, 3, 4, 5, 6, 7, 8, 9, 10, J, Q, K ---------------->
  // Check if the card being dropped is a 10
- if (draggedCard.rank === '10') {
-  const destDeck = decks.find((deck) => deck.id === destination.droppableId);
-  const topCard = destDeck.cards.slice(-1)[0];
-  if (!topCard || topCard.rank !== '9' || draggedCard.suit !== topCard.suit) {
-    return;
-  }
-}
-// Check if the card being dropped is a Queen and the top card is a Jack of the same suit
-else if (draggedCard.rank === 'Queen') {
-  const destDeck = decks.find((deck) => deck.id === destination.droppableId);
-  const topCard = destDeck.cards.slice(-1)[0];
-  if (!topCard || topCard.rank !== 'Jack' || draggedCard.suit !== topCard.suit) {
-    return;
-  }
-}
-// Check if the card being dropped is a Jack and the top card is a 10 of the same suit
-else if (draggedCard.rank === 'Jack') {
-  const destDeck = decks.find((deck) => deck.id === destination.droppableId);
-  const topCard = destDeck.cards.slice(-1)[0];
-  if (!topCard || topCard.rank !== '10' || draggedCard.suit !== topCard.suit) {
-    return;
-  }
-}
-// Check if the card being dropped is a King and the top card is a Queen of the same suit
-else if (draggedCard.rank === 'King') {
-  const destDeck = decks.find((deck) => deck.id === destination.droppableId);
-  const topCard = destDeck.cards.slice(-1)[0];
-  if (!topCard || topCard.rank !== 'Queen' || draggedCard.suit !== topCard.suit) {
-    return;
-  }
-} else {
-  // If the card being dropped is not a 10, Jack, Queen, or King, check for other conditions (e.g., Ace, 2-9)
-  const destDeck = decks.find((deck) => deck.id === destination.droppableId);
-  const topCard = destDeck.cards.slice(-1)[0];
-  if (draggedCard.rank === 'Ace') {
-    if (!destDeck || destDeck.cards.length > 0 || !destination.droppableId.includes(draggedCard.suit.toLowerCase())) {
+ switch (draggedCard.rank) {
+  case '10':
+    if (!topCard || topCard.rank !== '9' || draggedCard.suit !== topCard.suit) {
       return;
     }
-  } else if (draggedCard.rank === '2') {
-    if (!topCard || topCard.rank !== 'Ace' || draggedCard.suit !== topCard.suit) {
+    break;
+  case 'Queen':
+    if (!topCard || topCard.rank !== 'Jack' || draggedCard.suit !== topCard.suit) {
       return;
     }
-  } else {
-    if (!topCard || parseInt(draggedCard.rank) !== parseInt(topCard.rank) + 1 || draggedCard.suit !== topCard.suit) {
+    break;
+  case 'Jack':
+    if (!topCard || topCard.rank !== '10' || draggedCard.suit !== topCard.suit) {
       return;
     }
-  }
+    break;
+  case 'King':
+    if (!topCard || topCard.rank !== 'Queen' || draggedCard.suit !== topCard.suit) {
+      return;
+    }
+    break;
+  default:
+    if (draggedCard.rank === 'Ace') {
+      if (!destDeck || destDeck.cards.length > 0 || !destination.droppableId.includes(draggedCard.suit.toLowerCase())) {
+        return;
+      }
+    } else if (draggedCard.rank === '2') {
+      if (!topCard || topCard.rank !== 'Ace' || draggedCard.suit !== topCard.suit) {
+        return;
+      }
+    } else {
+      if (!topCard || parseInt(draggedCard.rank) !== parseInt(topCard.rank) + 1 || draggedCard.suit !== topCard.suit) {
+        return;
+      }
+    }
+    break;
 }
 
     // ------------- (+) FOUNDATION ARE (-) FROM OTHER DECKS --------------->
