@@ -74,6 +74,7 @@ const initialDecks = [
 const Solitaire = () => {
   const [cards, setCards] = useState(initialCards);
   const [decks, setDecks] = useState(initialDecks);
+  /* for next card display */ 
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
 
   const nextCard = () => {
@@ -82,11 +83,36 @@ const Solitaire = () => {
 
   const onDragEnd = (result) => {
     const { source, destination } = result;
+   
+/* -------------only Ace start Foundation deck -----------------*/
+/* remove this entire code chunk to allow all cards to be droppable */
+/* i.e. as a template for a different dragNdrop card game */ 
 
+    // Dropped outside the list
     if (!destination) {
       return;
     }
 
+        // Dropped in the same position
+        if (source.droppableId === destination.droppableId && source.index === destination.index) {
+          return;
+        }
+
+    // Retrieve the dragged card
+    const draggedCard = cards[source.index];
+
+    // Check if the card being dropped is an Ace
+    if (draggedCard.rank !== 'Ace') {
+      return; // Do not allow non-Ace cards to be dropped in foundation decks
+    }
+
+    // Update cards state
+    const updatedCards = [...cards];
+    updatedCards.splice(source.index, 1); // Remove the card from the main cards list
+    setCards(updatedCards);
+
+/* -------------------------------------------------------------*/
+    
     const updatedDecks = decks.map((deck) => {
       if (deck.id === destination.droppableId) {
         const draggedCard = cards[currentCardIndex];

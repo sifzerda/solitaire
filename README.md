@@ -117,7 +117,7 @@ Foundations: 4 places where cards stack by suit.
 8. 
    1. If cell is adjacent to two X/mines it will get two 'a's, i.e. 3 becomes 3aa
 9.  <u>'const updateAdjacentCells'</u>: For diagonal proximity cells
-   1. Create diagonal relations  between cells and modify cell id based on diagonal link:
+   1. Create diagonal relations between cells and modify cell id based on diagonal link:
    -   ↖️ ⬆️ ↗️
    -   ⬅️ 💣 ➡️
    -   ↙️ ⬇️ ↘️
@@ -155,7 +155,7 @@ Foundations: 4 places where cards stack by suit.
 - [ ] user profile page shows how many games user has won, and quickest (least time) wins
 - [ ] Make each part of the game a separate component
 - [ ] OPTIONAL: Some kind of animation upon winning game
-- [ ] 
+- [ ] switch content into solitaire git repo once finished and ready to deploy
 
 ## To do for all games
 - [ ] point accumulation system in-play, + calc points per safe cells revealed, 
