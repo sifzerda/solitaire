@@ -109,26 +109,40 @@ const Solitaire = () => {
   const draggedCard = cards[currentCardIndex];
 
   // ------------------- ORDERED FOUNDATION RECEIVE ------------------------------->
-   // Check if the card being dropped is an Ace
-   if (draggedCard.rank === 'Ace') {
-    const destDeck = decks.find((deck) => deck.id === destination.droppableId);
-    if (!destDeck || destDeck.cards.length > 0 || !destination.droppableId.includes(draggedCard.suit.toLowerCase())) {
-      return;
+    // Check if the card being dropped is a 10
+    if (draggedCard.rank === '10') {
+      const destDeck = decks.find((deck) => deck.id === destination.droppableId);
+      const topCard = destDeck.cards.slice(-1)[0];
+      if (!topCard || topCard.rank !== '9' || draggedCard.suit !== topCard.suit) {
+        return;
+      }
     }
-  } else if (draggedCard.rank === '2') {
-    const destDeck = decks.find((deck) => deck.id === destination.droppableId);
-    const topCard = destDeck.cards.slice(-1)[0];
-    if (topCard?.rank !== 'Ace' || draggedCard.suit !== topCard.suit) {
-      return;
+    // Check if the card being dropped is a Jack and the top card is a 10 of the same suit
+    else if (draggedCard.rank === 'Jack') {
+      const destDeck = decks.find((deck) => deck.id === destination.droppableId);
+      const topCard = destDeck.cards.slice(-1)[0];
+      if (!topCard || topCard.rank !== '10' || draggedCard.suit !== topCard.suit) {
+        return;
+      }
+    } else {
+      // If the card being dropped is not a 10 or Jack, check for other conditions (e.g., Ace, 2-9)
+      // Implement your existing logic here for other ranks
+      const destDeck = decks.find((deck) => deck.id === destination.droppableId);
+      const topCard = destDeck.cards.slice(-1)[0];
+      if (draggedCard.rank === 'Ace') {
+        if (!destDeck || destDeck.cards.length > 0 || !destination.droppableId.includes(draggedCard.suit.toLowerCase())) {
+          return;
+        }
+      } else if (draggedCard.rank === '2') {
+        if (!topCard || topCard.rank !== 'Ace' || draggedCard.suit !== topCard.suit) {
+          return;
+        }
+      } else {
+        if (!topCard || parseInt(draggedCard.rank) !== parseInt(topCard.rank) + 1 || draggedCard.suit !== topCard.suit) {
+          return;
+        }
+      }
     }
-  } else {
-    // If the card being dropped is not an Ace or 2, check for rank 3 onward
-    const destDeck = decks.find((deck) => deck.id === destination.droppableId);
-    const topCard = destDeck.cards.slice(-1)[0];
-    if (parseInt(draggedCard.rank) !== parseInt(topCard.rank) + 1 || draggedCard.suit !== topCard.suit) {
-      return;
-    }
-  }
 
     // ------------------------------------------------------------------------->
 
