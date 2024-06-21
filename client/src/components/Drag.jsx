@@ -70,9 +70,7 @@ const initialDecks = [
   { id: 'clubs', cards: [] },     // Clubs foundation deck
   { id: 'spades', cards: [] },    // Spades foundation deck
 ];
-
-   
-
+// Emoji on empty foundation decks
 const suitEmojis = {
   hearts: '♡',
   diamonds: '♢',
@@ -91,7 +89,6 @@ const Solitaire = () => {
   };
 
   // onDragEnd = logic for dropping cards into foundation decks
-
   const onDragEnd = (result) => {
     const { source, destination } = result;
    
@@ -104,103 +101,114 @@ const Solitaire = () => {
       return;
     }
 
+            // Dropped in the same position
+            if (source.droppableId === destination.droppableId && source.index === destination.index) {
+              return;
+            }
+
       // Retrieve the dragged card
   const draggedCard = cards[currentCardIndex];
 
-    // Check if the card being dropped is an Ace of the correct suit
-    if (draggedCard.rank !== 'Ace' || !destination.droppableId.includes(draggedCard.suit.toLowerCase())) {
-      return; // Do not allow non-Ace cards or incorrect suits to be dropped in foundation decks
+   // Check if the card being dropped is an Ace
+   if (draggedCard.rank === 'Ace') {
+    // Check if the destination is a foundation deck and matches the suit of the dragged Ace
+    const destDeck = decks.find((deck) => deck.id === destination.droppableId);
+    if (!destDeck || destDeck.cards.length > 0 || !destination.droppableId.includes(draggedCard.suit.toLowerCase())) {
+      // If the destination is not a valid foundation deck for Ace drop, return
+      return;
     }
+  } else {
+    // If the card being dropped is not an Ace, check if it's a rank 2 and matches the top card of the destination deck
+    const destDeck = decks.find((deck) => deck.id === destination.droppableId);
+    const topCard = destDeck.cards.slice(-1)[0];
+    if (draggedCard.rank !== '2' || draggedCard.suit !== topCard?.suit) {
+      // If it's not a valid rank 2 drop, return
+      return;
+    }
+  }
 
-        // Dropped in the same position
-        if (source.droppableId === destination.droppableId && source.index === destination.index) {
-          return;
-        }
+    // Update cards state
+    const updatedCards = [...cards];
+    updatedCards.splice(currentCardIndex, 1); // Remove the card from the main cards list
+    setCards(updatedCards);
 
- 
+    // Update decks state
+    const updatedDecks = decks.map((deck) => {
+      if (deck.id === destination.droppableId) {
+        return {
+          ...deck,
+          cards: [...deck.cards, draggedCard],
+        };
+      }
+      return deck;
+    });
 
-  // Update cards state
-  const updatedCards = [...cards];
-  updatedCards.splice(currentCardIndex, 1); // Remove the card from the main cards list
-  setCards(updatedCards);
+    setDecks(updatedDecks);
+  };
 
 /* -------------------------------------------------------------*/
-    
-  // Update decks state
-  const updatedDecks = decks.map((deck) => {
-    if (deck.id === destination.droppableId) {
-      return {
-        ...deck,
-        cards: [...deck.cards, draggedCard],
-      };
-    }
-    return deck;
-  });
 
-  setDecks(updatedDecks);
-};
-
-  return (
-    <DragDropContext onDragEnd={onDragEnd}>
-      <div className="container">
-        <div className="cards">
-          <h2>Cards</h2>
-          <div className="card-navigation">
-            <button onClick={nextCard}>Next Card</button>
-          </div>
-          <Droppable droppableId="revealed-cards">
-            {(provided) => (
-              <div className="card-list" {...provided.droppableProps} ref={provided.innerRef}>
-                {currentCardIndex < cards.length && (
-                  <Draggable draggableId={cards[currentCardIndex].id} index={currentCardIndex}>
-                    {(provided) => (
-                      <div
-                        className="card"
-                        {...provided.draggableProps}
-                        {...provided.dragHandleProps}
-                        ref={provided.innerRef}
-                      >
-                        {cards[currentCardIndex].rank} of {cards[currentCardIndex].suit}
-                      </div>
-                    )}
-                  </Draggable>
-                )}
-              </div>
-            )}
-          </Droppable>
+return (
+  <DragDropContext onDragEnd={onDragEnd}>
+    <div className="container">
+      <div className="cards">
+        <h2>Cards</h2>
+        <div className="card-navigation">
+          <button onClick={nextCard}>Next Card</button>
         </div>
-        <div className="decks">
-          <h2>Foundation Decks</h2>
-          <div className="foundation-decks">
-  {decks.map((deck) => (
-    <div key={deck.id} className="foundation-deck">
-      <Droppable droppableId={deck.id}>
-        {(provided, snapshot) => (
-          <div
-            className={`deck-content ${snapshot.isDraggingOver ? 'dragging-over' : ''}`}
-            {...provided.droppableProps}
-            ref={provided.innerRef}
-          >
-            {deck.cards.length === 0 ? (
-              <div className="empty-deck-emoji">{suitEmojis[deck.id]}</div>
-            ) : (
-              deck.cards.map((card, index) => (
-                <div key={card.id} className="card-in-deck">
-                  {card.rank} of {card.suit}
-                </div>
-              ))
-            )}
-            {provided.placeholder}
-          </div>
-        )}
-      </Droppable>
-    </div>
-  ))}
-          </div>
+        <Droppable droppableId="revealed-cards">
+          {(provided) => (
+            <div className="card-list" {...provided.droppableProps} ref={provided.innerRef}>
+              {currentCardIndex < cards.length && (
+                <Draggable draggableId={cards[currentCardIndex].id} index={currentCardIndex}>
+                  {(provided) => (
+                    <div
+                      className="card"
+                      {...provided.draggableProps}
+                      {...provided.dragHandleProps}
+                      ref={provided.innerRef}
+                    >
+                      {cards[currentCardIndex].rank} of {cards[currentCardIndex].suit}
+                    </div>
+                  )}
+                </Draggable>
+              )}
+            </div>
+          )}
+        </Droppable>
+      </div>
+      <div className="decks">
+        <h2>Foundation Decks</h2>
+        <div className="foundation-decks">
+          {decks.map((deck) => (
+            <div key={deck.id} className="foundation-deck">
+              <Droppable droppableId={deck.id}>
+                {(provided, snapshot) => (
+                  <div
+                    className={`deck-content ${snapshot.isDraggingOver ? 'dragging-over' : ''}`}
+                    {...provided.droppableProps}
+                    ref={provided.innerRef}
+                  >
+                    {deck.cards.length === 0 ? (
+                      <div className="empty-deck-emoji">{suitEmojis[deck.id]}</div>
+                    ) : (
+                      deck.cards.map((card, index) => (
+                        <div key={card.id} className="card-in-deck">
+                          {card.rank} of {card.suit}
+                        </div>
+                      ))
+                    )}
+                    {provided.placeholder}
+                  </div>
+                )}
+              </Droppable>
+            </div>
+          ))}
         </div>
       </div>
-    </DragDropContext>
-  );
+    </div>
+  </DragDropContext>
+);
 };
 
 export default Solitaire;
