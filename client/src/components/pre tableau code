@@ -71,7 +71,6 @@ const initialDecks = [
   { id: 'clubs', cards: [] },
   { id: 'spades', cards: [] },
 ];
-
 // Emoji on empty foundation decks
 const suitEmojis = {
   hearts: '♡',
@@ -80,23 +79,11 @@ const suitEmojis = {
   spades: '♤',
 };
 
-// Initial tableau cards (7 static cards)
-const initialTableau = [
-  { id: 'tableau-1', suit: 'Hearts', rank: '10' },
-  { id: 'tableau-2', suit: 'Diamonds', rank: '9' },
-  { id: 'tableau-3', suit: 'Clubs', rank: '8' },
-  { id: 'tableau-4', suit: 'Spades', rank: '7' },
-  { id: 'tableau-5', suit: 'Hearts', rank: '6' },
-  { id: 'tableau-6', suit: 'Diamonds', rank: '5' },
-  { id: 'tableau-7', suit: 'Clubs', rank: '4' },
-];
-
 const Solitaire = () => {
   const [cards, setCards] = useState(initialCards);
   const [decks, setDecks] = useState(initialDecks);
   /* for next card display */
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
-  const [tableau, setTableau] = useState(initialTableau); // State for tableau cards
 
   const nextCard = () => {
     setCurrentCardIndex((prevIndex) => (prevIndex + 1) % cards.length);
@@ -197,7 +184,7 @@ else if (draggedCard.rank === 'King') {
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
-      <div className="s-container">
+      <div className="container">
         <div className="cards">
           <h2>Cards</h2>
           <div className="card-navigation">
@@ -252,16 +239,6 @@ else if (draggedCard.rank === 'King') {
               </div>
             ))}
           </div>
-        </div>
-      </div>
-      <div className="tableau">
-        <h2>Tableau</h2>
-        <div className="tableau-cards">
-          {tableau.map((card) => (
-            <div key={card.id} className="tableau-card">
-              {card.rank} of {card.suit}
-            </div>
-          ))}
         </div>
       </div>
     </DragDropContext>

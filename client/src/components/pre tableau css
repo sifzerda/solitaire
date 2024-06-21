@@ -1,27 +1,5 @@
 /* ------------------------- solitaire -------------------------*/
 
-.s-container {
-  display: flex;
-  flex-wrap: wrap; /* Allow items to wrap to new line if needed */
-  justify-content: center;
-  margin-top: 20px;
-}
-
-.cards,
-.decks,
-.tableau {
-  margin: 10px;
-}
-
-.cards {
-  border: 1px solid #ccc;
-  padding: 10px;
-}
-
-.card-navigation {
-  margin-top: 10px;
-}
-
 .solitaire-box {
   width: 1400px;
   height: 900px;
@@ -185,46 +163,9 @@
   
   /* Add more nth-child rules as needed for more cards */
 
-  .dragging-over {
-    background-color: #d9ff00;
-    border: 8px dashed  #d9ff00;
-  }
 
-  .decks {
-    border: 1px solid #ccc;
-    padding: 10px;
-  }
 
-  .deck-content {
-    min-height: 50px; /* Adjust height as needed */
-    padding: 5px;
-    background-color: #e0e0e0;
-    border: 1px dashed #999;
-  }
-  
 
-  .foundation-deck {
-    flex: 1;
-    margin: 0 5px;
-    border: 1px solid #ccc;
-    padding: 10px;
-  }
 
-  .tableau {
-    border: 1px solid #ccc;
-    padding: 10px;
-    margin-top: 20px;
-  }
-  
-  .tableau-cards {
-    display: flex;
-    justify-content: space-around;
-  }
-  
-  .tableau-card {
-    flex: 1;
-    margin: 0 5px;
-    border: 1px solid #ccc;
-    padding: 10px;
-    background-color: #fff;
-  }
+
+ 
