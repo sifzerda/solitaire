@@ -78,16 +78,18 @@ Optional:
 
 ## Visuals
 
-INSERT SCREENSHOTS
+![minescreen3](https://github.com/sifzerda/minesweeper/assets/139626561/0d09ac37-ce4f-480c-ad35-8a1c61b1464c)
+![minesweeper 5](https://github.com/sifzerda/minesweeper/assets/139626561/e1d21645-ff92-44ed-8bc4-57f8eb47ef13)
 
 [Visit App deployed to Heroku](https://minesweeper10-611b154e8013.herokuapp.com/)
 
 ## Installation
 
 ```bash
-git clone https://github.com/yourusername/project.git
-cd project
+git clone https://github.com/sifzerda/solitaire.git
+cd solitaire
 npm install
+npm run start
 ```
 
 ## Usage
