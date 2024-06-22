@@ -81,15 +81,10 @@ const suitEmojis = {
 };
 
 // Initial tableau cards with stacks (adjust as needed)
-const initialTableau = [
-    { id: 'tableau-1', cards: [] },   // 1 card in tableau 1
-    { id: 'tableau-2', cards: [] },   // 2 cards in tableau 2
-    { id: 'tableau-3', cards: [] },   // 3 cards in tableau 3
-    { id: 'tableau-4', cards: [] },  // 4 cards in tableau 4
-    { id: 'tableau-5', cards: [] }, // 5 cards in tableau 5
-    { id: 'tableau-6', cards: [] }, // 6 cards in tableau 6
-    { id: 'tableau-7', cards: [] }, // 7 cards in tableau 7
-  ];
+const initialTableau = Array.from({ length: 7 }, (_, index) => ({
+    id: `tableau-${index + 1}`,
+    cards: [],
+  }));
 
 const Solitaire = () => {
   const [cards, setCards] = useState(initialCards);
@@ -101,15 +96,22 @@ const Solitaire = () => {
   useEffect(() => {
     const shuffledCards = shuffleArray([...initialCards]);
     const tableauCards = shuffledCards.slice(0, 28);
-    const deckCards = shuffledCards.slice(28);
+    const deckCards = shuffledCards.slice(24);
 
-    setTableau(
-      initialTableau.map((pile, index) => ({
-        ...pile,
-        cards: tableauCards.slice(index * 4, (index + 1) * 4),
-      }))
-    );
+    // Distribute cards into tableau piles
+    let tableauIndex = 0;
+    let remainingCards = tableauCards.length;
+    let currentPileSize = 1;
 
+    while (remainingCards > 0) {
+      const cardsToAdd = tableauCards.slice(tableauIndex, tableauIndex + currentPileSize);
+      tableau[tableauIndex].cards = cardsToAdd;
+      remainingCards -= currentPileSize;
+      tableauIndex++;
+      currentPileSize++;
+    }
+
+    setTableau(tableau);
     setCards(deckCards);
   }, []); // Empty dependency array ensures this runs only once on component mount
 

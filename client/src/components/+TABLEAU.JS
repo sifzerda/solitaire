@@ -1,6 +1,4 @@
-// see onDragEnd function ---->
-
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 // Define initial squares and boxes data
@@ -19,7 +17,7 @@ const initialCards = [
   { id: 'card-11', suit: 'Hearts', rank: 'Jack' },
   { id: 'card-12', suit: 'Hearts', rank: 'Queen' },
   { id: 'card-13', suit: 'Hearts', rank: 'King' },
-  
+
   // DIAMONDS
   { id: 'card-14', suit: 'Diamonds', rank: 'Ace' },
   { id: 'card-15', suit: 'Diamonds', rank: '2' },
@@ -34,7 +32,7 @@ const initialCards = [
   { id: 'card-24', suit: 'Diamonds', rank: 'Jack' },
   { id: 'card-25', suit: 'Diamonds', rank: 'Queen' },
   { id: 'card-26', suit: 'Diamonds', rank: 'King' },
-  
+
   // CLUBS
   { id: 'card-27', suit: 'Clubs', rank: 'Ace' },
   { id: 'card-28', suit: 'Clubs', rank: '2' },
@@ -66,12 +64,14 @@ const initialCards = [
   { id: 'card-52', suit: 'Spades', rank: 'King' },
 ];
 
+// create and initialize Foundation decks with suit id, and empty 
 const initialDecks = [
   { id: 'hearts', cards: [] },    // Hearts foundation deck
-  { id: 'diamonds', cards: [] },  // Diamonds foundation deck
-  { id: 'clubs', cards: [] },     // Clubs foundation deck
-  { id: 'spades', cards: [] },    // Spades foundation deck
+  { id: 'diamonds', cards: [] },
+  { id: 'clubs', cards: [] },
+  { id: 'spades', cards: [] },
 ];
+
 // Emoji on empty foundation decks
 const suitEmojis = {
   hearts: '♡',
@@ -82,196 +82,216 @@ const suitEmojis = {
 
 // Initial tableau cards with stacks (adjust as needed)
 const initialTableau = [
-  { id: 'tableau-1', stacks: initialCards.slice(0, 1) },   // 1 card in tableau 1
-  { id: 'tableau-2', stacks: initialCards.slice(1, 3) },   // 2 cards in tableau 2
-  { id: 'tableau-3', stacks: initialCards.slice(3, 6) },   // 3 cards in tableau 3
-  { id: 'tableau-4', stacks: initialCards.slice(6, 10) },  // 4 cards in tableau 4
-  { id: 'tableau-5', stacks: initialCards.slice(10, 15) }, // 5 cards in tableau 5
-  { id: 'tableau-6', stacks: initialCards.slice(15, 21) }, // 6 cards in tableau 6
-  { id: 'tableau-7', stacks: initialCards.slice(21, 28) }, // 7 cards in tableau 7
-];
+    { id: 'tableau-1', cards: [] },   // 1 card in tableau 1
+    { id: 'tableau-2', cards: [] },   // 2 cards in tableau 2
+    { id: 'tableau-3', cards: [] },   // 3 cards in tableau 3
+    { id: 'tableau-4', cards: [] },  // 4 cards in tableau 4
+    { id: 'tableau-5', cards: [] }, // 5 cards in tableau 5
+    { id: 'tableau-6', cards: [] }, // 6 cards in tableau 6
+    { id: 'tableau-7', cards: [] }, // 7 cards in tableau 7
+  ];
 
 const Solitaire = () => {
   const [cards, setCards] = useState(initialCards);
   const [decks, setDecks] = useState(initialDecks);
-  /* for next card display */ 
+  /* for next card display */
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
   const [tableau, setTableau] = useState(initialTableau); // State for tableau cards
+
+  useEffect(() => {
+    const shuffledCards = shuffleArray([...initialCards]);
+    const tableauCards = shuffledCards.slice(0, 28);
+    const deckCards = shuffledCards.slice(28);
+
+    setTableau(
+      initialTableau.map((pile, index) => ({
+        ...pile,
+        cards: tableauCards.slice(index * 4, (index + 1) * 4),
+      }))
+    );
+
+    setCards(deckCards);
+  }, []); // Empty dependency array ensures this runs only once on component mount
+
+ // Function to shuffle array (Fisher-Yates algorithm)
+ const shuffleArray = (array) => {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  };
 
   const nextCard = () => {
     setCurrentCardIndex((prevIndex) => (prevIndex + 1) % cards.length);
   };
 
+
   // onDragEnd = logic for dropping cards into foundation decks
-  // 
   const onDragEnd = (result) => {
     const { source, destination } = result;
-   
-/* -------------only Ace start Foundation deck -----------------*/
-/* remove this entire code chunk to allow all cards to be droppable */
-/* i.e. as a template for a different dragNdrop card game */ 
-
+  
     // Dropped outside the list
     if (!destination) {
       return;
     }
-            // Dropped in the same position, i.e. original deck
-            if (source.droppableId === destination.droppableId && source.index === destination.index) {
-              return;
-            }
-      // Retrieve the dragged card
-  const draggedCard = cards[currentCardIndex];
-
-   // Check if the card being dropped is an Ace
-   // THESE COVER THE RULES FOR DRAGGING CARDS FROM STOCKPILE INTO FOUNDATION DECKS
-   // FIRST CHUNK COVERS FOUNDATION EMPTY -> ACE
-    // SECOND CHUNK COVERS FOUNDATION ACE -> 2
-    // THIRD CHUNK COVERS THE REST
-    // YOU COULD REPLACE THIRD CHUNK WITH MANUAL CHECKING AS DONE FOR ACE AND 2
-    // THIS IS HERE AS A GUIDE
-    // however does not allow dragging j, q, k, these have to be covered manually (this is done in pre tableau code)
-   if (draggedCard.rank === 'Ace') {
-    const destDeck = decks.find((deck) => deck.id === destination.droppableId);
-    if (!destDeck || destDeck.cards.length > 0 || !destination.droppableId.includes(draggedCard.suit.toLowerCase())) {
-      return;
+    
+    // Retrieve the dragged card
+    let draggedCard;
+    if (source.droppableId === 'revealed-cards') {
+      draggedCard = cards[currentCardIndex];
+    } else {
+      const sourcePile = tableau.find((pile) => pile.id === source.droppableId);
+      draggedCard = sourcePile?.cards[source.index];
     }
-  } else if (draggedCard.rank === '2') {
-    const destDeck = decks.find((deck) => deck.id === destination.droppableId);
-    const topCard = destDeck.cards.slice(-1)[0];
-    if (topCard?.rank !== 'Ace' || draggedCard.suit !== topCard.suit) {
-      return;
-    }
-  } else if (draggedCard.rank === '3') {
-    const destDeck = decks.find((deck) => deck.id === destination.droppableId);
-    const topCard = destDeck.cards.slice(-1)[0];
-    if (topCard?.rank !== '2' || draggedCard.suit !== topCard.suit) {
-      return;
-    }
-  } else if (draggedCard.rank === 'Jack') {
-    const destDeck = decks.find((deck) => deck.id === destination.droppableId);
-    const topCard = destDeck.cards.slice(-1)[0];
-    if (topCard?.rank !== '10' || draggedCard.suit !== topCard.suit) {
-      return;
-    }
-  } else if (draggedCard.rank === 'Queen') {
-    const destDeck = decks.find((deck) => deck.id === destination.droppableId);
-    const topCard = destDeck.cards.slice(-1)[0];
-    if (topCard?.rank !== 'Jack' || draggedCard.suit !== topCard.suit) {
-      return;
-    }
-  } else if (draggedCard.rank === 'King') {
-    const destDeck = decks.find((deck) => deck.id === destination.droppableId);
-    const topCard = destDeck.cards.slice(-1)[0];
-    if (topCard?.rank !== 'Queen' || draggedCard.suit !== topCard.suit) {
-      return;
-    }
-  } else {
-    // If the card being dropped is not an Ace or 2, check for rank 3 onward
-    const destDeck = decks.find((deck) => deck.id === destination.droppableId);
-    const topCard = destDeck.cards.slice(-1)[0];
-    if (parseInt(draggedCard.rank) !== parseInt(topCard.rank) + 1 || draggedCard.suit !== topCard.suit) {
-      return;
-    }
+  
+    // Handle dropping logic based on destination
+    switch (destination.droppableId) {
+      case 'hearts':
+      case 'diamonds':
+      case 'clubs':
+      case 'spades':
+        const destDeck = decks.find((deck) => deck.id === destination.droppableId);
+        const topCard = destDeck.cards.slice(-1)[0];
+  
+        // Validate if the card can be placed on the foundation deck
+        if (
+          (draggedCard.rank === 'Ace' && draggedCard.suit.toLowerCase() === destination.droppableId) ||
+          (topCard &&
+            ((draggedCard.rank === '2' && topCard.rank === 'Ace' && draggedCard.suit === topCard.suit) ||
+            (draggedCard.rank === 'Jack' && topCard.rank === '10' && draggedCard.suit === topCard.suit) ||
+            (draggedCard.rank === 'Queen' && topCard.rank === 'Jack' && draggedCard.suit === topCard.suit) ||
+            (draggedCard.rank === 'King' && topCard.rank === 'Queen' && draggedCard.suit === topCard.suit) ||
+            (parseInt(draggedCard.rank) === parseInt(topCard.rank) + 1 && draggedCard.suit === topCard.suit)))
+        ) {
+          // Remove the card from tableau or stockpile
+          let updatedTableau;
+          if (source.droppableId === 'revealed-cards') {
+            const updatedCards = cards.filter((card) => card.id !== draggedCard.id);
+            setCards(updatedCards);
+          } else {
+            updatedTableau = tableau.map((pile) => ({
+              ...pile,
+              cards: pile.id === source.droppableId ? pile.cards.filter((card, index) => index !== source.index) : pile.cards,
+            }));
+            setTableau(updatedTableau);
+          }
+  
+          // Update the foundation deck
+          const updatedDecks = decks.map((deck) => ({
+            ...deck,
+            cards: deck.id === destination.droppableId ? [...deck.cards, draggedCard] : deck.cards,
+          }));
+  
+          setDecks(updatedDecks);
+        }
+        break;
+  
+      // Handle other cases as needed
+      default:
+        break;
   }
 
-  // Update Tableau: remove dropped card from tableau
-  const updatedTableau = tableau.map((pile) => ({
-    ...pile,
-    stacks: pile.stacks.filter((card) => card.id !== draggedCard.id),
-  }));
-  setTableau(updatedTableau);
+    // ------------- (+) FOUNDATION ARE (-) FROM OTHER DECKS --------------->
+// check card rank/suit was added to foundation and remove it from stockpile and tableau
 
-    // Update cards state
-    const updatedCards = [...cards];
-    updatedCards.splice(currentCardIndex, 1); // Remove the card from the main cards list
-    setCards(updatedCards);
+  // Update Stockpile: remove dropped card from stockpile
+  const updatedCards = cards.filter((card) => card.id !== draggedCard.id);
+  setCards(updatedCards);
 
-    // Update decks state
-    const updatedDecks = decks.map((deck) => {
-      if (deck.id === destination.droppableId) {
-        return {
-          ...deck,
-          cards: [...deck.cards, draggedCard],
-        };
-      }
-      return deck;
-    });
-
-    setDecks(updatedDecks);
-  };
+  // Update Foundations state: add dropped card to foundation decks 
+  const updatedDecks = decks.map((deck) => {
+    if (deck.id === destination.droppableId) {
+      return {
+        ...deck,
+        cards: [...deck.cards, draggedCard],
+      };
+    }
+    return deck;
+  });
+  setDecks(updatedDecks);
+};
 
 /* -------------------------------------------------------------*/
 
 return (
-  <DragDropContext onDragEnd={onDragEnd}>
-    <div className="container">
-      <div className="cards">
-        <h2>Cards</h2>
-        <div className="card-navigation">
-          <button onClick={nextCard}>Next Card</button>
+    <DragDropContext onDragEnd={onDragEnd}>
+      {/* Cards section */}
+      <div className="s-container">
+        <div className="cards">
+          <h2>Cards</h2>
+          <div className="card-navigation">
+            <button onClick={nextCard}>Next Card</button>
+          </div>
+          <Droppable droppableId="revealed-cards">
+            {(provided) => (
+              <div className="card-list" {...provided.droppableProps} ref={provided.innerRef}>
+                {currentCardIndex < cards.length && (
+                  <Draggable draggableId={cards[currentCardIndex].id} index={currentCardIndex}>
+                    {(provided) => (
+                      <div
+                        className="card"
+                        {...provided.draggableProps}
+                        {...provided.dragHandleProps}
+                        ref={provided.innerRef}
+                      >
+                        {cards[currentCardIndex].rank} of {cards[currentCardIndex].suit}
+                      </div>
+                    )}
+                  </Draggable>
+                )}
+                {provided.placeholder}
+              </div>
+            )}
+          </Droppable>
         </div>
-        <Droppable droppableId="revealed-cards">
-          {(provided) => (
-            <div className="card-list" {...provided.droppableProps} ref={provided.innerRef}>
-              {currentCardIndex < cards.length && (
-                <Draggable draggableId={cards[currentCardIndex].id} index={currentCardIndex}>
-                  {(provided) => (
+
+        {/* Foundation decks section */}
+        <div className="decks">
+          <h2>Foundation Decks</h2>
+          <div className="foundation-decks">
+            {decks.map((deck) => (
+              <div key={deck.id} className="foundation-deck">
+                <Droppable droppableId={deck.id}>
+                  {(provided, snapshot) => (
                     <div
-                      className="card"
-                      {...provided.draggableProps}
-                      {...provided.dragHandleProps}
+                      className={`deck-content ${snapshot.isDraggingOver ? 'dragging-over' : ''}`}
+                      {...provided.droppableProps}
                       ref={provided.innerRef}
                     >
-                      {cards[currentCardIndex].rank} of {cards[currentCardIndex].suit}
+                      {deck.cards.length === 0 ? (
+                        <div className="empty-deck-emoji">{suitEmojis[deck.id]}</div>
+                      ) : (
+                        deck.cards.map((card, index) => (
+                          <div key={card.id} className="card-in-deck">
+                            {card.rank} of {card.suit}
+                          </div>
+                        ))
+                      )}
+                      {provided.placeholder}
                     </div>
                   )}
-                </Draggable>
-              )}
-            </div>
-          )}
-        </Droppable>
-      </div>
-{/* --------- DECKS ----------------------------------------------*/}
-      <div className="decks">
-        <h2>Foundation Decks</h2>
-        <div className="foundation-decks">
-          {decks.map((deck) => (
-            <div key={deck.id} className="foundation-deck">
-              <Droppable droppableId={deck.id}>
-                {(provided, snapshot) => (
-                  <div
-                    className={`deck-content ${snapshot.isDraggingOver ? 'dragging-over' : ''}`}
-                    {...provided.droppableProps}
-                    ref={provided.innerRef}
-                  >
-                    {deck.cards.length === 0 ? (
-                      <div className="empty-deck-emoji">{suitEmojis[deck.id]}</div>
-                    ) : (
-                      deck.cards.map((card, index) => (
-                        <div key={card.id} className="card-in-deck">
-                          {card.rank} of {card.suit}
-                        </div>
-                      ))
-                    )}
-                    {provided.placeholder}
-                  </div>
-                )}
-              </Droppable>
-            </div>
-          ))}
+                </Droppable>
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
-      {/* --------- TABLEAU ----------------------------------------------*/}
-      <div className="tableau">
+
+        {/* Tableau section */}
+        <div className="tableau">
           <h2>Tableau</h2>
           <div className="tableau-cards">
             {tableau.map((pile) => (
               <div key={pile.id} className="tableau-pile">
                 <Droppable droppableId={pile.id}>
-                  {(provided) => (
-                    <div className="tableau-inner" {...provided.droppableProps} ref={provided.innerRef}>
-                      {pile.stacks.map((card, idx) => (
-                        <Draggable key={card.id} draggableId={card.id} index={idx}>
+                  {(provided, snapshot) => (
+                    <div
+                      className={`tableau-inner ${snapshot.isDraggingOver ? 'dragging-over' : ''}`}
+                      {...provided.droppableProps}
+                      ref={provided.innerRef}
+                    >
+                      {pile.cards.map((card, index) => (
+                        <Draggable key={card.id} draggableId={card.id} index={index}>
                           {(provided) => (
                             <div
                               className="tableau-card"
@@ -292,9 +312,9 @@ return (
             ))}
           </div>
         </div>
-    </div>
-  </DragDropContext>
-);
+      </div>
+    </DragDropContext>
+  );
 };
 
 export default Solitaire;
