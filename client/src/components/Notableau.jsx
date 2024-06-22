@@ -137,41 +137,39 @@ const Solitaire = () => {
       return;
     }
     
-    // Retrieve the dragged card
-    let draggedCard;
-    if (source.droppableId === 'revealed-cards') {
-      draggedCard = cards[currentCardIndex];
-    } else {
-      const sourcePile = tableau.find((pile) => pile.id === source.droppableId);
-      draggedCard = sourcePile?.cards[source.index];
-    }
+  // Retrieve the dragged card
+  let draggedCard;
+  if (source.droppableId === 'revealed-cards') {
+    draggedCard = cards[currentCardIndex];
+  } else {
+    const sourcePile = tableau.find((pile) => pile.id === source.droppableId);
+    draggedCard = sourcePile?.cards[source.index];
+  }
   
-    // Handle dropping logic based on destination
-    switch (destination.droppableId) {
-      case 'hearts':
-      case 'diamonds':
-      case 'clubs':
-      case 'spades':
-        const destDeck = decks.find((deck) => deck.id === destination.droppableId);
-        const topCard = destDeck.cards.slice(-1)[0];
+  // Handle dropping logic based on destination
+  switch (destination.droppableId) {
+    case 'hearts':
+    case 'diamonds':
+    case 'clubs':
+    case 'spades':
+      const destDeck = decks.find((deck) => deck.id === destination.droppableId);
+      const topCard = destDeck.cards.slice(-1)[0];
   
-        // Validate if the card can be placed on the foundation deck
-        if (
-          (draggedCard.rank === 'Ace' && draggedCard.suit.toLowerCase() === destination.droppableId) ||
-          (topCard &&
-            ((draggedCard.rank === '2' && topCard.rank === 'Ace' && draggedCard.suit === topCard.suit) ||
-            (draggedCard.rank === 'Jack' && topCard.rank === '10' && draggedCard.suit === topCard.suit) ||
-            (draggedCard.rank === 'Queen' && topCard.rank === 'Jack' && draggedCard.suit === topCard.suit) ||
-            (draggedCard.rank === 'King' && topCard.rank === 'Queen' && draggedCard.suit === topCard.suit) ||
-            (parseInt(draggedCard.rank) === parseInt(topCard.rank) + 1 && draggedCard.suit === topCard.suit)))
-        ) {
-          // Remove the card from tableau or stockpile
+      // Validate if the card can be placed on the foundation deck
+      if (
+        (draggedCard.rank === 'Ace' && draggedCard.suit.toLowerCase() === destination.droppableId) ||
+        (topCard &&
+          ((draggedCard.rank === '2' && topCard.rank === 'Ace' && draggedCard.suit === topCard.suit) ||
+          (draggedCard.rank === 'Jack' && topCard.rank === '10' && draggedCard.suit === topCard.suit) ||
+          (draggedCard.rank === 'Queen' && topCard.rank === 'Jack' && draggedCard.suit === topCard.suit) ||
+          (draggedCard.rank === 'King' && topCard.rank === 'Queen' && draggedCard.suit === topCard.suit) ||
+          (parseInt(draggedCard.rank) === parseInt(topCard.rank) + 1 && draggedCard.suit === topCard.suit)))
+      ) {
 
           // remove dropped card from stockpile
           if (source.droppableId === 'revealed-cards') {
             const updatedCards = cards.filter((card) => card.id !== draggedCard.id);
             setCards(updatedCards);
-
           } else {
            // remove dropped card from tableau
            let updatedTableau = tableau.map((pile) => ({
@@ -187,8 +185,8 @@ const Solitaire = () => {
           setTableau(updatedTableauWithCount);
           }
   
-          // Update the foundation deck with dropped cards
-          const updatedDecks = decks.map((deck) => ({
+        // Update the foundation deck with dropped cards
+        const updatedDecks = decks.map((deck) => ({
             ...deck,
             cards: deck.id === destination.droppableId ? [...deck.cards, draggedCard] : deck.cards,
           }));
