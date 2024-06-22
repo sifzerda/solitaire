@@ -1,5 +1,9 @@
 import profilePic from '../../public/images/propic.jpg';
 import '../App.css';
+import '../scss.css';
+import '../solitaire.css';
+import Notableau from '../components/Notableau';
+
 
 export default function About () {
   return (
@@ -22,7 +26,7 @@ export default function About () {
       </p>
  
 
- 
+ <Notableau />
 
 
 

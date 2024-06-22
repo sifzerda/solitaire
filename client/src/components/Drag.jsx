@@ -105,6 +105,9 @@ const Solitaire = () => {
   // onDragEnd = logic for dropping cards into foundation decks
   // 
   const onDragEnd = (result) => {
+
+    console.log('Drag End Result:', result);
+
     const { source, destination } = result;
    
 /* -------------only Ace start Foundation deck -----------------*/
@@ -113,14 +116,30 @@ const Solitaire = () => {
 
     // Dropped outside the list
     if (!destination) {
+      console.log('Dropped outside the list');
       return;
     }
             // Dropped in the same position, i.e. original deck
             if (source.droppableId === destination.droppableId && source.index === destination.index) {
+              console.log('Dropped in the same position');
               return;
             }
+
+    // Handle dropping from initial cards deck ('revealed-cards')
+    if (source.droppableId === 'revealed-cards') {
+      // Handle logic for initial cards deck
+      console.log('Dragging from initial cards deck');
+    }
+
+    // Handle dropping into tableau
+    if (destination.droppableId.startsWith('tableau')) {
+      // Handle logic for tableau
+      console.log('Dragging into tableau');
+    }
+
       // Retrieve the dragged card
   const draggedCard = cards[currentCardIndex];
+  console.log('Dragged Card:', draggedCard);
 
    // Check if the card being dropped is an Ace
    // THESE COVER THE RULES FOR DRAGGING CARDS FROM STOCKPILE INTO FOUNDATION DECKS
@@ -131,74 +150,90 @@ const Solitaire = () => {
     // THIS IS HERE AS A GUIDE
     // however does not allow dragging j, q, k, these have to be covered manually (this is done in pre tableau code)
    if (draggedCard.rank === 'Ace') {
+    console.log('Dragging Ace');
     const destDeck = decks.find((deck) => deck.id === destination.droppableId);
     if (!destDeck || destDeck.cards.length > 0 || !destination.droppableId.includes(draggedCard.suit.toLowerCase())) {
+      console.log('Invalid drop for aCE:', destination.droppableId);
       return;
     }
   } else if (draggedCard.rank === '2') {
+    console.log('Dragging 2');
     const destDeck = decks.find((deck) => deck.id === destination.droppableId);
     const topCard = destDeck.cards.slice(-1)[0];
     if (topCard?.rank !== 'Ace' || draggedCard.suit !== topCard.suit) {
+      console.log('Invalid drop for 2:', destination.droppableId);
       return;
     }
   } else if (draggedCard.rank === '3') {
+    console.log('Dragging 3');
     const destDeck = decks.find((deck) => deck.id === destination.droppableId);
     const topCard = destDeck.cards.slice(-1)[0];
     if (topCard?.rank !== '2' || draggedCard.suit !== topCard.suit) {
+      console.log('Invalid drop for 3:', destination.droppableId);
       return;
     }
   } else if (draggedCard.rank === 'Jack') {
+    console.log('Dragging Jack');
     const destDeck = decks.find((deck) => deck.id === destination.droppableId);
     const topCard = destDeck.cards.slice(-1)[0];
     if (topCard?.rank !== '10' || draggedCard.suit !== topCard.suit) {
+      console.log('Invalid drop for Jack:', destination.droppableId);
       return;
     }
   } else if (draggedCard.rank === 'Queen') {
+    console.log('Dragging Queen');
     const destDeck = decks.find((deck) => deck.id === destination.droppableId);
     const topCard = destDeck.cards.slice(-1)[0];
     if (topCard?.rank !== 'Jack' || draggedCard.suit !== topCard.suit) {
+      console.log('Invalid drop for Queen:', destination.droppableId);
       return;
     }
   } else if (draggedCard.rank === 'King') {
+    console.log('Dragging King');
     const destDeck = decks.find((deck) => deck.id === destination.droppableId);
     const topCard = destDeck.cards.slice(-1)[0];
     if (topCard?.rank !== 'Queen' || draggedCard.suit !== topCard.suit) {
+      console.log('Invalid drop for King:', destination.droppableId);
       return;
     }
   } else {
     // If the card being dropped is not an Ace or 2, check for rank 3 onward
+    console.log('Dragging other ranks');
     const destDeck = decks.find((deck) => deck.id === destination.droppableId);
     const topCard = destDeck.cards.slice(-1)[0];
     if (parseInt(draggedCard.rank) !== parseInt(topCard.rank) + 1 || draggedCard.suit !== topCard.suit) {
+      console.log('Invalid drop for other ranks:', destination.droppableId);
       return;
     }
   }
 
-  // Update Tableau: remove dropped card from tableau
+  // Update tableau: remove dropped card from tableau
   const updatedTableau = tableau.map((pile) => ({
     ...pile,
     stacks: pile.stacks.filter((card) => card.id !== draggedCard.id),
   }));
+  console.log('Updated Tableau:', updatedTableau);
   setTableau(updatedTableau);
 
-    // Update cards state
-    const updatedCards = [...cards];
-    updatedCards.splice(currentCardIndex, 1); // Remove the card from the main cards list
-    setCards(updatedCards);
+  // Update cards state
+  const updatedCards = [...cards];
+  updatedCards.splice(currentCardIndex, 1); // Remove the card from the main cards list
+  console.log('Updated Cards/Stockpile:', updatedCards);
+  setCards(updatedCards);
 
-    // Update decks state
-    const updatedDecks = decks.map((deck) => {
-      if (deck.id === destination.droppableId) {
-        return {
-          ...deck,
-          cards: [...deck.cards, draggedCard],
-        };
-      }
-      return deck;
-    });
-
-    setDecks(updatedDecks);
-  };
+  // Update decks state
+  const updatedDecks = decks.map((deck) => {
+    if (deck.id === destination.droppableId) {
+      return {
+        ...deck,
+        cards: [...deck.cards, draggedCard],
+      };
+    }
+    return deck;
+  });
+  console.log('Updated Decks:', updatedDecks);
+  setDecks(updatedDecks);
+};
 
 /* -------------------------------------------------------------*/
 
@@ -261,6 +296,7 @@ return (
           ))}
         </div>
       </div>
+
       {/* --------- TABLEAU ----------------------------------------------*/}
       <div className="tableau">
           <h2>Tableau</h2>
