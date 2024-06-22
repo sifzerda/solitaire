@@ -100,22 +100,32 @@ const Solitaire = () => {
 
   useEffect(() => {
     const shuffledCards = shuffleArray([...initialCards]);
-    // Initialize tableau with your desired setup
-    setCards(shuffledCards);
+    const tableauCards = shuffledCards.slice(0, 28);
+    const deckCards = shuffledCards.slice(28);
+
+    setTableau(
+      initialTableau.map((pile, index) => ({
+        ...pile,
+        cards: tableauCards.slice(index * 4, (index + 1) * 4),
+      }))
+    );
+
+    setCards(deckCards);
   }, []); // Empty dependency array ensures this runs only once on component mount
 
  // Function to shuffle array (Fisher-Yates algorithm)
  const shuffleArray = (array) => {
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
-  }
-  return array;
-};
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  };
 
   const nextCard = () => {
     setCurrentCardIndex((prevIndex) => (prevIndex + 1) % cards.length);
   };
+
 
   // onDragEnd = logic for dropping cards into foundation decks
  const onDragEnd = (result) => {
@@ -197,71 +207,70 @@ const Solitaire = () => {
 /* -------------------------------------------------------------*/
 
 return (
-  <DragDropContext onDragEnd={onDragEnd}>
-    {/* Cards section */}
-    <div className="s-container">
-      <div className="cards">
-        <h2>Cards</h2>
-        <div className="card-navigation">
-          <button onClick={nextCard}>Next Card</button>
+    <DragDropContext onDragEnd={onDragEnd}>
+      {/* Cards section */}
+      <div className="s-container">
+        <div className="cards">
+          <h2>Cards</h2>
+          <div className="card-navigation">
+            <button onClick={nextCard}>Next Card</button>
+          </div>
+          <Droppable droppableId="revealed-cards">
+            {(provided) => (
+              <div className="card-list" {...provided.droppableProps} ref={provided.innerRef}>
+                {currentCardIndex < cards.length && (
+                  <Draggable draggableId={cards[currentCardIndex].id} index={currentCardIndex}>
+                    {(provided) => (
+                      <div
+                        className="card"
+                        {...provided.draggableProps}
+                        {...provided.dragHandleProps}
+                        ref={provided.innerRef}
+                      >
+                        {cards[currentCardIndex].rank} of {cards[currentCardIndex].suit}
+                      </div>
+                    )}
+                  </Draggable>
+                )}
+                {provided.placeholder}
+              </div>
+            )}
+          </Droppable>
         </div>
-        <Droppable droppableId="revealed-cards">
-          {(provided) => (
-            <div className="card-list" {...provided.droppableProps} ref={provided.innerRef}>
-              {currentCardIndex < cards.length && (
-                <Draggable draggableId={cards[currentCardIndex].id} index={currentCardIndex}>
-                  {(provided) => (
+
+        {/* Foundation decks section */}
+        <div className="decks">
+          <h2>Foundation Decks</h2>
+          <div className="foundation-decks">
+            {decks.map((deck) => (
+              <div key={deck.id} className="foundation-deck">
+                <Droppable droppableId={deck.id}>
+                  {(provided, snapshot) => (
                     <div
-                      className="card"
-                      {...provided.draggableProps}
-                      {...provided.dragHandleProps}
+                      className={`deck-content ${snapshot.isDraggingOver ? 'dragging-over' : ''}`}
+                      {...provided.droppableProps}
                       ref={provided.innerRef}
                     >
-                      {cards[currentCardIndex].rank} of {cards[currentCardIndex].suit}
+                      {deck.cards.length === 0 ? (
+                        <div className="empty-deck-emoji">{suitEmojis[deck.id]}</div>
+                      ) : (
+                        deck.cards.map((card, index) => (
+                          <div key={card.id} className="card-in-deck">
+                            {card.rank} of {card.suit}
+                          </div>
+                        ))
+                      )}
+                      {provided.placeholder}
                     </div>
                   )}
-                </Draggable>
-              )}
-              {provided.placeholder}
-            </div>
-          )}
-        </Droppable>
-      </div>
-
-      {/* Foundation decks section */}
-      <div className="decks">
-        <h2>Foundation Decks</h2>
-        <div className="foundation-decks">
-          {decks.map((deck) => (
-            <div key={deck.id} className="foundation-deck">
-              <Droppable droppableId={deck.id}>
-                {(provided, snapshot) => (
-                  <div
-                    className={`deck-content ${snapshot.isDraggingOver ? 'dragging-over' : ''}`}
-                    {...provided.droppableProps}
-                    ref={provided.innerRef}
-                  >
-                    {deck.cards.length === 0 ? (
-                      <div className="empty-deck-emoji">{suitEmojis[deck.id]}</div>
-                    ) : (
-                      deck.cards.map((card, index) => (
-                        <div key={card.id} className="card-in-deck">
-                          {card.rank} of {card.suit}
-                        </div>
-                      ))
-                    )}
-                    {provided.placeholder}
-                  </div>
-                )}
-             </Droppable>
-            </div>
-          ))}
+                </Droppable>
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
 
-      {/* --------- TABLEAU ----------------------------------------------*/}
-
-      <div className="tableau">
+        {/* Tableau section */}
+        <div className="tableau">
           <h2>Tableau</h2>
           <div className="tableau-cards">
             {tableau.map((pile) => (
