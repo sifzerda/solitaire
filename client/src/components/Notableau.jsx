@@ -80,11 +80,23 @@ const suitEmojis = {
   spades: '♤',
 };
 
+// Initial tableau cards with stacks (adjust as needed)
+const initialTableau = [
+    { id: 'tableau-1', cards: [] },   // 1 card in tableau 1
+    { id: 'tableau-2', cards: [] },   // 2 cards in tableau 2
+    { id: 'tableau-3', cards: [] },   // 3 cards in tableau 3
+    { id: 'tableau-4', cards: [] },  // 4 cards in tableau 4
+    { id: 'tableau-5', cards: [] }, // 5 cards in tableau 5
+    { id: 'tableau-6', cards: [] }, // 6 cards in tableau 6
+    { id: 'tableau-7', cards: [] }, // 7 cards in tableau 7
+  ];
+
 const Solitaire = () => {
   const [cards, setCards] = useState(initialCards);
   const [decks, setDecks] = useState(initialDecks);
   /* for next card display */
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
+  const [tableau, setTableau] = useState(initialTableau); // State for tableau cards
 
   useEffect(() => {
     const shuffledCards = shuffleArray([...initialCards]);
@@ -241,15 +253,51 @@ return (
                     {provided.placeholder}
                   </div>
                 )}
-              </Droppable>
+             </Droppable>
             </div>
           ))}
         </div>
       </div>
 
-    </div>
-  </DragDropContext>
-);
+      {/* --------- TABLEAU ----------------------------------------------*/}
+
+      <div className="tableau">
+          <h2>Tableau</h2>
+          <div className="tableau-cards">
+            {tableau.map((pile) => (
+              <div key={pile.id} className="tableau-pile">
+                <Droppable droppableId={pile.id}>
+                  {(provided, snapshot) => (
+                    <div
+                      className={`tableau-inner ${snapshot.isDraggingOver ? 'dragging-over' : ''}`}
+                      {...provided.droppableProps}
+                      ref={provided.innerRef}
+                    >
+                      {pile.cards.map((card, index) => (
+                        <Draggable key={card.id} draggableId={card.id} index={index}>
+                          {(provided) => (
+                            <div
+                              className="tableau-card"
+                              {...provided.draggableProps}
+                              {...provided.dragHandleProps}
+                              ref={provided.innerRef}
+                            >
+                              {card.rank} of {card.suit}
+                            </div>
+                          )}
+                        </Draggable>
+                      ))}
+                      {provided.placeholder}
+                    </div>
+                  )}
+                </Droppable>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </DragDropContext>
+  );
 };
 
 export default Solitaire;

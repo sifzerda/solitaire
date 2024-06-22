@@ -1,7 +1,7 @@
 import ContactForm from '../components/ContactForm';
 import Drag from '../components/Drag';
 import '../App.css';
-import '../scss.css';
+
 import '../solitaire.css';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
