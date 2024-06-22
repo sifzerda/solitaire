@@ -167,19 +167,23 @@ const Solitaire = () => {
             (parseInt(draggedCard.rank) === parseInt(topCard.rank) + 1 && draggedCard.suit === topCard.suit)))
         ) {
           // Remove the card from tableau or stockpile
-          let updatedTableau;
+
+          // remove dropped card from stockpile
           if (source.droppableId === 'revealed-cards') {
             const updatedCards = cards.filter((card) => card.id !== draggedCard.id);
             setCards(updatedCards);
+
           } else {
-            updatedTableau = tableau.map((pile) => ({
-              ...pile,
-              cards: pile.id === source.droppableId ? pile.cards.filter((card, index) => index !== source.index) : pile.cards,
-            }));
-            setTableau(updatedTableau);
+           // remove dropped card from tableau
+          const updatedTableau = tableau.map((pile) => ({
+            ...pile,
+            cards: pile.id === source.droppableId ? pile.cards.filter((_, index) => index !== source.index) : pile.cards,
+            count: pile.id === source.droppableId ? pile.count - 1 : pile.count, // Decrement count
+          }));
+          setTableau(updatedTableau);
           }
   
-          // Update the foundation deck
+          // Update the foundation deck with dropped cards
           const updatedDecks = decks.map((deck) => ({
             ...deck,
             cards: deck.id === destination.droppableId ? [...deck.cards, draggedCard] : deck.cards,
@@ -188,7 +192,6 @@ const Solitaire = () => {
           setDecks(updatedDecks);
         }
         break;
-  
       // Handle other cases as needed
       default:
         break;
