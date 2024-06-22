@@ -95,25 +95,24 @@ const Solitaire = () => {
 
   useEffect(() => {
     const shuffledCards = shuffleArray([...initialCards]);
-    const tableauCards = shuffledCards.slice(0, 28);
-    const deckCards = shuffledCards.slice(24);
 
-    // Distribute cards into tableau piles
-    let tableauIndex = 0;
-    let remainingCards = tableauCards.length;
-    let currentPileSize = 1;
+    // Distribute cards between tableau and stockpile
+    let tableauCopy = initialTableau.map((pile) => ({ ...pile, cards: [] }));
+    let stockpile = [];
 
-    while (remainingCards > 0) {
-      const cardsToAdd = tableauCards.slice(tableauIndex, tableauIndex + currentPileSize);
-      tableau[tableauIndex].cards = cardsToAdd;
-      remainingCards -= currentPileSize;
-      tableauIndex++;
-      currentPileSize++;
+    for (let i = 0; i < tableauCopy.length; i++) {
+      for (let j = 0; j <= i; j++) {
+        tableauCopy[i].cards.push(shuffledCards.shift());
+      }
     }
 
-    setTableau(tableau);
-    setCards(deckCards);
-  }, []); // Empty dependency array ensures this runs only once on component mount
+    stockpile = shuffledCards;
+
+    setTableau(tableauCopy);
+    setCards(stockpile);
+  }, []);
+
+// Empty dependency array ensures this runs only once on component mount
 
  // Function to shuffle array (Fisher-Yates algorithm)
  const shuffleArray = (array) => {
