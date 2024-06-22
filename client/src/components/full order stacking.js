@@ -105,14 +105,11 @@ const Solitaire = () => {
         tableauCopy[i].cards.push(shuffledCards.shift());
       }
     }
-
     stockpile = shuffledCards;
 
     setTableau(tableauCopy);
     setCards(stockpile);
-  }, []);
-
-// Empty dependency array ensures this runs only once on component mount
+  }, []); // Empty dependency array ensures cards are distributed only once on component mount
 
  // Function to shuffle array (Fisher-Yates algorithm)
  const shuffleArray = (array) => {
@@ -126,7 +123,6 @@ const Solitaire = () => {
   const nextCard = () => {
     setCurrentCardIndex((prevIndex) => (prevIndex + 1) % cards.length);
   };
-
 
   // onDragEnd = logic for dropping cards into foundation decks
   const onDragEnd = (result) => {

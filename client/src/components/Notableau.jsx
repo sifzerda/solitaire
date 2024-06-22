@@ -127,7 +127,6 @@ const Solitaire = () => {
     setCurrentCardIndex((prevIndex) => (prevIndex + 1) % cards.length);
   };
 
-
   // onDragEnd = logic for dropping cards into foundation decks
   const onDragEnd = (result) => {
     const { source, destination, draggableId } = result;

@@ -20,12 +20,19 @@ Vue may be easiest, apparently Angular has a bigger learning curve
 
 ## Description
 
-This is a personal project to create a react MERN stack app which has a number of simple games. These were built with ChatGPT help only.
-
-I made a couple of first attempts at this and ran into problems. On the third attempt I realized it was easier to create basic working dnd structures and build the card game around them, rather than try to make a conditional click-based display and implement the dnd dynamic later.
+This is a personal project to create a react MERN stack app which has a number of simple games. I did not use online instructions, only trial and error and ChatGPT prompting.
 
 As with minesweeper the game had to be divided up into the smallest working components/units. It began as a simple dnd interface where one of 52 boxes (cards) could be dragged and dropped onto 4 rectangles (foundations). Then the dnd dynamic was configured to operate according to Solitaire rules, preventing dnd unless there was a match of card suit and rank.
 
+Lessons learned from building this project:
+
+- (0) Make the game fully generally, rather than specifically partially
+- (1) Create basic working dnd structures and build the game around them, rather than try to make a conditional click-based display/game, and implement the dnd dynamic later. The more moving parts, the harder it is to get dnd in;
+- (2) Create all game display parts (stockpile, foundations, tableau) first, and then give them operational logic, rather than create one fully working part one at a time;
+- (3) Make all possible moves legal and then impose conditions later, rather than build on priori rules.
+
+<u>Generally: Build God mode, then limit. </u>
+ 
 Games:
 
 - [ ] Minesweeper
@@ -97,82 +104,49 @@ npm run start
 
 ## Usage
 
-A Solitaire gameboard has 3 main parts: the Stock Pile, the Foundations, and the Tableau.
-
-Tableau: main game cards in 7 cols, card numbers = col number, e.g. col 7 contains 7 cards
-
-Stockpile: Remainder cards not in Tableau, cycles
-
-Foundations: 4 places where cards stack by suit. 
-
-Each of these form a separate component in the app. There is also a landing screen to start game, a high scores page, win and loss screens, and score submission page. Registered users can also view the number of games they've won and play times on their profile page.
+ The game executes a typical game of solitaire with traditional rules. There is also a landing screen to start game, a high scores page, win and loss screens, and score submission page. Registered users can also view the number of games they've won and best play times on their profile page.
 
 ## Building:
 
-1. <u>Initial dnd</u>: Create 4 boxes (initial card stockpile) which can be dragged and dropped into 4 bordered areas (the Foundations)
-2. <u>'const initialCards'</u>: replace boxes with 52 cards of traditional playing deck, give each card id, rank and suit
-3. <u>'const onDragEnd', Card stack CSS</u>: Make cards stack when dropped into Foundations
-4. <u>'const nextCard' + onClick={nextCard} </u>: Create button which cycles to next card in Card stock pile
-5. <u>Conflict between nextCard button and droppable StockPile:</u> Had to rework Stockpile into a one-card display on nextCard click, rather than a pre-formed pile. Now you click 'next card' and get one droppable card displayed per click (rather than cycling through a facedown pile with top card faceup)
-6. <u></u> Assign each foundation deck a suit identity, so it can only accept one suit
-7. <u>'const updatedCards', 'const updatedDecks'</u> The state of each foundation suit deck is trackable separately and updated per card dropped
-8. <u>'const onDragEnd'....if (draggedCard.rank ==== '')</u> If statements check whether dropped card matches Foundation deck suit, and match correct rank order from 2 --> 10
-9. <u>'onDragEnd':</u> A -> 2, 10 -> J, J -> Q, and Q -> K have manual stacking logic via if/else statements
-10. <u>'const initialTableau':</u> create a Tableau with col # = row card quant (e.g. col 7 has 7 cards). Slices off cards from Stockpile 'initialCards', so they share cards. This means a card taken from Tableau is also 'taken' from the Stockpile and will 'respawn' in both.
-11. <u>'const updatedTableau', 'const updatedCards' and 'const updatedDecks':</u> 
-  - Tableau = Tableau, 
-  - Cards = Stockpile
-  - Decks = Foundations
-Will update to remove cards dropped into foundation so they don't reappear in Stockpile or Tableau. This ensures once cards are dropped into Foundations, they become non-playable.
-1.  <u>'const shuffleArray':</u> uses 'Fisher-Yates' algorithm to ensure (tableau and initial deck) cards are shuffled each page refresh.
-2.  <u>useEffect:</u> useEffect...const shuffledCards ensures tableau retains it's col structure even after card shuffle each game start/pagerefresh
-3.  <u></u>
-4.  <u></u>
-5.  <u></u>
-6.  <u></u>
-7.  <u></u>
+1. <u>Initial dnd:</u> Create 4 boxes (initial card stockpile) which can be dragged and dropped into 4 bordered areas (the Foundations)
+2. <u>'const initialCards':</u> Creates the full playing card deck of 52 cards.  
+3. <u>'const initialDecks':</u> Splits the deck into 4 suits and initializes empty.
+4. <u>'const initialTableau':</u> Creates Tableau into 7 cols, each col contains the number of cards as it's id (e.g. col 7 contains 7 cards). Initializes empty. Originally tableau sliced off cards from the stockpile, but the 'card sharing' caused issues and had to be reworked.
+5. 8. <u>'const updatedCards', 'const updatedDecks'</u> The state of each foundation suit deck is trackable separately and updated per card dropped.
+6. <u>'const [currentCardIndex, setCurrentCardIndex] = useState(0)', 'const nextCard' + onClick={nextCard}:</u> Actions the Stockpile cycle. Conflict between nextCard button and droppable StockPile: Had to rework Stockpile into a one-card display on nextCard click, rather than a pre-formed pile. Now you click 'next card' and get one droppable card displayed per click (rather than cycling through a facedown pile with top card faceup)
+7. <u>'const shuffleArray':</u> Fisher-Yates algorithm shuffles cards in stockpile and tableau after distribution.
+8. <u>'const onDragEnd':</u> covers dnd from stockpile and tableau to foundations; dragging card from source->destination, + adding card to destination, removing card from source.
+9. <u>'const isMoveAllowed':</u> if conditional ensures foundations stack per rank and suit.
+10. <u>'return':</u> renders stockpile ('cards'), tableau, and foundations and contains in dnd areas.
 
-........up to here.........
-
-
-
-7. <u>'const updateAdjacentCells'</u>: Iterate through cell array again, check which # cell ids contain 'X's and attach an 'a' to cells that are X+1 or X-1 (e.g. if X is 15, then cells 14 and 16 will become 14a and 16a) these will be numerical 'proximity cells' 
-8. 
-   1. If cell is adjacent to two X/mines it will get two 'a's, i.e. 3 becomes 3aa
-9.  <u>'const updateAdjacentCells'</u>: For diagonal proximity cells
-   1. Create diagonal relations between cells and modify cell id based on diagonal link:
-   -   ↖️ ⬆️ ↗️
-   -   ⬅️ 💣 ➡️
-   -   ↙️ ⬇️ ↘️
-   -   All above directional cells will get update of proximity values once mines are randomly inserted into grid
-10. <u>'const handleClick'</u>: check which cells hold 'X's (mines) and switch the X to a 💣 if clicked
-11. 
-12. <u>'const nonBombCells'</u>: Create a constant that holds all cells minus the X/mine cells 
-13. 
-14. <u>' setTimeout ' </u>: create an alert one clicking a mine creating 'game over screen' and game restarts
-15. 
-16. <u>'const handleClick'</u>: if one mine cell is clicked, all mine cells are revealed
-17. <u>'generateInitialGrid' [...] content: '' revealed: false:</u>cells blank and unclicked at game start, <u>newGrid[rowIndex][colIndex].revealed = true:</u> once clicked, cell reveals proximity value
+11. <u>'const onDragEnd':</u> 
+12. <u>'const onDragEnd':</u> 
+13. <u>'const onDragEnd':</u> 
+14. <u></u>
+15. <u></u>
+16. <u></u>
+17. <u></u>
+18. <u></u>
+19. <u></u>
+20. <u></u>
+21. <u></u>
+22. <u></u>
+23. <u></u>
 
 ## To do: 
 
-- [x] Create Foundation < /> area/boxes for cards to slot/stack into
-- [x] Create Stockpile < /> of free cards
+- [x] Create Foundation area/boxes for cards to slot/stack into
+- [x] Create Stockpile of free cards
 - [x] Drag n Drop mechanics between stockpile and foundation
 - [x] Foundation logic: accept cards in sequential order (A -> K)
   - [x] Will accept Ace per suit
   - [x] Will accept Ace - > 2 per suit
   - [x] Will accept Ace - > 3 per suit
   - [x] Will accept Ace -> K (all) per suit 
-- [x] Create Tableau < /> of 7 cols with incrementally more card rows
+- [x] Create Tableau of 7 cols with incrementally more card rows
 - [x] Drag n Drop mechanics between tableau and foundation
 - [ ] Drag n Drop mechanics between stockpile and tableau
 - [ ] Drag n Drop of entire tableau groups of cards between cols
-
-
-
-
-
 
 
 
