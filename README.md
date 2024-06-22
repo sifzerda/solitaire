@@ -135,6 +135,10 @@ npm run start
 
 ## To do: 
 
+- (1) make the tableau a droppable area for stockpile cards (possibly all kinds any order) and then (2) apply the same drop conditions to them
+- 
+
+
 - [x] Create Foundation area/boxes for cards to slot/stack into
 - [x] Create Stockpile of free cards
 - [x] Drag n Drop mechanics between stockpile and foundation
@@ -149,14 +153,16 @@ npm run start
 - [ ] Drag n Drop of entire tableau groups of cards between cols
 
 
+Stuff to do once main game functioning (i.e. easy implementable latter tasks):
 
-- [ ] import card images
+- [ ] import card images - prob do this last
 - [ ] reshuffle stockpile button, basically restarts game
 - [ ] timer: restarts on game refresh
-- [ ] add points system via timer, no points gained but leadership board based on quickest win (least time)
-- [ ] Points system: add time to points so the less time, the more points you get, *** put this in minesweeper
+- [ ] Points system, each time a card is placed on foundation, it adds points (if cards can be removed from foundation, don't forget to subtract points for that)
+-  Points system: add time to points so the less time, the more points you get, *** put this in minesweeper
 - [ ] Handling upon: game win
 - [ ] Handling upon: game loss, or no valid moves left that would allow game win
+- [ ] add points system via timer, no points gained but leadership board based on quickest win (least time)
 - [ ] highscores comp
 - [ ] submit score/time if logged in
 - [ ] user profile page shows how many games user has won, and quickest (least time) wins
@@ -165,11 +171,11 @@ npm run start
 - [ ] switch content into solitaire git repo once finished and ready to deploy
 
 ## To do for all games
-- [ ] point accumulation system in-play, + calc points per safe cells revealed, 
-- [ ] button to show high scores
+- [ ] create start game landing screen: + start game btn; + high scores btn
+- [ ] end game/win game screen, + view score, + submit score, + see high scores, + restart game
 - [ ] if user logged in, can save high score (post to user array)
 - [ ] profile page where scores can be displayed
 - [ ] create a 'start game' landing screen with 'new game', 'set difficulty' and 'high scores' buttons
 - [ ] have 8-bit chiptune stylized music play during game (with button that starts and stops music, maybe a speaker pic that gets struck through)
 - [ ] volume increase/decrease for music
-- [ ] play through DL (self-titled, FN, RO) albums as 8-bit, and can play next song in list
+- [ ] play through albums as 8-bit, and can play next song in list
