@@ -187,26 +187,32 @@ const Solitaire = () => {
 // Function to validate if card can be moved to foundation
 const isMoveAllowed = (card, foundationDeck) => {
     if (foundationDeck.cards.length === 0) {
-        console.log('Card rank is:', card.rank, 'Card suit is :', card.suit, 'foundation deck id is:', foundationDeck.id);
+      console.log('Card rank is:', card.rank, 'Card suit is :', card.suit, 'foundation deck id is:', foundationDeck.id);
       // Only Ace can be placed on an empty foundation
       return card.rank === 'Ace' && card.suit === foundationDeck.id;
-
     } else {
-        console.log('card suit', card.suit, 'foundation deck id', foundationDeck.id, 'last card suit', foundationDeck.cards[foundationDeck.cards.length - 1].suit);
+      console.log('card suit', card.suit, 'foundation deck id', foundationDeck.id, 'last card suit', foundationDeck.cards[foundationDeck.cards.length - 1].suit);
       const lastCard = foundationDeck.cards[foundationDeck.cards.length - 1];
-
-    // Allow rank 2 of the same suit to be placed on Ace
-    if (lastCard.rank === 'Ace' && card.rank === '2' && card.suit === foundationDeck.id) {
+  
+      // Allow rank 2 of the same suit to be placed on Ace
+      if (lastCard.rank === 'Ace' && card.rank === '2' && card.suit === foundationDeck.id) {
         return true;
       }
-
-      
+  
       // Check if ranks are in ascending order and same suit
-      return (
-        card.suit === foundationDeck.id &&
-        getNextRank(lastCard.rank) === card.rank
-      );
-
+      if (card.suit === foundationDeck.id && getNextRank(lastCard.rank) === card.rank) {
+        return true;
+      }
+  
+      // Allow cards to drop in sequence using parseInt
+      const lastRankInt = parseInt(lastCard.rank, 10); // Parse the rank of the last card as an integer
+      const currentRankInt = parseInt(card.rank, 10); // Parse the rank of the current card as an integer
+  
+      if (!isNaN(lastRankInt) && !isNaN(currentRankInt) && currentRankInt === lastRankInt + 1 && card.suit === foundationDeck.id) {
+        return true;
+      }
+  
+      return false;
     }
   };
 
