@@ -175,12 +175,17 @@ const Solitaire = () => {
 
           } else {
            // remove dropped card from tableau
-          const updatedTableau = tableau.map((pile) => ({
+           let updatedTableau = tableau.map((pile) => ({
             ...pile,
             cards: pile.id === source.droppableId ? pile.cards.filter((_, index) => index !== source.index) : pile.cards,
-            count: pile.id === source.droppableId ? pile.count - 1 : pile.count, // Decrement count
           }));
           setTableau(updatedTableau);
+
+          const updatedTableauWithCount = updatedTableau.map((pile) => ({
+            ...pile,
+            count: pile.id === source.droppableId ? pile.cards.length - 1 : pile.count,
+          }));
+          setTableau(updatedTableauWithCount);
           }
   
           // Update the foundation deck with dropped cards
