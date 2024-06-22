@@ -128,60 +128,68 @@ const Solitaire = () => {
 
 
   // onDragEnd = logic for dropping cards into foundation decks
- const onDragEnd = (result) => {
-  const { source, destination } = result;
-
-  // Dropped outside the list
-  if (!destination) {
-    return;
-  }
-  // Dropped in the same position, i.e. original deck
-  if (source.droppableId === destination.droppableId && source.index === destination.index) {
-    return;
-  }
+  const onDragEnd = (result) => {
+    const { source, destination } = result;
   
-  // Retrieve the dragged card
-  const draggedCard = cards[currentCardIndex];
-  const destDeck = decks.find((deck) => deck.id === destination.droppableId);
-  const topCard = destDeck.cards.slice(-1)[0];
-
-  // Switch statement to handle different card ranks
-  switch (draggedCard.rank) {
-    case '10':
-      if (!topCard || topCard.rank !== '9' || draggedCard.suit !== topCard.suit) {
-        return;
-      }
-      break;
-    case 'Queen':
-      if (!topCard || topCard.rank !== 'Jack' || draggedCard.suit !== topCard.suit) {
-        return;
-      }
-      break;
-    case 'Jack':
-      if (!topCard || topCard.rank !== '10' || draggedCard.suit !== topCard.suit) {
-        return;
-      }
-      break;
-    case 'King':
-      if (!topCard || topCard.rank !== 'Queen' || draggedCard.suit !== topCard.suit) {
-        return;
-      }
-      break;
-    default:
-      if (draggedCard.rank === 'Ace') {
-        if (!destDeck || destDeck.cards.length > 0 || !destination.droppableId.includes(draggedCard.suit.toLowerCase())) {
-          return;
+    // Dropped outside the list
+    if (!destination) {
+      return;
+    }
+    
+    // Retrieve the dragged card
+    let draggedCard;
+    if (source.droppableId === 'revealed-cards') {
+      draggedCard = cards[currentCardIndex];
+    } else {
+      const sourcePile = tableau.find((pile) => pile.id === source.droppableId);
+      draggedCard = sourcePile?.cards[source.index];
+    }
+  
+    // Handle dropping logic based on destination
+    switch (destination.droppableId) {
+      case 'hearts':
+      case 'diamonds':
+      case 'clubs':
+      case 'spades':
+        const destDeck = decks.find((deck) => deck.id === destination.droppableId);
+        const topCard = destDeck.cards.slice(-1)[0];
+  
+        // Validate if the card can be placed on the foundation deck
+        if (
+          (draggedCard.rank === 'Ace' && draggedCard.suit.toLowerCase() === destination.droppableId) ||
+          (topCard &&
+            ((draggedCard.rank === '2' && topCard.rank === 'Ace' && draggedCard.suit === topCard.suit) ||
+            (draggedCard.rank === 'Jack' && topCard.rank === '10' && draggedCard.suit === topCard.suit) ||
+            (draggedCard.rank === 'Queen' && topCard.rank === 'Jack' && draggedCard.suit === topCard.suit) ||
+            (draggedCard.rank === 'King' && topCard.rank === 'Queen' && draggedCard.suit === topCard.suit) ||
+            (parseInt(draggedCard.rank) === parseInt(topCard.rank) + 1 && draggedCard.suit === topCard.suit)))
+        ) {
+          // Remove the card from tableau or stockpile
+          let updatedTableau;
+          if (source.droppableId === 'revealed-cards') {
+            const updatedCards = cards.filter((card) => card.id !== draggedCard.id);
+            setCards(updatedCards);
+          } else {
+            updatedTableau = tableau.map((pile) => ({
+              ...pile,
+              cards: pile.id === source.droppableId ? pile.cards.filter((card, index) => index !== source.index) : pile.cards,
+            }));
+            setTableau(updatedTableau);
+          }
+  
+          // Update the foundation deck
+          const updatedDecks = decks.map((deck) => ({
+            ...deck,
+            cards: deck.id === destination.droppableId ? [...deck.cards, draggedCard] : deck.cards,
+          }));
+  
+          setDecks(updatedDecks);
         }
-      } else if (draggedCard.rank === '2') {
-        if (!topCard || topCard.rank !== 'Ace' || draggedCard.suit !== topCard.suit) {
-          return;
-        }
-      } else {
-        if (!topCard || parseInt(draggedCard.rank) !== parseInt(topCard.rank) + 1 || draggedCard.suit !== topCard.suit) {
-          return;
-        }
-      }
-      break;
+        break;
+  
+      // Handle other cases as needed
+      default:
+        break;
   }
 
     // ------------- (+) FOUNDATION ARE (-) FROM OTHER DECKS --------------->
