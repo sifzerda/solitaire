@@ -66,18 +66,18 @@ const initialCards = [
 
 // create and initialize Foundation decks with suit id, and empty 
 const initialDecks = [
-  { id: 'hearts', cards: [] },    // Hearts foundation deck
-  { id: 'diamonds', cards: [] },
-  { id: 'clubs', cards: [] },
-  { id: 'spades', cards: [] },
+  { id: 'Hearts', cards: [] },    // Hearts foundation deck
+  { id: 'Diamonds', cards: [] },
+  { id: 'Clubs', cards: [] },
+  { id: 'Spades', cards: [] },
 ];
 
 // Emoji on empty foundation decks
 const suitEmojis = {
-  hearts: '♡',
-  diamonds: '♢',
-  clubs: '♧',
-  spades: '♤',
+  Hearts: '♡',
+  Diamonds: '♢',
+  Clubs: '♧',
+  Spades: '♤',
 };
 
 // Initial tableau cards with stacks (adjust as needed)
@@ -130,7 +130,7 @@ const Solitaire = () => {
 
   // onDragEnd = logic for dropping cards into foundation decks
   const onDragEnd = (result) => {
-    const { source, destination } = result;
+    const { source, destination, draggableId } = result;
   
     // Dropped outside the list
     if (!destination) {
@@ -145,58 +145,26 @@ const Solitaire = () => {
     const sourcePile = tableau.find((pile) => pile.id === source.droppableId);
     draggedCard = sourcePile?.cards[source.index];
   }
-  
-  // Handle dropping logic based on destination
-  switch (destination.droppableId) {
-    case 'hearts':
-    case 'diamonds':
-    case 'clubs':
-    case 'spades':
-      const destDeck = decks.find((deck) => deck.id === destination.droppableId);
-      const topCard = destDeck.cards.slice(-1)[0];
-  
-      // Validate if the card can be placed on the foundation deck
-      if (
-        (draggedCard.rank === 'Ace' && draggedCard.suit.toLowerCase() === destination.droppableId) ||
-        (topCard &&
-          ((draggedCard.rank === '2' && topCard.rank === 'Ace' && draggedCard.suit === topCard.suit) ||
-          (draggedCard.rank === 'Jack' && topCard.rank === '10' && draggedCard.suit === topCard.suit) ||
-          (draggedCard.rank === 'Queen' && topCard.rank === 'Jack' && draggedCard.suit === topCard.suit) ||
-          (draggedCard.rank === 'King' && topCard.rank === 'Queen' && draggedCard.suit === topCard.suit) ||
-          (parseInt(draggedCard.rank) === parseInt(topCard.rank) + 1 && draggedCard.suit === topCard.suit)))
-      ) {
 
-          // remove dropped card from stockpile
-          if (source.droppableId === 'revealed-cards') {
-            const updatedCards = cards.filter((card) => card.id !== draggedCard.id);
-            setCards(updatedCards);
-          } else {
-           // remove dropped card from tableau
-           let updatedTableau = tableau.map((pile) => ({
-            ...pile,
-            cards: pile.id === source.droppableId ? pile.cards.filter((_, index) => index !== source.index) : pile.cards,
-          }));
-          setTableau(updatedTableau);
+    // Check if the move is valid to the foundation
+    const targetFoundation = decks.find((deck) => deck.id === destination.droppableId);
+    const isMoveValid = isMoveAllowed(draggedCard, targetFoundation);
+  
+    if (!isMoveValid) {
+        // Invalid move, return card to its original position
+        return;
+      }
 
-          const updatedTableauWithCount = updatedTableau.map((pile) => ({
-            ...pile,
-            count: pile.id === source.droppableId ? pile.cards.length - 1 : pile.count,
-          }));
-          setTableau(updatedTableauWithCount);
-          }
-  
-        // Update the foundation deck with dropped cards
-        const updatedDecks = decks.map((deck) => ({
-            ...deck,
-            cards: deck.id === destination.droppableId ? [...deck.cards, draggedCard] : deck.cards,
-          }));
-  
-          setDecks(updatedDecks);
-        }
-        break;
-      // Handle other cases as needed
-      default:
-        break;
+  // Remove dragged card from its original location
+  if (source.droppableId === 'revealed-cards') {
+    const updatedCards = cards.filter((card) => card.id !== draggedCard.id);
+    setCards(updatedCards);
+  } else {
+    let updatedTableau = tableau.map((pile) => ({
+      ...pile,
+      cards: pile.id === source.droppableId ? pile.cards.filter((_, index) => index !== source.index) : pile.cards,
+    }));
+    setTableau(updatedTableau);
   }
 
     // ------------- (+) FOUNDATION ARE (-) FROM OTHER DECKS --------------->
@@ -207,17 +175,47 @@ const Solitaire = () => {
   setCards(updatedCards);
 
   // Update Foundations state: add dropped card to foundation decks 
-  const updatedDecks = decks.map((deck) => {
-    if (deck.id === destination.droppableId) {
-      return {
-        ...deck,
-        cards: [...deck.cards, draggedCard],
-      };
-    }
-    return deck;
-  });
+  // Add dragged card to the foundation deck
+  const updatedDecks = decks.map((deck) => ({
+    ...deck,
+    cards: deck.id === destination.droppableId ? [...deck.cards, draggedCard] : deck.cards,
+  }));
+
   setDecks(updatedDecks);
 };
+
+// Function to validate if card can be moved to foundation
+const isMoveAllowed = (card, foundationDeck) => {
+    if (foundationDeck.cards.length === 0) {
+        console.log('Card rank is:', card.rank, 'Card suit is :', card.suit, 'foundation deck id is:', foundationDeck.id);
+      // Only Ace can be placed on an empty foundation
+      return card.rank === 'Ace' && card.suit === foundationDeck.id;
+
+    } else {
+        console.log('card suit', card.suit, 'foundation deck id', foundationDeck.id, 'last card suit', foundationDeck.cards[foundationDeck.cards.length - 1].suit);
+      const lastCard = foundationDeck.cards[foundationDeck.cards.length - 1];
+
+    // Allow rank 2 of the same suit to be placed on Ace
+    if (lastCard.rank === 'Ace' && card.rank === '2' && card.suit === foundationDeck.id) {
+        return true;
+      }
+
+      
+      // Check if ranks are in ascending order and same suit
+      return (
+        card.suit === foundationDeck.id &&
+        getNextRank(lastCard.rank) === card.rank
+      );
+
+    }
+  };
+
+  // Function to get the next rank in sequence
+const getNextRank = (rank) => {
+    const ranks = ['Ace', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'Jack', 'Queen', 'King'];
+    const currentIndex = ranks.indexOf(rank);
+    return ranks[currentIndex + 1];
+  };
 
 /* -------------------------------------------------------------*/
 
