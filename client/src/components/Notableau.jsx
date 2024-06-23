@@ -226,7 +226,7 @@ const getNextRank = (rank) => {
 
 return (
     <DragDropContext onDragEnd={onDragEnd}>
-      {/* Cards section */}
+      {/* Stockpile Cards section */}
       <div className="s-container">
         <div className="cards">
           <h2>Stockpile</h2>
