@@ -114,9 +114,9 @@ button:disabled {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);  /* Optional: Card shadow */
 }
 
-/* Adjust overlap for subsequent cards */
+/* How much sub level layer of cards shows */
 .tableau-card + .tableau-card {
-  margin-top: -20px;  /* Amount of overlap between cards */
+  margin-top: -150px;  /* Amount of overlap between cards */
 }
 
 /* Optional: Highlight when dragging */
