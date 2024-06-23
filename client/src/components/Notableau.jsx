@@ -241,7 +241,7 @@ return (
                         {...provided.dragHandleProps}
                         ref={provided.innerRef}
                       >
-                        {cards[currentCardIndex].rank} of {cards[currentCardIndex].suit} - {cards[currentCardIndex].color}
+                        {cards[currentCardIndex].rank} of {cards[currentCardIndex].suit} - ({cards[currentCardIndex].color})
                       </div>
                     )}
                   </Draggable>
@@ -270,7 +270,7 @@ return (
                       ) : (
                         deck.cards.map((card, index) => (
                           <div key={card.id} className="card-in-deck">
-                            {card.rank} of {card.suit} - {card.color}
+                            {card.rank} of {card.suit} - ({card.color})
                           </div>
                         ))
                       )}
@@ -305,7 +305,7 @@ return (
                               {...provided.dragHandleProps}
                               ref={provided.innerRef}
                             >
-                              {card.rank} of {card.suit} - {card.color}
+                              {card.rank} of {card.suit} - ({card.color})
                             </div>
                           )}
                         </Draggable>
