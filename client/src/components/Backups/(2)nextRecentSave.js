@@ -1,3 +1,9 @@
+// // this allows:
+// + dnd from stockpile to foundation
+// + dnd from tableau to foundation
+// NO tableau to tableau
+// + stockpile to tableau
+
 import { useState, useEffect } from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
@@ -82,7 +88,7 @@ const suitEmojis = {
 
 // Initial tableau cards with stacks (adjust as needed)
 const initialTableau = Array.from({ length: 7 }, (_, index) => ({
-    id: `tableau-${index + 1}`,
+    id: tableau-${index + 1},
     cards: [],
   }));
 
@@ -147,7 +153,7 @@ const Solitaire = () => {
     draggedCard = sourcePile?.cards[source.index];
   }
 //--------------------------DROPPING FROM STOCKPILE INTO TABLEAU-----------------------------------------
-// Handle dropping into tableau
+
 if (source.droppableId === 'revealed-cards') {
   const updatedCards = cards.filter((card) => card.id !== draggedCard.id);
   setCards(updatedCards);
@@ -165,23 +171,11 @@ if (source.droppableId === 'revealed-cards') {
     });
     setTableau(updatedTableau);
   }
-
-// --------------------------DROPPING FROM TABLEAU INTO TABLEAU-----------------------------------------
-} else if (source.droppableId.startsWith('tableau') && destination.droppableId.startsWith('tableau')) {
-  // Moving cards between tableau columns
-  const sourcePileIndex = tableau.findIndex((pile) => pile.id === source.droppableId);
-  const destinationPileIndex = tableau.findIndex((pile) => pile.id === destination.droppableId);
-
-  if (sourcePileIndex !== -1 && destinationPileIndex !== -1) {
-    const updatedTableau = [...tableau];
-    const [draggedCard] = updatedTableau[sourcePileIndex].cards.splice(source.index, 1);
-    updatedTableau[destinationPileIndex].cards.splice(destination.index, 0, draggedCard);
-
-    setTableau(updatedTableau);
-  }
+} else {
+ // Handle drag from tableau if needed  
 }
 
-//----------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------
 
     // Check if the move is valid to the foundation
     const targetFoundation = decks.find((deck) => deck.id === destination.droppableId);
@@ -259,39 +253,39 @@ const getNextRank = (rank) => {
 /* -------------------------------------------------------------*/
 
 return (
-  <DragDropContext onDragEnd={onDragEnd}>
-    <div className="s-container">
-      {/* Stockpile Cards section */}
-      <div className="cards">
-        <h2>Stockpile</h2>
-        <div className="card-navigation">
-          <button onClick={nextCard}>Next Card</button>
+<DragDropContext onDragEnd={onDragEnd}>
+      <div className="s-container">
+        {/* Stockpile Cards section */}
+        <div className="cards">
+          <h2>Stockpile</h2>
+          <div className="card-navigation">
+            <button onClick={nextCard}>Next Card</button>
+          </div>
+          <Droppable droppableId="revealed-cards">
+            {(provided) => (
+              <div className="card-list" {...provided.droppableProps} ref={provided.innerRef}>
+                {currentCardIndex < cards.length && (
+                  <Draggable draggableId={cards[currentCardIndex].id} index={currentCardIndex}>
+                    {(provided) => (
+                      <div
+                        className="card"
+                        {...provided.draggableProps}
+                        {...provided.dragHandleProps}
+                        ref={provided.innerRef}
+                      >
+                        {cards[currentCardIndex].rank} of {cards[currentCardIndex].suit} - ({cards[currentCardIndex].color})
+                      </div>
+                    )}
+                  </Draggable>
+                )}
+                {provided.placeholder}
+              </div>
+            )}
+          </Droppable>
         </div>
-        <Droppable droppableId="revealed-cards">
-          {(provided) => (
-            <div className="card-list" {...provided.droppableProps} ref={provided.innerRef}>
-              {currentCardIndex < cards.length && (
-                <Draggable draggableId={cards[currentCardIndex].id} index={currentCardIndex}>
-                  {(provided) => (
-                    <div
-                      className="card"
-                      {...provided.draggableProps}
-                      {...provided.dragHandleProps}
-                      ref={provided.innerRef}
-                    >
-                      {cards[currentCardIndex].rank} of {cards[currentCardIndex].suit} - ({cards[currentCardIndex].color})
-                    </div>
-                  )}
-                </Draggable>
-              )}
-              {provided.placeholder}
-            </div>
-          )}
-        </Droppable>
-      </div>
 
          {/* Foundation decks section */}
-        <div className="decks">
+         <div className="decks">
           <h2>Foundations</h2>
           <div className="foundation-decks">
             {decks.map((deck) => (
@@ -299,7 +293,7 @@ return (
                 <Droppable droppableId={deck.id}>
                   {(provided, snapshot) => (
                     <div
-                      className={`deck-content ${snapshot.isDraggingOver ? 'dragging-over' : ''}`}
+                      className={deck-content ${snapshot.isDraggingOver ? 'dragging-over' : ''}}
                       {...provided.droppableProps}
                       ref={provided.innerRef}
                     >
@@ -330,7 +324,7 @@ return (
                 <Droppable droppableId={pile.id}>
                   {(provided, snapshot) => (
                     <div
-                      className={`tableau-inner ${snapshot.isDraggingOver ? 'dragging-over' : ''}`}
+                      className={tableau-inner ${snapshot.isDraggingOver ? 'dragging-over' : ''}}
                       {...provided.droppableProps}
                       ref={provided.innerRef}
                     >
