@@ -1,3 +1,9 @@
+// this allows:
+// + dnd from stockpile to foundation
+// + dnd from tableau to foundation
+// NO tableau to tableau
+// NO stockpile to tableau
+
 import { useState, useEffect } from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
@@ -82,7 +88,7 @@ const suitEmojis = {
 
 // Initial tableau cards with stacks (adjust as needed)
 const initialTableau = Array.from({ length: 7 }, (_, index) => ({
-    id: `tableau-${index + 1}`,
+    id: tableau-${index + 1},
     cards: [],
   }));
 
@@ -127,7 +133,6 @@ const Solitaire = () => {
     setCurrentCardIndex((prevIndex) => (prevIndex + 1) % cards.length);
   };
 
-  // ON DRAG END ------------------------------------------------------>
   // onDragEnd = logic for dropping cards into foundation decks
   const onDragEnd = (result) => {
     const { source, destination } = result;
@@ -139,37 +144,12 @@ const Solitaire = () => {
     
   // Retrieve the dragged card
   let draggedCard;
-
   if (source.droppableId === 'revealed-cards') {
     draggedCard = cards[currentCardIndex];
   } else {
     const sourcePile = tableau.find((pile) => pile.id === source.droppableId);
     draggedCard = sourcePile?.cards[source.index];
   }
-//--------------------------DROPPING FROM STOCKPILE INTO TABLEAU-----------------------------------------
-
-if (source.droppableId === 'revealed-cards') {
-  const updatedCards = cards.filter((card) => card.id !== draggedCard.id);
-  setCards(updatedCards);
-
-  if (destination.droppableId.startsWith('tableau')) {
-    const targetPileId = destination.droppableId;
-    const updatedTableau = tableau.map((pile) => {
-      if (pile.id === targetPileId) {
-        return {
-          ...pile,
-          cards: [...pile.cards, draggedCard],
-        };
-      }
-      return pile;
-    });
-    setTableau(updatedTableau);
-  }
-} else {
- // Handle drag from tableau if needed  
-}
-
-//-------------------------------------------------------------------------
 
     // Check if the move is valid to the foundation
     const targetFoundation = decks.find((deck) => deck.id === destination.droppableId);
@@ -247,9 +227,9 @@ const getNextRank = (rank) => {
 /* -------------------------------------------------------------*/
 
 return (
-<DragDropContext onDragEnd={onDragEnd}>
+    <DragDropContext onDragEnd={onDragEnd}>
+      {/* Stockpile Cards section */}
       <div className="s-container">
-        {/* Stockpile Cards section */}
         <div className="cards">
           <h2>Stockpile</h2>
           <div className="card-navigation">
@@ -278,8 +258,8 @@ return (
           </Droppable>
         </div>
 
-         {/* Foundation decks section */}
-         <div className="decks">
+        {/* Foundation decks section */}
+        <div className="decks">
           <h2>Foundations</h2>
           <div className="foundation-decks">
             {decks.map((deck) => (
@@ -287,7 +267,7 @@ return (
                 <Droppable droppableId={deck.id}>
                   {(provided, snapshot) => (
                     <div
-                      className={`deck-content ${snapshot.isDraggingOver ? 'dragging-over' : ''}`}
+                      className={deck-content ${snapshot.isDraggingOver ? 'dragging-over' : ''}}
                       {...provided.droppableProps}
                       ref={provided.innerRef}
                     >
@@ -309,8 +289,8 @@ return (
           </div>
         </div>
 
-       {/* Tableau section */}
-       <div className="tableau">
+        {/* Tableau section */}
+        <div className="tableau">
           <h2>Tableau</h2>
           <div className="tableau-cards">
             {tableau.map((pile) => (
@@ -318,7 +298,7 @@ return (
                 <Droppable droppableId={pile.id}>
                   {(provided, snapshot) => (
                     <div
-                      className={`tableau-inner ${snapshot.isDraggingOver ? 'dragging-over' : ''}`}
+                      className={tableau-inner ${snapshot.isDraggingOver ? 'dragging-over' : ''}}
                       {...provided.droppableProps}
                       ref={provided.innerRef}
                     >
