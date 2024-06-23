@@ -146,12 +146,18 @@ npm run start
   - [x] Will accept Ace -> K (all) per suit 
 - [x] Create Tableau of 7 cols with incrementally more card rows
 - [x] Drag n Drop mechanics between tableau and foundation
-- [ ] Drag n Drop mechanics between stockpile and tableau
+- [x] Drag n Drop mechanics between stockpile and tableau
+  - [ ] refine dropping to obey solitaire rules conditions
+- [x] Drag n Drop between tableau columns
+  - [ ] refine dropping to obey solitaire rules conditions
 - [ ] Drag n Drop of entire tableau groups of cards between cols
-- [x] style cards in tablau to layer
-- [x] style cards in foundation to layer
+- [ ] Facedown all tableau cards except top
+- [ ] Change 'next card' button to a facedown stack of cards
+  - [ ] I.e. make the stockpile a stack (or show all cards) and style like foundation and tableau stacks (but increase neg margin)
+- [x] Style cards in tablau to layer
+- [x] Style cards in foundation to layer
   - [ ] After testing/debugging, change -150 to -170 of CSS: .card-in-deck + .card-in-deck
-- [ ] Once game works fine, save a copy of the Notableau file and .scss to the 'Backups' folder, so if there's an unforseen issue in future, you can debug using God Mode all moves legal (instead of having to play through the game)
+- [ ] BEFORE FINAL STYLING: Once game works fine, save a copy of the Notableau file and .scss to the 'Backups' folder, so if there's an unforseen issue in future, you can debug using God Mode all moves legal (instead of having to play through the game)
 - [ ] x
 - [ ]  
 
