@@ -129,7 +129,7 @@ const Solitaire = () => {
 
   // onDragEnd = logic for dropping cards into foundation decks
   const onDragEnd = (result) => {
-    const { source, destination, draggableId } = result;
+    const { source, destination } = result;
   
     // Dropped outside the list
     if (!destination) {
@@ -186,18 +186,14 @@ const Solitaire = () => {
 // Function to validate if card can be moved to foundation
 const isMoveAllowed = (card, foundationDeck) => {
     if (foundationDeck.cards.length === 0) {
-      console.log('Card rank is:', card.rank, 'Card suit is :', card.suit, 'foundation deck id is:', foundationDeck.id);
       // Only Ace can be placed on an empty foundation
       return card.rank === 'Ace' && card.suit === foundationDeck.id;
     } else {
-      console.log('card suit', card.suit, 'foundation deck id', foundationDeck.id, 'last card suit', foundationDeck.cards[foundationDeck.cards.length - 1].suit);
       const lastCard = foundationDeck.cards[foundationDeck.cards.length - 1];
-  
       // Allow rank 2 of the same suit to be placed on Ace
       if (lastCard.rank === 'Ace' && card.rank === '2' && card.suit === foundationDeck.id) {
         return true;
       }
-  
       // Check if ranks are in ascending order and same suit
       if (card.suit === foundationDeck.id && getNextRank(lastCard.rank) === card.rank) {
         return true;
