@@ -151,7 +151,7 @@ npm run start
 - [x] style cards in tablau to layer
 - [x] style cards in foundation to layer
   - [ ] After testing/debugging, change -150 to -170 of CSS: .card-in-deck + .card-in-deck
-- [ ] Once game works fine, save a copy of the Notableau file and CSS to the 'Backups' folder, so if there's an unforseen issue in future, you can debug using God Mode all moves legal (instead of having to play through the game)
+- [ ] Once game works fine, save a copy of the Notableau file and .scss to the 'Backups' folder, so if there's an unforseen issue in future, you can debug using God Mode all moves legal (instead of having to play through the game)
 - [ ] x
 - [ ]  
 
