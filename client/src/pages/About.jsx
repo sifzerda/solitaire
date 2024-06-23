@@ -16,10 +16,8 @@ export default function About () {
 
       <div className="separator-line"></div>
 
-      <p className='portfolio-bio'>
-        Nunc pharetra finibus est at efficitur. Praesent sed congue diam.</p>
+      <p className='portfolio-bio'>Ordo ab chao.</p>
  
-
  <Notableau />
 
 

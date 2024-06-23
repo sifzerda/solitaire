@@ -26,10 +26,11 @@ As with minesweeper the game had to be divided up into the smallest working comp
 
 Lessons learned from building this project:
 
-- (0) Make the game fully generally, rather than specifically partially
-- (1) Create basic working dnd structures and build the game around them, rather than try to make a conditional click-based display/game, and implement the dnd dynamic later. The more moving parts, the harder it is to get dnd in;
-- (2) Create all game display parts (stockpile, foundations, tableau) first, and then give them operational logic, rather than create one fully working part one at a time;
-- (3) Make all possible moves legal and then impose conditions later, rather than build on priori rules.
+- How to implement a Drag and Drop package (react beautiful dnd)
+- Make the game fully generally, rather than specifically partially
+- Create basic working dnd structures and build the game around them, rather than try to make a conditional click-based display/game, and implement the dnd dynamic later. The more moving parts, the harder it is to get dnd in;
+- Create all game display parts (stockpile, foundations, tableau) first, and then give them operational logic, rather than create one fully working part one at a time;
+- Make all possible moves legal and then impose conditions later, rather than build on priori rules.
 
 <u>Generally: Build God mode, then limit. </u>
  
@@ -135,10 +136,6 @@ npm run start
 
 ## To do: 
 
-- (1) make the tableau a droppable area for stockpile cards (possibly all kinds any order) and then (2) apply the same drop conditions to them
-- 
-
-
 - [x] Create Foundation area/boxes for cards to slot/stack into
 - [x] Create Stockpile of free cards
 - [x] Drag n Drop mechanics between stockpile and foundation
@@ -151,7 +148,12 @@ npm run start
 - [x] Drag n Drop mechanics between tableau and foundation
 - [ ] Drag n Drop mechanics between stockpile and tableau
 - [ ] Drag n Drop of entire tableau groups of cards between cols
-
+- [x] style cards in tablau to layer
+- [x] style cards in foundation to layer
+  - [ ] After testing/debugging, change -150 to -170 of CSS: .card-in-deck + .card-in-deck
+- [ ] x
+- [ ] x
+- [ ]  
 
 Stuff to do once main game functioning (i.e. easy implementable latter tasks):
 
