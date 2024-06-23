@@ -229,7 +229,7 @@ return (
       {/* Cards section */}
       <div className="s-container">
         <div className="cards">
-          <h2>Cards</h2>
+          <h2>Stockpile</h2>
           <div className="card-navigation">
             <button onClick={nextCard}>Next Card</button>
           </div>
@@ -258,7 +258,7 @@ return (
 
         {/* Foundation decks section */}
         <div className="decks">
-          <h2>Foundation Decks</h2>
+          <h2>Foundations</h2>
           <div className="foundation-decks">
             {decks.map((deck) => (
               <div key={deck.id} className="foundation-deck">
