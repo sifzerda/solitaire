@@ -155,17 +155,25 @@ button:disabled {
 
 /* Individual foundation deck */
 .foundation-deck {
-  width: 100px;
-  height: 150px;
-  border: 1px solid #ccc;
+  width: 120px;  /* Adjust card width */
+  height: 180px; /* Adjust card height */
+  border: 2px dashed #00fff2;
   border-radius: 5px;
   padding: 10px;
-  background-color: #f0f0f0;
+  margin-right: 20px; /* Space between each foundation deck */
+  background-color: #c0bfbf;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
+}
+
+.deck-content {
+  min-height: 50px;
+  padding: 5px;
+  background-color: #00ffd5;
+  border: 1px dashed #999;
 }
 
 /* Highlight when dragging over */
