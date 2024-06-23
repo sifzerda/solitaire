@@ -47,19 +47,9 @@ body {
   overflow: hidden;
 }
 
-.header-gold {
+.centered-text {
   padding: 20px;
   text-align: center;
-  position: relative;
-}
-
-.header-gold:hover .horror-text {
-  animation-duration: 2s;
-  animation-iteration-count: infinite;
-  animation-name: flicker;
-  animation-timing-function: step-start;
-  transition: color 0.5s ease;
-  /* Add a transition for color property */
 }
 
 /* -------------------glitch effect */

@@ -9,6 +9,7 @@ export default function About () {
   return (
     <div>
       <h1>Solitaire</h1>
+      <p className='centered-text'>Ordo ab chao.</p>
 
       <p className="separator-line"></p>
 
@@ -16,7 +17,7 @@ export default function About () {
 
       <div className="separator-line"></div>
 
-      <p className='portfolio-bio'>Ordo ab chao.</p>
+
  
  <Notableau />
 
