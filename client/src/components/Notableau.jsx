@@ -181,7 +181,7 @@ if (source.droppableId === 'revealed-cards') {
   }
 }
 
-//----------------------------------------------------------------------------------------------------
+//----------------------------------------CARD TO FOUNDATION------------------------------------------------------------
 
     // Check if the move is valid to the foundation
     const targetFoundation = decks.find((deck) => deck.id === destination.droppableId);
