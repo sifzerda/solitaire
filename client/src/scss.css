@@ -95,3 +95,42 @@ button:disabled {
   background-color: #ccc;
   cursor: not-allowed;
 }
+
+.tableau-pile {
+  display: flex;  /* Ensures cards are displayed in a row */
+  flex-direction: column;  /* Stack cards vertically */
+  align-items: flex-start; /* Align cards to the left within the pile */
+  margin-right: 20px;  /* Adjust margin between tableau piles */
+}
+
+/* Styling for individual tableau cards */
+.tableau-card {
+  width: 120px;  /* Adjust card width */
+  height: 180px; /* Adjust card height */
+  background-color: white;  /* Card background color */
+  border: 1px solid #ccc;  /* Card border */
+  border-radius: 5px;  /* Rounded corners for card */
+  position: relative;  /* Positioning context for overlap */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);  /* Optional: Card shadow */
+}
+
+/* Adjust overlap for subsequent cards */
+.tableau-card + .tableau-card {
+  margin-top: -20px;  /* Amount of overlap between cards */
+}
+
+/* Optional: Highlight when dragging */
+.tableau-card.dragging {
+  opacity: 0.5;  /* Reduced opacity while dragging */
+}
+
+/* Optional: Hover effect */
+.tableau-card:hover {
+  cursor: pointer;  /* Change cursor on hover */
+  transform: translateY(-5px);  /* Lift card slightly on hover */
+}
+
+/* Droppable area highlight */
+.tableau-inner.dragging-over {
+  background-color: #f0f0f0;  /* Background color when dragging over */
+}
