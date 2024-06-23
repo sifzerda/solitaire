@@ -126,11 +126,11 @@ button:disabled {
 
 /* Optional: Hover effect */
 .tableau-card:hover {
-  cursor: pointer;  /* Change cursor on hover */
+  cursor: grab;  /* Change cursor on hover */
   transform: translateY(-5px);  /* Lift card slightly on hover */
 }
 
 /* Droppable area highlight */
 .tableau-inner.dragging-over {
-  background-color: #f0f0f0;  /* Background color when dragging over */
+  background-color: #fbff00;  /* Background color when dragging over */
 }
