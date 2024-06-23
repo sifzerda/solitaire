@@ -66,7 +66,7 @@ const initialCards = [
 
 // create and initialize Foundation decks with suit id, and empty 
 const initialDecks = [
-  { id: 'Hearts', cards: [] },    // Hearts foundation deck
+  { id: 'Hearts', cards: [] }, 
   { id: 'Diamonds', cards: [] },
   { id: 'Clubs', cards: [] },
   { id: 'Spades', cards: [] },
