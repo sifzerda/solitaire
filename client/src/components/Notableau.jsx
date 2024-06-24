@@ -133,9 +133,8 @@ const Solitaire = () => {
     const { source, destination } = result;
 
     // Dropped outside the list
-    if (!destination) {
-      return;
-    }
+    // Dropped outside the list
+    if (!destination) return;
 
     // Retrieve the dragged card
     let draggedCard;
@@ -187,10 +186,8 @@ const Solitaire = () => {
     const targetFoundation = decks.find((deck) => deck.id === destination.droppableId);
     const isMoveValid = isMoveAllowed(draggedCard, targetFoundation);
 
-    if (!isMoveValid) {
       // Invalid move, return card to its original position
-      return;
-    }
+      if (!isMoveValid) return;
 
     // Remove dragged card from its original location
     if (source.droppableId === 'revealed-cards') {

@@ -145,7 +145,6 @@ button:disabled {
   border: 1px solid #ccc; /* Example border */
   border-radius: 3px;
   background-color: white; /* Default background color */
-  transition: background-color 0.2s ease; /* Smooth transition for background color */
 }
 
 /* Droppable area highlight */
@@ -171,6 +170,13 @@ button:disabled {
   transition: top 0.2s ease-in-out; /* Smooth transition */
   pointer-events: none; /* Allows mouse events to pass through */
   z-index: 1; /* Ensure it's above the tableau cards */
+}
+
+.tableau-card.group-dragging {
+  transform: scale(1.2); /* Increase size of dragged group */
+  z-index: 100; /* Ensure dragged cards appear above others */
+border: solid 4px purple;
+
 }
  
 /* FOUNDATION --------------------------------------------*/

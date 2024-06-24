@@ -115,9 +115,7 @@ const Solitaire = () => {
     const { source, destination } = result;
 
     // Dropped outside the list
-    if (!destination) {
-      return;
-    }
+    if (!destination) return;
 
     // Retrieve the dragged card
     let draggedCard;
@@ -150,10 +148,9 @@ const Solitaire = () => {
 
       // --------------------------DROPPING FROM TABLEAU INTO TABLEAU-----------------------------------------
     } else if (source.droppableId.startsWith('tableau') && destination.droppableId.startsWith('tableau')) {
-      // Moving cards between tableau columns
       const sourcePileIndex = tableau.findIndex((pile) => pile.id === source.droppableId);
       const destinationPileIndex = tableau.findIndex((pile) => pile.id === destination.droppableId);
-  
+
       console.log('Source pile index:', sourcePileIndex);
       console.log('Destination pile index:', destinationPileIndex);
 
@@ -161,23 +158,23 @@ const Solitaire = () => {
         const updatedTableau = [...tableau];
         const sourceCards = updatedTableau[sourcePileIndex].cards;
         const draggedIndex = source.index;
-        
+
         console.log('Source cards:', sourceCards);
 
-        // Check if dragging a group from tableau
+
         let draggedGroup = [sourceCards[draggedIndex]];
         if (draggedIndex < sourceCards.length - 1) {
           draggedGroup = sourceCards.slice(draggedIndex);
         }
 
         console.log('Dragged group:', draggedGroup);
-  
+
         // Remove cards from source
         updatedTableau[sourcePileIndex].cards = sourceCards.filter((card, index) => !draggedGroup.includes(card));
-  
+
         // Insert cards into destination
         updatedTableau[destinationPileIndex].cards.splice(destination.index, 0, ...draggedGroup);
-  
+
         console.log('Updated tableau:', updatedTableau);
 
         setTableau(updatedTableau);
@@ -194,7 +191,6 @@ const Solitaire = () => {
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <div className="s-container">
-        {/* Stockpile Cards section */}
         <div className="cards">
           <h2>Stockpile</h2>
           <div className="card-navigation">
@@ -205,12 +201,12 @@ const Solitaire = () => {
               <div className="card-list" {...provided.droppableProps} ref={provided.innerRef}>
                 {currentCardIndex < cards.length && (
                   <Draggable draggableId={cards[currentCardIndex].id} index={currentCardIndex}>
-                    {(provided) => (
+                    {(dragProvided) => (
                       <div
                         className="card"
-                        {...provided.draggableProps}
-                        {...provided.dragHandleProps}
-                        ref={provided.innerRef}
+                        {...dragProvided.draggableProps}
+                        {...dragProvided.dragHandleProps}
+                        ref={dragProvided.innerRef}
                       >
                         {cards[currentCardIndex].rank} of {cards[currentCardIndex].suit} - ({cards[currentCardIndex].color})
                       </div>
@@ -223,7 +219,6 @@ const Solitaire = () => {
           </Droppable>
         </div>
 
-        {/* Tableau section */}
         <div className="tableau">
           <h2>Tableau</h2>
           <div className="tableau-cards">
@@ -240,12 +235,27 @@ const Solitaire = () => {
                         <Draggable key={card.id} draggableId={card.id} index={index}>
                           {(dragProvided, dragSnapshot) => (
                             <div
-                              className={`tableau-card ${dragSnapshot.isDragging ? 'dragging' : ''}`}
+                              className={`tableau-card ${dragSnapshot.isDragging ? 'group-dragging' : ''}`}
                               {...dragProvided.draggableProps}
                               {...dragProvided.dragHandleProps}
                               ref={dragProvided.innerRef}
                             >
-                              {card.rank} of {card.suit} - ({card.color})
+                              {/* Render individual card when not dragging, group when dragging */}
+                              {dragSnapshot.isDragging ? (
+                                // Render group of cards being dragged
+                                <div>
+                                  {pile.cards.slice(index).map((c, idx) => (
+                                    <div key={c.id}>
+                                      {c.rank} of {c.suit} - ({c.color})
+                                    </div>
+                                  ))}
+                                </div>
+                              ) : (
+                                // Render individual card
+                                <div>
+                                  {card.rank} of {card.suit} - ({card.color})
+                                </div>
+                              )}
                             </div>
                           )}
                         </Draggable>
