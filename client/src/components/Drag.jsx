@@ -108,7 +108,7 @@ const Solitaire = () => {
     setCurrentCardIndex((prevIndex) => (prevIndex + 1) % cards.length);
   };
 
-  //----------------------------------- stockpile to tableau dnd rules -------------------------------------------------
+  //----------------------------------- drag STOCKPILE TO TABLEAU RULES -------------------------------------------------
 
   const handleStockpileToTableauDrop = (draggedCard, destination) => {
     const updatedCards = cards.filter((card) => card.id !== draggedCard.id);
