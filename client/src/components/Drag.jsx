@@ -245,7 +245,7 @@ const Solitaire = () => {
                                 // Render group of cards being dragged
                                 <div>
                                   {pile.cards.slice(index).map((c, idx) => (
-                                    <div key={c.id}>
+                                    <div className='t-drag-card' key={c.id}>
                                       {c.rank} of {c.suit} - ({c.color})
                                     </div>
                                   ))}

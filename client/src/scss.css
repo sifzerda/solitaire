@@ -172,12 +172,26 @@ button:disabled {
   z-index: 1; /* Ensure it's above the tableau cards */
 }
 
+/* Dragging tableau piles/columns */
+
 .tableau-card.group-dragging {
   transform: scale(1.2); /* Increase size of dragged group */
   z-index: 100; /* Ensure dragged cards appear above others */
 border: solid 4px purple;
-
 }
+
+.t-drag-card {
+
+  border: 1px dashed #007bff;
+  background-color: rgb(255, 255, 255);
+padding: 5px;
+margin: -11px;
+height: 180px;
+margin-bottom: -145px;
+}
+
+
+
  
 /* FOUNDATION --------------------------------------------*/
 
