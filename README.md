@@ -105,7 +105,7 @@ npm run start
 
 13. <u>'return {... t-drag-group}':</u> this targets a tableau -> tableau pile of cards and applies a class selector which allowed me to modify appearance of dragging card pile as a single object/stack. React Beautiful DnD didn't seem to have a 'group/multiple object/s' dragging graphic, so I had to make it manually with CSS.
 
-16. <u></u>
+16. <u>'const handleStockpileToTableauDrop', 'isValidRank', 'isValidColor':</u> covers dnd cards from Stockpile to Tableau, by solitaire rules (K-A, opposite colour)
 17. <u></u>
 18. <u></u>
 19. <u></u>
@@ -116,8 +116,8 @@ npm run start
 
 ## To do: 
 
-- make tableau card piles draggable
-- stockpile -> tableau dnd rules
+
+
 - tableau -> tableau dnd rules
 
 
@@ -133,7 +133,7 @@ npm run start
 - [x] Create Tableau of 7 cols with incrementally more card rows
 - [x] Drag n Drop mechanics between tableau and foundation
 - [x] Drag n Drop mechanics between stockpile and tableau
-  - [ ] refine dropping to obey solitaire rules conditions
+  - [x] refine dropping to obey solitaire rules conditions
 - [x] Drag n Drop between tableau columns
   - [ ] refine dropping to obey solitaire rules conditions
 - [x] Drag n Drop of entire tableau groups of cards between cols
