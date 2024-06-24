@@ -1,3 +1,5 @@
+// THIS HAS SOME SELECTORS IN RETURN FOR TABLEAU -> TABLEAU CARD DROPPING
+
 import { useState, useEffect } from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
@@ -333,7 +335,22 @@ return (
       className={`tableau-inner ${snapshot.isDraggingOver ? 'dragging-over' : ''}`}
       {...provided.droppableProps}
       ref={provided.innerRef}
+      onDragOver={(e) => {
+        const draggingIndex = snapshot.draggingOverWithIndex; // Index of the card being dragged over
+        const targetElement = e.currentTarget.querySelector('.tableau-card:nth-child(' + (draggingIndex + 1) + ')');
 
+        if (targetElement) {
+          const rect = targetElement.getBoundingClientRect();
+          const highlightTop = rect.top + rect.height - e.clientY + 'px'; // Position the highlight at the bottom of the hovered card
+          const highlightStyle = { top: highlightTop };
+
+          // Update the style of .highlight-bottom-card dynamically
+          const highlightElement = document.querySelector('.highlight-bottom-card');
+          if (highlightElement) {
+            highlightElement.style.top = highlightStyle.top;
+          }
+        }
+      }}
     >
       {pile.cards.map((card, index) => (
         <Draggable key={card.id} draggableId={card.id} index={index}>
@@ -351,7 +368,10 @@ return (
       ))}
       {provided.placeholder}
 
-
+      {/* Highlight the card below the hovered position */}
+      {snapshot.isDraggingOver && (
+        <div className="highlight-bottom-card"></div>
+      )}
     </div>
   )}
 </Droppable>
