@@ -108,7 +108,29 @@ const Solitaire = () => {
     setCurrentCardIndex((prevIndex) => (prevIndex + 1) % cards.length);
   };
 
-  //----------------------------------- drag STOCKPILE TO TABLEAU RULES -------------------------------------------------
+  //----------------------------------- (T1) drag TABLEAU TO TABLEAU RULES -------------------------------------------------
+
+  const handleTableauToTableauDrop = (source, destination) => {
+    const sourcePileIndex = tableau.findIndex((pile) => pile.id === source.droppableId);
+    const destinationPileIndex = tableau.findIndex((pile) => pile.id === destination.droppableId);
+
+    if (sourcePileIndex !== -1 && destinationPileIndex !== -1) {
+      const updatedTableau = [...tableau];
+      const sourcePile = updatedTableau[sourcePileIndex];
+      const destinationPile = updatedTableau[destinationPileIndex];
+      const draggedGroup = sourcePile.cards.slice(source.index);
+
+      // Remove cards from source
+      sourcePile.cards = sourcePile.cards.filter((_, index) => index < source.index);
+
+      // Insert cards into destination
+      destinationPile.cards.splice(destination.index, 0, ...draggedGroup);
+
+      setTableau(updatedTableau);
+    }
+  };
+
+  //-----------------------------------(S1)  drag STOCKPILE TO TABLEAU RULES -------------------------------------------------
 
   const handleStockpileToTableauDrop = (draggedCard, destination) => {
     const updatedCards = cards.filter((card) => card.id !== draggedCard.id);
@@ -157,8 +179,8 @@ const Solitaire = () => {
   };
 
   
-  // ON DRAG END (collective index for separate DND functions) ------------------------------------------------------>
-  // onDragEnd = logic for dropping cards
+  // --------------------------- ON DRAG END (collective index for separate DND functions) ------------------->
+
   const onDragEnd = (result) => {
     console.log('Drag result:', result); // Log the entire drag result object
     const { source, destination } = result;
@@ -175,7 +197,8 @@ const Solitaire = () => {
       const sourcePile = tableau.find((pile) => pile.id === source.droppableId);
       draggedCard = sourcePile?.cards[source.index];
     }
-    //--------------------------DROPPING FROM STOCKPILE INTO TABLEAU-----------------------------------------
+
+    //--------------------------(S1.1) DROPPING FROM STOCKPILE INTO TABLEAU-----------------------------------------
     // Handle dropping into tableau
     if (source.droppableId === 'revealed-cards') {
       const updatedCards = cards.filter((card) => card.id !== draggedCard.id);
@@ -183,38 +206,9 @@ const Solitaire = () => {
 
       handleStockpileToTableauDrop(draggedCard, destination);
 
-      // --------------------------DROPPING FROM TABLEAU INTO TABLEAU-----------------------------------------
+      // -------------------------- (T1.1) DROPPING FROM TABLEAU INTO TABLEAU-----------------------------------------
     } else if (source.droppableId.startsWith('tableau') && destination.droppableId.startsWith('tableau')) {
-      const sourcePileIndex = tableau.findIndex((pile) => pile.id === source.droppableId);
-      const destinationPileIndex = tableau.findIndex((pile) => pile.id === destination.droppableId);
-
-      console.log('Source pile index:', sourcePileIndex);
-      console.log('Destination pile index:', destinationPileIndex);
-
-      if (sourcePileIndex !== -1 && destinationPileIndex !== -1) {
-        const updatedTableau = [...tableau];
-        const sourceCards = updatedTableau[sourcePileIndex].cards;
-        const draggedIndex = source.index;
-
-        console.log('Source cards:', sourceCards);
-
-        let draggedGroup = [sourceCards[draggedIndex]];
-        if (draggedIndex < sourceCards.length - 1) {
-          draggedGroup = sourceCards.slice(draggedIndex);
-        }
-
-        console.log('Dragged group:', draggedGroup);
-
-        // Remove cards from source
-        updatedTableau[sourcePileIndex].cards = sourceCards.filter((card, index) => !draggedGroup.includes(card));
-
-        // Insert cards into destination
-        updatedTableau[destinationPileIndex].cards.splice(destination.index, 0, ...draggedGroup);
-
-        console.log('Updated tableau:', updatedTableau);
-
-        setTableau(updatedTableau);
-      }
+      handleTableauToTableauDrop(source, destination);
     }
     //----------------------------------------------------------------------------------------------------
   };
