@@ -158,7 +158,7 @@ npm run start
   - [ ] refine dropping to obey solitaire rules conditions
 - [x] Drag n Drop between tableau columns
   - [ ] refine dropping to obey solitaire rules conditions
-- [ ] Drag n Drop of entire tableau groups of cards between cols
+- [x] Drag n Drop of entire tableau groups of cards between cols
 - [ ] Facedown all tableau cards except top
 - [ ] Change 'next card' button to a facedown stack of cards
   - [ ] I.e. make the stockpile a stack (or show all cards) and style like foundation and tableau stacks (but increase neg margin)
