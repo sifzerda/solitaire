@@ -108,6 +108,38 @@ const Solitaire = () => {
     setCurrentCardIndex((prevIndex) => (prevIndex + 1) % cards.length);
   };
 
+  //----------------------------------- stockpile to tableau dnd rules -------------------------------------------------
+
+  const handleStockpileToTableauDrop = (draggedCard, destination) => {
+    const updatedCards = cards.filter((card) => card.id !== draggedCard.id);
+    setCards(updatedCards);
+
+    if (destination.droppableId.startsWith('tableau')) {
+      const targetPileId = destination.droppableId;
+      const targetPile = tableau.find((pile) => pile.id === targetPileId);
+
+      if (targetPile.cards.length === 0 || targetPile.cards[targetPile.cards.length - 1].rank === 'King') {
+        if (draggedCard.rank === 'Queen' || (targetPile.cards[targetPile.cards.length - 1].rank === 'King' && draggedCard.rank === 'King')) {
+          const updatedTableau = tableau.map((pile) => {
+            if (pile.id === targetPileId) {
+              return {
+                ...pile,
+                cards: [...pile.cards, draggedCard],
+              };
+            }
+            return pile;
+          });
+          setTableau(updatedTableau);
+        } else {
+          console.log('Invalid move: Can only drop Queen on top of a King.');
+        }
+      } else {
+        console.log('Invalid move: Can only drop onto an empty tableau pile or on top of a King.');
+      }
+    }
+  };
+
+
   // ON DRAG END ------------------------------------------------------>
   // onDragEnd = logic for dropping cards
   const onDragEnd = (result) => {
@@ -132,19 +164,7 @@ const Solitaire = () => {
       const updatedCards = cards.filter((card) => card.id !== draggedCard.id);
       setCards(updatedCards);
 
-      if (destination.droppableId.startsWith('tableau')) {
-        const targetPileId = destination.droppableId;
-        const updatedTableau = tableau.map((pile) => {
-          if (pile.id === targetPileId) {
-            return {
-              ...pile,
-              cards: [...pile.cards, draggedCard],
-            };
-          }
-          return pile;
-        });
-        setTableau(updatedTableau);
-      }
+      handleStockpileToTableauDrop(draggedCard, destination);
 
       // --------------------------DROPPING FROM TABLEAU INTO TABLEAU-----------------------------------------
     } else if (source.droppableId.startsWith('tableau') && destination.droppableId.startsWith('tableau')) {
