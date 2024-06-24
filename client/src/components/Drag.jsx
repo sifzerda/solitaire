@@ -120,7 +120,16 @@ const Solitaire = () => {
   
       const topCardRank = targetPile.cards.length > 0 ? targetPile.cards[targetPile.cards.length - 1].rank : null;
   
-      if (targetPile.cards.length === 0 && draggedCard.rank === 'King') {
+      // Define ranks in sequential order
+      const ranks = ['King', 'Queen', 'Jack', '10', '9', '8', '7', '6', '5', '4', '3', '2', 'Ace'];
+  
+      // Find the index of the top card rank in the ranks array
+      const topCardIndex = topCardRank ? ranks.indexOf(topCardRank) : -1;
+      // Find the index of the dragged card rank in the ranks array
+      const draggedCardIndex = ranks.indexOf(draggedCard.rank);
+  
+      // Check if the dragged card can be dropped based on sequential ranks
+      if (topCardIndex === -1 || draggedCardIndex === topCardIndex + 1) {
         const updatedTableau = tableau.map((pile) => {
           if (pile.id === targetPileId) {
             return {
@@ -130,155 +139,6 @@ const Solitaire = () => {
           }
           return pile;
         });
-        setTableau(updatedTableau);
-      } else if (topCardRank === 'King' && draggedCard.rank === 'Queen') {
-        const updatedTableau = tableau.map((pile) => {
-          if (pile.id === targetPileId) {
-            return {
-              ...pile,
-              cards: [...pile.cards, draggedCard],
-            };
-          }
-          return pile;
-        });
-        setTableau(updatedTableau);
-      } else if (topCardRank === 'Queen' && draggedCard.rank === 'Jack') {
-        const updatedTableau = tableau.map((pile) => {
-          if (pile.id === targetPileId) {
-            return {
-              ...pile,
-              cards: [...pile.cards, draggedCard],
-            };
-          }
-          return pile;
-        });
-        setTableau(updatedTableau);
-      } else if (topCardRank === 'Jack' && draggedCard.rank === '10') {
-        const updatedTableau = tableau.map((pile) => {
-          if (pile.id === targetPileId) {
-            return {
-              ...pile,
-              cards: [...pile.cards, draggedCard],
-            };
-          }
-          return pile;
-        });
-
-
-        setTableau(updatedTableau);
-      } else if (topCardRank === '10' && draggedCard.rank === '9') {
-        const updatedTableau = tableau.map((pile) => {
-          if (pile.id === targetPileId) {
-            return {
-              ...pile,
-              cards: [...pile.cards, draggedCard],
-            };
-          }
-          return pile;
-        });
-
-        setTableau(updatedTableau);
-      } else if (topCardRank === '9' && draggedCard.rank === '8') {
-        const updatedTableau = tableau.map((pile) => {
-          if (pile.id === targetPileId) {
-            return {
-              ...pile,
-              cards: [...pile.cards, draggedCard],
-            };
-          }
-          return pile;
-        });
-
-        setTableau(updatedTableau);
-      } else if (topCardRank === '8' && draggedCard.rank === '7') {
-        const updatedTableau = tableau.map((pile) => {
-          if (pile.id === targetPileId) {
-            return {
-              ...pile,
-              cards: [...pile.cards, draggedCard],
-            };
-          }
-          return pile;
-        });
-
-        setTableau(updatedTableau);
-      } else if (topCardRank === '7' && draggedCard.rank === '6') {
-        const updatedTableau = tableau.map((pile) => {
-          if (pile.id === targetPileId) {
-            return {
-              ...pile,
-              cards: [...pile.cards, draggedCard],
-            };
-          }
-          return pile;
-        });
-
-
-        setTableau(updatedTableau);
-      } else if (topCardRank === '6' && draggedCard.rank === '5') {
-        const updatedTableau = tableau.map((pile) => {
-          if (pile.id === targetPileId) {
-            return {
-              ...pile,
-              cards: [...pile.cards, draggedCard],
-            };
-          }
-          return pile;
-        });
-
-        setTableau(updatedTableau);
-      } else if (topCardRank === '5' && draggedCard.rank === '4') {
-        const updatedTableau = tableau.map((pile) => {
-          if (pile.id === targetPileId) {
-            return {
-              ...pile,
-              cards: [...pile.cards, draggedCard],
-            };
-          }
-          return pile;
-        });
-
-
-        setTableau(updatedTableau);
-      } else if (topCardRank === '4' && draggedCard.rank === '3') {
-        const updatedTableau = tableau.map((pile) => {
-          if (pile.id === targetPileId) {
-            return {
-              ...pile,
-              cards: [...pile.cards, draggedCard],
-            };
-          }
-          return pile;
-        });
-
-        setTableau(updatedTableau);
-      } else if (topCardRank === '3' && draggedCard.rank === '2') {
-        const updatedTableau = tableau.map((pile) => {
-          if (pile.id === targetPileId) {
-            return {
-              ...pile,
-              cards: [...pile.cards, draggedCard],
-            };
-          }
-          return pile;
-        });
-
-        setTableau(updatedTableau);
-      } else if (topCardRank === '2' && draggedCard.rank === 'Ace') {
-        const updatedTableau = tableau.map((pile) => {
-          if (pile.id === targetPileId) {
-            return {
-              ...pile,
-              cards: [...pile.cards, draggedCard],
-            };
-          }
-          return pile;
-        });
-
-
-
-
-        
         setTableau(updatedTableau);
       } else {
         console.log('Invalid move: Cannot drop this card on top of the current tableau pile.');
