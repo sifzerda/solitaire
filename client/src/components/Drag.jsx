@@ -119,7 +119,8 @@ const Solitaire = () => {
       const targetPile = tableau.find((pile) => pile.id === targetPileId);
 
       if (targetPile.cards.length === 0 || targetPile.cards[targetPile.cards.length - 1].rank === 'King') {
-        if (draggedCard.rank === 'Queen' || (targetPile.cards[targetPile.cards.length - 1].rank === 'King' && draggedCard.rank === 'King')) {
+        // Check if the dragged card is a King
+        if (draggedCard.rank === 'King') {
           const updatedTableau = tableau.map((pile) => {
             if (pile.id === targetPileId) {
               return {
