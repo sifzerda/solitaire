@@ -157,7 +157,7 @@ const Solitaire = () => {
   };
 
   
-  // ON DRAG END ------------------------------------------------------>
+  // ON DRAG END (collective index for separate DND functions) ------------------------------------------------------>
   // onDragEnd = logic for dropping cards
   const onDragEnd = (result) => {
     console.log('Drag result:', result); // Log the entire drag result object
@@ -197,7 +197,6 @@ const Solitaire = () => {
         const draggedIndex = source.index;
 
         console.log('Source cards:', sourceCards);
-
 
         let draggedGroup = [sourceCards[draggedIndex]];
         if (draggedIndex < sourceCards.length - 1) {
