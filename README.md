@@ -119,9 +119,11 @@ npm run start
 8. <u>'const onDragEnd':</u> covers dnd from stockpile and tableau to foundations; dragging card from source->destination, + adding card to destination, removing card from source.
 9. <u>'const isMoveAllowed':</u> if conditional ensures foundations stack per rank and suit.
 10. <u>'return':</u> renders stockpile ('cards'), tableau, and foundations and contains in dnd areas.
+11. <u>'if (source.droppableId === 'revealed-cards') '':</u> covers dragging stockpile, dropping to tableau.
+12. <u>'else if (source.droppableId.startsWith('tableau') && destination.droppableId.startsWith('tableau'))':</u> covers DnD within tableau. 
 
-11. <u>'const onDragEnd':</u> 
-12. <u>'const onDragEnd':</u> 
+
+
 13. <u>'const onDragEnd':</u> 
 14. <u></u>
 15. <u></u>
@@ -135,6 +137,12 @@ npm run start
 23. <u></u>
 
 ## To do: 
+
+- make tableau card piles draggable
+- stockpile -> tableau dnd rules
+- tableau -> tableau dnd rules
+
+
 
 - [x] Create Foundation area/boxes for cards to slot/stack into
 - [x] Create Stockpile of free cards
