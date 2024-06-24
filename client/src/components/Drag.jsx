@@ -113,34 +113,180 @@ const Solitaire = () => {
   const handleStockpileToTableauDrop = (draggedCard, destination) => {
     const updatedCards = cards.filter((card) => card.id !== draggedCard.id);
     setCards(updatedCards);
-
+  
     if (destination.droppableId.startsWith('tableau')) {
       const targetPileId = destination.droppableId;
       const targetPile = tableau.find((pile) => pile.id === targetPileId);
+  
+      const topCardRank = targetPile.cards.length > 0 ? targetPile.cards[targetPile.cards.length - 1].rank : null;
+  
+      if (targetPile.cards.length === 0 && draggedCard.rank === 'King') {
+        const updatedTableau = tableau.map((pile) => {
+          if (pile.id === targetPileId) {
+            return {
+              ...pile,
+              cards: [...pile.cards, draggedCard],
+            };
+          }
+          return pile;
+        });
+        setTableau(updatedTableau);
+      } else if (topCardRank === 'King' && draggedCard.rank === 'Queen') {
+        const updatedTableau = tableau.map((pile) => {
+          if (pile.id === targetPileId) {
+            return {
+              ...pile,
+              cards: [...pile.cards, draggedCard],
+            };
+          }
+          return pile;
+        });
+        setTableau(updatedTableau);
+      } else if (topCardRank === 'Queen' && draggedCard.rank === 'Jack') {
+        const updatedTableau = tableau.map((pile) => {
+          if (pile.id === targetPileId) {
+            return {
+              ...pile,
+              cards: [...pile.cards, draggedCard],
+            };
+          }
+          return pile;
+        });
+        setTableau(updatedTableau);
+      } else if (topCardRank === 'Jack' && draggedCard.rank === '10') {
+        const updatedTableau = tableau.map((pile) => {
+          if (pile.id === targetPileId) {
+            return {
+              ...pile,
+              cards: [...pile.cards, draggedCard],
+            };
+          }
+          return pile;
+        });
 
-      if (targetPile.cards.length === 0 || targetPile.cards[targetPile.cards.length - 1].rank === 'King') {
-        // Check if the dragged card is a King
-        if (draggedCard.rank === 'King') {
-          const updatedTableau = tableau.map((pile) => {
-            if (pile.id === targetPileId) {
-              return {
-                ...pile,
-                cards: [...pile.cards, draggedCard],
-              };
-            }
-            return pile;
-          });
-          setTableau(updatedTableau);
-        } else {
-          console.log('Invalid move: Can only drop Queen on top of a King.');
-        }
+
+        setTableau(updatedTableau);
+      } else if (topCardRank === '10' && draggedCard.rank === '9') {
+        const updatedTableau = tableau.map((pile) => {
+          if (pile.id === targetPileId) {
+            return {
+              ...pile,
+              cards: [...pile.cards, draggedCard],
+            };
+          }
+          return pile;
+        });
+
+        setTableau(updatedTableau);
+      } else if (topCardRank === '9' && draggedCard.rank === '8') {
+        const updatedTableau = tableau.map((pile) => {
+          if (pile.id === targetPileId) {
+            return {
+              ...pile,
+              cards: [...pile.cards, draggedCard],
+            };
+          }
+          return pile;
+        });
+
+        setTableau(updatedTableau);
+      } else if (topCardRank === '8' && draggedCard.rank === '7') {
+        const updatedTableau = tableau.map((pile) => {
+          if (pile.id === targetPileId) {
+            return {
+              ...pile,
+              cards: [...pile.cards, draggedCard],
+            };
+          }
+          return pile;
+        });
+
+        setTableau(updatedTableau);
+      } else if (topCardRank === '7' && draggedCard.rank === '6') {
+        const updatedTableau = tableau.map((pile) => {
+          if (pile.id === targetPileId) {
+            return {
+              ...pile,
+              cards: [...pile.cards, draggedCard],
+            };
+          }
+          return pile;
+        });
+
+
+        setTableau(updatedTableau);
+      } else if (topCardRank === '6' && draggedCard.rank === '5') {
+        const updatedTableau = tableau.map((pile) => {
+          if (pile.id === targetPileId) {
+            return {
+              ...pile,
+              cards: [...pile.cards, draggedCard],
+            };
+          }
+          return pile;
+        });
+
+        setTableau(updatedTableau);
+      } else if (topCardRank === '5' && draggedCard.rank === '4') {
+        const updatedTableau = tableau.map((pile) => {
+          if (pile.id === targetPileId) {
+            return {
+              ...pile,
+              cards: [...pile.cards, draggedCard],
+            };
+          }
+          return pile;
+        });
+
+
+        setTableau(updatedTableau);
+      } else if (topCardRank === '4' && draggedCard.rank === '3') {
+        const updatedTableau = tableau.map((pile) => {
+          if (pile.id === targetPileId) {
+            return {
+              ...pile,
+              cards: [...pile.cards, draggedCard],
+            };
+          }
+          return pile;
+        });
+
+        setTableau(updatedTableau);
+      } else if (topCardRank === '3' && draggedCard.rank === '2') {
+        const updatedTableau = tableau.map((pile) => {
+          if (pile.id === targetPileId) {
+            return {
+              ...pile,
+              cards: [...pile.cards, draggedCard],
+            };
+          }
+          return pile;
+        });
+
+        setTableau(updatedTableau);
+      } else if (topCardRank === '2' && draggedCard.rank === 'Ace') {
+        const updatedTableau = tableau.map((pile) => {
+          if (pile.id === targetPileId) {
+            return {
+              ...pile,
+              cards: [...pile.cards, draggedCard],
+            };
+          }
+          return pile;
+        });
+
+
+
+
+        
+        setTableau(updatedTableau);
       } else {
-        console.log('Invalid move: Can only drop onto an empty tableau pile or on top of a King.');
+        console.log('Invalid move: Cannot drop this card on top of the current tableau pile.');
       }
     }
   };
 
-
+  
   // ON DRAG END ------------------------------------------------------>
   // onDragEnd = logic for dropping cards
   const onDragEnd = (result) => {
