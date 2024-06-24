@@ -2,7 +2,7 @@ import ContactForm from '../components/ContactForm';
 import Drag from '../components/Drag';
 import '../App.css';
 
-import '../solitaire.css';
+import '../scss.css';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithub, faLinkedin, faFacebook } from '@fortawesome/free-brands-svg-icons';

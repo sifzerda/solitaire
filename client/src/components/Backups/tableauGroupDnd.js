@@ -1,3 +1,7 @@
+// this lacks a Foundation (to keep code smaller)
+// it has dragging of cards from tableau to tableau in groups implemented
+// has to be combined with main (Notableau) code
+
 import { useState, useEffect } from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
@@ -64,22 +68,6 @@ const initialCards = [
   { id: 'card-52', suit: 'Spades', rank: 'King', color: 'Black' },
 ];
 
-// create and initialize Foundation decks with suit id, and empty 
-const initialDecks = [
-  { id: 'Hearts', cards: [] },
-  { id: 'Diamonds', cards: [] },
-  { id: 'Clubs', cards: [] },
-  { id: 'Spades', cards: [] },
-];
-
-// Emoji on empty foundation decks
-const suitEmojis = {
-  Hearts: '♡',
-  Diamonds: '♢',
-  Clubs: '♧',
-  Spades: '♤',
-};
-
 // Initial tableau cards with stacks (adjust as needed)
 const initialTableau = Array.from({ length: 7 }, (_, index) => ({
   id: `tableau-${index + 1}`,
@@ -88,7 +76,6 @@ const initialTableau = Array.from({ length: 7 }, (_, index) => ({
 
 const Solitaire = () => {
   const [cards, setCards] = useState(initialCards);
-  const [decks, setDecks] = useState(initialDecks);
   /* for next card display */
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
   const [tableau, setTableau] = useState(initialTableau); // State for tableau cards
@@ -112,8 +99,6 @@ const Solitaire = () => {
     setCards(stockpile);
   }, []);
 
-  // Empty dependency array ensures this runs only once on component mount
-
   // Function to shuffle array (Fisher-Yates algorithm)
   const shuffleArray = (array) => {
     for (let i = array.length - 1; i > 0; i--) {
@@ -128,8 +113,9 @@ const Solitaire = () => {
   };
 
   // ON DRAG END ------------------------------------------------------>
-  // onDragEnd = logic for dropping cards into foundation decks
+  // onDragEnd = logic for dropping cards
   const onDragEnd = (result) => {
+    console.log('Drag result:', result); // Log the entire drag result object
     const { source, destination } = result;
 
     // Dropped outside the list
@@ -171,90 +157,41 @@ const Solitaire = () => {
       // Moving cards between tableau columns
       const sourcePileIndex = tableau.findIndex((pile) => pile.id === source.droppableId);
       const destinationPileIndex = tableau.findIndex((pile) => pile.id === destination.droppableId);
+  
+      console.log('Source pile index:', sourcePileIndex);
+      console.log('Destination pile index:', destinationPileIndex);
 
       if (sourcePileIndex !== -1 && destinationPileIndex !== -1) {
         const updatedTableau = [...tableau];
-        const [draggedCard] = updatedTableau[sourcePileIndex].cards.splice(source.index, 1);
-        updatedTableau[destinationPileIndex].cards.splice(destination.index, 0, draggedCard);
+        const sourceCards = updatedTableau[sourcePileIndex].cards;
+        const draggedIndex = source.index;
+        
+        console.log('Source cards:', sourceCards);
+
+        // Check if dragging a group from tableau
+        let draggedGroup = [sourceCards[draggedIndex]];
+        if (draggedIndex < sourceCards.length - 1) {
+          draggedGroup = sourceCards.slice(draggedIndex);
+        }
+
+        console.log('Dragged group:', draggedGroup);
+  
+        // Remove cards from source
+        updatedTableau[sourcePileIndex].cards = sourceCards.filter((card, index) => !draggedGroup.includes(card));
+  
+        // Insert cards into destination
+        updatedTableau[destinationPileIndex].cards.splice(destination.index, 0, ...draggedGroup);
+  
+        console.log('Updated tableau:', updatedTableau);
 
         setTableau(updatedTableau);
       }
     }
-
-    //----------------------------------------CARD TO FOUNDATION------------------------------------------------------------
-
-    // Check if the move is valid to the foundation
-    const targetFoundation = decks.find((deck) => deck.id === destination.droppableId);
-    const isMoveValid = isMoveAllowed(draggedCard, targetFoundation);
-
-    if (!isMoveValid) {
-      // Invalid move, return card to its original position
-      return;
-    }
-
-    // Remove dragged card from its original location
-    if (source.droppableId === 'revealed-cards') {
-      const updatedCards = cards.filter((card) => card.id !== draggedCard.id);
-      setCards(updatedCards);
-    } else {
-      let updatedTableau = tableau.map((pile) => ({
-        ...pile,
-        cards: pile.id === source.droppableId ? pile.cards.filter((_, index) => index !== source.index) : pile.cards,
-      }));
-      setTableau(updatedTableau);
-    }
-
-    // ------------- (+) FOUNDATION ARE (-) FROM OTHER DECKS --------------->
-    // check card rank/suit was added to foundation and remove it from stockpile and tableau
-
-    // Update Stockpile: remove dropped card from stockpile
-    const updatedCards = cards.filter((card) => card.id !== draggedCard.id);
-    setCards(updatedCards);
-
-    // Update Foundations state: add dropped card to foundation decks 
-    // Add dragged card to the foundation deck
-    const updatedDecks = decks.map((deck) => ({
-      ...deck,
-      cards: deck.id === destination.droppableId ? [...deck.cards, draggedCard] : deck.cards,
-    }));
-
-    setDecks(updatedDecks);
+    //----------------------------------------------------------------------------------------------------
   };
 
-  // Function to validate if card can be moved to foundation
-  const isMoveAllowed = (card, foundationDeck) => {
-    if (foundationDeck.cards.length === 0) {
-      // Only Ace can be placed on an empty foundation
-      return card.rank === 'Ace' && card.suit === foundationDeck.id;
-    } else {
-      const lastCard = foundationDeck.cards[foundationDeck.cards.length - 1];
-      // Allow rank 2 of the same suit to be placed on Ace
-      if (lastCard.rank === 'Ace' && card.rank === '2' && card.suit === foundationDeck.id) {
-        return true;
-      }
-      // Check if ranks are in ascending order and same suit
-      if (card.suit === foundationDeck.id && getNextRank(lastCard.rank) === card.rank) {
-        return true;
-      }
 
-      // Allow cards to drop in sequence using parseInt
-      const lastRankInt = parseInt(lastCard.rank, 10); // Parse the rank of the last card as an integer
-      const currentRankInt = parseInt(card.rank, 10); // Parse the rank of the current card as an integer
 
-      if (!isNaN(lastRankInt) && !isNaN(currentRankInt) && currentRankInt === lastRankInt + 1 && card.suit === foundationDeck.id) {
-        return true;
-      }
-
-      return false;
-    }
-  };
-
-  // Function to get the next rank in sequence
-  const getNextRank = (rank) => {
-    const ranks = ['Ace', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'Jack', 'Queen', 'King'];
-    const currentIndex = ranks.indexOf(rank);
-    return ranks[currentIndex + 1];
-  };
 
   /* -------------------------------------------------------------*/
 
@@ -290,37 +227,6 @@ const Solitaire = () => {
           </Droppable>
         </div>
 
-        {/* Foundation decks section */}
-        <div className="decks">
-          <h2>Foundations</h2>
-          <div className="foundation-decks">
-            {decks.map((deck) => (
-              <div key={deck.id} className="foundation-deck">
-                <Droppable droppableId={deck.id}>
-                  {(provided, snapshot) => (
-                    <div
-                      className={`deck-content ${snapshot.isDraggingOver ? 'dragging-over' : ''}`}
-                      {...provided.droppableProps}
-                      ref={provided.innerRef}
-                    >
-                      {deck.cards.length === 0 ? (
-                        <div className="empty-deck-emoji">{suitEmojis[deck.id]}</div>
-                      ) : (
-                        deck.cards.map((card, index) => (
-                          <div key={card.id} className="card-in-deck">
-                            {card.rank} of {card.suit} - ({card.color})
-                          </div>
-                        ))
-                      )}
-                      {provided.placeholder}
-                    </div>
-                  )}
-                </Droppable>
-              </div>
-            ))}
-          </div>
-        </div>
-
         {/* Tableau section */}
         <div className="tableau">
           <h2>Tableau</h2>
@@ -333,16 +239,15 @@ const Solitaire = () => {
                       className={`tableau-inner ${snapshot.isDraggingOver ? 'dragging-over' : ''}`}
                       {...provided.droppableProps}
                       ref={provided.innerRef}
-
                     >
                       {pile.cards.map((card, index) => (
                         <Draggable key={card.id} draggableId={card.id} index={index}>
-                          {(provided) => (
+                          {(dragProvided, dragSnapshot) => (
                             <div
-                              className="tableau-card"
-                              {...provided.draggableProps}
-                              {...provided.dragHandleProps}
-                              ref={provided.innerRef}
+                              className={`tableau-card ${dragSnapshot.isDragging ? 'dragging' : ''}`}
+                              {...dragProvided.draggableProps}
+                              {...dragProvided.dragHandleProps}
+                              ref={dragProvided.innerRef}
                             >
                               {card.rank} of {card.suit} - ({card.color})
                             </div>
@@ -350,8 +255,6 @@ const Solitaire = () => {
                         </Draggable>
                       ))}
                       {provided.placeholder}
-
-
                     </div>
                   )}
                 </Droppable>
