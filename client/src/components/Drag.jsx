@@ -118,18 +118,28 @@ const Solitaire = () => {
       const targetPileId = destination.droppableId;
       const targetPile = tableau.find((pile) => pile.id === targetPileId);
   
-      const topCardRank = targetPile.cards.length > 0 ? targetPile.cards[targetPile.cards.length - 1].rank : null;
+      const topCard = targetPile.cards.length > 0 ? targetPile.cards[targetPile.cards.length - 1] : null;
   
-      // Define ranks in sequential order
-      const ranks = ['King', 'Queen', 'Jack', '10', '9', '8', '7', '6', '5', '4', '3', '2', 'Ace'];
+      // Check if dragged card rank is valid
+      const isValidRank = () => {
+        const ranks = ['King', 'Queen', 'Jack', '10', '9', '8', '7', '6', '5', '4', '3', '2', 'Ace'];
+        const draggedCardIndex = ranks.indexOf(draggedCard.rank);
+        if (topCard === null) {
+          // If the pile is empty, only a King can be dropped
+          return draggedCard.rank === 'King';
+        } else {
+          const topCardIndex = ranks.indexOf(topCard.rank);
+          return draggedCardIndex === topCardIndex + 1;
+        }
+      };
   
-      // Find the index of the top card rank in the ranks array
-      const topCardIndex = topCardRank ? ranks.indexOf(topCardRank) : -1;
-      // Find the index of the dragged card rank in the ranks array
-      const draggedCardIndex = ranks.indexOf(draggedCard.rank);
+      // Check if dragged card color is valid (opposite color)
+      const isValidColor = () => {
+        if (!topCard) return true; // If no top card, any color is valid
+        return (topCard.color === 'Red' && draggedCard.color === 'Black') || (topCard.color === 'Black' && draggedCard.color === 'Red');
+      };
   
-      // Check if the dragged card can be dropped based on sequential ranks
-      if (topCardIndex === -1 || draggedCardIndex === topCardIndex + 1) {
+      if (isValidRank() && isValidColor()) {
         const updatedTableau = tableau.map((pile) => {
           if (pile.id === targetPileId) {
             return {

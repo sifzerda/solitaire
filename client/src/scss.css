@@ -180,7 +180,7 @@ button:disabled {
 border: solid 4px purple;
 }
 
-.t-drag-card-group {
+.t-drag-card {
 
   border: 1px dashed #007bff;
   background-color: rgb(255, 255, 255);
