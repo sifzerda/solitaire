@@ -66,7 +66,7 @@ const initialCards = [
 
 // Initial tableau cards with stacks (adjust as needed)
 const initialTableau = Array.from({ length: 7 }, (_, index) => ({
-  id: `tableau-${index + 1}`,
+  id: `tableau-${index + 1}`, // + 1 because index starts at 0
   cards: [],
 }));
 
@@ -108,29 +108,7 @@ const Solitaire = () => {
     setCurrentCardIndex((prevIndex) => (prevIndex + 1) % cards.length);
   };
 
-  //----------------------------------- (T1) drag TABLEAU TO TABLEAU RULES -------------------------------------------------
-
-  const handleTableauToTableauDrop = (source, destination) => {
-    const sourcePileIndex = tableau.findIndex((pile) => pile.id === source.droppableId);
-    const destinationPileIndex = tableau.findIndex((pile) => pile.id === destination.droppableId);
-
-    if (sourcePileIndex !== -1 && destinationPileIndex !== -1) {
-      const updatedTableau = [...tableau];
-      const sourcePile = updatedTableau[sourcePileIndex];
-      const destinationPile = updatedTableau[destinationPileIndex];
-      const draggedGroup = sourcePile.cards.slice(source.index);
-
-      // Remove cards from source
-      sourcePile.cards = sourcePile.cards.filter((_, index) => index < source.index);
-
-      // Insert cards into destination
-      destinationPile.cards.splice(destination.index, 0, ...draggedGroup);
-
-      setTableau(updatedTableau);
-    }
-  };
-
-  //-----------------------------------(S1)  drag STOCKPILE TO TABLEAU RULES -------------------------------------------------
+  //-----------------------------------(S1) drag STOCKPILE TO TABLEAU RULES -------------------------------------------------
 
   const handleStockpileToTableauDrop = (draggedCard, destination) => {
     const updatedCards = cards.filter((card) => card.id !== draggedCard.id);
@@ -178,6 +156,27 @@ const Solitaire = () => {
     }
   };
 
+    //----------------------------------- (T1) drag TABLEAU TO TABLEAU RULES -------------------------------------------------
+
+    const handleTableauToTableauDrop = (source, destination) => {
+      const sourcePileIndex = tableau.findIndex((pile) => pile.id === source.droppableId);
+      const destinationPileIndex = tableau.findIndex((pile) => pile.id === destination.droppableId);
+  
+      if (sourcePileIndex !== -1 && destinationPileIndex !== -1) {
+        const updatedTableau = [...tableau];
+        const sourcePile = updatedTableau[sourcePileIndex];
+        const destinationPile = updatedTableau[destinationPileIndex];
+        const draggedGroup = sourcePile.cards.slice(source.index);
+  
+        // Remove cards from source
+        sourcePile.cards = sourcePile.cards.filter((_, index) => index < source.index);
+  
+        // Insert cards into destination
+        destinationPile.cards.splice(destination.index, 0, ...draggedGroup);
+  
+        setTableau(updatedTableau);
+      }
+    };
   
   // --------------------------- ON DRAG END (collective index for separate DND functions) ------------------->
 
