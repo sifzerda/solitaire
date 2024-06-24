@@ -3,7 +3,10 @@ Vue may be easiest, apparently Angular has a bigger learning curve
 
 # SOLITAIRE 🂡
 
-#2 in gamestack.
+Games in gamestack:
+
+- [ ] Minesweeper
+- [x] Solitaire
 
 ## Table of Contents
 
@@ -14,58 +17,27 @@ Vue may be easiest, apparently Angular has a bigger learning curve
   - [Visuals](#visuals)
   - [Installation](#installation)
   - [Usage](#usage)
-  - [Building:](#building)
+  - [Dev Stuff: Building:](#dev-stuff-building)
   - [To do:](#to-do)
   - [To do for all games](#to-do-for-all-games)
 
 ## Description
 
-This is a personal project to create a react MERN stack app which has a number of simple games. I did not use online instructions, only trial and error and ChatGPT prompting.
+This is a personal project to create a react MERN stack app which has a number of simple games. I did not use online instructions, only trial and error and ChatGPT prompting. This was more challenging to make than minesweeper and took some experimentation, and working through challenges with problem-solving and logic.
 
-As with minesweeper the game had to be divided up into the smallest working components/units. It began as a simple dnd interface where one of 52 boxes (cards) could be dragged and dropped onto 4 rectangles (foundations). Then the dnd dynamic was configured to operate according to Solitaire rules, preventing dnd unless there was a match of card suit and rank.
+As with minesweeper the game had to be divided up into the smallest working components/units. It began as a simple DnD interface where one of 52 boxes (cards) could be dragged and dropped onto 4 rectangles (foundations). Then the DnD dynamic was configured to operate according to Solitaire rules, preventing DnD unless there was a match of card suit and rank.
 
 Lessons learned from building this project:
 
 - How to implement a Drag and Drop package (react beautiful dnd)
-- Make the game fully generally, rather than specifically partially
+- Make the game full generally, rather than specific and partially
 - Create basic working dnd structures and build the game around them, rather than try to make a conditional click-based display/game, and implement the dnd dynamic later. The more moving parts, the harder it is to get dnd in;
 - Create all game display parts (stockpile, foundations, tableau) first, and then give them operational logic, rather than create one fully working part one at a time;
 - Make all possible moves legal and then impose conditions later, rather than build on priori rules.
+- Try to keep all code together for context, but where necessary, make backup copies with partial code for debugging.
+- Save all/extra code in backup files.
 
 <u>Generally: Build God mode, then limit. </u>
- 
-Games:
-
-- [ ] Minesweeper
-- [x] Solitaire
-- [ ] Chess - would need an AI PC opponent
-- [ ] Poker
-- [ ] Slot Machine
-- [ ] Pacman (similar to snake)
-- [ ] Frogger
-- [ ] Flyswatting game
-- [ ] Bad Toys 
-- [ ] SideShow shooting gallery
-- [ ] Go Fish, Uno, etc (would need AI PC opponent)
-- [ ] snake (snake eats and gets bigger)
-
-Others:
-
-- chess
-- poker
-- slot machine
-  - This would require points from other games to pay to play
-- 'bad toys' type simple shooting game with reticule/flashpoint, 
-  - Or sideshow type shooting gallery
-- fly swat type game, 'gun' is a flyswatter
-- pacman
-- frogger
-
-- pool (?)
-- pinball (?)
-
-Optional:
-- type of virtual reward shop where you trade points for virtual stuff, e.g. user avatars, 'trophies'
 
 ## Badges
 
@@ -105,9 +77,15 @@ npm run start
 
 ## Usage
 
- The game executes a typical game of solitaire with traditional rules. There is also a landing screen to start game, a high scores page, win and loss screens, and score submission page. Registered users can also view the number of games they've won and best play times on their profile page.
+ The game executes a typical game of solitaire with traditional rules. Parts:
+ 
+ - Start screen;
+ - Game;
+ - Final score page + score submission;
+ - High scores page;
+ - If logged on: profile page with User scores.
 
-## Building:
+## Dev Stuff: Building:
 
 1. <u>Initial dnd:</u> Create 4 boxes (initial card stockpile) which can be dragged and dropped into 4 bordered areas (the Foundations)
 2. <u>'const initialCards':</u> Creates the full playing card deck of 52 cards.  
@@ -122,11 +100,11 @@ npm run start
 11. <u>'if (source.droppableId === 'revealed-cards') '':</u> covers dragging stockpile, dropping to tableau.
 12. <u>'else if (source.droppableId.startsWith('tableau') && destination.droppableId.startsWith('tableau'))':</u> covers DnD within tableau. 
 
-
-
-13. <u>'const onDragEnd':</u> 
 14. <u></u>
-15. <u></u>
+15. <u>'else if (source.droppableId.startsWith('tableau')...)':</u> Enables tableau cards to be dragged in stacks (piles), from source.index -> last-item. 
+
+13. <u>'return {... t-drag-group}':</u> this targets a tableau -> tableau pile of cards and applies a class selector which allowed me to modify appearance of dragging card pile as a single object/stack. React Beautiful DnD didn't seem to have a 'group/multiple object/s' dragging graphic, so I had to make it manually with CSS.
+
 16. <u></u>
 17. <u></u>
 18. <u></u>
