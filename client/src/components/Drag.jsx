@@ -66,18 +66,18 @@ const initialCards = [
 
 // create and initialize Foundation decks with suit id, and empty 
 const initialDecks = [
-  { id: 'Hearts', cards: [] },
+  { id: 'Spades', cards: [] },
   { id: 'Diamonds', cards: [] },
   { id: 'Clubs', cards: [] },
-  { id: 'Spades', cards: [] },
+  { id: 'Hearts', cards: [] },
 ];
 
 // Emoji on empty foundation decks
 const suitEmojis = {
-  Hearts: '♡',
+  Spades: '♤',
   Diamonds: '♢',
   Clubs: '♧',
-  Spades: '♤',
+  Hearts: '♡',
 };
 
 // Initial tableau cards with stacks (adjust as needed)
@@ -381,7 +381,9 @@ const Solitaire = () => {
                       ref={provided.innerRef}
                     >
                       {deck.cards.length === 0 ? (
-                        <div className="empty-deck-emoji">{suitEmojis[deck.id]}</div>
+                         <div className={`empty-deck-emoji ${deck.id === 'Hearts' || deck.id === 'Diamonds' ? 'emoji-red' : 'emoji-blue'}`}>
+                             {suitEmojis[deck.id]}
+                         </div>
                       ) : (
                         deck.cards.map((card, index) => (
                           <div key={card.id} className="card-in-deck">

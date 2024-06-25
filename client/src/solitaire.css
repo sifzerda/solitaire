@@ -1,42 +1,24 @@
 /* ------------------------- solitaire -------------------------*/
+.solitaire {
+  display: flex;
+  justify-content: space-around;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
 
 .s-container {
   display: flex;
-  flex-wrap: wrap; /* Allow items to wrap to new line if needed */
+  flex-wrap: wrap;
+  /* Allow items to wrap to new line if needed */
   justify-content: space-around;
   margin-top: 20px;
-}
-
-.cards,
-.decks,
-.tableau {
-  margin: 10px;
-}
-
-.cards {
-  border: 1px solid #ccc;
-  padding: 10px;
-  width: 200px;
-  margin-right: 20px;
-}
-
-.card-navigation {
-  margin-top: 10px;
-}
-
-.center-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center; /* Center items horizontally */
-  justify-content: center; /* Center items vertically */
-
 }
 
 .solitaire-box {
   width: 1400px;
   height: 900px;
   background-color: #2ecc71;
-  border: 6px solid #229753; 
+  border: 6px solid #229753;
   border-radius: 8px;
   padding: 20px;
   display: flex;
@@ -47,20 +29,92 @@
   text-align: center;
 }
 
+.cards,
+.decks,
+.tableau {
+  margin: 10px;
+}
+
+.decks {
+  border: 1px solid #ccc;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.deck {
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+  width: 80px;
+  text-align: center;
+}
+
+.deck-content {
+  min-height: 50px;
+  /* Adjust height as needed */
+  padding: 5px;
+}
+
+.deck-title {
+  font-size: 24px;
+  margin-bottom: 5px;
+}
+
+.cards {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid #ccc;
+  padding: 10px;
+  width: 300px;
+  margin-right: 20px;
+}
+
+.card-navigation {
+  margin-top: 10px;
+}
+
+.center-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* Center items horizontally */
+  justify-content: center;
+  /* Center items vertically */
+}
+
 .empty-deck-emoji {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 4em; /* Adjust size as needed */
-  margin-bottom: 20px; /* Optional: Add margin for spacing */
-  height: 100%; /* Ensure the emoji container fills its parent */
+  font-size: 4em;
+  /* Adjust size as needed */
+  margin-bottom: 20px;
+  /* Optional: Add margin for spacing */
+  height: 100%;
+  /* Ensure the emoji container fills its parent */
+}
+
+.emoji-red {
+  color: var(--light-red);
+}
+
+.emoji-blue {
+  color: var(--lblue);
 }
 
 /* TwoBoxes.css */
 .card-shaped {
-  width: 150px; /* Adjust width as needed */
-  height: 200px; /* Adjust height as needed */
-  border: 2px dashed #999; /* Dashed border */
+  width: 150px;
+  /* Adjust width as needed */
+  height: 200px;
+  /* Adjust height as needed */
+  border: 2px dashed #999;
+  /* Dashed border */
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   background-color: #fff;
@@ -75,161 +129,254 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 20px; /* Adjust gap between boxes as needed */
+  gap: 20px;
 }
-  
-  .sp {
-    width: 50%;
-    height: 200px;
-    border: 1px solid #000;
-    box-sizing: border-box;
-  }
-  
-  .box1 {
-    background-color: lightblue;
-  }
-  
-  .box2 {
-    background-color: lightgreen;
-  }
 
-  .card-stack-container {
-    display: flex;
-    padding: 10px;
-    transition: border-color 0.3s ease;
-  }
+.sp {
+  width: 50%;
+  height: 200px;
+  border: 1px solid #000;
+  box-sizing: border-box;
+}
 
-  .card-stack {
-    position: relative;
-    width: 150px; /* Adjust width as needed */
-    height: 200px; /* Adjust height as needed */
-  }
+.box1 {
+  background-color: lightblue;
+}
 
-  .card {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s ease;
-    padding: 10px;
-    margin: 5px;
-    margin-bottom: 5px;
-    cursor: pointer;
-  }
-  
-  .card-image {
-    width: 100%;
-    height: 100%;
-    border-radius: 6px;
-   border: 1px solid black;
-  }
+.box2 {
+  background-color: lightgreen;
+}
 
-  .card:hover {
-    cursor: pointer;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-  }
-  
-  .card-index {
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    background-color: #fff;
-    padding: 3px 8px;
-    border-radius: 3px;
-    font-size: 12px;
-    font-weight: bold;
-  }
+.card-stack-container {
+  display: flex;
+  padding: 10px;
+  transition: border-color 0.3s ease;
+}
 
-  .card-shaped {
-    width: 100px; /* Adjust card width as needed */
-    height: 150px; /* Adjust card height as needed */
-    border: 2px dashed #ccc; /* Dashed border */
-    border-radius: 8px; /* Rounded corners */
-    display: inline-block;
-    margin: 10px; /* Adjust margin as needed */
-    position: relative;
-    overflow: hidden;
-  }
+.card-stack {
+  position: relative;
+  width: 150px;
+  /* Adjust width as needed */
+  height: 200px;
+  /* Adjust height as needed */
+}
 
-  .playing-card {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
+.card-list {
+ display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  height: 100%; /* Ensure it takes full height of its container */
+}
 
-  .card-shaped-box {
-    width: 150px; /* Adjust width as needed */
-    height: 200px; /* Adjust height as needed */
-    margin-left: 20px; /* Adjust margin as needed */
-    border: 2px dashed #999; /* Dashed border */
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    background-color: #fff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 18px;
-    font-weight: bold;
-  }
+.card {
+  position: relative;
+  width: 120px;
+  height: 180px;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+  padding: 10px;
+  margin: 5px;
+  margin-bottom: 5px;
+  cursor: grab;
+}
 
-  .card-shaped-box.show {
-    display: block;
-  }
-  
-  /* Adjust these styles for the card stacking effect */
-  .card:nth-child(1) {
-    transform: translate(0, 0);
-  }
-  
-  .card:nth-child(2) {
-    transform: translate(5px, -5px);
-  }
-  
-  .card:nth-child(3) {
-    transform: translate(10px, -10px);
-  }
-  
-  /* Add more nth-child rules as needed for more cards */
-  .deck-content.dragging-over {
-    border: 9px dashed   #d9ff00;
-  }
+.card-image {
+  width: 100%;
+  height: 100%;
+  border-radius: 6px;
+  border: 1px solid black;
+}
 
-  .dragging-over {
-    background-color: #d9ff00;
-    border: 8px dashed  #ff1100;
-  }
+.card:hover {
+  cursor: grab;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    /* Lift card slightly on hover */
+  transform: translateY(-5px);
+  border: 5px dashed var(--lblue);
+}
 
-  .decks {
-    border: 1px solid #ccc;
-    padding: 10px;
-  }
+.card.dragging {
+  opacity: 0.5;
+  /* Reduced opacity while dragging */
+}
 
-  .deck-content {
-    min-height: 50px; /* Adjust height as needed */
-    padding: 5px;
-    background-color: #e0e0e0;
-    border: 1px dashed #999;
-  }
-  
+.card-index {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background-color: #fff;
+  padding: 3px 8px;
+  border-radius: 3px;
+  font-size: 12px;
+  font-weight: bold;
+}
 
-  .foundation-deck {
-    flex: 1;
-    margin: 0 5px;
-    border: 1px solid #ccc;
-    padding: 10px;
-  }
+.card-shaped {
+  width: 100px;
+  /* Adjust card width as needed */
+  height: 150px;
+  /* Adjust card height as needed */
+  border: 2px dashed #ccc;
+  /* Dashed border */
+  border-radius: 8px;
+  /* Rounded corners */
+  display: inline-block;
+  margin: 10px;
+  /* Adjust margin as needed */
+  position: relative;
+  overflow: hidden;
+}
 
-/* Styling for the tableau section */
-/* Tableau section */
-/* Tableau */
-/* Tableau section */
-.tableau {
+.playing-card {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card-shaped-box {
+  width: 150px;
+  /* Adjust width as needed */
+  height: 200px;
+  /* Adjust height as needed */
+  margin-left: 20px;
+  /* Adjust margin as needed */
+  border: 2px dashed #999;
+  /* Dashed border */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.card-shaped-box.show {
+  display: block;
+}
+
+/* Adjust these styles for the card stacking effect */
+.card:nth-child(1) {
+  transform: translate(0, 0);
+}
+
+.card:nth-child(2) {
+  transform: translate(5px, -5px);
+}
+
+.card:nth-child(3) {
+  transform: translate(10px, -10px);
+}
+
+/* Add more nth-child rules as needed for more cards */
+.deck-content.dragging-over {
+  border: 2px solid #0a0a0a;
+}
+
+.dragging-over {
+  background-color: lightgreen;
+  border: 3px solid #00a51b;
+}
+
+.foundation-deck {
   flex: 1;
+  margin: 0 5px;
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+/* STOCKPILE --------------------------------------------*/
+
+.pile {
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  margin-right: 10px;
+  width: 80px;
+  min-height: 120px;
+}
+
+.stockpile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+button {
+  margin-top: 10px;
+  padding: 8px 16px;
+  font-size: 16px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* FOUNDATION --------------------------------------------*/
+
+/* Foundation deck container */
+.foundation-decks {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+/* Individual foundation deck */
+.foundation-deck {
+  width: 120px;  /* Adjust card width */
+  height: 180px; /* Adjust card height */
+  border: 3px dashed #0d0e0e;
+  border-radius: 5px;
+  padding: 10px;
+  margin-right: 20px; /* Space between each foundation deck */
+  background-color: none;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+/* Cards dropped into foundation deck */
+.card-in-deck {
+  width: 120px;  /* Adjust card width */
+  height: 180px; /* Adjust card height */
+  background-color: white;  /* Card background color */
+  border: 1px solid #ccc;  /* Card border */
+  border-radius: 5px;  /* Rounded corners for card */
+  position: relative;  /* Positioning context for overlap */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+}
+
+/* How much sub level layer of cards shows */
+.card-in-deck + .card-in-deck {
+  margin-top: -140px;  /* Amount of overlap between cards */
+}
+
+/* Adjust card styles as needed */
+.card-in-deck:last-child {
+  margin-bottom: 0;
+}
+
+/* TABLEAU ------------------------------------------------*/
+
+.tableau {
+  display: flex;
 }
 
 .tableau-cards {
@@ -238,20 +385,90 @@
 }
 
 .tableau-pile {
-  flex: 1;
+  display: flex;
   border: 1px solid #ccc;
   padding: 10px;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-right: 20px;
 }
 
 .tableau-inner {
   min-height: 100px;
-  border: 1px dashed #ccc;
   padding: 5px;
+  border-radius: 3px;
 }
 
 .tableau-card {
   border: 1px solid #ccc;
   padding: 10px;
   margin-bottom: 5px;
-  background-color: #fff;
+  background-color: white;
+  border: 1px solid #9e9696;
+  border-radius: 5px;
+  width: 120px;
+  height: 180px;
+  position: relative;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  color: black;
+}
+
+/* How much sub level layer of cards shows */
+.tableau-card+.tableau-card {
+  margin-top: -150px;
+  /* Amount of overlap between cards */
+}
+
+/* Optional: Highlight when dragging */
+.tableau-card.dragging {
+  opacity: 0.5;
+  /* Reduced opacity while dragging */
+}
+
+/* Optional: Hover effect */
+.tableau-card:hover {
+  cursor: grab;
+  /* Change cursor on hover */
+  transform: translateY(-5px);
+  /* Lift card slightly on hover */
+  border: 5px dashed var(--lblue);
+}
+
+/* Droppable area highlight */
+.tableau-inner.dragging-over {
+  background-color: lightgreen;
+  /* Green background when dragging over */
+}
+
+.tableau-inner.dragging-over .tableau-card {
+  transform: translateY(calc(-10px - 1px));
+  /* Adjust position when dragged over */
+}
+
+.tableau-card.dragging {
+  opacity: 0.7;
+  /* Reduce opacity when dragging */
+  background-color: #f0f0f0;
+  /* Change background color when dragging */
+}
+
+/* Dragging tableau piles/columns */
+
+.tableau-card.group-dragging {
+  transform: scale(1.2);
+  /* Increase size of dragged group */
+  z-index: 100;
+  /* Ensure dragged cards appear above others */
+}
+
+.t-drag-card-group {
+  border-left: 5px dashed #007bff;
+  border-right: 5px dashed #007bff;
+  border-bottom: 5px dashed #007bff;
+  border-top: 5px dashed #007bff;
+  background-color: rgb(255, 255, 255);
+  padding: 5px;
+  margin: -11px;
+  height: 180px;
+  margin-bottom: -145px;
 }
