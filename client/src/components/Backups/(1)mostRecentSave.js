@@ -3,6 +3,7 @@
 // + dnd from tableau to foundation
 // NO tableau to tableau
 // NO stockpile to tableau
+// no solitaire rules?
 
 import { useState, useEffect } from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
