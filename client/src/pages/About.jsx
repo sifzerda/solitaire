@@ -1,30 +1,36 @@
-import profilePic from '../../public/images/propic.jpg';
+import StockPile from '../components/StockPile';
+import Drag from '../components/Drag';
 import '../App.css';
-import '../scss.css';
-
-import Notableau from '../components/Notableau';
-
+import '../solitaire.css';
 
 export default function About () {
   return (
-    <div>
+    <div className="center-container">
       <h1>Solitaire</h1>
-      <p className='centered-text'>Ordo ab chao.</p>
+      <p className='centered-text'>Ordo ab chao</p>
+
 
       <p className="separator-line"></p>
 
-      <img className="profile-picture" src={profilePic} alt="Profile"  />
 
-      <div className="separator-line"></div>
-
-
+      <div className="solitaire-box">
  
- <Notableau />
+
+      <div className='white-box'>
+<Drag />
+      </div>
+
+
+
+       {/*         <Stockpile />       */}
+
+
+
+    </div>
 
 
 
       <div className="separator-line"></div>
-
 
     </div>
   );
