@@ -9,6 +9,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Permanent+Marker&family=Rubik+Mono+One&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Poiret+One&family=Rajdhani:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&display=swap');
 
 :root {
   --blue: #2684ff;
@@ -273,19 +274,6 @@ h1.jumbo-bg-dark-text {
   gap: 20px;
 }
 
-/* ------------------------ sidebar (dropdown)  ----------------------*/
-
-sidebar {
-  width: 250px;
-}
-
-.sidebar-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-}
-
 /* bucket app ---------------------------------------------------------*/
 
 .bucket-app {
@@ -392,19 +380,45 @@ li.nav-item {
 }
 
 h1 {
-  font-size: 99px !important;
+  font-size: 60px !important;
   margin: auto 0;
   justify-content: center;
   display: grid;
-  font-family: 'Amatic SC', cursive;
+  font-family: 'UnifrakturCook', cursive;
   color:  white;
   text-shadow: 5px 8px 5px rgba(0, 0, 0, 0.5);
 }
 
-span.solicard {
-  color:   var(--light-red);
-  padding: 10px;
-  font-size: 80px;
+.diamond {
+  color: var(--light-red); 
+}
+
+.clubs {
+  color: var(--lblue);
+}
+
+.hearts {
+  color: var(--light-red); 
+}
+
+.spades {
+  color:  var(--lblue);
+}
+
+.title-with-suits {
+  display: flex; 
+  align-items: center; 
+}
+
+.diamond, .clubs, .hearts, .spades {
+  font-size: 50px; 
+  margin: 0 5px; 
+}
+
+.solitaire-text {
+  font-size: 1em; 
+  margin: 0 10px;
+  font-family: 'UnifrakturCook';
 }
 
 .separator-line {
