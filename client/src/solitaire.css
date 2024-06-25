@@ -361,6 +361,7 @@ button:disabled {
   border-radius: 5px;  /* Rounded corners for card */
   position: relative;  /* Positioning context for overlap */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+  color: black;
 }
 
 /* How much sub level layer of cards shows */
