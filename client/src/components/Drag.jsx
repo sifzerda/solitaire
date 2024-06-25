@@ -64,6 +64,22 @@ const initialCards = [
   { id: 'card-52', suit: 'Spades', rank: 'King', color: 'Black' },
 ];
 
+// create and initialize Foundation decks with suit id, and empty 
+const initialDecks = [
+  { id: 'Hearts', cards: [] },
+  { id: 'Diamonds', cards: [] },
+  { id: 'Clubs', cards: [] },
+  { id: 'Spades', cards: [] },
+];
+
+// Emoji on empty foundation decks
+const suitEmojis = {
+  Hearts: '♡',
+  Diamonds: '♢',
+  Clubs: '♧',
+  Spades: '♤',
+};
+
 // Initial tableau cards with stacks (adjust as needed)
 const initialTableau = Array.from({ length: 7 }, (_, index) => ({
   id: `tableau-${index + 1}`, // + 1 because index starts at 0
@@ -72,6 +88,7 @@ const initialTableau = Array.from({ length: 7 }, (_, index) => ({
 
 const Solitaire = () => {
   const [cards, setCards] = useState(initialCards);
+  const [decks, setDecks] = useState(initialDecks);
   /* for next card display */
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
   const [tableau, setTableau] = useState(initialTableau); // State for tableau cards
@@ -282,6 +299,47 @@ const Solitaire = () => {
             )}
           </Droppable>
         </div>
+
+
+
+
+
+   {/* Foundation decks section */}
+   <div className="decks">
+          <h2>Foundations</h2>
+          <div className="foundation-decks">
+            {decks.map((deck) => (
+              <div key={deck.id} className="foundation-deck">
+                <Droppable droppableId={deck.id}>
+                  {(provided, snapshot) => (
+                    <div
+                      className={`deck-content ${snapshot.isDraggingOver ? 'dragging-over' : ''}`}
+                      {...provided.droppableProps}
+                      ref={provided.innerRef}
+                    >
+                      {deck.cards.length === 0 ? (
+                        <div className="empty-deck-emoji">{suitEmojis[deck.id]}</div>
+                      ) : (
+                        deck.cards.map((card, index) => (
+                          <div key={card.id} className="card-in-deck">
+                            {card.rank} of {card.suit} - ({card.color})
+                          </div>
+                        ))
+                      )}
+                      {provided.placeholder}
+                    </div>
+                  )}
+                </Droppable>
+              </div>
+            ))}
+          </div>
+        </div>
+
+
+
+
+
+
 
         <div className="tableau">
           <h2>Tableau</h2>
