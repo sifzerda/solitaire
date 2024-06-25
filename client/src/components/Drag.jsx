@@ -125,6 +125,72 @@ const Solitaire = () => {
     setCurrentCardIndex((prevIndex) => (prevIndex + 1) % cards.length);
   };
 
+    //-----------------------------------(F1) drag ANY TO FOUNDATION RULES -------------------------------------------------
+
+    // Check if the move is valid to the foundation
+    const handleFoundationDrop = (source, destination, draggedCard) => {
+      const targetFoundation = decks.find((deck) => deck.id === destination.droppableId);
+  
+      if (!targetFoundation) return;
+  
+      const isMoveValid = isMoveAllowed(draggedCard, targetFoundation);
+  
+      if (!isMoveValid) return;
+  
+      if (source.droppableId === 'revealed-cards') {
+        const updatedCards = cards.filter((card) => card.id !== draggedCard.id);
+        setCards(updatedCards);
+      } else {
+        let updatedTableau = tableau.map((pile) => ({
+          ...pile,
+          cards: pile.id === source.droppableId ? pile.cards.filter((_, index) => index !== source.index) : pile.cards,
+        }));
+        setTableau(updatedTableau);
+      }
+  
+      const updatedDecks = decks.map((deck) => ({
+        ...deck,
+        cards: deck.id === destination.droppableId ? [...deck.cards, draggedCard] : deck.cards,
+      }));
+  
+      setDecks(updatedDecks);
+    };
+
+  // Function to validate if card can be moved to foundation
+  const isMoveAllowed = (card, foundationDeck) => {
+    if (foundationDeck.cards.length === 0) {
+      // Only Ace can be placed on an empty foundation
+      return card.rank === 'Ace' && card.suit === foundationDeck.id;
+    } else {
+      const lastCard = foundationDeck.cards[foundationDeck.cards.length - 1];
+      // Allow rank 2 of the same suit to be placed on Ace
+      if (lastCard.rank === 'Ace' && card.rank === '2' && card.suit === foundationDeck.id) {
+        return true;
+      }
+      // Check if ranks are in ascending order and same suit
+      if (card.suit === foundationDeck.id && getNextRank(lastCard.rank) === card.rank) {
+        return true;
+      }
+
+      // Allow cards to drop in sequence using parseInt
+      const lastRankInt = parseInt(lastCard.rank, 10); // Parse the rank of the last card as an integer
+      const currentRankInt = parseInt(card.rank, 10); // Parse the rank of the current card as an integer
+
+      if (!isNaN(lastRankInt) && !isNaN(currentRankInt) && currentRankInt === lastRankInt + 1 && card.suit === foundationDeck.id) {
+        return true;
+      }
+
+      return false;
+    }
+  };
+
+  // Function to get the next rank in sequence
+  const getNextRank = (rank) => {
+    const ranks = ['Ace', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'Jack', 'Queen', 'King'];
+    const currentIndex = ranks.indexOf(rank);
+    return ranks[currentIndex + 1];
+  };
+
   //-----------------------------------(S1) drag STOCKPILE TO TABLEAU RULES -------------------------------------------------
 
   const handleStockpileToTableauDrop = (draggedCard, destination) => {
@@ -230,7 +296,7 @@ const Solitaire = () => {
     }
   };
 
-  // --------------------------- ON DRAG END (collective index for separate DND functions) ------------------->
+  // --------------------------- ON DRAG END (collective index for separate DnD functions) ------------------->
 
   const onDragEnd = (result) => {
     console.log('Drag result:', result); // Log the entire drag result object
@@ -249,28 +315,29 @@ const Solitaire = () => {
       draggedCard = sourcePile?.cards[source.index];
     }
 
-    //--------------------------(S1.1) DROPPING FROM STOCKPILE INTO TABLEAU-----------------------------------------
-    // Handle dropping into tableau
+    // (S1.1) DROPPING FROM STOCKPILE INTO TABLEAU -----------------------------------------
+
     if (source.droppableId === 'revealed-cards') {
       const updatedCards = cards.filter((card) => card.id !== draggedCard.id);
       setCards(updatedCards);
 
       handleStockpileToTableauDrop(draggedCard, destination);
 
-      // -------------------------- (T1.1) DROPPING FROM TABLEAU INTO TABLEAU-----------------------------------------
+      // (T1.1) DROPPING FROM TABLEAU INTO TABLEAU -----------------------------------------
+   
     } else if (source.droppableId.startsWith('tableau') && destination.droppableId.startsWith('tableau')) {
       handleTableauToTableauDrop(source, destination);
     }
-    //----------------------------------------------------------------------------------------------------
+    // (F.1) DROPPING FROM ANY INTO FOUNDATION ------------------------------------------
+    
+    handleFoundationDrop(source, destination, draggedCard);
   };
-
-
-
 
   /* -------------------------------------------------------------*/
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
+{/* Stockpile decks section ------------------------------------------------------------------------- */}
       <div className="s-container">
         <div className="cards">
           <h2>Stockpile</h2>
@@ -300,11 +367,7 @@ const Solitaire = () => {
           </Droppable>
         </div>
 
-
-
-
-
-   {/* Foundation decks section */}
+   {/* Foundation decks section ------------------------------------------------------------------------- */}
    <div className="decks">
           <h2>Foundations</h2>
           <div className="foundation-decks">
@@ -335,12 +398,7 @@ const Solitaire = () => {
           </div>
         </div>
 
-
-
-
-
-
-
+{/* Tableau decks section ------------------------------------------------------------------------- */}
         <div className="tableau">
           <h2>Tableau</h2>
           <div className="tableau-cards">

@@ -216,12 +216,6 @@ const Solitaire = () => {
       setDecks(updatedDecks);
     };
 
-
-
-
-
-
-
   // Function to validate if card can be moved to foundation
   const isMoveAllowed = (card, foundationDeck) => {
     if (foundationDeck.cards.length === 0) {
