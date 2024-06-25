@@ -35,9 +35,8 @@
 .solitaire-box {
   width: 1400px;
   height: 900px;
-  background-color: #2ecc71; /* Green color */
-  border: 1px solid #27ae60; /* Darker green border */
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); /* Shadow effect */
+  background-color: #2ecc71;
+  border: 6px solid #229753; 
   border-radius: 8px;
   padding: 20px;
   display: flex;

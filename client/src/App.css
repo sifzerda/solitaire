@@ -30,6 +30,9 @@
   --midnight: rgb(8, 29, 88);
   --fluro: #DEFF00;
   --felt-green: #2ecc71; 
+  --silver: #C0C0C0;
+  --platinum: #E5E4E2
+  --bronze: #CD7F32;
 }
 
 * {
@@ -158,14 +161,14 @@ a.back-link {
 
 .submit-button-z:hover {
   background-color: #000000;
-  border: 2px solid var(--gold);
-  color:  var(--gold);
+  border: 2px solid  var(--lblue);
+  color:  var(--lblue);
 }
 
 .submit-button-z {
   padding: 10px 20px;
   font-size: 16px;
-  background-color: var(--gold);
+  background-color: var(--lblue);
   color: #fff;
   border: none;
   border-radius: 5px;
@@ -177,11 +180,6 @@ a.back-link {
   display: flex;
   justify-content: center;
   padding: 20px;
-}
-
-.email-label {
-  color: #f0e10c;
-  font-size: 16px;
 }
 
 .back-link {
@@ -204,23 +202,23 @@ a.back-link {
   width: 100%;
   padding: 10px;
   font-size: 16px;
-  border: 4px var(--gold) ridge;
+  border: 3px var(--lblue) ridge;
   border-radius: 5px;
 }
 
 .input-z:focus {
-  border: 2px black solid;
+  border: 2px  var(--gold) solid;
 }
 
 .error-text {
-  color: #dc3545;
+  color: rgb(252, 74, 89);
 }
 
 h2.login-title {
   text-align: center;
   margin-bottom: 20px;
   margin-top: 20px;
-  color: var(--gold);
+  color: var(--lblue);
 }
 
 div.container.my-1-9 {
@@ -245,7 +243,7 @@ div.container.my-1-9 {
 
 h1.jumbo-bg-dark-text {
   margin: 32px 0;
-  color: var(--blue);
+  color: var(--lblue);
   font-size: 35px;
   font-family: 'Josefin Sans', 'Rubik', 'Arial Narrow Bold', sans-serif
 }
@@ -261,7 +259,7 @@ h1.jumbo-bg-dark-text {
 }
 
 .profile-container p.email-info {
-  color: var(--light-red);
+  color:  rgb(252, 74, 89);
   font-size: 0.9rem;
   margin-top: 5px;
   margin-bottom: 20px;
@@ -312,7 +310,7 @@ header.header {
   width: 100%;
   display: flex;
   flex-direction: column;
-  border-right: var(--gold) ridge 8px;
+  border-right: var(--lblue) ridge 8px;
   align-items: center;
   padding: 0;
 }
@@ -331,7 +329,7 @@ a {
 
 /* svg icons on contact page*/
 a:hover {
-  color: var(--gold)!important;
+  color: var(--lblue)!important;
 }
 
 /* ------ -------------------- ----------- */
@@ -363,15 +361,15 @@ aside.sidebar {
 
 .nav-link {
   background-color: black !important;
-  color:   white !important;
+  color:   var(--gold) !important;
   border: 2px solid var(--gold) !important;
   font-family: 'Source Code Pro';
 }
 
 .nav-link.active {
   background-color: black !important;
-  color: var(--felt-green) !important;
-  border: 2px solid var(--felt-green) !important;
+  color: var(--light-red) !important;
+  border: 2px solid var(--lblue) !important;
   font-style: italic;
 }
 
@@ -459,6 +457,18 @@ p.mb-0-1 {
 
 h5 {
   color: rgb(0, 110, 255);
+}
+
+span.blue-span {
+  color: var(--lblue);
+  padding: 5px;
+font-size: 1.2rem;
+}
+
+span.red-span {
+  color: var(--light-red);
+  padding: 5px;
+  font-size: 1.2rem;
 }
 
 /* content ------------------------------------------------*/
