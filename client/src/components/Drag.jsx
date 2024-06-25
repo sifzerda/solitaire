@@ -4,64 +4,64 @@ import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 // Define initial squares and boxes data
 const initialCards = [
   // HEARTS 
-  { id: 'card-1', suit: 'Hearts', rank: 'Ace', color: 'Red' },
-  { id: 'card-2', suit: 'Hearts', rank: '2', color: 'Red' },
-  { id: 'card-3', suit: 'Hearts', rank: '3', color: 'Red' },
-  { id: 'card-4', suit: 'Hearts', rank: '4', color: 'Red' },
-  { id: 'card-5', suit: 'Hearts', rank: '5', color: 'Red' },
-  { id: 'card-6', suit: 'Hearts', rank: '6', color: 'Red' },
-  { id: 'card-7', suit: 'Hearts', rank: '7', color: 'Red' },
-  { id: 'card-8', suit: 'Hearts', rank: '8', color: 'Red' },
-  { id: 'card-9', suit: 'Hearts', rank: '9', color: 'Red' },
-  { id: 'card-10', suit: 'Hearts', rank: '10', color: 'Red' },
-  { id: 'card-11', suit: 'Hearts', rank: 'Jack', color: 'Red' },
-  { id: 'card-12', suit: 'Hearts', rank: 'Queen', color: 'Red' },
-  { id: 'card-13', suit: 'Hearts', rank: 'King', color: 'Red' },
+  { id: 'card-1', suit: 'Hearts', rank: 'Ace', color: 'Red', image: '../../public/images/heartA.jpg' },
+  { id: 'card-2', suit: 'Hearts', rank: '2', color: 'Red', image: '../../public/images/heart2.jpg' },
+  { id: 'card-3', suit: 'Hearts', rank: '3', color: 'Red', image: '../../public/images/heart3.jpg' },
+  { id: 'card-4', suit: 'Hearts', rank: '4', color: 'Red', image: '../../public/images/heart4.jpg' },
+  { id: 'card-5', suit: 'Hearts', rank: '5', color: 'Red', image: '../../public/images/heart5.jpg' },
+  { id: 'card-6', suit: 'Hearts', rank: '6', color: 'Red', image: '../../public/images/heart6.jpg' },
+  { id: 'card-7', suit: 'Hearts', rank: '7', color: 'Red', image: '../../public/images/heart7.jpg' },
+  { id: 'card-8', suit: 'Hearts', rank: '8', color: 'Red', image: '../../public/images/heart8.jpg' },
+  { id: 'card-9', suit: 'Hearts', rank: '9', color: 'Red', image: '../../public/images/heart9.jpg' },
+  { id: 'card-10', suit: 'Hearts', rank: '10', color: 'Red', image: '../../public/images/heart10.jpg' },
+  { id: 'card-11', suit: 'Hearts', rank: 'Jack', color: 'Red', image: '../../public/images/heartJ.jpg' },
+  { id: 'card-12', suit: 'Hearts', rank: 'Queen', color: 'Red', image: '../../public/images/heartQ.jpg' },
+  { id: 'card-13', suit: 'Hearts', rank: 'King', color: 'Red', image: '../../public/images/heartK.jpg' },
 
   // DIAMONDS
-  { id: 'card-14', suit: 'Diamonds', rank: 'Ace', color: 'Red' },
-  { id: 'card-15', suit: 'Diamonds', rank: '2', color: 'Red' },
-  { id: 'card-16', suit: 'Diamonds', rank: '3', color: 'Red' },
-  { id: 'card-17', suit: 'Diamonds', rank: '4', color: 'Red' },
-  { id: 'card-18', suit: 'Diamonds', rank: '5', color: 'Red' },
-  { id: 'card-19', suit: 'Diamonds', rank: '6', color: 'Red' },
-  { id: 'card-20', suit: 'Diamonds', rank: '7', color: 'Red' },
-  { id: 'card-21', suit: 'Diamonds', rank: '8', color: 'Red' },
-  { id: 'card-22', suit: 'Diamonds', rank: '9', color: 'Red' },
-  { id: 'card-23', suit: 'Diamonds', rank: '10', color: 'Red' },
-  { id: 'card-24', suit: 'Diamonds', rank: 'Jack', color: 'Red' },
-  { id: 'card-25', suit: 'Diamonds', rank: 'Queen', color: 'Red' },
-  { id: 'card-26', suit: 'Diamonds', rank: 'King', color: 'Red' },
+  { id: 'card-14', suit: 'Diamonds', rank: 'Ace', color: 'Red', image: '../../public/images/diamondA.jpg' },
+  { id: 'card-15', suit: 'Diamonds', rank: '2', color: 'Red', image: '../../public/images/diamond2.jpg' },
+  { id: 'card-16', suit: 'Diamonds', rank: '3', color: 'Red', image: '../../public/images/diamond3.jpg' },
+  { id: 'card-17', suit: 'Diamonds', rank: '4', color: 'Red', image: '../../public/images/diamond4.jpg' },
+  { id: 'card-18', suit: 'Diamonds', rank: '5', color: 'Red', image: '../../public/images/diamond5.jpg' },
+  { id: 'card-19', suit: 'Diamonds', rank: '6', color: 'Red', image: '../../public/images/diamond6.jpg' },
+  { id: 'card-20', suit: 'Diamonds', rank: '7', color: 'Red', image: '../../public/images/diamond7.jpg' },
+  { id: 'card-21', suit: 'Diamonds', rank: '8', color: 'Red', image: '../../public/images/diamond8.jpg' },
+  { id: 'card-22', suit: 'Diamonds', rank: '9', color: 'Red', image: '../../public/images/diamond9.jpg' },
+  { id: 'card-23', suit: 'Diamonds', rank: '10', color: 'Red', image: '../../public/images/diamond10.jpg' },
+  { id: 'card-24', suit: 'Diamonds', rank: 'Jack', color: 'Red', image: '../../public/images/diamondJ.jpg' },
+  { id: 'card-25', suit: 'Diamonds', rank: 'Queen', color: 'Red', image: '../../public/images/diamondQ.jpg' },
+  { id: 'card-26', suit: 'Diamonds', rank: 'King', color: 'Red', image: '../../public/images/diamondK.jpg' },
 
   // CLUBS
-  { id: 'card-27', suit: 'Clubs', rank: 'Ace', color: 'Black' },
-  { id: 'card-28', suit: 'Clubs', rank: '2', color: 'Black' },
-  { id: 'card-29', suit: 'Clubs', rank: '3', color: 'Black' },
-  { id: 'card-30', suit: 'Clubs', rank: '4', color: 'Black' },
-  { id: 'card-31', suit: 'Clubs', rank: '5', color: 'Black' },
-  { id: 'card-32', suit: 'Clubs', rank: '6', color: 'Black' },
-  { id: 'card-33', suit: 'Clubs', rank: '7', color: 'Black' },
-  { id: 'card-34', suit: 'Clubs', rank: '8', color: 'Black' },
-  { id: 'card-35', suit: 'Clubs', rank: '9', color: 'Black' },
-  { id: 'card-36', suit: 'Clubs', rank: '10', color: 'Black' },
-  { id: 'card-37', suit: 'Clubs', rank: 'Jack', color: 'Black' },
-  { id: 'card-38', suit: 'Clubs', rank: 'Queen', color: 'Black' },
-  { id: 'card-39', suit: 'Clubs', rank: 'King', color: 'Black' },
+  { id: 'card-27', suit: 'Clubs', rank: 'Ace', color: 'Black', image: '../../public/images/clubA.jpg' },
+  { id: 'card-28', suit: 'Clubs', rank: '2', color: 'Black', image: '../../public/images/club2.jpg' },
+  { id: 'card-29', suit: 'Clubs', rank: '3', color: 'Black', image: '../../public/images/club3.jpg' },
+  { id: 'card-30', suit: 'Clubs', rank: '4', color: 'Black', image: '../../public/images/club4.jpg' },
+  { id: 'card-31', suit: 'Clubs', rank: '5', color: 'Black', image: '../../public/images/club5.jpg' },
+  { id: 'card-32', suit: 'Clubs', rank: '6', color: 'Black', image: '../../public/images/club6.jpg' },
+  { id: 'card-33', suit: 'Clubs', rank: '7', color: 'Black', image: '../../public/images/club7.jpg' },
+  { id: 'card-34', suit: 'Clubs', rank: '8', color: 'Black', image: '../../public/images/club8.jpg' },
+  { id: 'card-35', suit: 'Clubs', rank: '9', color: 'Black', image: '../../public/images/club9.jpg' },
+  { id: 'card-36', suit: 'Clubs', rank: '10', color: 'Black', image: '../../public/images/club10.jpg' },
+  { id: 'card-37', suit: 'Clubs', rank: 'Jack', color: 'Black', image: '../../public/images/clubJ.jpg' },
+  { id: 'card-38', suit: 'Clubs', rank: 'Queen', color: 'Black', image: '../../public/images/clubQ.jpg' },
+  { id: 'card-39', suit: 'Clubs', rank: 'King', color: 'Black', image: '../../public/images/clubK.jpg' },
 
   // SPADES
-  { id: 'card-40', suit: 'Spades', rank: 'Ace', color: 'Black' },
-  { id: 'card-41', suit: 'Spades', rank: '2', color: 'Black' },
-  { id: 'card-42', suit: 'Spades', rank: '3', color: 'Black' },
-  { id: 'card-43', suit: 'Spades', rank: '4', color: 'Black' },
-  { id: 'card-44', suit: 'Spades', rank: '5', color: 'Black' },
-  { id: 'card-45', suit: 'Spades', rank: '6', color: 'Black' },
-  { id: 'card-46', suit: 'Spades', rank: '7', color: 'Black' },
-  { id: 'card-47', suit: 'Spades', rank: '8', color: 'Black' },
-  { id: 'card-48', suit: 'Spades', rank: '9', color: 'Black' },
-  { id: 'card-49', suit: 'Spades', rank: '10', color: 'Black' },
-  { id: 'card-50', suit: 'Spades', rank: 'Jack', color: 'Black' },
-  { id: 'card-51', suit: 'Spades', rank: 'Queen', color: 'Black' },
-  { id: 'card-52', suit: 'Spades', rank: 'King', color: 'Black' },
+  { id: 'card-40', suit: 'Spades', rank: 'Ace', color: 'Black', image: '../../public/images/spadeA.jpg' },
+  { id: 'card-41', suit: 'Spades', rank: '2', color: 'Black', image: '../../public/images/spade2.jpg' },
+  { id: 'card-42', suit: 'Spades', rank: '3', color: 'Black', image: '../../public/images/spade3.jpg' },
+  { id: 'card-43', suit: 'Spades', rank: '4', color: 'Black', image: '../../public/images/spade4.jpg' },
+  { id: 'card-44', suit: 'Spades', rank: '5', color: 'Black', image: '../../public/images/spade5.jpg' },
+  { id: 'card-45', suit: 'Spades', rank: '6', color: 'Black', image: '../../public/images/spade6.jpg' },
+  { id: 'card-46', suit: 'Spades', rank: '7', color: 'Black', image: '../../public/images/spade7.jpg' },
+  { id: 'card-47', suit: 'Spades', rank: '8', color: 'Black', image: '../../public/images/spade8.jpg' },
+  { id: 'card-48', suit: 'Spades', rank: '9', color: 'Black', image: '../../public/images/spade9.jpg' },
+  { id: 'card-49', suit: 'Spades', rank: '10', color: 'Black', image: '../../public/images/spade10.jpg' },
+  { id: 'card-50', suit: 'Spades', rank: 'Jack', color: 'Black', image: '../../public/images/spadeJ.jpg' },
+  { id: 'card-51', suit: 'Spades', rank: 'Queen', color: 'Black', image: '../../public/images/spadeQ.jpg' },
+  { id: 'card-52', suit: 'Spades', rank: 'King', color: 'Black', image: '../../public/images/spadeK.jpg' },
 ];
 
 // create and initialize Foundation decks with suit id, and empty 
@@ -125,36 +125,36 @@ const Solitaire = () => {
     setCurrentCardIndex((prevIndex) => (prevIndex + 1) % cards.length);
   };
 
-    //-----------------------------------(F1) drag ANY TO FOUNDATION RULES -------------------------------------------------
+  //-----------------------------------(F1) drag ANY TO FOUNDATION RULES -------------------------------------------------
 
-    // Check if the move is valid to the foundation
-    const handleFoundationDrop = (source, destination, draggedCard) => {
-      const targetFoundation = decks.find((deck) => deck.id === destination.droppableId);
-  
-      if (!targetFoundation) return;
-  
-      const isMoveValid = isMoveAllowed(draggedCard, targetFoundation);
-  
-      if (!isMoveValid) return;
-  
-      if (source.droppableId === 'revealed-cards') {
-        const updatedCards = cards.filter((card) => card.id !== draggedCard.id);
-        setCards(updatedCards);
-      } else {
-        let updatedTableau = tableau.map((pile) => ({
-          ...pile,
-          cards: pile.id === source.droppableId ? pile.cards.filter((_, index) => index !== source.index) : pile.cards,
-        }));
-        setTableau(updatedTableau);
-      }
-  
-      const updatedDecks = decks.map((deck) => ({
-        ...deck,
-        cards: deck.id === destination.droppableId ? [...deck.cards, draggedCard] : deck.cards,
+  // Check if the move is valid to the foundation
+  const handleFoundationDrop = (source, destination, draggedCard) => {
+    const targetFoundation = decks.find((deck) => deck.id === destination.droppableId);
+
+    if (!targetFoundation) return;
+
+    const isMoveValid = isMoveAllowed(draggedCard, targetFoundation);
+
+    if (!isMoveValid) return;
+
+    if (source.droppableId === 'revealed-cards') {
+      const updatedCards = cards.filter((card) => card.id !== draggedCard.id);
+      setCards(updatedCards);
+    } else {
+      let updatedTableau = tableau.map((pile) => ({
+        ...pile,
+        cards: pile.id === source.droppableId ? pile.cards.filter((_, index) => index !== source.index) : pile.cards,
       }));
-  
-      setDecks(updatedDecks);
-    };
+      setTableau(updatedTableau);
+    }
+
+    const updatedDecks = decks.map((deck) => ({
+      ...deck,
+      cards: deck.id === destination.droppableId ? [...deck.cards, draggedCard] : deck.cards,
+    }));
+
+    setDecks(updatedDecks);
+  };
 
   // Function to validate if card can be moved to foundation
   const isMoveAllowed = (card, foundationDeck) => {
@@ -244,21 +244,21 @@ const Solitaire = () => {
   const handleTableauToTableauDrop = (source, destination) => {
     const sourcePileIndex = tableau.findIndex((pile) => pile.id === source.droppableId);
     const destinationPileIndex = tableau.findIndex((pile) => pile.id === destination.droppableId);
-  
+
     if (sourcePileIndex !== -1 && destinationPileIndex !== -1) {
       const updatedTableau = [...tableau];
       const sourcePile = updatedTableau[sourcePileIndex];
       const destinationPile = updatedTableau[destinationPileIndex];
       const draggedGroup = sourcePile.cards.slice(source.index);
-  
+
       // Remove cards from source
       sourcePile.cards = sourcePile.cards.filter((_, index) => index < source.index);
-  
+
       // Validate if the dragged cards can be placed on the destination pile
       const isTableauValidMove = () => {
         const topCard = destinationPile.cards.length > 0 ? destinationPile.cards[destinationPile.cards.length - 1] : null;
         const draggedCard = draggedGroup[0]; // We only validate the top card of the dragged group
-  
+
         // Check if dragged card rank is valid
         const isValidRank = () => {
           const ranks = ['King', 'Queen', 'Jack', '10', '9', '8', '7', '6', '5', '4', '3', '2', 'Ace'];
@@ -271,26 +271,26 @@ const Solitaire = () => {
             return draggedCardIndex === topCardIndex + 1;
           }
         };
-  
+
         // Check if dragged card color is valid (opposite color)
         const isValidColor = () => {
           if (!topCard) return true; // If no top card, any color is valid
           return (topCard.color === 'Red' && draggedCard.color === 'Black') || (topCard.color === 'Black' && draggedCard.color === 'Red');
         };
-  
+
         return isValidRank() && isValidColor();
       };
-  
+
       if (isTableauValidMove()) {
         // Insert cards into destination
         destinationPile.cards.splice(destination.index, 0, ...draggedGroup);
-  
+
         setTableau(updatedTableau);
       } else {
         console.log('Invalid move: Cannot drop this card on top of the current tableau pile.');
         // Restore cards to the source pile on invalid move
         sourcePile.cards.splice(source.index, 0, ...draggedGroup);
-  
+
         setTableau(updatedTableau);
       }
     }
@@ -324,12 +324,12 @@ const Solitaire = () => {
       handleStockpileToTableauDrop(draggedCard, destination);
 
       // (T1.1) DROPPING FROM TABLEAU INTO TABLEAU -----------------------------------------
-   
+
     } else if (source.droppableId.startsWith('tableau') && destination.droppableId.startsWith('tableau')) {
       handleTableauToTableauDrop(source, destination);
     }
     // (F.1) DROPPING FROM ANY INTO FOUNDATION ------------------------------------------
-    
+
     handleFoundationDrop(source, destination, draggedCard);
   };
 
@@ -337,10 +337,9 @@ const Solitaire = () => {
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
-{/* Stockpile decks section ------------------------------------------------------------------------- */}
+      {/* Stockpile decks section ------------------------------------------------------------------------- */}
       <div className="s-container">
         <div className="cards">
-          <h2>Stockpile</h2>
           <div className="card-navigation">
             <button onClick={nextCard}>Next Card</button>
           </div>
@@ -356,7 +355,7 @@ const Solitaire = () => {
                         {...dragProvided.dragHandleProps}
                         ref={dragProvided.innerRef}
                       >
-                        {cards[currentCardIndex].rank} of {cards[currentCardIndex].suit} - ({cards[currentCardIndex].color})
+                        <img src={cards[currentCardIndex].image} alt={`${cards[currentCardIndex].rank} of ${cards[currentCardIndex].suit}`} />
                       </div>
                     )}
                   </Draggable>
@@ -367,9 +366,8 @@ const Solitaire = () => {
           </Droppable>
         </div>
 
-   {/* Foundation decks section ------------------------------------------------------------------------- */}
-   <div className="decks">
-          <h2>Foundations</h2>
+        {/* Foundation decks section ------------------------------------------------------------------------- */}
+        <div className="decks">
           <div className="foundation-decks">
             {decks.map((deck) => (
               <div key={deck.id} className="foundation-deck">
@@ -381,13 +379,13 @@ const Solitaire = () => {
                       ref={provided.innerRef}
                     >
                       {deck.cards.length === 0 ? (
-                         <div className={`empty-deck-emoji ${deck.id === 'Hearts' || deck.id === 'Diamonds' ? 'emoji-red' : 'emoji-blue'}`}>
-                             {suitEmojis[deck.id]}
-                         </div>
+                        <div className={`empty-deck-emoji ${deck.id === 'Hearts' || deck.id === 'Diamonds' ? 'emoji-red' : 'emoji-blue'}`}>
+                          {suitEmojis[deck.id]}
+                        </div>
                       ) : (
                         deck.cards.map((card, index) => (
                           <div key={card.id} className="card-in-deck">
-                            {card.rank} of {card.suit} - ({card.color})
+                            <img src={card.image} alt={`${card.rank} of ${card.suit}`} />
                           </div>
                         ))
                       )}
@@ -400,9 +398,8 @@ const Solitaire = () => {
           </div>
         </div>
 
-{/* Tableau decks section ------------------------------------------------------------------------- */}
+        {/* Tableau decks section ------------------------------------------------------------------------- */}
         <div className="tableau">
-          <h2>Tableau</h2>
           <div className="tableau-cards">
             {tableau.map((pile) => (
               <div key={pile.id} className="tableau-pile">
@@ -425,17 +422,17 @@ const Solitaire = () => {
                               {/* Render individual card when not dragging, group when dragging */}
                               {dragSnapshot.isDragging ? (
                                 // Render group of cards being dragged
-                                <div>
+                                <div className='t-drag-card-group'>
                                   {pile.cards.slice(index).map((c, index) => (
-                                    <div className='t-drag-card-group' key={c.id}>
-                                      {c.rank} of {c.suit} - ({c.color})
+                                    <div key={c.id} className='t-drag-card-group'>
+                                      <img src={c.image} alt={`${c.rank} of ${c.suit}`} />
                                     </div>
                                   ))}
                                 </div>
                               ) : (
                                 // Render individual card
                                 <div>
-                                  {card.rank} of {card.suit} - ({card.color})
+                                  <img src={card.image} alt={`${card.rank} of ${card.suit}`} />
                                 </div>
                               )}
                             </div>
