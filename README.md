@@ -87,40 +87,35 @@ npm run start
 
 ## Dev Stuff: Building:
 
-1. <u>Initial dnd:</u> Create 4 boxes (initial card stockpile) which can be dragged and dropped into 4 bordered areas (the Foundations)
-2. <u>'const initialCards':</u> Creates the full playing card deck of 52 cards.  
-3. <u>'const initialDecks':</u> Splits the deck into 4 suits and initializes empty.
-4. <u>'const initialTableau':</u> Creates Tableau into 7 cols, each col contains the number of cards as it's id (e.g. col 7 contains 7 cards). Initializes empty. Originally tableau sliced off cards from the stockpile, but the 'card sharing' caused issues and had to be reworked.
-5. 8. <u>'const updatedCards', 'const updatedDecks'</u> The state of each foundation suit deck is trackable separately and updated per card dropped.
-6. <u>'const [currentCardIndex, setCurrentCardIndex] = useState(0)', 'const nextCard' + onClick={nextCard}:</u> Actions the Stockpile cycle. Conflict between nextCard button and droppable StockPile: Had to rework Stockpile into a one-card display on nextCard click, rather than a pre-formed pile. Now you click 'next card' and get one droppable card displayed per click (rather than cycling through a facedown pile with top card faceup)
-7. <u>'const shuffleArray':</u> Fisher-Yates algorithm shuffles cards in stockpile and tableau after distribution.
-8. <u>'const onDragEnd':</u> covers dnd from stockpile and tableau to foundations; dragging card from source->destination, + adding card to destination, removing card from source.
-9. <u>'const isMoveAllowed':</u> if conditional ensures foundations stack per rank and suit.
-10. <u>'return':</u> renders stockpile ('cards'), tableau, and foundations and contains in dnd areas.
-11. <u>'if (source.droppableId === 'revealed-cards') '':</u> covers dragging stockpile, dropping to tableau.
-12. <u>'else if (source.droppableId.startsWith('tableau') && destination.droppableId.startsWith('tableau'))':</u> covers DnD within tableau. 
+1. <u>'const initialCards':</u> Creates full playing card deck data.  
+2. <u>'const initialDecks':</u> Splits the deck into 4 suits and initializes empty.
+3. <u>'const initialTableau':</u> Creates Tableau into 7 cols, each col contains the number of cards as it's id (e.g. col 7 contains 7 cards). Initializes empty. Originally tableau sliced off cards from the stockpile, but the 'card sharing' caused issues and had to be reworked.
+4. <u>'const Solitaire':</u> Runs main game code (i.e. covers user activity).
+5. <u>'const updatedCards', 'const updatedDecks'</u> The state of each foundation suit deck is trackable separately and updated per card dropped.
+6. <u>'const [currentCardIndex, setCurrentCardIndex] = useState(0)', 'const nextCard' + onClick={nextCard}:</u> Actions the Stockpile click cycle. 
+7. <u>'const shuffleArray':</u> shuffles cards in stockpile and tableau after distribution.
+8. <u>'const onDragEnd':</u> Collects and Executes all DnD functions for stockpile, tableau and foundations:
+   1. <u>'const handleStockpileToTableauDrop':</u> DnD from Stockpile to Tableau;
+   2. <u>'const handleTableauToTableauDrop':</u> DnD from Tableau to Tableau;
+   3. <u>'...':</u> DnD from Stockpile to Foundations;
+   4. <u>'...':</u> DnD from Tableau to Foundations;
+9.  xxx
 
-14. <u></u>
-15. <u>'else if (source.droppableId.startsWith('tableau')...)':</u> Enables tableau cards to be dragged in stacks (piles), from source.index -> last-item. 
-
+10. <u>'return':</u> renders stockpile ('cards'), tableau, and foundations and contains in DnD areas.
+Other:
+12. <u>'else if (source.droppableId.startsWith('tableau')...)':</u> Enables tableau cards to be dragged in stacks (piles), from source.index -> last-item. 
 13. <u>'return {... t-drag-group}':</u> this targets a tableau -> tableau pile of cards and applies a class selector which allowed me to modify appearance of dragging card pile as a single object/stack. React Beautiful DnD didn't seem to have a 'group/multiple object/s' dragging graphic, so I had to make it manually with CSS.
 
-16. <u>'const handleStockpileToTableauDrop', 'isValidRank', 'isValidColor':</u> covers dnd cards from Stockpile to Tableau, by solitaire rules (K-A, opposite colour)
+
+14. <u></u>
+15. <u></u>
+16. <u></u>
 17. <u></u>
 18. <u></u>
 19. <u></u>
 20. <u></u>
-21. <u></u>
-22. <u></u>
-23. <u></u>
 
 ## To do: 
-
-
-
-- tableau -> tableau dnd rules
-
-
 
 - [x] Create Foundation area/boxes for cards to slot/stack into
 - [x] Create Stockpile of free cards
@@ -135,19 +130,19 @@ npm run start
 - [x] Drag n Drop mechanics between stockpile and tableau
   - [x] refine dropping to obey solitaire rules conditions
 - [x] Drag n Drop between tableau columns
-  - [ ] refine dropping to obey solitaire rules conditions
+  - [x] refine dropping to obey solitaire rules conditions
 - [x] Drag n Drop of entire tableau groups of cards between cols
 - [ ] Facedown all tableau cards except top
 - [ ] Change 'next card' button to a facedown stack of cards
   - [ ] I.e. make the stockpile a stack (or show all cards) and style like foundation and tableau stacks (but increase neg margin)
-- [x] Style cards in tablau to layer
+- [x] Style cards in tableau to layer
 - [x] Style cards in foundation to layer
   - [ ] After testing/debugging, change -150 to -170 of CSS: .card-in-deck + .card-in-deck
 - [ ] BEFORE FINAL STYLING: Once game works fine, save a copy of the Notableau file and .scss to the 'Backups' folder, so if there's an unforseen issue in future, you can debug using God Mode all moves legal (instead of having to play through the game)
-- [ ] x
+- [ ] 
 - [ ]  
 
-Stuff to do once main game functioning (i.e. easy implementable latter tasks):
+Stuff to do once main game functioning (i.e. easier implementable latter tasks):
 
 - [ ] import card images - prob do this last
 - [ ] reshuffle stockpile button, basically restarts game
