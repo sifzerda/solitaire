@@ -105,9 +105,7 @@ npm run start
 Other:
 12. <u>'else if (source.droppableId.startsWith('tableau')...)':</u> Enables tableau cards to be dragged in stacks (piles), from source.index -> last-item. 
 13. <u>'return {... t-drag-group}':</u> this targets a tableau -> tableau pile of cards and applies a class selector which allowed me to modify appearance of dragging card pile as a single object/stack. React Beautiful DnD didn't seem to have a 'group/multiple object/s' dragging graphic, so I had to make it manually with CSS.
-
-
-14. <u></u>
+14. <u>return {...}</u> conditionally renders tableau card as faceup or facedown depending on card's array index.
 15. <u></u>
 16. <u></u>
 17. <u></u>

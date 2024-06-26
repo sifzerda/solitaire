@@ -197,6 +197,11 @@
   border: 5px dashed var(--lblue);
 }
 
+/* Selector for hover effect on facedown cards */
+.tableau-card.facedown:hover {
+  border: none!important;
+}
+
 .card.dragging {
   opacity: 0.5;
   /* Reduced opacity while dragging */

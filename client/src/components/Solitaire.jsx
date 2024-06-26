@@ -344,7 +344,6 @@ const isTableauValidMove = () => {
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
-      {/* Stockpile decks section ------------------------------------------------------------------------- */}
       <div className="s-container">
         <div className="cards">
           <div className="card-navigation">
@@ -362,7 +361,10 @@ const isTableauValidMove = () => {
                         {...dragProvided.dragHandleProps}
                         ref={dragProvided.innerRef}
                       >
-                        <img src={cards[currentCardIndex].image} alt={`${cards[currentCardIndex].rank} of ${cards[currentCardIndex].suit}`} />
+                        <img
+                          src={cards[currentCardIndex].image}
+                          alt={`${cards[currentCardIndex].rank} of ${cards[currentCardIndex].suit}`}
+                        />
                       </div>
                     )}
                   </Draggable>
@@ -373,7 +375,7 @@ const isTableauValidMove = () => {
           </Droppable>
         </div>
 
-        {/* Foundation decks section ------------------------------------------------------------------------- */}
+        {/* Foundation decks section */}
         <div className="decks">
           <div className="foundation-decks">
             {decks.map((deck) => (
@@ -386,7 +388,11 @@ const isTableauValidMove = () => {
                       ref={provided.innerRef}
                     >
                       {deck.cards.length === 0 ? (
-                        <div className={`empty-deck-emoji ${deck.id === 'Hearts' || deck.id === 'Diamonds' ? 'emoji-red' : 'emoji-blue'}`}>
+                        <div
+                          className={`empty-deck-emoji ${
+                            deck.id === 'Hearts' || deck.id === 'Diamonds' ? 'emoji-red' : 'emoji-blue'
+                          }`}
+                        >
                           {suitEmojis[deck.id]}
                         </div>
                       ) : (
@@ -405,39 +411,38 @@ const isTableauValidMove = () => {
           </div>
         </div>
 
-        {/* Tableau decks section ------------------------------------------------------------------------- */}
-        <div className="tableau">
+       {/* Tableau decks section */}
+       <div className="tableau">
           <div className="tableau-cards">
-          {tableau.map((pile) => (
-  <div key={pile.id} className="tableau-pile">
-    <Droppable droppableId={pile.id}>
-      {(provided, snapshot) => (
-        <div
-          className={`tableau-inner ${snapshot.isDraggingOver ? 'dragging-over' : ''}`}
-          {...provided.droppableProps}
-          ref={provided.innerRef}
-        >
-          {pile.cards.map((card, index) => (
-            <Draggable key={card.id} draggableId={card.id} index={index}>
-              {(dragProvided, dragSnapshot) => (
-                <div
-                  className={`tableau-card ${dragSnapshot.isDragging ? 'group-dragging' : ''}`}
-                  {...dragProvided.draggableProps}
-                  {...dragProvided.dragHandleProps}
-                  ref={dragProvided.innerRef}
-                >
-                  {index === pile.cards.length - 1 ? (
-                    // Render topmost card normally
-                    <img src={card.image} alt={`${card.rank} of ${card.suit}`} />
-                  ) : (
-                    // Render face-down card for other cards
-                    <div className="face-down-card">
-                      <img src={'../../public/images/cardBack.jpg'} alt="Face Down Card" />
-                    </div>
-                  )}
-                </div>
-              )}
-            </Draggable>
+            {tableau.map((pile) => (
+              <div key={pile.id} className="tableau-pile">
+                <Droppable droppableId={pile.id}>
+                  {(provided, snapshot) => (
+                    <div
+                      className={`tableau-inner ${snapshot.isDraggingOver ? 'dragging-over' : ''}`}
+                      {...provided.droppableProps}
+                      ref={provided.innerRef}
+                    >
+                      {pile.cards.map((card, index) => (
+                        // Render Draggable only for the last card in the pile
+                        index === pile.cards.length - 1 ? (
+                          <Draggable key={card.id} draggableId={card.id} index={index}>
+                            {(dragProvided, dragSnapshot) => (
+                              <div
+                                className={`tableau-card ${dragSnapshot.isDragging ? 'group-dragging' : ''}`}
+                                {...dragProvided.draggableProps}
+                                {...dragProvided.dragHandleProps}
+                                ref={dragProvided.innerRef}
+                              >
+                                <img src={card.image} alt={`${card.rank} of ${card.suit}`} />
+                              </div>
+                            )}
+                          </Draggable>
+                        ) : (
+                          <div key={card.id} className={`tableau-card facedown`}>
+                            <img src={'../../public/images/cardBack.jpg'} alt="Face Down Card" />
+                          </div>
+                        )
                       ))}
                       {provided.placeholder}
                     </div>
