@@ -248,57 +248,60 @@ const Solitaire = () => {
   const handleTableauToTableauDrop = (source, destination) => {
     const sourcePileIndex = tableau.findIndex((pile) => pile.id === source.droppableId);
     const destinationPileIndex = tableau.findIndex((pile) => pile.id === destination.droppableId);
-
+  
     if (sourcePileIndex !== -1 && destinationPileIndex !== -1) {
       const updatedTableau = [...tableau];
       const sourcePile = updatedTableau[sourcePileIndex];
       const destinationPile = updatedTableau[destinationPileIndex];
       const draggedGroup = sourcePile.cards.slice(source.index);
 
-      // Remove cards from source
-      sourcePile.cards = sourcePile.cards.filter((_, index) => index < source.index);
+// Remove cards from source
+sourcePile.cards = sourcePile.cards.filter((_, index) => index < source.index);
 
-      // Validate if the dragged cards can be placed on the destination pile
-      const isTableauValidMove = () => {
-        const topCard = destinationPile.cards.length > 0 ? destinationPile.cards[destinationPile.cards.length - 1] : null;
-        const draggedCard = draggedGroup[0]; // We only validate the top card of the dragged group
+// Validate if the dragged cards can be placed on the destination pile
+const isTableauValidMove = () => {
+  const topCard = destinationPile.cards.length > 0 ? destinationPile.cards[destinationPile.cards.length - 1] : null;
+  const draggedCard = draggedGroup[0]; // We only validate the top card of the dragged group
 
-        // Check if dragged card rank is valid
-        const isValidRank = () => {
-          const ranks = ['King', 'Queen', 'Jack', '10', '9', '8', '7', '6', '5', '4', '3', '2', 'Ace'];
-          const draggedCardIndex = ranks.indexOf(draggedCard.rank);
-          if (!topCard) {
-            // If the pile is empty, only a King can be dropped
-            return draggedCard.rank === 'King';
-          } else {
-            const topCardIndex = ranks.indexOf(topCard.rank);
-            return draggedCardIndex === topCardIndex + 1;
-          }
-        };
-
-        // Check if dragged card color is valid (opposite color)
-        const isValidColor = () => {
-          if (!topCard) return true; // If no top card, any color is valid
-          return (topCard.color === 'Red' && draggedCard.color === 'Black') || (topCard.color === 'Black' && draggedCard.color === 'Red');
-        };
-
-        return isValidRank() && isValidColor();
-      };
-
-      if (isTableauValidMove()) {
-        // Insert cards into destination
-        destinationPile.cards.splice(destination.index, 0, ...draggedGroup);
-
-        setTableau(updatedTableau);
-      } else {
-        console.log('Invalid move: Cannot drop this card on top of the current tableau pile.');
-        // Restore cards to the source pile on invalid move
-        sourcePile.cards.splice(source.index, 0, ...draggedGroup);
-
-        setTableau(updatedTableau);
-      }
+  // Check if dragged card rank is valid
+  const isValidRank = () => {
+    const ranks = ['King', 'Queen', 'Jack', '10', '9', '8', '7', '6', '5', '4', '3', '2', 'Ace'];
+    const draggedCardIndex = ranks.indexOf(draggedCard.rank);
+    if (!topCard) {
+      // If the pile is empty, only a King can be dropped
+      return draggedCard.rank === 'King';
+    } else {
+      const topCardIndex = ranks.indexOf(topCard.rank);
+      return draggedCardIndex === topCardIndex + 1;
     }
   };
+
+        // Check if dragged card color is valid (opposite color)
+      const isValidColor = () => {
+        if (!topCard) return true; // If no top card, any color is valid
+        return (topCard.color === 'Red' && draggedCard.color === 'Black') || (topCard.color === 'Black' && draggedCard.color === 'Red');
+      };
+
+      return isValidRank() && isValidColor();
+    };
+
+    if (isTableauValidMove()) {
+      // Insert cards into destination
+      destinationPile.cards.splice(destination.index, 0, ...draggedGroup);
+
+      // Update tableau state only on valid move
+      setTableau(updatedTableau);
+    } else {
+      // Restore cards to the source pile on invalid move
+      sourcePile.cards.splice(source.index, 0, ...draggedGroup);
+
+      // Update tableau state regardless to reflect the restored cards
+      setTableau(updatedTableau);
+
+      console.log('Invalid move: Cannot drop this card on top of the current tableau pile.');
+    }
+  }
+};
 
   // --------------------------- ON DRAG END (collective index for separate DnD functions) ------------------->
 
