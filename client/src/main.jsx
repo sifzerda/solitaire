@@ -5,13 +5,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import App from './App.jsx';
 import Error from './pages/Error.jsx';
-import Contact from './pages/Contact.jsx';
 import About from './pages/About.jsx';
 import Profile from './pages/Profile.jsx';
 
 // subjects
-
-import Solitaire from './pages/Solitaire.jsx';
 
 import Login from './pages/Login.jsx';
 import Signup from './pages/Signup.jsx';
@@ -31,11 +28,6 @@ const router = createBrowserRouter([
       {
         path: '/Profile',
         element: <Profile />,
-      },
-
-      {
-        path: '/Solitaire',
-        element: <Solitaire />,
       },
 
       {

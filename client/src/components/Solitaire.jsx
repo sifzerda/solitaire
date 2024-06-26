@@ -130,12 +130,16 @@ const Solitaire = () => {
   // Check if the move is valid to the foundation
   const handleFoundationDrop = (source, destination, draggedCard) => {
     const targetFoundation = decks.find((deck) => deck.id === destination.droppableId);
-
+  
     if (!targetFoundation) return;
-
+  
     const isMoveValid = isMoveAllowed(draggedCard, targetFoundation);
-
-    if (!isMoveValid) return;
+  
+    if (!isMoveValid) {
+      // Move is invalid, return to beginning of stockpile array
+      //setCards((prevCards) => [draggedCard, ...prevCards]); 
+      return;
+    }
 
     if (source.droppableId === 'revealed-cards') {
       const updatedCards = cards.filter((card) => card.id !== draggedCard.id);

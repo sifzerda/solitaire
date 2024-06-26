@@ -1,5 +1,5 @@
-import StockPile from '../components/StockPile';
-import Drag from '../components/Drag';
+
+import Solitaire from '../components/Solitaire';
 import '../App.css';
 import '../solitaire.css';
 
@@ -11,12 +11,11 @@ export default function About () {
  
 
       <div className='white-box'>
-<Drag />
+<Solitaire />
       </div>
 
 
 
-       {/*         <Stockpile />       */}
 
 
 
