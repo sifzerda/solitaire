@@ -15,7 +15,7 @@
 }
 
 .solitaire-box {
-  min-width: 400px; /* Example minimum width to prevent shrinking too small */
+  width: 1400px;
   min-height: 300px; /* Example minimum height to prevent shrinking too small */
   background-color: #2ecc71;
   border: 6px solid #229753;
