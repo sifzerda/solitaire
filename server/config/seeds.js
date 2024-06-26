@@ -5,7 +5,7 @@ const cleanDB = require('./cleanDB');
 db.once('open', async () => {
   try {
     await cleanDB('User', 'users');
-    await cleanDB('Thought', 'thoughts');
+    //await cleanDB('Thought', 'thoughts');
 
     // Create thoughts
 //    const thoughts = await Thought.create([

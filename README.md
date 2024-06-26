@@ -3,7 +3,7 @@ Vue may be easiest, apparently Angular has a bigger learning curve
 
 # SOLITAIRE 🂡
 
-Games in gamestack:
+Games in solitaire:
 
 - [ ] Minesweeper
 - [x] Solitaire
@@ -37,7 +37,7 @@ Lessons learned from building this project:
 - Try to keep all code together for context, but where necessary, make backup copies with partial code for debugging.
 - Save all/extra code in backup files.
 
-<u>Generally: Build God mode, then limit. </u>
+<u>Generally: Build God mode basic, expand, then limit. </u>
 
 ## Badges
 
