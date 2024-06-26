@@ -138,7 +138,7 @@ const Solitaire = () => {
     if (!isMoveValid) {
       // Move is invalid, return to beginning of stockpile array
       //setCards((prevCards) => [draggedCard, ...prevCards]); 
-      return;
+      return; // go to next card in array
     }
 
     if (source.droppableId === 'revealed-cards') {
