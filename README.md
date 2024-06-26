@@ -79,13 +79,15 @@ npm run start
 
  The game executes a typical game of solitaire with traditional rules. Parts:
  
- - Start screen;
- - Game;
- - Final score page + score submission;
- - High scores page;
+ - Start screen
+ - Game
+ - Final score page + score submission
+ - High scores page
  - If logged on: profile page with User scores.
 
 ## Dev Stuff: Building:
+
+The main/mother function is 'onDragEnd' which indexes and executes all other major DnD functions. 
 
 1. <u>'const initialCards':</u> Creates full playing card deck data.  
 2. <u>'const initialDecks':</u> Splits the deck into 4 suits and initializes empty.
@@ -95,23 +97,20 @@ npm run start
 6. <u>'const [currentCardIndex, setCurrentCardIndex] = useState(0)', 'const nextCard' + onClick={nextCard}:</u> Actions the Stockpile click cycle. 
 7. <u>'const shuffleArray':</u> shuffles cards in stockpile and tableau after distribution.
 8. <u>'const onDragEnd':</u> Collects and Executes all DnD functions for stockpile, tableau and foundations:
-   1. <u>'const handleStockpileToTableauDrop':</u> DnD from Stockpile to Tableau;
-   2. <u>'const handleTableauToTableauDrop':</u> DnD from Tableau to Tableau;
-   3. <u>'...':</u> DnD from Stockpile to Foundations;
-   4. <u>'...':</u> DnD from Tableau to Foundations;
-9.  xxx
-
-10. <u>'return':</u> renders stockpile ('cards'), tableau, and foundations and contains in DnD areas.
+   - <u>'const handleStockpileToTableauDrop':</u> DnD from Stockpile to Tableau;
+   - <u>'const handleTableauToTableauDrop':</u> DnD from Tableau to Tableau;
+   - <u>'handleFoundationDrop':</u> DnD from any to Foundations.
+9.  <u>'return':</u> renders stockpile ('cards'), tableau, and foundations and contains in DnD areas.
 Other:
-12. <u>'else if (source.droppableId.startsWith('tableau')...)':</u> Enables tableau cards to be dragged in stacks (piles), from source.index -> last-item. 
-13. <u>'return {... t-drag-group}':</u> this targets a tableau -> tableau pile of cards and applies a class selector which allowed me to modify appearance of dragging card pile as a single object/stack. React Beautiful DnD didn't seem to have a 'group/multiple object/s' dragging graphic, so I had to make it manually with CSS.
-14. <u>return {...}</u> conditionally renders tableau card as faceup or facedown depending on card's array index.
-15. <u></u>
-16. <u></u>
-17. <u></u>
-18. <u></u>
-19. <u></u>
-20. <u></u>
+1.  <u>'else if (source.droppableId.startsWith('tableau')...)':</u> Enables tableau cards to be dragged in stacks (piles), from source.index -> last-item. 
+2.  <u>'return {... t-drag-group}':</u> this targets a tableau -> tableau pile of cards and applies a class selector which allowed me to modify appearance of dragging card pile as a single object/stack. React Beautiful DnD didn't seem to have a 'group/multiple object/s' dragging graphic, so I had to make it manually with CSS.
+3.  <u>return {...}</u> conditionally renders tableau card as faceup or facedown depending on card's array index.
+4.  <u>'index === pile.cards.length - 1 ? ...'</u> Conditional rendering of card DnD based on whether card is faceup or facedown. Facedown cards are not draggable. Tableau.pile array -1 is facedown (i.e. everything but top card).
+5.  <u></u>
+6.  <u></u>
+7.  <u></u>
+8.  <u></u>
+9.  <u></u>
 
 ## To do: 
 
@@ -130,7 +129,7 @@ Other:
 - [x] Drag n Drop between tableau columns
   - [x] refine dropping to obey solitaire rules conditions
 - [x] Drag n Drop of entire tableau groups of cards between cols
-- [ ] Facedown all tableau cards except top
+- [x] Facedown all tableau cards except top
 - [ ] Change 'next card' button to a facedown stack of cards
   - [ ] I.e. make the stockpile a stack (or show all cards) and style like foundation and tableau stacks (but increase neg margin)
 - [x] Style cards in tableau to layer
