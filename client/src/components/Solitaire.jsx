@@ -82,8 +82,9 @@ const suitEmojis = {
 
 // Initial tableau cards with stacks (adjust as needed)
 const initialTableau = Array.from({ length: 7 }, (_, index) => ({
-  id: `tableau-${index + 1}`, // + 1 because index starts at 0
+  id: `tableau-${index + 1}`,
   cards: [],
+  faceUp: [], // Array to track faceup cards
 }));
 
 const Solitaire = () => {
@@ -102,7 +103,9 @@ const Solitaire = () => {
 
     for (let i = 0; i < tableauCopy.length; i++) {
       for (let j = 0; j <= i; j++) {
+        const isTopCard = j === i; // Determine if this card is the top card
         tableauCopy[i].cards.push(shuffledCards.shift());
+        tableauCopy[i].faceUp.push(isTopCard); // Set faceup state
       }
     }
 
@@ -130,11 +133,11 @@ const Solitaire = () => {
   // Check if the move is valid to the foundation
   const handleFoundationDrop = (source, destination, draggedCard) => {
     const targetFoundation = decks.find((deck) => deck.id === destination.droppableId);
-  
+
     if (!targetFoundation) return;
-  
+
     const isMoveValid = isMoveAllowed(draggedCard, targetFoundation);
-  
+
     if (!isMoveValid) {
       // Move is invalid, return to beginning of stockpile array
       //setCards((prevCards) => [draggedCard, ...prevCards]); 
@@ -248,60 +251,60 @@ const Solitaire = () => {
   const handleTableauToTableauDrop = (source, destination) => {
     const sourcePileIndex = tableau.findIndex((pile) => pile.id === source.droppableId);
     const destinationPileIndex = tableau.findIndex((pile) => pile.id === destination.droppableId);
-  
+
     if (sourcePileIndex !== -1 && destinationPileIndex !== -1) {
       const updatedTableau = [...tableau];
       const sourcePile = updatedTableau[sourcePileIndex];
       const destinationPile = updatedTableau[destinationPileIndex];
       const draggedGroup = sourcePile.cards.slice(source.index);
 
-// Remove cards from source
-sourcePile.cards = sourcePile.cards.filter((_, index) => index < source.index);
+      // Remove cards from source
+      sourcePile.cards = sourcePile.cards.filter((_, index) => index < source.index);
 
-// Validate if the dragged cards can be placed on the destination pile
-const isTableauValidMove = () => {
-  const topCard = destinationPile.cards.length > 0 ? destinationPile.cards[destinationPile.cards.length - 1] : null;
-  const draggedCard = draggedGroup[0]; // We only validate the top card of the dragged group
+      // Validate if the dragged cards can be placed on the destination pile
+      const isTableauValidMove = () => {
+        const topCard = destinationPile.cards.length > 0 ? destinationPile.cards[destinationPile.cards.length - 1] : null;
+        const draggedCard = draggedGroup[0]; // We only validate the top card of the dragged group
 
-  // Check if dragged card rank is valid
-  const isValidRank = () => {
-    const ranks = ['King', 'Queen', 'Jack', '10', '9', '8', '7', '6', '5', '4', '3', '2', 'Ace'];
-    const draggedCardIndex = ranks.indexOf(draggedCard.rank);
-    if (!topCard) {
-      // If the pile is empty, only a King can be dropped
-      return draggedCard.rank === 'King';
-    } else {
-      const topCardIndex = ranks.indexOf(topCard.rank);
-      return draggedCardIndex === topCardIndex + 1;
-    }
-  };
+        // Check if dragged card rank is valid
+        const isValidRank = () => {
+          const ranks = ['King', 'Queen', 'Jack', '10', '9', '8', '7', '6', '5', '4', '3', '2', 'Ace'];
+          const draggedCardIndex = ranks.indexOf(draggedCard.rank);
+          if (!topCard) {
+            // If the pile is empty, only a King can be dropped
+            return draggedCard.rank === 'King';
+          } else {
+            const topCardIndex = ranks.indexOf(topCard.rank);
+            return draggedCardIndex === topCardIndex + 1;
+          }
+        };
 
         // Check if dragged card color is valid (opposite color)
-      const isValidColor = () => {
-        if (!topCard) return true; // If no top card, any color is valid
-        return (topCard.color === 'Red' && draggedCard.color === 'Black') || (topCard.color === 'Black' && draggedCard.color === 'Red');
+        const isValidColor = () => {
+          if (!topCard) return true; // If no top card, any color is valid
+          return (topCard.color === 'Red' && draggedCard.color === 'Black') || (topCard.color === 'Black' && draggedCard.color === 'Red');
+        };
+
+        return isValidRank() && isValidColor();
       };
 
-      return isValidRank() && isValidColor();
-    };
+      if (isTableauValidMove()) {
+        // Insert cards into destination
+        destinationPile.cards.splice(destination.index, 0, ...draggedGroup);
 
-    if (isTableauValidMove()) {
-      // Insert cards into destination
-      destinationPile.cards.splice(destination.index, 0, ...draggedGroup);
+        // Update tableau state only on valid move
+        setTableau(updatedTableau);
+      } else {
+        // Restore cards to the source pile on invalid move
+        sourcePile.cards.splice(source.index, 0, ...draggedGroup);
 
-      // Update tableau state only on valid move
-      setTableau(updatedTableau);
-    } else {
-      // Restore cards to the source pile on invalid move
-      sourcePile.cards.splice(source.index, 0, ...draggedGroup);
+        // Update tableau state regardless to reflect the restored cards
+        setTableau(updatedTableau);
 
-      // Update tableau state regardless to reflect the restored cards
-      setTableau(updatedTableau);
-
-      console.log('Invalid move: Cannot drop this card on top of the current tableau pile.');
+        console.log('Invalid move: Cannot drop this card on top of the current tableau pile.');
+      }
     }
-  }
-};
+  };
 
   // --------------------------- ON DRAG END (collective index for separate DnD functions) ------------------->
 
@@ -389,9 +392,8 @@ const isTableauValidMove = () => {
                     >
                       {deck.cards.length === 0 ? (
                         <div
-                          className={`empty-deck-emoji ${
-                            deck.id === 'Hearts' || deck.id === 'Diamonds' ? 'emoji-red' : 'emoji-blue'
-                          }`}
+                          className={`empty-deck-emoji ${deck.id === 'Hearts' || deck.id === 'Diamonds' ? 'emoji-red' : 'emoji-blue'
+                            }`}
                         >
                           {suitEmojis[deck.id]}
                         </div>
@@ -411,8 +413,8 @@ const isTableauValidMove = () => {
           </div>
         </div>
 
-       {/* Tableau decks section */}
-       <div className="tableau">
+        {/* Tableau decks section */}
+        <div className="tableau">
           <div className="tableau-cards">
             {tableau.map((pile) => (
               <div key={pile.id} className="tableau-pile">
@@ -424,25 +426,22 @@ const isTableauValidMove = () => {
                       ref={provided.innerRef}
                     >
                       {pile.cards.map((card, index) => (
-                        // Render Draggable only for the last card in the pile
-                        index === pile.cards.length - 1 ? (
-                          <Draggable key={card.id} draggableId={card.id} index={index}>
-                            {(dragProvided, dragSnapshot) => (
-                              <div
-                                className={`tableau-card ${dragSnapshot.isDragging ? 'group-dragging' : ''}`}
-                                {...dragProvided.draggableProps}
-                                {...dragProvided.dragHandleProps}
-                                ref={dragProvided.innerRef}
-                              >
+                        <Draggable key={card.id} draggableId={card.id} index={index}>
+                          {(dragProvided, dragSnapshot) => (
+                            <div
+                              className={`tableau-card ${dragSnapshot.isDragging ? 'group-dragging' : ''}`}
+                              {...dragProvided.draggableProps}
+                              {...dragProvided.dragHandleProps}
+                              ref={dragProvided.innerRef}
+                            >
+                              {pile.faceUp[index] ? (
                                 <img src={card.image} alt={`${card.rank} of ${card.suit}`} />
-                              </div>
-                            )}
-                          </Draggable>
-                        ) : (
-                          <div key={card.id} className={`tableau-card facedown`}>
-                            <img src={'../../public/images/cardBack.jpg'} alt="Face Down Card" />
-                          </div>
-                        )
+                              ) : (
+                                <img src={'../../public/images/cardBack.jpg'} alt="Face Down Card" />
+                              )}
+                            </div>
+                          )}
+                        </Draggable>
                       ))}
                       {provided.placeholder}
                     </div>
