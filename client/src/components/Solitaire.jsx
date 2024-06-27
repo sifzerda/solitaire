@@ -292,6 +292,10 @@ const Solitaire = () => {
         // Insert cards into destination
         destinationPile.cards.splice(destination.index, 0, ...draggedGroup);
 
+        // Make card added to destination pile faceup
+        const topCardIndex = destination.index;
+        destinationPile.faceUp[topCardIndex] = true;
+
         // Update tableau state only on valid move
         setTableau(updatedTableau);
       } else {
@@ -415,17 +419,17 @@ const Solitaire = () => {
 
         {/* Tableau decks section */}
         <div className="tableau">
-  <div className="tableau-cards">
-    {tableau.map((pile) => (
-      <div key={pile.id} className="tableau-pile">
-        <Droppable droppableId={pile.id}>
-          {(provided, snapshot) => (
-            <div
-              className={`tableau-inner ${snapshot.isDraggingOver ? 'dragging-over' : ''}`}
-              {...provided.droppableProps}
-              ref={provided.innerRef}
-            >
-             {pile.cards.map((card, index) => (
+          <div className="tableau-cards">
+            {tableau.map((pile) => (
+              <div key={pile.id} className="tableau-pile">
+                <Droppable droppableId={pile.id}>
+                  {(provided, snapshot) => (
+                    <div
+                      className={`tableau-inner ${snapshot.isDraggingOver ? 'dragging-over' : ''}`}
+                      {...provided.droppableProps}
+                      ref={provided.innerRef}
+                    >
+                      {pile.cards.map((card, index) => (
                         <>
                           {pile.faceUp[index] ? ( // Render Draggable only for face-up cards
                             <Draggable
@@ -433,29 +437,29 @@ const Solitaire = () => {
                               draggableId={card.id}
                               index={index}
                             >
-                      {(dragProvided, dragSnapshot) => (
-                        <div
-                          className={`tableau-card ${dragSnapshot.isDragging ? 'group-dragging' : ''}`}
-                          {...dragProvided.draggableProps}
-                          {...dragProvided.dragHandleProps}
-                          ref={dragProvided.innerRef}
-                        >
-                          <img src={card.image} alt={`${card.rank} of ${card.suit}`} />
-                        </div>
-                      )}
-                    </Draggable>
-                  ) : (
-                    // Render facedown card without Draggable
-                    <div key={card.id} className={`tableau-card facedown`}>
-                      <img src={'../../public/images/cardBack.jpg'} alt="Face Down Card" />
+                              {(dragProvided, dragSnapshot) => (
+                                <div
+                                  className={`tableau-card ${dragSnapshot.isDragging ? 'group-dragging' : ''}`}
+                                  {...dragProvided.draggableProps}
+                                  {...dragProvided.dragHandleProps}
+                                  ref={dragProvided.innerRef}
+                                >
+                                  <img src={card.image} alt={`${card.rank} of ${card.suit}`} />
+                                </div>
+                              )}
+                            </Draggable>
+                          ) : (
+                            // Render facedown card without Draggable
+                            <div key={card.id} className={`tableau-card facedown`}>
+                              <img src={'../../public/images/cardBack.jpg'} alt="Face Down Card" />
+                            </div>
+                          )}
+                        </>
+                      ))}
+                      {provided.placeholder}
                     </div>
                   )}
-                </>
-              ))}
-              {provided.placeholder}
-            </div>
-          )}
-        </Droppable>
+                </Droppable>
               </div>
             ))}
           </div>
