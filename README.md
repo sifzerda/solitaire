@@ -131,9 +131,9 @@ Other:
   - [ ] I.e. make the stockpile a stack (or show all cards) and style like foundation and tableau stacks (but increase neg margin)
 - [x] Style cards in tableau to layer
 - [x] Style cards in foundation to layer
+- [ ] recover tableau group drag animation (group drag works it's just lost the in-between animation)
   - [ ] After testing/debugging, change -150 to -170 of CSS: .card-in-deck + .card-in-deck
 - [ ] BEFORE FINAL STYLING: Once game works fine, save a copy of the Notableau file and .scss to the 'Backups' folder, so if there's an unforseen issue in future, you can debug using God Mode all moves legal (instead of having to play through the game)
-- [ ] 
 - [ ]  
 
 Stuff to do once main game functioning (i.e. easier implementable latter tasks):
