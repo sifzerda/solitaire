@@ -496,3 +496,10 @@ button:disabled {
   max-height: 100%;
   display: block;
 }
+
+/* hover of facedown cards*/
+.tableau-card.facedown:hover {
+  border: none;
+  transition: none;
+  transform: none;
+}

@@ -415,38 +415,47 @@ const Solitaire = () => {
 
         {/* Tableau decks section */}
         <div className="tableau">
-          <div className="tableau-cards">
-            {tableau.map((pile) => (
-              <div key={pile.id} className="tableau-pile">
-                <Droppable droppableId={pile.id}>
-                  {(provided, snapshot) => (
-                    <div
-                      className={`tableau-inner ${snapshot.isDraggingOver ? 'dragging-over' : ''}`}
-                      {...provided.droppableProps}
-                      ref={provided.innerRef}
-                    >
-                      {pile.cards.map((card, index) => (
-                        <Draggable key={card.id} draggableId={card.id} index={index}>
-                          {(dragProvided, dragSnapshot) => (
-                            <div
-                              className={`tableau-card ${dragSnapshot.isDragging ? 'group-dragging' : ''}`}
-                              {...dragProvided.draggableProps}
-                              {...dragProvided.dragHandleProps}
-                              ref={dragProvided.innerRef}
+  <div className="tableau-cards">
+    {tableau.map((pile) => (
+      <div key={pile.id} className="tableau-pile">
+        <Droppable droppableId={pile.id}>
+          {(provided, snapshot) => (
+            <div
+              className={`tableau-inner ${snapshot.isDraggingOver ? 'dragging-over' : ''}`}
+              {...provided.droppableProps}
+              ref={provided.innerRef}
+            >
+             {pile.cards.map((card, index) => (
+                        <>
+                          {pile.faceUp[index] ? ( // Render Draggable only for face-up cards
+                            <Draggable
+                              key={card.id}
+                              draggableId={card.id}
+                              index={index}
                             >
-                              {pile.faceUp[index] ? (
-                                <img src={card.image} alt={`${card.rank} of ${card.suit}`} />
-                              ) : (
-                                <img src={'../../public/images/cardBack.jpg'} alt="Face Down Card" />
-                              )}
-                            </div>
-                          )}
-                        </Draggable>
-                      ))}
-                      {provided.placeholder}
+                      {(dragProvided, dragSnapshot) => (
+                        <div
+                          className={`tableau-card ${dragSnapshot.isDragging ? 'group-dragging' : ''}`}
+                          {...dragProvided.draggableProps}
+                          {...dragProvided.dragHandleProps}
+                          ref={dragProvided.innerRef}
+                        >
+                          <img src={card.image} alt={`${card.rank} of ${card.suit}`} />
+                        </div>
+                      )}
+                    </Draggable>
+                  ) : (
+                    // Render facedown card without Draggable
+                    <div key={card.id} className={`tableau-card facedown`}>
+                      <img src={'../../public/images/cardBack.jpg'} alt="Face Down Card" />
                     </div>
                   )}
-                </Droppable>
+                </>
+              ))}
+              {provided.placeholder}
+            </div>
+          )}
+        </Droppable>
               </div>
             ))}
           </div>
