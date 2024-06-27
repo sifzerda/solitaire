@@ -103,7 +103,7 @@ Other:
 2.  <u>'return {... t-drag-group}':</u> this targets a tableau -> tableau pile of cards and applies a class selector which allowed me to modify appearance of dragging card pile as a single object/stack. React Beautiful DnD didn't seem to have a 'group/multiple object/s' dragging graphic, so I had to make it manually with CSS.
 3.  <u>return {...}</u> conditionally renders tableau card as faceup or facedown depending on card's array index.
 4.  <u>'index === pile.cards.length - 1 ? ...'</u> Conditional rendering of card DnD based on whether card is faceup or facedown. Facedown cards are not draggable. Tableau.pile array -1 is facedown (i.e. everything but top card).
-5.  <u></u>
+5.  <u>'const initialTableau': </u>'faceUp' property tracks faceup cards. 
 6.  <u></u>
 7.  <u></u>
 8.  <u></u>
