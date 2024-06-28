@@ -1,16 +1,18 @@
 /* ------------------------- solitaire -------------------------*/
- 
+
 .s-container {
   display: flex;
   flex-wrap: wrap;
   /* Allow items to wrap to new line if needed */
   justify-content: space-around;
   margin-top: 20px;
+  position: relative;
 }
 
 .solitaire-box {
   width: 1400px;
-  min-height: 300px; /* Example minimum height to prevent shrinking too small */
+  min-height: 300px;
+  /* Example minimum height to prevent shrinking too small */
   background-color: #2ecc71;
   border: 6px solid #229753;
   border-radius: 8px;
@@ -155,10 +157,13 @@
 }
 
 .card-list {
- display: flex;
-  justify-content: center; /* Center horizontally */
-  align-items: center; /* Center vertically */
-  height: 100%; /* Ensure it takes full height of its container */
+  display: flex;
+  justify-content: center;
+  /* Center horizontally */
+  align-items: center;
+  /* Center vertically */
+  height: 100%;
+  /* Ensure it takes full height of its container */
 }
 
 .card {
@@ -186,14 +191,14 @@
 .card:hover {
   cursor: grab;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-    /* Lift card slightly on hover */
+  /* Lift card slightly on hover */
   transform: translateY(-5px);
   border: 5px dashed var(--lblue);
 }
 
 /* Selector for hover effect on facedown cards */
 .tableau-card.facedown:hover {
-  border: none!important;
+  border: none !important;
 }
 
 .card.dragging {
@@ -328,7 +333,9 @@ button:disabled {
 }
 
 .facedown-stockpile {
-  margin-right: -10px; /* Adjust margin as needed */
+  margin-right: -10px;
+  position: relative;
+  /* Adjust margin as needed */
 }
 
 .facedown-card {
@@ -339,7 +346,8 @@ button:disabled {
   height: 180px;
   margin-bottom: 5px;
   padding: 10px;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Optional: add a shadow effect */
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  /* Optional: add a shadow effect */
   color: black;
   margin-left: 60px;
   margin-right: 10px;
@@ -357,6 +365,21 @@ button:disabled {
   /* Amount of overlap between cards */
 }
 
+.last-card-container {
+  position: absolute;
+  bottom: 465px;
+  left: 50%;
+  border: 3px dashed #606666;
+  border-radius: 5px;
+  padding: 10px;
+  transform: translateX(-510%);
+  width: 120px;
+  height: 180px;
+color: white;
+
+
+}
+
 /* FOUNDATION --------------------------------------------*/
 
 /* Foundation deck container */
@@ -369,8 +392,10 @@ button:disabled {
 
 /* Individual foundation deck */
 .foundation-deck {
-  width: 120px;  /* Adjust card width */
-  height: 180px; /* Adjust card height */
+  width: 120px;
+  /* Adjust card width */
+  height: 180px;
+  /* Adjust card height */
   border: 3px dashed #606666;
   border-radius: 5px;
   padding: 10px;
@@ -385,19 +410,26 @@ button:disabled {
 
 /* Cards dropped into foundation deck */
 .card-in-deck {
-  width: 120px;  /* Adjust card width */
-  height: 180px; /* Adjust card height */
-  background-color: white;  /* Card background color */
-  border: 1px solid #ccc;  /* Card border */
-  border-radius: 5px;  /* Rounded corners for card */
-  position: relative;  /* Positioning context for overlap */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+  width: 120px;
+  /* Adjust card width */
+  height: 180px;
+  /* Adjust card height */
+  background-color: white;
+  /* Card background color */
+  border: 1px solid #ccc;
+  /* Card border */
+  border-radius: 5px;
+  /* Rounded corners for card */
+  position: relative;
+  /* Positioning context for overlap */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   color: black;
 }
 
 /* How much sub level layer of cards shows */
-.card-in-deck + .card-in-deck {
-  margin-top: -174px;  /* Amount of overlap between cards */
+.card-in-deck+.card-in-deck {
+  margin-top: -174px;
+  /* Amount of overlap between cards */
 }
 
 /* Adjust card styles as needed */
@@ -528,4 +560,3 @@ button:disabled {
   transition: none;
   transform: none;
 }
-
