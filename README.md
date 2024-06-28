@@ -33,6 +33,7 @@ Lessons learned from building this project:
 - Make all possible moves legal and then impose conditions later, rather than build on priori rules.
 - Try to keep all code together for context, but where necessary, make backup copies with partial code for debugging.
 - Save all/extra code in backup files.
+- The dnd packages don't allow dragging of group items. I had to combine grouped cards into one object and style it like multiple cards. Apparently you can drag multiple objects using 'react-beautiful-dnd multi drag pattern'.
 
 <u>Generally: Build God mode basic, expand, then limit. </u>
 

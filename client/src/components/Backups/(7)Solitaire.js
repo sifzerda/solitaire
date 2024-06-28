@@ -130,6 +130,26 @@ const Solitaire = () => {
     setCurrentCardIndex((prevIndex) => (prevIndex + 1) % cards.length);
   };
 
+  const handleLastFaceDownClick = (pileId) => {
+    console.log(`Clicked on tableau pile ${pileId}`);
+    alert(`Flip worked for tableau pile ${pileId}`);
+    // Implement logic to flip the last face-down card
+    // Example:
+    const updatedTableau = tableau.map((pile) => {
+    if (pile.id === pileId) {
+     const lastCardIndex = pile.cards.length - 1;
+    const updatedFaceUp = [...pile.faceUp];
+    updatedFaceUp[lastCardIndex] = true;
+    return {
+    ...pile,
+    faceUp: updatedFaceUp,
+    };
+    }
+   return pile;
+    });
+    setTableau(updatedTableau);
+  };
+
   //-----------------------------------(F1) drag ANY TO FOUNDATION RULES -------------------------------------------------
 
   // Check if the move is valid to the foundation
@@ -455,52 +475,55 @@ const Solitaire = () => {
           <div className="tableau-cards">
             {tableau.map((pile) => (
               <div key={pile.id} className="tableau-pile">
-<Droppable droppableId={pile.id}>
-                {(provided, snapshot) => (
-                  <div
-                    className={`tableau-inner ${snapshot.isDraggingOver ? 'dragging-over' : ''}`}
-                    {...provided.droppableProps}
-                    ref={provided.innerRef}
-                  >
-                    {pile.cards.map((card, index) => (
-                      <Draggable
-                        key={card.id}
-                        draggableId={card.id}
-                        index={index}
-                        isDragDisabled={!pile.faceUp[index]} // Disable dragging for face-down cards
-                      >
-                        {(dragProvided, dragSnapshot) => (
-                          <div
-                            className={`tableau-card ${dragSnapshot.isDragging ? 'group-dragging' : ''}`}
-                            ref={dragProvided.innerRef}
-                            {...dragProvided.draggableProps}
-                            {...dragProvided.dragHandleProps}
-                          >
-                            {/* Render individual card when not dragging, group when dragging */}
-                            {dragSnapshot.isDragging && pile.faceUp[index] ? (
-                              // Render group of face-up cards being dragged
-                              <div className='t-drag-card-group'>
-                                {pile.cards.slice(index).map((c, idx) => (
-                                  <div key={c.id}>
-                                    {c.rank} of {c.suit} - ({c.color})
-                                  </div>
-                                ))}
-                              </div>
-                            ) : (
-                              // Render individual card or facedown card
-                              <img
-                                src={pile.faceUp[index] ? card.image : cardBack}
-                                alt={pile.faceUp[index] ? `${card.rank} of ${card.suit}` : 'Face-down card'}
-                              />
-                            )}
-                          </div>
-                        )}
-                      </Draggable>
-                    ))}
-                    {provided.placeholder}
-                  </div>
-                )}
-              </Droppable>
+ <Droppable droppableId={pile.id}>
+                  {(provided, snapshot) => (
+                    <div
+                      className={`tableau-inner ${snapshot.isDraggingOver ? 'dragging-over' : ''}`}
+                      {...provided.droppableProps}
+                      ref={provided.innerRef}
+                    >
+                      {pile.cards.map((card, index) => (
+                        <Draggable
+                          key={card.id}
+                          draggableId={card.id}
+                          index={index}
+                          isDragDisabled={!pile.faceUp[index]}
+                        >
+                          {(dragProvided, dragSnapshot) => (
+                            <div
+                              className={`tableau-card ${dragSnapshot.isDragging ? 'group-dragging' : ''}`}
+                              ref={dragProvided.innerRef}
+                              {...dragProvided.draggableProps}
+                              {...dragProvided.dragHandleProps}
+                              onClick={() => {
+                                console.log(`Clicked card index ${index} in tableau pile ${pile.id}`);
+                                if (index === pile.cards.length - 1 && !pile.faceUp[index]) {
+                                  handleLastFaceDownClick(pile.id);
+                                }
+                              }}
+                            >
+                              {dragSnapshot.isDragging && pile.faceUp[index] ? (
+                                <div className='t-drag-card-group'>
+                                  {pile.cards.slice(index).map((c, index) => (
+                                    <div key={c.id}>
+                                      {c.rank} of {c.suit} - ({c.color})
+                                    </div>
+                                  ))}
+                                </div>
+                              ) : (
+                                <img
+                                  src={pile.faceUp[index] ? card.image : cardBack}
+                                  alt={pile.faceUp[index] ? `${card.rank} of ${card.suit}` : 'Face-down card'}
+                                />
+                              )}
+                            </div>
+                          )}
+                        </Draggable>
+                      ))}
+                      {provided.placeholder}
+                    </div>
+                  )}
+                </Droppable>
               </div>
             ))}
           </div>
