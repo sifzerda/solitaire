@@ -13,8 +13,6 @@ import Profile from './pages/Profile.jsx';
 import Login from './pages/Login.jsx';
 import Signup from './pages/Signup.jsx';
 
-
-
 import SolitaireCopy from './components/Copy.jsx';
 
 // Define the accessible routes, and which components respond to which URL

@@ -1,6 +1,6 @@
 # SOLITAIRE 🂡
 
-Games in solitaire:
+Current games in gamestack:
 
 - [ ] Minesweeper
 - [x] Solitaire
@@ -20,20 +20,20 @@ Games in solitaire:
 
 ## Description
 
-This is a personal project to create a react MERN stack app which has a number of simple games. I did not use online instructions, only trial and error and ChatGPT prompting. This was more challenging to make than minesweeper and took some experimentation, and working through challenges with problem-solving and logic.
+A personal project to create a react MERN stack app which has a number of simple games. I used trial and error and ChatGPT prompting. This was more challenging to make than minesweeper and took some experimentation, and a lot of debugging.
 
 As with minesweeper the game had to be divided up into the smallest working components/units. It began as a simple DnD interface where one of 52 boxes (cards) could be dragged and dropped onto 4 rectangles (foundations). Then the DnD dynamic was configured to operate according to Solitaire rules, preventing DnD unless there was a match of card suit and rank.
 
 Lessons learned from building this project:
 
-- How to implement a Drag and Drop package (react beautiful dnd)
-- Make the game full generally, rather than specific and partially
+- How to implement a Drag and Drop package (react beautiful dnd);
+  - The dnd packages don't allow dragging of group items. I had to combine grouped cards into one object and style it like multiple cards. Apparently you can drag multiple objects using 'react-beautiful-dnd multi drag pattern'.
+- Make the game full generally, rather than specific and partially;
 - Create basic working dnd structures and build the game around them, rather than try to make a conditional click-based display/game, and implement the dnd dynamic later. The more moving parts, the harder it is to get dnd in;
 - Create all game display parts (stockpile, foundations, tableau) first, and then give them operational logic, rather than create one fully working part one at a time;
 - Make all possible moves legal and then impose conditions later, rather than build on priori rules.
 - Try to keep all code together for context, but where necessary, make backup copies with partial code for debugging.
 - Save all/extra code in backup files.
-- The dnd packages don't allow dragging of group items. I had to combine grouped cards into one object and style it like multiple cards. Apparently you can drag multiple objects using 'react-beautiful-dnd multi drag pattern'.
 
 <u>Generally: Build God mode basic, expand, then limit. </u>
 
@@ -75,7 +75,7 @@ npm run start
 
 ## Usage
 
- The game executes a typical game of solitaire with traditional rules. Parts:
+ The game executes a game of solitaire with traditional rules. Parts:
  
  - Start screen
  - Game
@@ -101,14 +101,10 @@ The main/mother function is 'onDragEnd' which indexes and executes all other maj
 9.  <u>'return':</u> renders stockpile ('cards'), tableau, and foundations and contains in DnD areas.
 Other:
 1.  <u>'else if (source.droppableId.startsWith('tableau')...)':</u> Enables tableau cards to be dragged in stacks (piles), from source.index -> last-item. 
-2.  <u>'return {... t-drag-group}':</u> this targets a tableau -> tableau pile of cards and applies a class selector which allowed me to modify appearance of dragging card pile as a single object/stack. React Beautiful DnD didn't seem to have a 'group/multiple object/s' dragging graphic, so I had to make it manually with CSS.
+2.  <u>'return {... t-drag-card-group}':</u> this targets a tableau -> tableau pile of cards and applies a class selector which allowed me to modify appearance of dragging card pile as a single object/stack. React Beautiful DnD didn't seem to have a 'group/multiple object/s' dragging graphic, so I had to make it manually with CSS.
 3.  <u>return {...}</u> conditionally renders tableau card as faceup or facedown depending on card's array index.
 4.  <u>'index === pile.cards.length - 1 ? ...'</u> Conditional rendering of card DnD based on whether card is faceup or facedown. Facedown cards are not draggable. Tableau.pile array -1 is facedown (i.e. everything but top card).
 5.  <u>'const initialTableau': </u>'faceUp' property tracks faceup cards. 
-6.  <u></u>
-7.  <u></u>
-8.  <u></u>
-9.  <u></u>
 
 ## To do: 
 
@@ -128,20 +124,18 @@ Other:
   - [x] refine dropping to obey solitaire rules conditions
 - [x] Drag n Drop of entire tableau groups of cards between cols
 - [x] Facedown all tableau cards except top
-- [ ] Change 'next card' button to a facedown stack of cards
-  - [ ] I.e. make the stockpile a stack (or show all cards) and style like foundation and tableau stacks (but increase neg margin)
+- [x] Change 'next card' button to a facedown stack of cards
+  - [x] I.e. make the stockpile a stack (or show all cards) and style like foundation and tableau stacks (but increase neg margin)
 - [x] Style cards in tableau to layer
 - [x] Style cards in foundation to layer
-- [ ] recover tableau group drag animation (group drag works it's just lost the in-between animation)
-  - [ ] After testing/debugging, change -150 to -170 of CSS: .card-in-deck + .card-in-deck
-- [ ] BEFORE FINAL STYLING: Once game works fine, save a copy of the Notableau file and .scss to the 'Backups' folder, so if there's an unforseen issue in future, you can debug using God Mode all moves legal (instead of having to play through the game)
-- [ ]  
+- [x] recover tableau group drag animation (group drag works it's just lost the in-between animation)
+  - [x] After testing/debugging, change -150 to -170 of CSS: .card-in-deck + .card-in-deck
 
 Stuff to do once main game functioning (i.e. easier implementable latter tasks):
 
 - [] double clicking a card in stockpile; if there's a valid move to foundations (but not other areas), will automatically make that move 
 - [] double clicking a card in tableau; if there's a valid move to foundations (but not other areas), will automatically make that move 
-- [ ] import card images - prob do this last
+- [x] import card images - prob do this last
 - [ ] reshuffle stockpile button, basically restarts game
 - [ ] timer: restarts on game refresh
 - [ ] Points system, each time a card is placed on foundation, it adds points (if cards can be removed from foundation, don't forget to subtract points for that)
