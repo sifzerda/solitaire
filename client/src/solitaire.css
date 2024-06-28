@@ -368,7 +368,7 @@ button:disabled {
 
 /* How much sub level layer of cards shows */
 .card-in-deck + .card-in-deck {
-  margin-top: -140px;  /* Amount of overlap between cards */
+  margin-top: -174px;  /* Amount of overlap between cards */
 }
 
 /* Adjust card styles as needed */
