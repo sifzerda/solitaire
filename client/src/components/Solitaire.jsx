@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import StartScreen from './StartScreen';
 // facedown card image
 import cardBack from '../../public/images/cardBack.jpg';
 
@@ -90,6 +91,7 @@ const initialTableau = Array.from({ length: 7 }, (_, index) => ({
 }));
 
 const Solitaire = () => {
+  const [gameStarted, setGameStarted] = useState(false);
   const [cards, setCards] = useState(initialCards);
   const [decks, setDecks] = useState(initialDecks);
   /* for next card display */
@@ -129,6 +131,11 @@ const Solitaire = () => {
   // cycling through cards in stockpile
   const nextCard = () => {
     setCurrentCardIndex((prevIndex) => (prevIndex + 1) % cards.length);
+  };
+
+  const handleStartGame = () => {
+    setGameStarted(true);
+    // Additional initialization logic if needed
   };
 
   //-----------------------------------(F1) drag ANY TO FOUNDATION RULES -------------------------------------------------
@@ -384,6 +391,10 @@ const Solitaire = () => {
   /* -------------------------------------------------------------*/
 
   return (
+<div className="solitaire-container">
+{!gameStarted ? (
+        <StartScreen onStartGame={handleStartGame} />
+      ) : (
     <DragDropContext onDragEnd={onDragEnd}>
       <div className="s-container">
         {/* Facedown stockpile section */}
@@ -396,17 +407,17 @@ const Solitaire = () => {
           ))}
         </div>
 
-{/* Visible only on final card */}
+        {/* Visible only on final card */}
 
-{cards.slice(currentCardIndex + 1).length === 0 && (
-<div className="last-card-container">
-<div className="last-card-content">
-              <img className='refresh' src="https://img.icons8.com/matisse/100/rotate.png" alt="rotate"/>
+        {cards.slice(currentCardIndex + 1).length === 0 && (
+          <div className="last-card-container">
+            <div className="last-card-content">
+              <img className='refresh' src="https://img.icons8.com/matisse/100/rotate.png" alt="rotate" />
             </div>
           </div>
-)}
+        )}
 
-{/* -------------------------- */}
+        {/* -------------------------- */}
 
         <div className="cards">
 
@@ -473,8 +484,8 @@ const Solitaire = () => {
         </div>
 
         <div className="card-navigation">
-            <button onClick={nextCard}>Next Card</button>
-          </div>
+          <button onClick={nextCard}>Next Card</button>
+        </div>
 
         {/* Tableau decks section */}
         <div className="tableau">
@@ -509,7 +520,7 @@ const Solitaire = () => {
                                   {pile.cards.slice(index).map((c, index) => (
                                     <div className='t-drag-card-group' key={c.id}>
                                       <img src={c.image} alt={`${c.rank} of ${c.suit}`} />
-                                    {/*  {c.rank} of {c.suit} - ({c.color})  */}
+                                      {/*  {c.rank} of {c.suit} - ({c.color})  */}
                                     </div>
                                   ))}
                                 </div>
@@ -549,6 +560,10 @@ const Solitaire = () => {
 
       </div>
     </DragDropContext>
+    
+  )}
+
+    </div>
   );
 };
 

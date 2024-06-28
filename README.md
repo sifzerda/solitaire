@@ -154,11 +154,10 @@ Stuff to do once main game functioning (i.e. easier implementable latter tasks):
 - [ ] switch content into solitaire git repo once finished and ready to deploy
 
 ## To do for all games
-- [ ] create start game landing screen: + start game btn; + high scores btn
+- [x] create start game landing screen: + start game btn; + high scores btn
 - [ ] end game/win game screen, + view score, + submit score, + see high scores, + restart game
 - [ ] if user logged in, can save high score (post to user array)
 - [ ] profile page where scores can be displayed
-- [ ] create a 'start game' landing screen with 'new game', 'set difficulty' and 'high scores' buttons
 - [ ] have 8-bit chiptune stylized music play during game (with button that starts and stops music, maybe a speaker pic that gets struck through)
 - [ ] volume increase/decrease for music
 - [ ] play through albums as 8-bit, and can play next song in list
