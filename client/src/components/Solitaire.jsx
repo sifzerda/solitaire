@@ -265,64 +265,81 @@ const Solitaire = () => {
   //----------------------------------- (T1) drag TABLEAU TO TABLEAU RULES -------------------------------------------------
 
   const handleTableauToTableauDrop = (source, destination) => {
+    // Find indices of source and destination piles in the tableau
     const sourcePileIndex = tableau.findIndex((pile) => pile.id === source.droppableId);
     const destinationPileIndex = tableau.findIndex((pile) => pile.id === destination.droppableId);
-
+  
     if (sourcePileIndex !== -1 && destinationPileIndex !== -1) {
+      // Clone tableau to avoid mutating state directly
       const updatedTableau = [...tableau];
       const sourcePile = updatedTableau[sourcePileIndex];
       const destinationPile = updatedTableau[destinationPileIndex];
+  
+      // Extract dragged group of cards from source pile
       const draggedGroup = sourcePile.cards.slice(source.index);
-
-      // Remove cards from source
+  
+      // Remove cards from source pile
       sourcePile.cards = sourcePile.cards.filter((_, index) => index < source.index);
 
-      // Validate if the dragged cards can be placed on the destination pile
-      const isTableauValidMove = () => {
-        const topCard = destinationPile.cards.length > 0 ? destinationPile.cards[destinationPile.cards.length - 1] : null;
-        const draggedCard = draggedGroup[0]; // We only validate the top card of the dragged group
+    // Validate if the dragged cards can be placed on the destination pile
+    const isTableauValidMove = () => {
+      const topCard = destinationPile.cards.length > 0 ? destinationPile.cards[destinationPile.cards.length - 1] : null;
+      const draggedCard = draggedGroup[0]; // We only validate the top card of the dragged group
 
-        // Check if dragged card rank is valid
-        const isValidRank = () => {
-          const ranks = ['King', 'Queen', 'Jack', '10', '9', '8', '7', '6', '5', '4', '3', '2', 'Ace'];
-          const draggedCardIndex = ranks.indexOf(draggedCard.rank);
-          if (!topCard) {
-            // If the pile is empty, only a King can be dropped
-            return draggedCard.rank === 'King';
-          } else {
-            const topCardIndex = ranks.indexOf(topCard.rank);
-            return draggedCardIndex === topCardIndex + 1;
-          }
-        };
-
-        // Check if dragged card color is valid (opposite color)
-        const isValidColor = () => {
-          if (!topCard) return true; // If no top card, any color is valid
-          return (topCard.color === 'Red' && draggedCard.color === 'Black') || (topCard.color === 'Black' && draggedCard.color === 'Red');
-        };
-
-        return isValidRank() && isValidColor();
+      // Check if dragged card rank is valid
+      const isValidRank = () => {
+        const ranks = ['King', 'Queen', 'Jack', '10', '9', '8', '7', '6', '5', '4', '3', '2', 'Ace'];
+        const draggedCardIndex = ranks.indexOf(draggedCard.rank);
+        if (!topCard) {
+          // If the pile is empty, only a King can be dropped
+          return draggedCard.rank === 'King';
+        } else {
+          const topCardIndex = ranks.indexOf(topCard.rank);
+          return draggedCardIndex === topCardIndex + 1;
+        }
       };
 
-      if (isTableauValidMove()) {
-        // Insert cards into destination
-        destinationPile.cards.splice(destination.index, 0, ...draggedGroup);
+      // Check if dragged card color is valid (opposite color)
+      const isValidColor = () => {
+        if (!topCard) return true; // If no top card, any color is valid
+        return (topCard.color === 'Red' && draggedCard.color === 'Black') || (topCard.color === 'Black' && draggedCard.color === 'Red');
+      };
 
-        // Make card added to destination pile faceup
-        const topCardIndex = destination.index;
-        destinationPile.faceUp[topCardIndex] = true;
+      return isValidRank() && isValidColor();
+    };
 
-        // Update tableau state only on valid move
-        setTableau(updatedTableau);
-      } else {
-        // Restore cards to the source pile on invalid move
-        sourcePile.cards.splice(source.index, 0, ...draggedGroup);
+    if (isTableauValidMove()) {
+      // Remember current faceUp state
+      const currentFaceUpState = [...destinationPile.faceUp];
 
-        // Update tableau state regardless to reflect the restored cards
-        setTableau(updatedTableau);
+      // Insert cards into destination pile
+      destinationPile.cards.splice(destination.index, 0, ...draggedGroup);
 
-        console.log('Invalid move: Cannot drop this card on top of the current tableau pile.');
-      }
+      // Update face-up state for all cards in the destination pile
+      destinationPile.faceUp = destinationPile.cards.map((_, index) => {
+        // Preserve existing face-up state if it was true before the drop
+        if (index < currentFaceUpState.length && currentFaceUpState[index]) {
+          return true;
+        }
+        // Otherwise, set face-up state for newly added cards
+        return index >= destination.index;
+      });
+
+      // Log added card and new faceup state
+      console.log(`Card ${draggedGroup[0].rank} of ${draggedGroup[0].suit} added to tableau ${destinationPile.id}.`);
+      console.log(`New faceup state: ${destinationPile.faceUp}`);
+
+      // Update tableau state only on valid move
+      setTableau(updatedTableau);
+    } else {
+      // Restore cards to the source pile on invalid move
+      sourcePile.cards.splice(source.index, 0, ...draggedGroup);
+
+      // Update tableau state regardless to reflect the restored cards
+      setTableau(updatedTableau);
+
+      console.log('Invalid move: Cannot drop this card on top of the current tableau pile.');
+    }
     }
   };
 
