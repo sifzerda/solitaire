@@ -321,6 +321,10 @@ button {
   transform: translateX(-83%) translateY(-108%);
 }
 
+button:hover {
+  background-color: transparent;
+}
+
 button:disabled {
   background-color: #ccc;
   cursor: not-allowed;
