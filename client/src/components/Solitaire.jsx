@@ -401,7 +401,7 @@ const Solitaire = () => {
 {cards.slice(currentCardIndex + 1).length === 0 && (
 <div className="last-card-container">
 <div className="last-card-content">
-              Last Card
+              <img className='refresh' src="https://img.icons8.com/matisse/100/rotate.png" alt="rotate"/>
             </div>
           </div>
 )}
@@ -409,9 +409,7 @@ const Solitaire = () => {
 {/* -------------------------- */}
 
         <div className="cards">
-          <div className="card-navigation">
-            <button onClick={nextCard}>Next Card</button>
-          </div>
+
           <Droppable droppableId="revealed-cards">
             {(provided) => (
               <div className="card-list" {...provided.droppableProps} ref={provided.innerRef}>
@@ -473,6 +471,10 @@ const Solitaire = () => {
             ))}
           </div>
         </div>
+
+        <div className="card-navigation">
+            <button onClick={nextCard}>Next Card</button>
+          </div>
 
         {/* Tableau decks section */}
         <div className="tableau">

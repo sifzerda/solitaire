@@ -17,7 +17,7 @@
   border: 6px solid #229753;
   border-radius: 8px;
   padding: 20px;
-  /*display: flex;   /* ----------------------------------------------------- */
+  display: flex;
   justify-content: center;
   align-items: center;
   color: white;
@@ -33,7 +33,7 @@
 
 .decks {
   padding: 10px;
-  /*display: flex;   /* ----------------------------------------------------- */
+  display: flex;
   flex-direction: column;
   align-items: center;
 }
@@ -60,7 +60,7 @@
 }
 
 .cards {
-  display: flex;   
+  display: flex;
   flex-direction: column;
   align-items: center;
   padding: 10px;
@@ -74,7 +74,7 @@
 }
 
 .center-container {
-  display: flex;   
+  display: flex;
   flex-direction: column;
   align-items: center;
   /* Center items horizontally */
@@ -83,7 +83,7 @@
 }
 
 .empty-deck-emoji {
-  /*display: flex;    ----------------------------------------------------- */
+  display: flex;
   justify-content: center;
   align-items: center;
   font-size: 4em;
@@ -307,18 +307,18 @@
 }
 
 button {
-  margin-top: 10px;
+  width: 120px;
+  height: 180px;
+ margin-bottom: -100px;
   padding: 8px 16px;
   font-size: 16px;
-  background-color: #4CAF50;
-  color: white;
+  background-color: transparent;
+  color: transparent;
   border: none;
   border-radius: 4px;
   cursor: pointer;
-}
-
-button:hover {
-  background-color: #45a049;
+  margin-right: 900px;
+  transform: translateX(-83%) translateY(-108%);
 }
 
 button:disabled {
@@ -440,6 +440,13 @@ button:disabled {
   max-height: 100%;
   display: block;
   transition: transform 0.3s ease;
+}
+
+img.refresh {
+  margin-top: 30px;
+  width: 85%;
+  height: 100%;
+  object-fit: cover;
 }
 
 /* TABLEAU ------------------------------------------------*/

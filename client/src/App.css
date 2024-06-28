@@ -136,6 +136,13 @@ a.back-link {
   display: inline-block;
 }
 
+.center-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+}
+
 /* signup ---------------------------------------------------------*/
 
 .signup-container {
