@@ -530,6 +530,17 @@ const Solitaire = () => {
             ))}
           </div>
         </div>
+
+{/* Facedown stockpile section */}
+<div className="facedown-stockpile">
+          {cards.slice(currentCardIndex + 1).map((card, index) => (
+            <div key={card.id} className="facedown-card">
+              <img src={cardBack} alt="Facedown card" />
+            </div>
+          ))}
+        </div>
+
+
       </div>
     </DragDropContext>
   );

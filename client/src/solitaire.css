@@ -172,7 +172,7 @@
   width: 120px;
   height: 180px;
   background-color: white;
-  border: 1px solid #ccc;
+  border: 1px solid #7a7a7a;
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s ease;
@@ -223,7 +223,6 @@
   /* Adjust card width as needed */
   height: 150px;
   /* Adjust card height as needed */
-  /* Dashed border */
   border-radius: 8px;
   /* Rounded corners */
   display: inline-block;
@@ -327,6 +326,38 @@ button:disabled {
   background-color: #ccc;
   cursor: not-allowed;
 }
+
+.facedown-pile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.facedown-card {
+  background-color: white;
+  border: 1px solid #999;
+  border-radius: 5px;
+  width: 120px;
+  height: 180px;
+  margin-bottom: 5px;
+  padding: 10px;
+  margin-bottom: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Optional: add a shadow effect */
+  color: black;
+
+}
+
+.facedown-card img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+/* How much sub level layer of cards shows */
+.facedown-card+.facedown-card {
+  margin-top: -150px;
+  /* Amount of overlap between cards */
+}
+
 
 /* FOUNDATION --------------------------------------------*/
 
@@ -439,7 +470,6 @@ button:disabled {
 /* Optional: Highlight when dragging */
 .tableau-card.dragging {
   opacity: 0.5;
-  /* Reduced opacity while dragging */
 }
 
 /* Optional: Hover effect */
@@ -454,19 +484,16 @@ button:disabled {
 /* Droppable area highlight */
 .tableau-inner.dragging-over {
   background-color: lightgreen;
-  /* Green background when dragging over */
 }
 
 .tableau-inner.dragging-over .tableau-card {
   transform: translateY(calc(-10px - 1px));
-  /* Adjust position when dragged over */
 }
 
 .tableau-card.dragging {
   opacity: 0.7;
   /* Reduce opacity when dragging */
   background-color: #f0f0f0;
-  /* Change background color when dragging */
 }
 
 /* Dragging tableau piles/columns */
@@ -503,3 +530,4 @@ button:disabled {
   transition: none;
   transform: none;
 }
+
