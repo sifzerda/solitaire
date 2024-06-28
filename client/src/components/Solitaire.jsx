@@ -105,9 +105,9 @@ const Solitaire = () => {
 
     for (let i = 0; i < tableauCopy.length; i++) {
       for (let j = 0; j <= i; j++) {
-        const isTopCard = j === i; // Determine if this card is the top card
-        tableauCopy[i].cards.push(shuffledCards.shift());
-        tableauCopy[i].faceUp.push(isTopCard); // Set faceup state
+        const card = shuffledCards.shift();
+        tableauCopy[i].cards.push(card);
+        tableauCopy[i].faceUp.push(j === i); // Set face-up only for the top card in each pile
       }
     }
 
@@ -206,47 +206,61 @@ const Solitaire = () => {
     const updatedCards = cards.filter((card) => card.id !== draggedCard.id);
     setCards(updatedCards);
 
+    console.log(`Dragging card ${draggedCard.rank} of ${draggedCard.suit} to destination: ${destination.droppableId}`);
+
     if (destination.droppableId.startsWith('tableau')) {
       const targetPileId = destination.droppableId;
       const targetPile = tableau.find((pile) => pile.id === targetPileId);
 
+      if (!targetPile) {
+        console.error(`Error: Tableau pile ${targetPileId} not found.`);
+        return;
+      }
+
       const topCard = targetPile.cards.length > 0 ? targetPile.cards[targetPile.cards.length - 1] : null;
 
-      // Check if dragged card rank is valid
-      const isValidRank = () => {
-        const ranks = ['King', 'Queen', 'Jack', '10', '9', '8', '7', '6', '5', '4', '3', '2', 'Ace'];
-        const draggedCardIndex = ranks.indexOf(draggedCard.rank);
-        if (topCard === null) {
-          // If the pile is empty, only a King can be dropped
-          return draggedCard.rank === 'King';
-        } else {
-          const topCardIndex = ranks.indexOf(topCard.rank);
-          return draggedCardIndex === topCardIndex + 1;
-        }
-      };
-
-      // Check if dragged card color is valid (opposite color)
-      const isValidColor = () => {
-        if (!topCard) return true; // If no top card, any color is valid
-        return (topCard.color === 'Red' && draggedCard.color === 'Black') || (topCard.color === 'Black' && draggedCard.color === 'Red');
-      };
-
-      if (isValidRank() && isValidColor()) {
-        const updatedTableau = tableau.map((pile) => {
-          if (pile.id === targetPileId) {
-            return {
-              ...pile,
-              cards: [...pile.cards, draggedCard],
-            };
-          }
-          return pile;
-        });
-        setTableau(updatedTableau);
+    // Check if dragged card rank is valid
+    const isValidRank = () => {
+      const ranks = ['King', 'Queen', 'Jack', '10', '9', '8', '7', '6', '5', '4', '3', '2', 'Ace'];
+      const draggedCardIndex = ranks.indexOf(draggedCard.rank);
+      if (topCard === null) {
+        // If the pile is empty, only a King can be dropped
+        return draggedCard.rank === 'King';
       } else {
-        console.log('Invalid move: Cannot drop this card on top of the current tableau pile.');
+        const topCardIndex = ranks.indexOf(topCard.rank);
+        return draggedCardIndex === topCardIndex + 1;
       }
+    };
+
+    // Check if dragged card color is valid (opposite color)
+    const isValidColor = () => {
+      if (!topCard) return true; // If no top card, any color is valid
+      return (topCard.color === 'Red' && draggedCard.color === 'Black') || (topCard.color === 'Black' && draggedCard.color === 'Red');
+    };
+
+    if (isValidRank() && isValidColor()) {
+      // Add the card to the tableau pile and mark it as faceup
+      const updatedTableau = tableau.map((pile) => {
+        if (pile.id === targetPileId) {
+          // Mark the added card faceup and retain other cards' face-up state
+          const updatedFaceUp = [...pile.faceUp, true];
+          console.log(`Card ${draggedCard.rank} of ${draggedCard.suit} added to tableau ${targetPileId}. New faceup state: ${updatedFaceUp}`);
+          return {
+            ...pile,
+            cards: [...pile.cards, draggedCard],
+            faceUp: updatedFaceUp,
+          };
+        }
+        return pile;
+      });
+      setTableau(updatedTableau);
+    } else {
+      console.log('Invalid move: Cannot drop this card on top of the current tableau pile.');
     }
-  };
+  } else {
+    console.log('Invalid destination: Destination must be a tableau pile.');
+  }
+};
 
   //----------------------------------- (T1) drag TABLEAU TO TABLEAU RULES -------------------------------------------------
 
