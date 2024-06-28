@@ -366,8 +366,8 @@ button:disabled {
 }
 
 .last-card-container {
-  position: absolute;
-  bottom: 465px;
+ margin-right: 65px;
+  bottom: -85px;
   left: 50%;
   border: 3px dashed #606666;
   border-radius: 5px;
@@ -375,9 +375,7 @@ button:disabled {
   transform: translateX(-510%);
   width: 120px;
   height: 180px;
-color: white;
-
-
+  color: white;
 }
 
 /* FOUNDATION --------------------------------------------*/
