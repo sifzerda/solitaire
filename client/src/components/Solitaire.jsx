@@ -505,10 +505,11 @@ const Solitaire = () => {
                               {/* Render individual card when not dragging, group when dragging */}
                               {dragSnapshot.isDragging && pile.faceUp[index] ? (
                                 // Render group of face-up cards being dragged
-                                <div className='t-drag-card-group'>
-                                  {pile.cards.slice(index).map((c, idx) => (
-                                    <div key={c.id}>
-                                      {c.rank} of {c.suit} - ({c.color})
+                                <div className='t-drag-card'>
+                                  {pile.cards.slice(index).map((c, index) => (
+                                    <div className='t-drag-card-group' key={c.id}>
+                                      <img src={c.image} alt={`${c.rank} of ${c.suit}`} />
+                                    {/*  {c.rank} of {c.suit} - ({c.color})  */}
                                     </div>
                                   ))}
                                 </div>
