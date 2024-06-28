@@ -1,11 +1,5 @@
 /* ------------------------- solitaire -------------------------*/
-.solitaire {
-  display: flex;
-  justify-content: space-around;
-  padding: 20px;
-  font-family: Arial, sans-serif;
-}
-
+ 
 .s-container {
   display: flex;
   flex-wrap: wrap;
@@ -70,7 +64,7 @@
   padding: 10px;
   width: 300px;
   margin-right: 60px;
-  margin-left: -90px;
+  margin-left: -40px;
 }
 
 .card-navigation {
@@ -333,6 +327,10 @@ button:disabled {
   align-items: center;
 }
 
+.facedown-stockpile {
+  margin-right: -10px; /* Adjust margin as needed */
+}
+
 .facedown-card {
   background-color: white;
   border: 1px solid #999;
@@ -341,10 +339,11 @@ button:disabled {
   height: 180px;
   margin-bottom: 5px;
   padding: 10px;
-  margin-bottom: 5px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Optional: add a shadow effect */
   color: black;
-
+  margin-left: 60px;
+  margin-right: 10px;
+  margin-top: 47px;
 }
 
 .facedown-card img {
@@ -363,7 +362,7 @@ button:disabled {
 /* Foundation deck container */
 .foundation-decks {
   display: flex;
-  justify-content: space-around;
+  justify-content: flex-start;
   margin-top: 20px;
   margin-left: 200px;
 }

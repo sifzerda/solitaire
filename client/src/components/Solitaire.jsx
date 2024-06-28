@@ -396,6 +396,16 @@ const Solitaire = () => {
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <div className="s-container">
+ 
+{/* Facedown stockpile section */}
+<div className="facedown-stockpile">
+          {cards.slice(currentCardIndex + 1).map((card, index) => (
+            <div key={card.id} className="facedown-card">
+              <img src={cardBack} alt="Facedown card" />
+            </div>
+          ))}
+        </div>
+
         <div className="cards">
           <div className="card-navigation">
             <button onClick={nextCard}>Next Card</button>
@@ -425,6 +435,7 @@ const Solitaire = () => {
             )}
           </Droppable>
         </div>
+ 
 
         {/* Foundation decks section */}
         <div className="decks">
@@ -529,15 +540,6 @@ const Solitaire = () => {
               </div>
             ))}
           </div>
-        </div>
-
-{/* Facedown stockpile section */}
-<div className="facedown-stockpile">
-          {cards.slice(currentCardIndex + 1).map((card, index) => (
-            <div key={card.id} className="facedown-card">
-              <img src={cardBack} alt="Facedown card" />
-            </div>
-          ))}
         </div>
 
 
