@@ -7,16 +7,19 @@ Current games in gamestack:
 
 ## Table of Contents
 
-- [SOLITAIRE 🂡](#solitaire-)
-  - [Table of Contents](#table-of-contents)
-  - [Description](#description)
-  - [Badges](#badges)
-  - [Visuals](#visuals)
-  - [Installation](#installation)
-  - [Usage](#usage)
-  - [Dev Stuff: Building:](#dev-stuff-building)
-  - [To do:](#to-do)
-  - [To do for all games](#to-do-for-all-games)
+1. Description
+2. Badges
+3. Visuals
+4. Installation
+5. Usage
+6. Development
+7. To do
+8. To do for all games
+9. Support
+10. Contributing 
+11. Authors and acknowledgment
+12. License
+13. Project status
 
 ## Description
 
@@ -159,3 +162,37 @@ Stuff to do once main game functioning (i.e. easier implementable latter tasks):
 - [ ] have 8-bit chiptune stylized music play during game (with button that starts and stops music, maybe a speaker pic that gets struck through)
 - [ ] volume increase/decrease for music
 - [ ] play through albums as 8-bit, and can play next song in list
+
+## 6. Support
+
+For support, users can contact tydamon@hotmail.com.
+
+## 8. Contributing
+
+Any contributions you make are greatly appreciated.
+
+If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement". 
+1. Fork the Project
+2. Create your Feature Branch (git checkout -b feature/NewFeature)
+3. Commit your Changes (git commit -m 'Add some NewFeature')
+4. Push to the Branch (git push origin feature/NewFeature)
+5. Open a Pull Request
+
+## Authors and acknowledgment
+
+The author acknowledges and credits those who have contributed to this project, including:
+
+- ChatGPT
+
+## License
+
+Distributed under the MIT License. See LICENSE.txt for more information.
+
+## Project status
+
+This project is completed. 
+
+Otherwise It has a couple of minor, non-game-breaking bug issues:
+- Cards can be inserted into tableau piles behind other cards. You have to make sure you drop the card onto the correct (topmost) card.
+- Sometimes cards dropped onto tableau piles turn facedown. You have to click them to turn them back faceup.
+- Further development to fix these issues would be great.
