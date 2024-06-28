@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-
+// facedown card image
 import cardBack from '../../public/images/cardBack.jpg';
 
 // Define initial squares and boxes data
