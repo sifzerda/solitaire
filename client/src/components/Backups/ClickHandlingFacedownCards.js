@@ -139,7 +139,6 @@ const Solitaire = () => {
     });
   };
 
-
   //-----------------------------------(F1) drag ANY TO FOUNDATION RULES -------------------------------------------------
 
   // Check if the move is valid to the foundation

@@ -126,8 +126,19 @@ const Solitaire = () => {
     return array;
   };
 
+  // cycling through cards in stockpile
   const nextCard = () => {
     setCurrentCardIndex((prevIndex) => (prevIndex + 1) % cards.length);
+  };
+
+  const onCardClick = (pileIndex) => {
+    const updatedTableau = [...tableau];
+    const pile = updatedTableau[pileIndex];
+
+    if (pile.cards.length > 0 && !pile.faceUp[pile.faceUp.length - 1]) {
+      pile.faceUp[pile.faceUp.length - 1] = true;
+      setTableau(updatedTableau);
+    }
   };
 
   //-----------------------------------(F1) drag ANY TO FOUNDATION RULES -------------------------------------------------
@@ -487,13 +498,27 @@ const Solitaire = () => {
                                 ))}
                               </div>
                             ) : (
-                              // Render individual card or facedown card
+                              <div
+                              className="tableau-card-inner"
+                              onClick={() => {
+                                if (!pile.faceUp[index] && index === pile.cards.length - 1) {
+                                  const updatedTableau = [...tableau];
+                                  updatedTableau.forEach((p) => {
+                                    if (p.id === pile.id) {
+                                      p.faceUp[index] = true;
+                                    }
+                                  });
+                                  setTableau(updatedTableau);
+                                }
+                              }}
+                            >
                               <img
                                 src={pile.faceUp[index] ? card.image : cardBack}
                                 alt={pile.faceUp[index] ? `${card.rank} of ${card.suit}` : 'Face-down card'}
                               />
-                            )}
-                          </div>
+                            </div>
+                          )}
+                        </div>
                         )}
                       </Draggable>
                     ))}
