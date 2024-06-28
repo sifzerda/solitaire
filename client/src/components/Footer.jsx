@@ -7,15 +7,15 @@ function Footer() {
       <div className="row d-flex justify-content-center">
         <div className="col-lg-8">
 
-          <p className="footer-text">Ordo ab chao.</p>
+          <p>Ordo ab chao.</p>
 
 <span className='blue-span'>♤</span>
 <span className='red-span'>♢</span>
 <span className='blue-span'>♧</span>
 <span className='red-span'>♡</span>
+<p className="footer-text"></p>
 
-          <p className="footer-text">sifzerda</p>
-          <p className="footer-text">2024</p>
+          <p>sifzerda 2024</p>
           <a href="https://github.com/sifzerda/solitaire" target="_blank" rel="noopener noreferrer">
           <FontAwesomeIcon icon={faGithub} size="2x" />
           </a>

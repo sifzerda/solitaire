@@ -441,7 +441,25 @@ p {
 
 /* Footer -------------------------------------------------------------- */
 
-p.footer-text {
+.footer-text {
+  display: flex; /* Ensures items are aligned in a row */
+  align-items: center; /* Centers items vertically */
+  gap: 10px; /* Adjust the gap between items */
+}
+
+.footer-text-2 {
+  display: flex;
+  align-items: center; /* Center vertically */
+  justify-content: center; /* Center horizontally */
+  gap: 10px;
+  text-align: center; /* Align text horizontally */
+  margin-right: 20px; /* Adjust margin for spacing */
+}
+
+
+.img-tesseract {
+  width: 100%;
+  height: auto;
   color: white;
 }
 
