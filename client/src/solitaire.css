@@ -354,10 +354,9 @@ button:disabled {
 
 /* How much sub level layer of cards shows */
 .facedown-card+.facedown-card {
-  margin-top: -150px;
+  margin-top: -183px;
   /* Amount of overlap between cards */
 }
-
 
 /* FOUNDATION --------------------------------------------*/
 
