@@ -163,7 +163,7 @@ const handleRestartGame = () => {
   setDecks(initialDecks);
 };
 
-  // from Start to Game
+  // from Start to Highscores
   const handleHighscores = () => {
     setViewHighscores(true);
   };
@@ -423,6 +423,7 @@ if (viewHighscores) {
   return <Highscores />;
 }
 
+/* -------------------------- RETURN/RENDERING -----------------------------------*/
 
   return (
 <div>

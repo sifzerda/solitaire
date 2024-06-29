@@ -34,6 +34,11 @@ const Highscores = () => {
             ))}
           </tbody>
         </table>
+
+<div className="button-container-2">
+        <button className="p-btn-2" onClick={() => window.location.reload()}>⏪ Back</button>
+        </div>
+
       </div>
     );
   };
