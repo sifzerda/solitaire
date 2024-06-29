@@ -112,6 +112,7 @@ li {
   color: white;
   cursor: pointer;
   transition: background-color 0.4s;
+  border: 2px white solid;
 }
 
 h1.start-h1 {
