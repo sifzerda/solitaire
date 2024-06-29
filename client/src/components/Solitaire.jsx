@@ -481,11 +481,11 @@ if (viewHighscores) {
 /* -------------------------- RETURN/RENDERING -----------------------------------*/
 
   return (
-<div className='main-game-container'>
+<div className='solitaire-box'>
 { !gameStarted && <StartScreen onStartGame={handleStartGame} onHighScores={handleHighscores} /> }
 
       {gameStarted && (
-        <div>
+        <div className='main-game-container'>
 
 {/* --------------- game exit and restart btns ----------------*/}
         <div className="button-wrapper">

@@ -79,7 +79,14 @@ li {
 }
 
 main.mx-3 {
-  height: 85vh;
+  height: 90vh;
+}
+
+.center-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 87vh;
 }
 
 /*----------------------- START SCREEN ----------------------------*/
@@ -128,7 +135,7 @@ h1.start-h1 {
 .button-wrapper {
   display: flex;
   justify-content: flex-end; 
-  
+  padding-top: 20px;
 }
 
 .game-button {
@@ -294,13 +301,6 @@ a.back-link {
   color: white;
   margin-bottom: 10px;
   display: inline-block;
-}
-
-.center-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 80vh;
 }
 
 /* signup ---------------------------------------------------------*/

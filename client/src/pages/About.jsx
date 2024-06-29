@@ -7,15 +7,10 @@ export default function About () {
   return (
     <div className="center-container">
 
-      <div className="solitaire-box">
- 
-
 
 <Solitaire />
 
 
-
-    </div>
     </div>
   );
 }
