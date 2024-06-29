@@ -306,7 +306,7 @@
   align-items: center;
 }
 
-button {
+.next-card-btn {
   width: 120px;
   height: 180px;
  margin-bottom: -100px;
@@ -321,11 +321,11 @@ button {
   transform: translateX(-83%) translateY(-108%);
 }
 
-button:hover {
+.next-card-btn:hover {
   background-color: transparent;
 }
 
-button:disabled {
+.next-card-btn:disabled {
   background-color: #ccc;
   cursor: not-allowed;
 }

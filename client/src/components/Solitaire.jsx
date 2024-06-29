@@ -484,7 +484,7 @@ const Solitaire = () => {
         </div>
 
         <div className="card-navigation">
-          <button onClick={nextCard}>Next Card</button>
+          <button className='next-card-btn' onClick={nextCard}>Next Card</button>
         </div>
 
         {/* Tableau decks section */}
