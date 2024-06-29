@@ -99,6 +99,35 @@ const Solitaire = () => {
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
   const [tableau, setTableau] = useState(initialTableau); // State for tableau cards
   const [viewHighscores, setViewHighscores] = useState(false);
+  const [timeInSeconds, setTimeInSeconds] = useState(0);
+  const [timerActive, setTimerActive] = useState(false);
+ 
+    // Timer logic -------------------------------------------
+    useEffect(() => {
+      let interval;
+  
+      if (timerActive) {
+        interval = setInterval(() => {
+          setTimeInSeconds((prevTime) => prevTime + 1);
+        }, 1000);
+      } else {
+        clearInterval(interval);
+      }
+  
+      return () => clearInterval(interval);
+    }, [timerActive]);
+  
+    // Reset timer when game starts or restarts
+    useEffect(() => {
+      if (gameStarted) {
+        setTimeInSeconds(0);
+        setTimerActive(true);
+      } else {
+        setTimerActive(false);
+      }
+    }, [gameStarted]);
+
+    // --------- -------------------------------------------
 
   useEffect(() => {
     const shuffledCards = shuffleArray([...initialCards]);
@@ -438,6 +467,8 @@ if (viewHighscores) {
         <button className="game-button restart-game" onClick={handleRestartGame}>Restart</button>
         <button className="game-button exit-game" onClick={handleExitGame}>Exit</button>
       </div>
+
+      <div className="timer">{formatTime(timeInSeconds)}</div>
  
 {/* --------------- --------------------- -----------------------*/}
 
@@ -616,6 +647,13 @@ if (viewHighscores) {
     </div>
     </div>
   );
+};
+
+// Helper function to format time in MM:SS format
+const formatTime = (timeInSeconds) => {
+  const minutes = Math.floor(timeInSeconds / 60).toString().padStart(2, '0');
+  const seconds = (timeInSeconds % 60).toString().padStart(2, '0');
+  return `${minutes}:${seconds}`;
 };
 
 export default Solitaire;
