@@ -140,12 +140,11 @@ Stuff to do once main game functioning (i.e. easier implementable latter tasks):
 - [] double clicking a card in tableau; if there's a valid move to foundations (but not other areas), will automatically make that move 
 - [x] import card images - prob do this last
 - [x] reshuffle stockpile button, basically restarts game
-- [ ] timer: restarts on game refresh
+- [x] timer: restarts on game refresh
 - [ ] Points system, each time a card is placed on foundation, it adds points (if cards can be removed from foundation, don't forget to subtract points for that)
 -  Points system: add time to points so the less time, the more points you get, *** put this in minesweeper
 - [ ] Handling upon: game win
 - [ ] Handling upon: game loss, or no valid moves left that would allow game win
-- [ ] add points system via timer, no points gained but leadership board based on quickest win (least time)
 - [ ] highscores comp
 - [ ] submit score/time if logged in
 - [ ] user profile page shows how many games user has won, and quickest (least time) wins
