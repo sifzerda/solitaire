@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import StartScreen from './StartScreen';
+import Highscores from './Highscores';
 // facedown card image
 import cardBack from '../../public/images/cardBack.jpg';
 
@@ -97,6 +98,7 @@ const Solitaire = () => {
   /* for next card display */
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
   const [tableau, setTableau] = useState(initialTableau); // State for tableau cards
+  const [viewHighscores, setViewHighscores] = useState(false);
 
   useEffect(() => {
     const shuffledCards = shuffleArray([...initialCards]);
@@ -112,9 +114,7 @@ const Solitaire = () => {
         tableauCopy[i].faceUp.push(j === i); // Set face-up only for the top card in each pile
       }
     }
-
     stockpile = shuffledCards;
-
     setTableau(tableauCopy);
     setCards(stockpile);
   }, []);
@@ -143,10 +143,6 @@ const handleExitGame = () => {
   setGameStarted(false);
 };
 
-if (!gameStarted) {
-  return <StartScreen onStartGame={handleStartGame} onExitGame={handleExitGame} />;
-}
-
 // reiterates the initial game state
 
 const handleRestartGame = () => {
@@ -166,6 +162,11 @@ const handleRestartGame = () => {
   setCards(stockpile);
   setDecks(initialDecks);
 };
+
+  // from Start to Game
+  const handleHighscores = () => {
+    setViewHighscores(!viewHighscores);
+  };
 
   //-----------------------------------(F1) drag ANY TO FOUNDATION RULES -------------------------------------------------
 
@@ -417,21 +418,30 @@ const handleRestartGame = () => {
     handleFoundationDrop(source, destination, draggedCard);
   };
 
-  /* -------------------------------------------------------------*/
+/* -------------------------------------------------------------*/
+
+
 
   return (
 <div className="solitaire-container">
+{!gameStarted && (
+        <>
+          <StartScreen onStartGame={handleStartGame} />
+        </>
+      )}
 
-        {/* --------------- game exit and restart ----------------*/}
+<div>
+      {gameStarted && (
+        <div>
+
+{/* --------------- game exit and restart btns ----------------*/}
         <div className="button-wrapper">
         <button className="game-button restart-game" onClick={handleRestartGame}>Restart</button>
         <button className="game-button exit-game" onClick={handleExitGame}>Exit</button>
       </div>
-        {/* --------------- --------------------- ----------------*/}
+ 
+{/* --------------- --------------------- -----------------------*/}
 
-{!gameStarted ? (
-        <StartScreen onStartGame={handleStartGame} />
-      ) : (
     <DragDropContext onDragEnd={onDragEnd}>
       <div className="s-container">
 
@@ -445,7 +455,7 @@ const handleRestartGame = () => {
           ))}
         </div>
 
-        {/* Visible only on final card */}
+{/* Visible only on final card ---------------------------------------*/}
 
         {cards.slice(currentCardIndex + 1).length === 0 && (
           <div className="last-card-container">
@@ -455,7 +465,7 @@ const handleRestartGame = () => {
           </div>
         )}
 
-        {/* -------------------------- */}
+{/* ------------------------------------------------------------------ */}
 
         <div className="cards">
 
@@ -486,7 +496,8 @@ const handleRestartGame = () => {
         </div>
 
 
-        {/* Foundation decks section */}
+{/* Foundation decks section ---------------------------------------------------------------------*/}
+
         <div className="decks">
           <div className="foundation-decks">
             {decks.map((deck) => (
@@ -525,7 +536,8 @@ const handleRestartGame = () => {
           <button className='next-card-btn' onClick={nextCard}>Next Card</button>
         </div>
 
-        {/* Tableau decks section */}
+{/* Tableau decks section ---------------------------------------------------------------------*/}
+
         <div className="tableau">
           <div className="tableau-cards">
             {tableau.map((pile) => (
@@ -599,8 +611,9 @@ const handleRestartGame = () => {
 
       </div>
     </DragDropContext>
-    
+    </div>
   )}
+    </div>
 
     </div>
   );
