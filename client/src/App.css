@@ -171,10 +171,18 @@ h1.start-h1 {
 }
 
 .highscores-container h2 {
-  font-size: 28px;
   text-align: center;
-  margin-bottom: 20px;
   color: #333;
+  font-size: 40px !important;
+  justify-content: center;
+  display: grid;
+  font-family: "Rajdhani", cursive;
+  color:  white;
+  text-shadow: 5px 8px 5px rgba(0, 0, 0, 0.5);
+  background-color: var(--bootstrap-dark);
+  border: 2px white solid;
+  border-radius: 5px;
+  /* margin-bottom: 0!important; */
 }
 
 .p-btn-2 {
