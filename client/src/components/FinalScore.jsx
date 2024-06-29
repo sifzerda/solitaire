@@ -1,10 +1,13 @@
-const FinalScore = ({ timer }) => {
+ 
+  const FinalScore = () => {
+
     return (
       <div className='final-container'>
-        <h1>game completed!</h1>
-        <p className='timer'>Your time was: {timer}</p>
+        <h1>Game Completed!</h1>
       </div>
     );
   };
   
   export default FinalScore;
+
+ 

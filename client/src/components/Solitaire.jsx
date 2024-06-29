@@ -469,7 +469,7 @@ const handleRestartGame = () => {
 const checkGameWon = () => {
   return decks.every((deck) => {
     // Check if all ranks from Ace to King are in the foundation deck
-    const requiredCards = ['Ace', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'Jack', 'Queen', 'King'];
+    const requiredCards = ['King'];
     const deckCards = deck.cards.map((card) => card.rank);
 
     return requiredCards.every((rank) => deckCards.includes(rank));
@@ -477,6 +477,7 @@ const checkGameWon = () => {
 };
 
 if (checkGameWon()) {
+  setTimerActive(false);
   alert('Congratulations! You have won the game!');
 }
 
