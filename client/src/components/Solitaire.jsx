@@ -127,6 +127,12 @@ const Solitaire = () => {
       }
     }, [gameStarted]);
 
+    useEffect(() => {
+      if (checkGameWon()) {
+        alert('Congratulations! You have won the game!');
+      }
+    }, [decks]); // Listen for changes in the foundation decks
+
     // --------- -------------------------------------------
 
   useEffect(() => {
@@ -449,7 +455,25 @@ const handleRestartGame = () => {
     handleFoundationDrop(source, destination, draggedCard);
   };
 
-/* -------------------------------------------------------------*/
+/* -------------------------- check if game won -----------------------------------*/
+
+const checkGameWon = () => {
+  return decks.every((deck) => {
+    // Check if all ranks from Ace to King are in the foundation deck
+    const requiredCards = ['Ace', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'Jack', 'Queen', 'King'];
+    const deckCards = deck.cards.map((card) => card.rank);
+
+    return requiredCards.every((rank) => deckCards.includes(rank));
+  });
+};
+
+if (checkGameWon()) {
+  alert('Congratulations! You have won the game!');
+}
+
+
+/* -------------------------- check if game won -----------------------------------*/
+
 if (viewHighscores) {
   return <Highscores />;
 }
@@ -457,9 +481,8 @@ if (viewHighscores) {
 /* -------------------------- RETURN/RENDERING -----------------------------------*/
 
   return (
-<div>
+<div className='main-game-container'>
 { !gameStarted && <StartScreen onStartGame={handleStartGame} onHighScores={handleHighscores} /> }
-<div className="solitaire-container">
 
       {gameStarted && (
         <div>
@@ -646,7 +669,7 @@ if (viewHighscores) {
     </div>
   )}
 
-    </div>
+
     </div>
   );
 };

@@ -10,18 +10,12 @@ export default function About () {
       <div className="solitaire-box">
  
 
-      <div className='white-box'>
+
 <Solitaire />
-      </div>
-
-
-
 
 
 
     </div>
-
-
     </div>
   );
 }
