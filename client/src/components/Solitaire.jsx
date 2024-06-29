@@ -165,7 +165,7 @@ const handleRestartGame = () => {
 
   // from Start to Game
   const handleHighscores = () => {
-    setViewHighscores(!viewHighscores);
+    setViewHighscores(true);
   };
 
   //-----------------------------------(F1) drag ANY TO FOUNDATION RULES -------------------------------------------------
@@ -419,18 +419,16 @@ const handleRestartGame = () => {
   };
 
 /* -------------------------------------------------------------*/
-
+if (viewHighscores) {
+  return <Highscores />;
+}
 
 
   return (
-<div className="solitaire-container">
-{!gameStarted && (
-        <>
-          <StartScreen onStartGame={handleStartGame} />
-        </>
-      )}
-
 <div>
+{ !gameStarted && <StartScreen onStartGame={handleStartGame} onHighScores={handleHighscores} /> }
+<div className="solitaire-container">
+
       {gameStarted && (
         <div>
 
@@ -613,8 +611,8 @@ const handleRestartGame = () => {
     </DragDropContext>
     </div>
   )}
-    </div>
 
+    </div>
     </div>
   );
 };
