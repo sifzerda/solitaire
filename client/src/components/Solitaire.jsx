@@ -190,6 +190,8 @@ const handleRestartGame = () => {
   setTableau(tableauCopy);
   setCards(stockpile);
   setDecks(initialDecks);
+  setTimeInSeconds(0); // Reset the timer
+  setTimerActive(true); // Start the timer
 };
 
   // from Start to Highscores
