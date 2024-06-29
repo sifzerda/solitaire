@@ -1,6 +1,6 @@
 
 
-const StartScreen = ({ onStartGame, onHighScores }) => {
+const StartScreen = ({ onStartGame, onHighScores, onFinalScore }) => {
   
     return (
       <div className="start-screen">
@@ -11,6 +11,13 @@ const StartScreen = ({ onStartGame, onHighScores }) => {
 <br></br>
 <br></br>
             <button className="p-btn" onClick={onHighScores}> High Scores</button>
+
+<br></br>
+<br></br>
+<br></br>
+            <button className="p-btn" onClick={onFinalScore}> Final Scores  - debugging </button>
+
+
             </div>
           </div>   
  

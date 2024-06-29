@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import StartScreen from './StartScreen';
 import Highscores from './Highscores';
+import FinalScore from './FinalScore';
 // facedown card image
 import cardBack from '../../public/images/cardBack.jpg';
 
@@ -101,7 +102,10 @@ const Solitaire = () => {
   const [viewHighscores, setViewHighscores] = useState(false);
   const [timeInSeconds, setTimeInSeconds] = useState(0);
   const [timerActive, setTimerActive] = useState(false);
- 
+
+  const [showFinalScore, setShowFinalScore] = useState(false);
+
+
     // Timer logic -------------------------------------------
     useEffect(() => {
       let interval;
@@ -205,6 +209,10 @@ const handleRestartGame = () => {
     setViewHighscores(true);
   };
 
+  // from Start to FinalScore
+  const handleFinalScore = () => {
+    setShowFinalScore(true);
+  };
 
   //-----------------------------------(F1) drag ANY TO FOUNDATION RULES -------------------------------------------------
 
@@ -479,11 +487,15 @@ if (viewHighscores) {
   return <Highscores />;
 }
 
+if (showFinalScore) {
+  return <FinalScore />;
+}
+
 /* -------------------------- RETURN/RENDERING -----------------------------------*/
 
   return (
 <div className='solitaire-box'>
-{ !gameStarted && <StartScreen onStartGame={handleStartGame} onHighScores={handleHighscores} /> }
+{ !gameStarted && <StartScreen onStartGame={handleStartGame} onHighScores={handleHighscores}  onFinalScore={handleFinalScore}  /> }
 
       {gameStarted && (
         <div className='main-game-container'>
