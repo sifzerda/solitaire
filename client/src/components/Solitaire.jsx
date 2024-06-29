@@ -133,10 +133,39 @@ const Solitaire = () => {
     setCurrentCardIndex((prevIndex) => (prevIndex + 1) % cards.length);
   };
 
+  // from Start to Game
   const handleStartGame = () => {
     setGameStarted(true);
-    // Additional initialization logic if needed
   };
+
+// From Game to Start
+const handleExitGame = () => {
+  setGameStarted(false);
+};
+
+if (!gameStarted) {
+  return <StartScreen onStartGame={handleStartGame} onExitGame={handleExitGame} />;
+}
+
+// reiterates the initial game state
+
+const handleRestartGame = () => {
+  // Reset cards
+  const shuffledCards = shuffleArray([...initialCards]);
+  let tableauCopy = initialTableau.map((pile) => ({ ...pile, cards: [], faceUp: pile.faceUp.map(() => false) }));
+  let stockpile = [];
+  for (let i = 0; i < tableauCopy.length; i++) {
+    for (let j = 0; j <= i; j++) {
+      const card = shuffledCards.shift();
+      tableauCopy[i].cards.push(card);
+      tableauCopy[i].faceUp[j] = (j === i); // Set face-up only for the top card in each pile
+    }
+  }
+  stockpile = shuffledCards;
+  setTableau(tableauCopy);
+  setCards(stockpile);
+  setDecks(initialDecks);
+};
 
   //-----------------------------------(F1) drag ANY TO FOUNDATION RULES -------------------------------------------------
 
@@ -392,11 +421,20 @@ const Solitaire = () => {
 
   return (
 <div className="solitaire-container">
+
+        {/* --------------- game exit and restart ----------------*/}
+        <div className="button-wrapper">
+        <button className="game-button restart-game" onClick={handleRestartGame}>Restart</button>
+        <button className="game-button exit-game" onClick={handleExitGame}>Exit</button>
+      </div>
+        {/* --------------- --------------------- ----------------*/}
+
 {!gameStarted ? (
         <StartScreen onStartGame={handleStartGame} />
       ) : (
     <DragDropContext onDragEnd={onDragEnd}>
       <div className="s-container">
+
         {/* Facedown stockpile section */}
         <div className="facedown-stockpile">
 
@@ -557,6 +595,7 @@ const Solitaire = () => {
             ))}
           </div>
         </div>
+        
 
       </div>
     </DragDropContext>

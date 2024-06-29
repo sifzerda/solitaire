@@ -135,6 +135,47 @@ h1.start-h1 {
   margin-bottom: 20px;
 }
 
+.button-wrapper {
+  display: flex;
+  justify-content: flex-end; 
+
+}
+
+.game-button {
+  padding: 10px 20px;
+  margin: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;  
+}
+
+.exit-game {
+  background-color: transparent; 
+  color: white;
+  border: 2px solid #fdfcfc;
+}
+
+.exit-game:hover {
+  background-color: var(--light-red);
+  border: 2px solid white;
+  color:  white;
+}
+
+.restart-game {
+  background-color: transparent; 
+  color: white;
+  border: 2px solid #fdfcfc;
+}
+
+.restart-game:hover {
+  background-color: var(--lblue);
+  border: 2px solid white;
+  color:  white;
+}
+
 /* -----------------------*/
 
 /* Additional styling */
