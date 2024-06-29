@@ -79,14 +79,14 @@ li {
 }
 
 main.mx-3 {
-  height: 90vh;
+  height: 105vh;
 }
 
 .center-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 87vh;
+  height: 100vh;
 }
 
 /*----------------------- START SCREEN ----------------------------*/

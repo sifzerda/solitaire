@@ -11,18 +11,22 @@
 
 .solitaire-box {
   width: 1400px;
-  min-height: 300px;
+  height: 1150px!important;
   /* Example minimum height to prevent shrinking too small */
   background-color: #2ecc71;
   border: 6px solid #229753;
   border-radius: 8px;
   padding: 20px;
-  display: flex;
   justify-content: center;
   align-items: center;
   color: white;
   font-size: 24px;
   text-align: center;
+}
+
+.main-game-container {
+  justify-content: center;
+  align-items: center;
 }
 
 .cards,
