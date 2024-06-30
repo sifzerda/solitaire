@@ -64,8 +64,9 @@ Lessons learned from building this project:
 
 [Visit App deployed to Heroku](https://minesweeper10-611b154e8013.herokuapp.com/)
 
-![minescreen3](https://github.com/sifzerda/minesweeper/assets/139626561/0d09ac37-ce4f-480c-ad35-8a1c61b1464c)
-![minesweeper 5](https://github.com/sifzerda/minesweeper/assets/139626561/e1d21645-ff92-44ed-8bc4-57f8eb47ef13)
+![solitaire-screenshot-1](https://github.com/sifzerda/solitaire/assets/139626561/a82c2908-baa8-4085-89b9-f19f782646c9)
+
+![solitaire-screenshot-2](https://github.com/sifzerda/solitaire/assets/139626561/597cc570-c867-4a2b-9975-7aa68b7aa358)
 
 ## Installation
 
@@ -143,20 +144,19 @@ Stuff to do once main game functioning (i.e. easier implementable latter tasks):
 - [x] timer: restarts on game refresh
 - [ ] Points system, each time a card is placed on foundation, it adds points (if cards can be removed from foundation, don't forget to subtract points for that)
 -  Points system: add time to points so the less time, the more points you get, *** put this in minesweeper
-- [ ] Handling upon: game win
+- [x] Handling upon: game win
 - [ ] Handling upon: game loss, or no valid moves left that would allow game win
-- [ ] highscores comp
-- [ ] submit score/time if logged in
-- [ ] user profile page shows how many games user has won, and quickest (least time) wins
+- [x] highscores comp
+- [x] submit score/time if logged in
+- [x] user profile page shows how many games user has won, and quickest (least time) wins
 - [ ] Make each part of the game a separate component
 - [ ] OPTIONAL: Some kind of animation upon winning game
-- [ ] switch content into solitaire git repo once finished and ready to deploy
 
 ## To do for all games
 - [x] create start game landing screen: + start game btn; + high scores btn
-- [ ] end game/win game screen, + view score, + submit score, + see high scores, + restart game
-- [ ] if user logged in, can save high score (post to user array)
-- [ ] profile page where scores can be displayed
+- [x] end game/win game screen, + view score, + submit score, + see high scores, + restart game
+- [x] if user logged in, can save high score (post to user array)
+- [x] profile page where scores can be displayed
 - [ ] have 8-bit chiptune stylized music play during game (with button that starts and stops music, maybe a speaker pic that gets struck through)
 - [ ] volume increase/decrease for music
 - [ ] play through albums as 8-bit, and can play next song in list
@@ -190,7 +190,7 @@ Distributed under the MIT License. See LICENSE.txt for more information.
 
 This project is completed. 
 
-Otherwise It has a couple of minor, non-game-breaking bug issues:
+Otherwise it has a couple of minor, non-game-breaking bug issues:
 - Cards can be inserted into tableau piles behind other cards. You have to make sure you drop the card onto the correct (topmost) card.
 - Sometimes cards dropped onto tableau piles turn facedown. You have to click them to turn them back faceup.
-- Further development to fix these issues would be great.
+- Further development to fix these issues needed.
