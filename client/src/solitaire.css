@@ -29,6 +29,104 @@
   align-items: center;
 }
 
+/* game win screen */
+
+.grid-container {
+  border: 2px solid var(--lblue);
+  border-radius: 5px;
+padding: 20px;
+margin-top: -400px;
+text-align: center;
+}
+
+.start {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color:  white;  
+}
+
+.black-text {
+  color: white; 
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+span.red {
+  color: var(--light-red); /* user time and score*/  
+}
+
+.submit-button-s {  /* submit score button */
+  background-color: #2da031; 
+  color: rgb(255, 255, 255); 
+  border: 2px solid rgb(255, 255, 255);
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 1rem;
+  margin: 0.5rem;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.submit-button-s:hover {
+  background-color: var(--fluro); 
+  color: black;
+  border: 2px solid rgb(169, 172, 1);
+}
+
+.success {
+  color: var(--fluro) 
+  font-weight: bold;
+  margin: 1rem 0;
+}
+
+.submit-button-h {   /* to highscores button */
+  background-color: var(--light-red); 
+  color: rgb(255, 255, 255); 
+  border: 2px solid rgb(255, 255, 255);
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 1rem;
+  margin: 0.5rem;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.submit-button-h:hover {
+  background-color: rgb(151, 23, 23); 
+  color: rgb(255, 255, 255);
+  border: 2px solid rgb(255, 255, 255);
+}
+
+.submit-button-p { /* play again button */
+  background-color: var(--lblue);  
+  color: rgb(255, 255, 255); 
+  border: 2px solid rgb(255, 255, 255);
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 1rem;
+  margin: 0.5rem;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.submit-button-p:hover {
+  background-color: rgb(0, 64, 138); 
+  color: white;
+  border: 2px solid white;
+}
+
+
+/* ----------------- */
+
 .cards,
 .decks,
 .tableau {

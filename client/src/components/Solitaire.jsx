@@ -100,34 +100,29 @@ const Solitaire = () => {
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
   const [tableau, setTableau] = useState(initialTableau); // State for tableau cards
   const [viewHighscores, setViewHighscores] = useState(false);
-  const [timeInSeconds, setTimeInSeconds] = useState(0);
-  const [timerActive, setTimerActive] = useState(false);
-
+  const [timer, setTimer] = useState(0);
+  const [isActive, setIsActive] = useState(false);
   const [showFinalScore, setShowFinalScore] = useState(false);
 
 
     // Timer logic -------------------------------------------
+
     useEffect(() => {
-      let interval;
-  
-      if (timerActive) {
-        interval = setInterval(() => {
-          setTimeInSeconds((prevTime) => prevTime + 1);
+      if (isActive) {
+        const interval = setInterval(() => {
+          setTimer(timer => timer + 1);
         }, 1000);
-      } else {
-        clearInterval(interval);
+        return () => clearInterval(interval);
       }
-  
-      return () => clearInterval(interval);
-    }, [timerActive]);
-  
+    }, [isActive]);
+
     // Reset timer when game starts or restarts
     useEffect(() => {
       if (gameStarted) {
-        setTimeInSeconds(0);
-        setTimerActive(true);
+        setTimer(0);
+        setIsActive(true);
       } else {
-        setTimerActive(false);
+        setIsActive(false);
       }
     }, [gameStarted]);
 
@@ -200,8 +195,8 @@ const handleRestartGame = () => {
   setTableau(tableauCopy);
   setCards(stockpile);
   setDecks(initialDecks);
-  setTimeInSeconds(0); // Reset the timer
-  setTimerActive(true); // Start the timer
+  setTimer(0); // Reset the timer
+  setIsActive(true); // Start the timer
 };
 
   // from Start to Highscores
@@ -467,20 +462,17 @@ const handleRestartGame = () => {
 /* -------------------------- check if game won -----------------------------------*/
 
 const checkGameWon = () => {
-  return decks.every((deck) => {
-    // Check if all ranks from Ace to King are in the foundation deck
-    const requiredCards = ['King'];
+  const requiredCards = ['King']; // Adjust if needed to include all ranks from 'Ace' to 'King'
+  const foundationsComplete = decks.every((deck) => {
     const deckCards = deck.cards.map((card) => card.rank);
-
     return requiredCards.every((rank) => deckCards.includes(rank));
   });
+  if (foundationsComplete) {
+    setIsActive(false);
+    alert(`You won! Time taken: ${timer} seconds`);
+    setShowFinalScore(true);
+  }
 };
-
-if (checkGameWon()) {
-  setTimerActive(false);
-  alert('Congratulations! You have won the game!');
-}
-
 
 /* -------------------------- check if game won -----------------------------------*/
 
@@ -489,7 +481,7 @@ if (viewHighscores) {
 }
 
 if (showFinalScore) {
-  return <FinalScore />;
+  return <FinalScore time={timer} onHighScores={handleHighscores} />;
 }
 
 /* -------------------------- RETURN/RENDERING -----------------------------------*/
@@ -507,7 +499,7 @@ if (showFinalScore) {
         <button className="game-button exit-game" onClick={handleExitGame}>Exit</button>
       </div>
 
-      <div className="timer">{formatTime(timeInSeconds)}</div>
+      <div className="timer">Time: {timer}</div>
  
 {/* --------------- --------------------- -----------------------*/}
 
@@ -688,11 +680,5 @@ if (showFinalScore) {
   );
 };
 
-// Helper function to format time in MM:SS format
-const formatTime = (timeInSeconds) => {
-  const minutes = Math.floor(timeInSeconds / 60).toString().padStart(2, '0');
-  const seconds = (timeInSeconds % 60).toString().padStart(2, '0');
-  return `${minutes}:${seconds}`;
-};
 
 export default Solitaire;

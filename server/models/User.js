@@ -20,13 +20,18 @@ const userSchema = new Schema({
     required: true,
     minlength: 5
   },
-  thoughts: [
+  solScore: [
     {
-      type: Schema.Types.ObjectId,
-      ref: 'Thought',
-    },
+      solPoints: {
+        type: Number,
+        required: true,
+      },
+      solTimeTaken: {
+        type: Number,
+        required: true,
+      },
+    }
   ],
-  
 });
 
 // set up pre-save middleware to create password
