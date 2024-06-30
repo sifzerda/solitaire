@@ -6,35 +6,38 @@ import { QUERY_ME } from '../utils/queries';
 import { SAVE_SOL_SCORE } from '../utils/mutations'
 import '../App.css';
 
-const FinalScore = ({ time, onHighScores }) => { // add 'score' once coded in
-    //const [solPoints, setSolPoints] = useState(score);
-    const [solTimeTaken, setSolTimeTaken] = useState(time);
-    const [showSuccessMessage, setShowSuccessMessage] = useState(false); 
-  
-    const { data } = useQuery(QUERY_ME);
-    const userId = data?.me?._id;
-    const username = data?.me?.username || 'Anonymous';
-  
-    const [saveSolScore] = useMutation(SAVE_SOL_SCORE);
-  
-    const handleSubmit = async () => {
-      try {
-        const { data } = await saveSolScore({
-          variables: {
-            userId,
-            //solPoints, // add this once 'score' is coded in
-            solTimeTaken,
-          },
-        });
-        console.log('Score saved:', data.saveSolScore);
-        // Optionally, you can trigger some UI update or action upon successful save
-        setShowSuccessMessage(true); // Show success message
-      } catch (error) {
-        console.error('Error saving score:', error);
-        // Handle error state or display a message to the user
-    alert ('There was an error saving your score', error);  
+const FinalScore = ({ time, onHighScores }) => {
+  //const [solPoints, setSolPoints] = useState(score);
+  const [solTimeTaken, setSolTimeTaken] = useState(time);
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
+
+  const { data, loading, error } = useQuery(QUERY_ME);
+  const userId = data?.me?._id;
+
+  const [saveSolScore, { loading: savingScore }] = useMutation(SAVE_SOL_SCORE);
+
+  const handleSubmit = async () => {
+    try {
+      console.log('Submitting score with userId:', userId);
+      console.log('Submitting score with solTimeTaken:', solTimeTaken);
+
+      const { data } = await saveSolScore({
+        variables: {
+          userId,
+          solTimeTaken,
+        },
+      });
+
+      console.log('Score saved:', data.saveSolScore);
+      setShowSuccessMessage(true);
+    } catch (error) {
+      console.error('Error saving score:', error);
+      alert('There was an error saving your score');
     }
-    };
+  };
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error.message}</p>;
   
     return (
         <div className="grid-container">
@@ -45,30 +48,31 @@ const FinalScore = ({ time, onHighScores }) => { // add 'score' once coded in
           <p className='black-text'>Time taken: <span className='red'>{time} seconds</span></p>
     
           {/* Conditional rendering based on success message state */}
-          {showSuccessMessage ? (
-            <p className="success">Your score has been submitted!</p>
+      {showSuccessMessage ? (
+        <p className="success">Your score has been submitted!</p>
+      ) : (
+        <>
+          {userId ? (
+            <button className="submit-button-s" onClick={handleSubmit} disabled={savingScore}>
+              {savingScore ? 'Submitting...' : 'Submit Score'}
+            </button>
           ) : (
-            Auth.loggedIn() ? (
-              <button className="submit-button-s" onClick={handleSubmit}>
-                Submit Score
-              </button>
-            ) : (
-              <p className='black-text'>
-                You must <Link to="/login"> LOG IN </Link> or <Link to="/signup"> SIGNUP </Link> to Submit a Score.
-              </p>
-            )
+            <p className='black-text'>
+              You must <Link to="/login">LOG IN</Link> or <Link to="/signup">SIGNUP</Link> to Submit a Score.
+            </p>
           )}
-    
-          <button className="submit-button-h" onClick={onHighScores}>
-            High Scores
-          </button>
-    
-          <button className="submit-button-p" onClick={() => window.location.reload()}>
-            Play Again
-          </button>
+        </>
+      )}
 
-        </div>
-      );
-    };
-    
-    export default FinalScore;
+      <button className="submit-button-h" onClick={onHighScores}>
+        High Scores
+      </button>
+
+      <button className="submit-button-p" onClick={() => window.location.reload()}>
+        Play Again
+      </button>
+    </div>
+  );
+};
+
+export default FinalScore;

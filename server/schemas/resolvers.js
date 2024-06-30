@@ -70,10 +70,10 @@ const resolvers = {
       return { token, user };
     },
 
-    saveSolScore: async (parent, { userId, solPoints, solTimeTaken }) => {
+    saveSolScore: async (parent, { userId, solTimeTaken }) => {
       const updatedUser = await User.findByIdAndUpdate(
         userId,
-        { $push: { solScore: { solPoints, solTimeTaken } } },
+        { $push: { solScore: { solTimeTaken } } },
         { new: true }
       );
       if (!updatedUser) {

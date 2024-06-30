@@ -22,10 +22,6 @@ const userSchema = new Schema({
   },
   solScore: [
     {
-      solPoints: {
-        type: Number,
-        required: true,
-      },
       solTimeTaken: {
         type: Number,
         required: true,

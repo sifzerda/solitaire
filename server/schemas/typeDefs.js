@@ -9,7 +9,6 @@ const typeDefs = `
   }
 
       type SolScore {
-    solPoints: Int
     solTimeTaken: Int
   }
 
@@ -30,7 +29,7 @@ const typeDefs = `
     updateUser(username: String, email: String, password: String): User
     login(email: String!, password: String!): Auth
     removeUser: User
-    saveSolScore(userId: ID!, solPoints: Int!, solTimeTaken: Int!): User
+    saveSolScore(userId: ID!, solTimeTaken: Int!): User
   }
 `;
 

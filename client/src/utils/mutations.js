@@ -34,13 +34,12 @@ export const REMOVE_USER = gql`
 `;
 
 export const SAVE_SOL_SCORE = gql`
-  mutation saveSolScore($userId: ID!, $solPoints: Int!, $solTimeTaken: Int!) {
-    saveSolScore(userId: $userId, solPoints: $solPoints, solTimeTaken: $solTimeTaken) {
+  mutation saveSolScore($userId: ID!, $solTimeTaken: Int!) {
+    saveSolScore(userId: $userId, solTimeTaken: $solTimeTaken) {
       _id
       username
       email
       solScore {
-        solPoints
         solTimeTaken
       }
     }

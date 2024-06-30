@@ -15,7 +15,6 @@ db.once('open', async () => {
 /* -----------------minesweeper score*/ 
         mineScore: [
           {
-            solPoints: 100,
             solTimeTaken: 10
           }
         ]
@@ -27,7 +26,6 @@ db.once('open', async () => {
         password: '12345',
         mineScore: [
           {
-            solPoints: 90,
             solTimeTaken: 12
           }
         ]
@@ -39,7 +37,6 @@ db.once('open', async () => {
         password: '12345',
         mineScore: [
           {
-            solPoints: 50,
             solTimeTaken: 100
           }
         ]

@@ -17,7 +17,6 @@ export const QUERY_USERS = gql`
       username
       email
       solScore {
-        solPoints
         solTimeTaken
       }
     }
@@ -31,7 +30,6 @@ export const QUERY_ME = gql`
       username
       email
             solScore {
-        solPoints
         solTimeTaken
       }
     }
@@ -41,8 +39,7 @@ export const QUERY_ME = gql`
 export const GET_SOL_SCORE = gql`
   query getSolScore($userId: ID!) {
     getSolScore(userId: $userId) {
-      solPoints
-      soltimeTaken
+      solTimeTaken
     }
   }
 `;
