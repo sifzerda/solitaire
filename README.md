@@ -137,8 +137,8 @@ Other:
 
 Stuff to do once main game functioning (i.e. easier implementable latter tasks):
 
-- [] double clicking a card in stockpile; if there's a valid move to foundations (but not other areas), will automatically make that move 
-- [] double clicking a card in tableau; if there's a valid move to foundations (but not other areas), will automatically make that move 
+- [ ] double clicking a card in stockpile; if there's a valid move to foundations (but not other areas), will automatically make that move 
+- [ ] double clicking a card in tableau; if there's a valid move to foundations (but not other areas), will automatically make that move 
 - [x] import card images - prob do this last
 - [x] reshuffle stockpile button, basically restarts game
 - [x] timer: restarts on game refresh
