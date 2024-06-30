@@ -1,39 +1,57 @@
+import '../App.css';  
+import { useQuery } from '@apollo/client';
+import { QUERY_USERS } from '../utils/queries';
+
 const Highscores = () => {
-    // Mock data for highscores
-    const fakeHighscores = [
-      { id: 1, name: 'Player 1', score: 100 },
-      { id: 2, name: 'Player 2', score: 90 },
-      { id: 3, name: 'Player 3', score: 80 },
-      { id: 4, name: 'Player 4', score: 70 },
-      { id: 5, name: 'Player 5', score: 60 },
-      { id: 6, name: 'Player 6', score: 50 },
-      { id: 7, name: 'Player 7', score: 40 },
-      { id: 8, name: 'Player 8', score: 30 },
-      { id: 9, name: 'Player 9', score: 20 },
-      { id: 10, name: 'Player 10', score: 10 },
-    ];
-  
-    return (
-      <div className="highscores-container">
-        <h2>Highscores</h2>
-        <table>
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Name</th>
-              <th>Score</th>
-            </tr>
-          </thead>
-          <tbody>
-            {fakeHighscores.map((score, index) => (
-              <tr key={score.id}>
-                <td>{index + 1}</td>
-                <td>{score.name}</td>
-                <td>{score.score}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+  const { loading, data, error } = useQuery(QUERY_USERS);
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error.message}</p>;
+
+  const users = data.users; // Extracting users from query data
+
+  // Aggregate all mineScore entries with associated usernames
+  let allScores = [];
+  users.forEach(user => {
+    user.solScore.forEach(score => {
+      allScores.push({
+        username: user.username,
+        solTimeTaken: score.solTimeTaken,
+      });
+    });
+  });
+
+  // Sort combined scores by minePoints in descending order
+  // If points are the same, then sort by mineTimeTaken in ascending order
+  allScores.sort((a, b) => {
+      return a.solTimeTaken - b.solTimeTaken; // Sort by time ascending if points are tied
+});
+
+// Limit to top 20 scores
+const top20Scores = allScores.slice(0, 20);
+
+return (
+  <div className="grid-container">
+    <h1 className='end'>High scores </h1>
+    <p className='yellow'>★ ★ ★ ★</p>
+    <table className="high-scores-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Seconds</th>
+          <th>Username</th>
+        </tr>
+      </thead>
+      <tbody>
+        {top20Scores.map((score, index) => (
+          <tr key={index}>
+            <td>{index + 1}</td>
+            <td>{score.solTimeTaken}</td>
+            <td>{score.username}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
 
 <div className="button-container-2">
         <button className="p-btn-2" onClick={() => window.location.reload()}>⏪ Back</button>

@@ -70,10 +70,6 @@ ul {
   color: white;
 }
 
-h6 {
-  color: var(--creepy-green);
-}
-
 li {
   color: white;
 }
@@ -105,26 +101,35 @@ p.timer {
 
 /*----------------------- START SCREEN ----------------------------*/
 
+.start-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 600px;
+  width: 1380px;
+}
+
 .start-screen {
   border-radius: 10px;
   border: 3px solid #fff;
   justify-content: center;
   align-items: center;
-  height: 20vh;
+  height: 240px;  
+  width: 175px; 
 }
 
 .start-screen-background {
   background-image: url('../../public/images/startcard.png');
   background-position: center;
-  height: 100%;
-  width: 100%;
+  background-repeat: no-repeat; /* Prevents the background image from repeating */
+  height: 100%; /* Adjust height as needed */
   border-radius: 10px;
 }
 
 .p-btn {
   color: rgb(252, 74, 89);
   font-size: 1.2rem;
-  padding: 25px 35px;
+  padding: 26px 30px;
   border-radius: 5px;
   background-color: transparent;
   cursor: pointer;
@@ -429,28 +434,32 @@ h1.jumbo-bg-dark-text {
   font-family: 'Josefin Sans', 'Rubik', 'Arial Narrow Bold', sans-serif
 }
 
-.profile-container {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
+/* ---------------- high scores -----------------*/
+
+.high-scores-table th {
+  color: white;
 }
 
-.profile-container h1 {
-  text-align: center;
-}
-
-.profile-container p.email-info {
-  color: rgb(252, 74, 89);
-  font-size: 0.9rem;
-  margin-top: 5px;
-  margin-bottom: 20px;
-}
-
-.thought-cards-p {
+h1.end {
+  align-items: center;
   display: flex;
-  flex-wrap: wrap;
-  flex-direction: column;
-  gap: 20px;
+}
+
+p.yellow {
+  color: var(--gold);
+  font-size: 1.2rem;
+}
+
+.button-container-2 {
+  margin-top: 20px;
+}
+
+th {
+  font-size: 1.2rem;
+}
+
+td {
+  font-size: 1.1rem;
 }
 
 /* bucket app ---------------------------------------------------------*/
@@ -466,16 +475,12 @@ h1.jumbo-bg-dark-text {
   text-align: left;
   margin: 0 auto;
   background-color: black;
+  border-top: var(--gold) ridge 8px;
 }
 
 .main-content {
   flex: 1;
   padding: 20px;
-}
-
-header.header {
-  background: black;
-  border: none;
 }
 
 *,
@@ -488,10 +493,10 @@ header.header {
 }
 
 .header {
+  background: black;
   width: 100%;
   display: flex;
   flex-direction: column;
-  border-right: var(--lblue) ridge 8px;
   align-items: center;
   padding: 0;
 }
@@ -514,10 +519,6 @@ a:hover {
 }
 
 /* ------ -------------------- ----------- */
-
-div.bucket-app {
-  border-top: var(--gold) ridge 8px;
-}
 
 aside.sidebar {
   border-right: var(--gold) ridge 8px;
@@ -640,12 +641,6 @@ p {
   /* Adjust margin for spacing */
 }
 
-
-.img-tesseract {
-  width: 100%;
-  height: auto;
-  color: white;
-}
 
 a {
   color: white;

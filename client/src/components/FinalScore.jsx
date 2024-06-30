@@ -49,7 +49,7 @@ const FinalScore = ({ time, onHighScores }) => {
     
           {/* Conditional rendering based on success message state */}
       {showSuccessMessage ? (
-        <p className="success">Your score has been submitted!</p>
+        <p className="success"> ☆ Your score has been submitted ☆ </p>
       ) : (
         <>
           {userId ? (

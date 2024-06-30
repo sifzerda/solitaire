@@ -7,6 +7,11 @@ function Navigation() {
   const currentPage = useLocation().pathname;
   const isLoggedIn = Auth.loggedIn();
 
+    // Function to determine active class based on current page
+    function isActive(path) {
+      return currentPage === path ? 'nav-link active' : 'nav-link';
+    }
+
   // login condition //
 
   function showNavigation() {
@@ -14,7 +19,7 @@ function Navigation() {
       return (
         <React.Fragment>
           <li className="nav-item">
-            <Link to="/Profile" className={currentPage === '/account' ? 'nav-link active' : 'nav-link'}>
+          <Link to="/profile" className={isActive('/profile')}>
               Profile
             </Link>
           </li>

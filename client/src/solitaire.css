@@ -77,8 +77,7 @@ span.red {
 }
 
 .success {
-  color: var(--fluro) 
-  font-weight: bold;
+  color: var(--fluro);
   margin: 1rem 0;
 }
 
