@@ -39,6 +39,9 @@ const FinalScore = ({ time, onHighScores }) => { // add 'score' once coded in
     return (
         <div className="grid-container">
           <h1 className='start'>Congratulations</h1>
+
+          <p>♢ ♢ ♢ ♢ </p>
+ 
           <p className='black-text'>Time taken: <span className='red'>{time} seconds</span></p>
     
           {/* Conditional rendering based on success message state */}
