@@ -52,6 +52,7 @@ body {
   padding: 20px;
   text-align: center;
   overflow: hidden;
+  border-bottom: var(--gold) ridge 8px;
 }
 
 .header-gold {
@@ -310,9 +311,10 @@ body,
 }
 
 #root {
-  border: var(--dark-blue) ridge 8px;
+  border: var(--dark-blue) ridge 12px;
   margin: 0 auto;
   text-align: center;
+  background-color: black;
 }
 
 a.back-link {

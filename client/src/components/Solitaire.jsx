@@ -564,6 +564,7 @@ if (showFinalScore) {
 
         {/* Facedown stockpile section */}
         <div className="facedown-stockpile">
+        <button className='next-card-btn' onClick={nextCard}>Next Card</button>
 
           {cards.slice(currentCardIndex + 1).map((card, index) => (
             <div key={card.id} className="facedown-card">
@@ -649,9 +650,7 @@ if (showFinalScore) {
           </div>
         </div>
 
-        <div className="card-navigation">
-          <button className='next-card-btn' onClick={nextCard}>Next Card</button>
-        </div>
+
 
 {/* Tableau decks section ---------------------------------------------------------------------*/}
 
