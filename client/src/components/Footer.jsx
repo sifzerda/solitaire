@@ -7,8 +7,6 @@ function Footer() {
       <div className="row d-flex justify-content-center">
         <div className="col-lg-8">
 
-          <p>Ordo ab chao.</p>
-
 <span className='blue-span'>♤</span>
 <span className='red-span'>♢</span>
 <span className='blue-span'>♧</span>

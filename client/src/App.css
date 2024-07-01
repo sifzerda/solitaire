@@ -112,24 +112,17 @@ p.timer {
 .start-screen {
   border-radius: 10px;
   border: 3px solid #fff;
+  background-color: var(--bootstrap-dark);
   justify-content: center;
   align-items: center;
   height: 240px;  
   width: 175px; 
 }
 
-.start-screen-background {
-  background-image: url('../../public/images/startcard.png');
-  background-position: center;
-  background-repeat: no-repeat; /* Prevents the background image from repeating */
-  height: 100%; /* Adjust height as needed */
-  border-radius: 10px;
-}
-
 .p-btn {
   color: rgb(252, 74, 89);
   font-size: 1.2rem;
-  padding: 26px 30px;
+  padding: 19px 30px;
   border-radius: 5px;
   background-color: transparent;
   cursor: pointer;
@@ -190,6 +183,13 @@ h1.start-h1 {
   background-color: var(--lblue);
   border: 2px solid white;
   color:  white;
+}
+
+.club-logo {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto;
+  font-size: 4rem;
 }
 
 /* -------------------- HIGHSCORES --------------------*/

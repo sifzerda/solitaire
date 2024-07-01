@@ -5,68 +5,124 @@ import Highscores from './Highscores';
 import FinalScore from './FinalScore';
 // facedown card image
 import cardBack from '../../public/images/cardBack.jpg';
+import heartA from '../../public/images/heartA.jpg';
+import heart2 from '../../public/images/heart2.jpg';
+import heart3 from '../../public/images/heart3.jpg';
+import heart4 from '../../public/images/heart4.jpg';
+import heart5 from '../../public/images/heart5.jpg';
+import heart6 from '../../public/images/heart6.jpg';
+import heart7 from '../../public/images/heart7.jpg';
+import heart8 from '../../public/images/heart8.jpg';
+import heart9 from '../../public/images/heart9.jpg';
+import heart10 from '../../public/images/heart10.jpg';
+import heartJ from '../../public/images/heartJ.jpg';
+import heartQ from '../../public/images/heartQ.jpg';
+import heartK from '../../public/images/heartK.jpg';
+
+import diamondA from '../../public/images/diamondA.jpg';
+import diamond2 from '../../public/images/diamond2.jpg';
+import diamond3 from '../../public/images/diamond3.jpg';
+import diamond4 from '../../public/images/diamond4.jpg';
+import diamond5 from '../../public/images/diamond5.jpg';
+import diamond6 from '../../public/images/diamond6.jpg';
+import diamond7 from '../../public/images/diamond7.jpg';
+import diamond8 from '../../public/images/diamond8.jpg';
+import diamond9 from '../../public/images/diamond9.jpg';
+import diamond10 from '../../public/images/diamond10.jpg';
+import diamondJ from '../../public/images/diamondJ.jpg';
+import diamondQ from '../../public/images/diamondQ.jpg';
+import diamondK from '../../public/images/diamondK.jpg';
+
+import clubA from '../../public/images/clubA.jpg';
+import club2 from '../../public/images/club2.jpg';
+import club3 from '../../public/images/club3.jpg';
+import club4 from '../../public/images/club4.jpg';
+import club5 from '../../public/images/club5.jpg';
+import club6 from '../../public/images/club6.jpg';
+import club7 from '../../public/images/club7.jpg';
+import club8 from '../../public/images/club8.jpg';
+import club9 from '../../public/images/club9.jpg';
+import club10 from '../../public/images/club10.jpg';
+import clubJ from '../../public/images/clubJ.jpg';
+import clubQ from '../../public/images/clubQ.jpg';
+import clubK from '../../public/images/clubK.jpg';
+
+import spadeA from '../../public/images/spadeA.jpg';
+import spade2 from '../../public/images/spade2.jpg';
+import spade3 from '../../public/images/spade3.jpg';
+import spade4 from '../../public/images/spade4.jpg';
+import spade5 from '../../public/images/spade5.jpg';
+import spade6 from '../../public/images/spade6.jpg';
+import spade7 from '../../public/images/spade7.jpg';
+import spade8 from '../../public/images/spade8.jpg';
+import spade9 from '../../public/images/spade9.jpg';
+import spade10 from '../../public/images/spade10.jpg';
+import spadeJ from '../../public/images/spadeJ.jpg';
+import spadeQ from '../../public/images/spadeQ.jpg';
+import spadeK from '../../public/images/spadeK.jpg';
+
 
 // Define initial squares and boxes data
 const initialCards = [
   // HEARTS 
-  { id: 'card-1', suit: 'Hearts', rank: 'Ace', color: 'Red', image: '../../public/images/heartA.jpg' },
-  { id: 'card-2', suit: 'Hearts', rank: '2', color: 'Red', image: '../../public/images/heart2.jpg' },
-  { id: 'card-3', suit: 'Hearts', rank: '3', color: 'Red', image: '../../public/images/heart3.jpg' },
-  { id: 'card-4', suit: 'Hearts', rank: '4', color: 'Red', image: '../../public/images/heart4.jpg' },
-  { id: 'card-5', suit: 'Hearts', rank: '5', color: 'Red', image: '../../public/images/heart5.jpg' },
-  { id: 'card-6', suit: 'Hearts', rank: '6', color: 'Red', image: '../../public/images/heart6.jpg' },
-  { id: 'card-7', suit: 'Hearts', rank: '7', color: 'Red', image: '../../public/images/heart7.jpg' },
-  { id: 'card-8', suit: 'Hearts', rank: '8', color: 'Red', image: '../../public/images/heart8.jpg' },
-  { id: 'card-9', suit: 'Hearts', rank: '9', color: 'Red', image: '../../public/images/heart9.jpg' },
-  { id: 'card-10', suit: 'Hearts', rank: '10', color: 'Red', image: '../../public/images/heart10.jpg' },
-  { id: 'card-11', suit: 'Hearts', rank: 'Jack', color: 'Red', image: '../../public/images/heartJ.jpg' },
-  { id: 'card-12', suit: 'Hearts', rank: 'Queen', color: 'Red', image: '../../public/images/heartQ.jpg' },
-  { id: 'card-13', suit: 'Hearts', rank: 'King', color: 'Red', image: '../../public/images/heartK.jpg' },
+  { id: 'card-1', suit: 'Hearts', rank: 'Ace', color: 'Red', image: heartA },
+  { id: 'card-2', suit: 'Hearts', rank: '2', color: 'Red', image: heart2 },
+  { id: 'card-3', suit: 'Hearts', rank: '3', color: 'Red', image: heart3 },
+  { id: 'card-4', suit: 'Hearts', rank: '4', color: 'Red', image: heart4 },
+  { id: 'card-5', suit: 'Hearts', rank: '5', color: 'Red', image: heart5 },
+  { id: 'card-6', suit: 'Hearts', rank: '6', color: 'Red', image: heart6 },
+  { id: 'card-7', suit: 'Hearts', rank: '7', color: 'Red', image: heart7 },
+  { id: 'card-8', suit: 'Hearts', rank: '8', color: 'Red', image: heart8 },
+  { id: 'card-9', suit: 'Hearts', rank: '9', color: 'Red', image: heart9 },
+  { id: 'card-10', suit: 'Hearts', rank: '10', color: 'Red', image: heart10 },
+  { id: 'card-11', suit: 'Hearts', rank: 'Jack', color: 'Red', image: heartJ },
+  { id: 'card-12', suit: 'Hearts', rank: 'Queen', color: 'Red', image: heartQ },
+  { id: 'card-13', suit: 'Hearts', rank: 'King', color: 'Red', image: heartK },
 
   // DIAMONDS
-  { id: 'card-14', suit: 'Diamonds', rank: 'Ace', color: 'Red', image: '../../public/images/diamondA.jpg' },
-  { id: 'card-15', suit: 'Diamonds', rank: '2', color: 'Red', image: '../../public/images/diamond2.jpg' },
-  { id: 'card-16', suit: 'Diamonds', rank: '3', color: 'Red', image: '../../public/images/diamond3.jpg' },
-  { id: 'card-17', suit: 'Diamonds', rank: '4', color: 'Red', image: '../../public/images/diamond4.jpg' },
-  { id: 'card-18', suit: 'Diamonds', rank: '5', color: 'Red', image: '../../public/images/diamond5.jpg' },
-  { id: 'card-19', suit: 'Diamonds', rank: '6', color: 'Red', image: '../../public/images/diamond6.jpg' },
-  { id: 'card-20', suit: 'Diamonds', rank: '7', color: 'Red', image: '../../public/images/diamond7.jpg' },
-  { id: 'card-21', suit: 'Diamonds', rank: '8', color: 'Red', image: '../../public/images/diamond8.jpg' },
-  { id: 'card-22', suit: 'Diamonds', rank: '9', color: 'Red', image: '../../public/images/diamond9.jpg' },
-  { id: 'card-23', suit: 'Diamonds', rank: '10', color: 'Red', image: '../../public/images/diamond10.jpg' },
-  { id: 'card-24', suit: 'Diamonds', rank: 'Jack', color: 'Red', image: '../../public/images/diamondJ.jpg' },
-  { id: 'card-25', suit: 'Diamonds', rank: 'Queen', color: 'Red', image: '../../public/images/diamondQ.jpg' },
-  { id: 'card-26', suit: 'Diamonds', rank: 'King', color: 'Red', image: '../../public/images/diamondK.jpg' },
+  { id: 'card-14', suit: 'Diamonds', rank: 'Ace', color: 'Red', image: diamondA },
+  { id: 'card-15', suit: 'Diamonds', rank: '2', color: 'Red', image: diamond2 },
+  { id: 'card-16', suit: 'Diamonds', rank: '3', color: 'Red', image: diamond3 },
+  { id: 'card-17', suit: 'Diamonds', rank: '4', color: 'Red', image: diamond4 },
+  { id: 'card-18', suit: 'Diamonds', rank: '5', color: 'Red', image: diamond5 },
+  { id: 'card-19', suit: 'Diamonds', rank: '6', color: 'Red', image: diamond6 },
+  { id: 'card-20', suit: 'Diamonds', rank: '7', color: 'Red', image: diamond7 },
+  { id: 'card-21', suit: 'Diamonds', rank: '8', color: 'Red', image: diamond8 },
+  { id: 'card-22', suit: 'Diamonds', rank: '9', color: 'Red', image: diamond9 },
+  { id: 'card-23', suit: 'Diamonds', rank: '10', color: 'Red', image: diamond10 },
+  { id: 'card-24', suit: 'Diamonds', rank: 'Jack', color: 'Red', image: diamondJ },
+  { id: 'card-25', suit: 'Diamonds', rank: 'Queen', color: 'Red', image: diamondQ },
+  { id: 'card-26', suit: 'Diamonds', rank: 'King', color: 'Red', image: diamondK },
 
   // CLUBS
-  { id: 'card-27', suit: 'Clubs', rank: 'Ace', color: 'Black', image: '../../public/images/clubA.jpg' },
-  { id: 'card-28', suit: 'Clubs', rank: '2', color: 'Black', image: '../../public/images/club2.jpg' },
-  { id: 'card-29', suit: 'Clubs', rank: '3', color: 'Black', image: '../../public/images/club3.jpg' },
-  { id: 'card-30', suit: 'Clubs', rank: '4', color: 'Black', image: '../../public/images/club4.jpg' },
-  { id: 'card-31', suit: 'Clubs', rank: '5', color: 'Black', image: '../../public/images/club5.jpg' },
-  { id: 'card-32', suit: 'Clubs', rank: '6', color: 'Black', image: '../../public/images/club6.jpg' },
-  { id: 'card-33', suit: 'Clubs', rank: '7', color: 'Black', image: '../../public/images/club7.jpg' },
-  { id: 'card-34', suit: 'Clubs', rank: '8', color: 'Black', image: '../../public/images/club8.jpg' },
-  { id: 'card-35', suit: 'Clubs', rank: '9', color: 'Black', image: '../../public/images/club9.jpg' },
-  { id: 'card-36', suit: 'Clubs', rank: '10', color: 'Black', image: '../../public/images/club10.jpg' },
-  { id: 'card-37', suit: 'Clubs', rank: 'Jack', color: 'Black', image: '../../public/images/clubJ.jpg' },
-  { id: 'card-38', suit: 'Clubs', rank: 'Queen', color: 'Black', image: '../../public/images/clubQ.jpg' },
-  { id: 'card-39', suit: 'Clubs', rank: 'King', color: 'Black', image: '../../public/images/clubK.jpg' },
+  { id: 'card-27', suit: 'Clubs', rank: 'Ace', color: 'Black', image: clubA },
+  { id: 'card-28', suit: 'Clubs', rank: '2', color: 'Black', image: club2 },
+  { id: 'card-29', suit: 'Clubs', rank: '3', color: 'Black', image: club3 },
+  { id: 'card-30', suit: 'Clubs', rank: '4', color: 'Black', image: club4 },
+  { id: 'card-31', suit: 'Clubs', rank: '5', color: 'Black', image: club5 },
+  { id: 'card-32', suit: 'Clubs', rank: '6', color: 'Black', image: club6 },
+  { id: 'card-33', suit: 'Clubs', rank: '7', color: 'Black', image: club7 },
+  { id: 'card-34', suit: 'Clubs', rank: '8', color: 'Black', image: club8 },
+  { id: 'card-35', suit: 'Clubs', rank: '9', color: 'Black', image: club9 },
+  { id: 'card-36', suit: 'Clubs', rank: '10', color: 'Black', image: club10 },
+  { id: 'card-37', suit: 'Clubs', rank: 'Jack', color: 'Black', image: clubJ },
+  { id: 'card-38', suit: 'Clubs', rank: 'Queen', color: 'Black', image: clubQ },
+  { id: 'card-39', suit: 'Clubs', rank: 'King', color: 'Black', image: clubK },
 
   // SPADES
-  { id: 'card-40', suit: 'Spades', rank: 'Ace', color: 'Black', image: '../../public/images/spadeA.jpg' },
-  { id: 'card-41', suit: 'Spades', rank: '2', color: 'Black', image: '../../public/images/spade2.jpg' },
-  { id: 'card-42', suit: 'Spades', rank: '3', color: 'Black', image: '../../public/images/spade3.jpg' },
-  { id: 'card-43', suit: 'Spades', rank: '4', color: 'Black', image: '../../public/images/spade4.jpg' },
-  { id: 'card-44', suit: 'Spades', rank: '5', color: 'Black', image: '../../public/images/spade5.jpg' },
-  { id: 'card-45', suit: 'Spades', rank: '6', color: 'Black', image: '../../public/images/spade6.jpg' },
-  { id: 'card-46', suit: 'Spades', rank: '7', color: 'Black', image: '../../public/images/spade7.jpg' },
-  { id: 'card-47', suit: 'Spades', rank: '8', color: 'Black', image: '../../public/images/spade8.jpg' },
-  { id: 'card-48', suit: 'Spades', rank: '9', color: 'Black', image: '../../public/images/spade9.jpg' },
-  { id: 'card-49', suit: 'Spades', rank: '10', color: 'Black', image: '../../public/images/spade10.jpg' },
-  { id: 'card-50', suit: 'Spades', rank: 'Jack', color: 'Black', image: '../../public/images/spadeJ.jpg' },
-  { id: 'card-51', suit: 'Spades', rank: 'Queen', color: 'Black', image: '../../public/images/spadeQ.jpg' },
-  { id: 'card-52', suit: 'Spades', rank: 'King', color: 'Black', image: '../../public/images/spadeK.jpg' },
+  { id: 'card-40', suit: 'Spades', rank: 'Ace', color: 'Black', image: spadeA },
+  { id: 'card-41', suit: 'Spades', rank: '2', color: 'Black', image: spade2 },
+  { id: 'card-42', suit: 'Spades', rank: '3', color: 'Black', image: spade3 },
+  { id: 'card-43', suit: 'Spades', rank: '4', color: 'Black', image: spade4 },
+  { id: 'card-44', suit: 'Spades', rank: '5', color: 'Black', image: spade5 },
+  { id: 'card-45', suit: 'Spades', rank: '6', color: 'Black', image: spade6 },
+  { id: 'card-46', suit: 'Spades', rank: '7', color: 'Black', image: spade7 },
+  { id: 'card-47', suit: 'Spades', rank: '8', color: 'Black', image: spade8 },
+  { id: 'card-48', suit: 'Spades', rank: '9', color: 'Black', image: spade9 },
+  { id: 'card-49', suit: 'Spades', rank: '10', color: 'Black', image: spade10 },
+  { id: 'card-50', suit: 'Spades', rank: 'Jack', color: 'Black', image: spadeJ },
+  { id: 'card-51', suit: 'Spades', rank: 'Queen', color: 'Black', image: spadeQ },
+  { id: 'card-52', suit: 'Spades', rank: 'King', color: 'Black', image: spadeK },
 ];
 
 // create and initialize Foundation decks with suit id, and empty 

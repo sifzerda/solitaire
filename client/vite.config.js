@@ -14,9 +14,17 @@ export default defineConfig({
         changeOrigin: true
       }
     }
-  }, 
+  },
+  build: {
+    outDir: 'client/dist', // Specify the output directory for production builds
+    assetsDir: '.', // Specify the assets directory (relative to outDir)
+    rollupOptions: {
+      // Externalize assets not imported in Vite's build process
+      external: ['react', 'react-dom']
+    }
+  },
   test: {
     environment: 'happy-dom',
     globals: true
   }
-})
+});
