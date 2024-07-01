@@ -649,9 +649,6 @@ if (showFinalScore) {
           </div>
         </div>
 
-
-
-
 {/* Tableau decks section ---------------------------------------------------------------------*/}
 
         <div className="tableau">
