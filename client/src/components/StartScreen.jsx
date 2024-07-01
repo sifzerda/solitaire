@@ -9,6 +9,7 @@ const StartScreen = ({ onStartGame, onHighScores }) => {  // add onFinalScore fo
         <button className="p-btn" onClick={onStartGame}> Start Game</button>
 
 <p className='club-logo'> ♧</p>
+<br></br>
 
             <button className="p-btn" onClick={onHighScores}> High Scores</button>
 
