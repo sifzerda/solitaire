@@ -12,16 +12,17 @@ Current games in gamestack:
 3. Visuals
 4. Installation
 5. Usage
-6. Development
-7. To do
-8. To do for all games
-9. Support
-10. Contributing 
-11. Authors and acknowledgment
-12. License
-13. Project status
+6. Dev Stuff: Building
+7. Bugs 
+8. To do
+9. To do for all games
+10. Support
+11. Contributing 
+12. Authors and acknowledgment
+13. License
+14. Project status
 
-## Description
+## (1) Description
 
 A personal project to create a react MERN stack app which has a number of simple games. I used trial and error and ChatGPT prompting. This was more challenging to make than minesweeper and took some experimentation, and a lot of debugging.
 
@@ -40,7 +41,7 @@ Lessons learned from building this project:
 
 <u>Generally: Build God mode basic, expand, then limit. </u>
 
-## Badges
+## (2) Badges
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) 
 
@@ -60,7 +61,7 @@ Lessons learned from building this project:
 ![FontAwesome](https://img.shields.io/badge/Font%20Awesome-538DD7.svg?style=for-the-badge&logo=Font-Awesome&logoColor=white) 
 ![Heroku](https://img.shields.io/badge/heroku-%23430098.svg?style=for-the-badge&logo=heroku&logoColor=white)
 
-## Visuals
+## (3) Visuals
 
 [Visit App deployed to Heroku](https://solitaire-10-c835a42e5e11.herokuapp.com/)
 
@@ -68,7 +69,7 @@ Lessons learned from building this project:
 
 ![solitaire-screenshot-2](https://github.com/sifzerda/solitaire/assets/139626561/597cc570-c867-4a2b-9975-7aa68b7aa358)
 
-## Installation
+## (4) Installation
 
 ```bash
 git clone https://github.com/sifzerda/solitaire.git
@@ -77,7 +78,7 @@ npm install
 npm run start
 ```
 
-## Usage
+## (5) Usage
 
  The game executes a game of solitaire with traditional rules. Parts:
  
@@ -87,7 +88,7 @@ npm run start
  - High scores page
  - If logged on: profile page with User scores.
 
-## Dev Stuff: Building:
+## (6) Dev Stuff: Building:
 
 The main/mother function is 'onDragEnd' which indexes and executes all other major DnD functions. 
 
@@ -110,7 +111,14 @@ Other:
 4.  <u>'index === pile.cards.length - 1 ? ...'</u> Conditional rendering of card DnD based on whether card is faceup or facedown. Facedown cards are not draggable. Tableau.pile array -1 is facedown (i.e. everything but top card).
 5.  <u>'const initialTableau': </u>'faceUp' property tracks faceup cards. 
 
-## To do: 
+## (7) Bugs: 
+
+- Cards must be put onto tableau in specific position (i.e. on top) otherwise insert at some other point in the tableau pile
+- Very rarely a card will vanish entirely after dropping and game must be restarted
+- Cards can be pulled from anywhere in the tableau pile.
+- Sometimes a card dropped onto a tableau pile will switch to facedown state. Clicking it will cause it to return to faceup state.
+
+## (8) To do: 
 
 - [x] Create Foundation area/boxes for cards to slot/stack into
 - [x] Create Stockpile of free cards
@@ -152,7 +160,7 @@ Stuff to do once main game functioning (i.e. easier implementable latter tasks):
 - [ ] Make each part of the game a separate component
 - [ ] OPTIONAL: Some kind of animation upon winning game
 
-## To do for all games
+## (9) To do for all games
 - [x] create start game landing screen: + start game btn; + high scores btn
 - [x] end game/win game screen, + view score, + submit score, + see high scores, + restart game
 - [x] if user logged in, can save high score (post to user array)
@@ -161,11 +169,11 @@ Stuff to do once main game functioning (i.e. easier implementable latter tasks):
 - [ ] volume increase/decrease for music
 - [ ] play through albums as 8-bit, and can play next song in list
 
-## 6. Support
+## .(10) Support
 
 For support, users can contact tydamon@hotmail.com.
 
-## 8. Contributing
+## (11) Contributing
 
 Any contributions you make are greatly appreciated.
 
@@ -176,17 +184,17 @@ If you have a suggestion that would make this better, please fork the repo and c
 4. Push to the Branch (git push origin feature/NewFeature)
 5. Open a Pull Request
 
-## Authors and acknowledgment
+## (12) Authors and acknowledgment
 
 The author acknowledges and credits those who have contributed to this project, including:
 
 - ChatGPT
 
-## License
+## (13) License
 
 Distributed under the MIT License. See LICENSE.txt for more information.
 
-## Project status
+## (14) Project status
 
 This project is completed. 
 
