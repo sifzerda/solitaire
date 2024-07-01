@@ -21,11 +21,8 @@ const startApolloServer = async () => {
   app.use(express.urlencoded({ extended: false }));
   app.use(express.json());
 
-// Serve the static files from the Vite build output
-app.use(express.static(path.join(__dirname, 'client/dist')));
-
-// Serve images specifically
-app.use('/images', express.static(path.join(__dirname, 'client/dist/images')));
+  // Serve up static assets
+  app.use('/images', express.static(path.join(__dirname, '../client/public/images')));
 
   app.use('/graphql', expressMiddleware(server, {
     context: authMiddleware
@@ -34,10 +31,9 @@ app.use('/images', express.static(path.join(__dirname, 'client/dist/images')));
   if (process.env.NODE_ENV === 'production') {
     app.use(express.static(path.join(__dirname, '../client/dist')));
 
-// Handle other routes and serve index.html
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'client/dist', 'index.html'));
-});
+    app.get('*', (req, res) => {
+      res.sendFile(path.join(__dirname, '../client/dist/index.html'));
+    });
   }
 
   db.once('open', () => {
