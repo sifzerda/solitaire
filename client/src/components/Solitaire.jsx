@@ -548,7 +548,6 @@ if (showFinalScore) {
 
       {gameStarted && (
  
-
     <DragDropContext onDragEnd={onDragEnd}>
 
         {/* --------------- game exit and restart btns ----------------*/}
@@ -560,15 +559,12 @@ if (showFinalScore) {
   </div>
 </div>
 
-{/* ------------------------------------------------------------------ */}
-
 {/* Foundation decks section ---------------------------------------------------------------------*/}
 
         <div className="decks">
 
         <div className="cards">
 {/* --------------- --------------------- -----------------------*/}
-        <button className='next-card-btn' onClick={nextCard}>Next Card</button>
 
         {/* Facedown stockpile section */}
         <div className="facedown-stockpile">
@@ -606,18 +602,21 @@ if (showFinalScore) {
           </Droppable>
         </div>
 
-
 {/* Visible only on final card ---------------------------------------*/}
 <div className="last-card-container">
         {cards.slice(currentCardIndex + 1).length === 0 && (
 
-            <div className="last-card-content">
-              <img className='refresh' src="https://img.icons8.com/matisse/100/rotate.png" alt="rotate" />
-            </div>
-
+            <p className="last-card-content">
+              🔄
+            </p>
         )}
+
+<button className='next-card-btn' onClick={nextCard}>Next Card</button>
+
+{/* ----------------------------------------------------------------*/}
 </div>
-          
+
+
           <div className="foundation-decks">
             {decks.map((deck) => (
               <div key={deck.id} className="foundation-deck">
