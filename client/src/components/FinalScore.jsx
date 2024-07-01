@@ -11,8 +11,9 @@ const FinalScore = ({ time, onHighScores }) => {
   const [solTimeTaken, setSolTimeTaken] = useState(time);
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
 
-  const { data, loading, error } = useQuery(QUERY_ME);
+  const { data } = useQuery(QUERY_ME);
   const userId = data?.me?._id;
+  const username = data?.me?.username || 'Anonymous';
 
   const [saveSolScore, { loading: savingScore }] = useMutation(SAVE_SOL_SCORE);
 
@@ -35,9 +36,6 @@ const FinalScore = ({ time, onHighScores }) => {
       alert('There was an error saving your score');
     }
   };
-
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error.message}</p>;
   
     return (
         <div className="grid-container">
@@ -51,8 +49,7 @@ const FinalScore = ({ time, onHighScores }) => {
       {showSuccessMessage ? (
         <p className="success"> ☆ Your score has been submitted ☆ </p>
       ) : (
-        <>
-          {userId ? (
+          Auth.loggedIn() ? (
             <button className="submit-button-s" onClick={handleSubmit} disabled={savingScore}>
               {savingScore ? 'Submitting...' : 'Submit Score'}
             </button>
@@ -60,8 +57,7 @@ const FinalScore = ({ time, onHighScores }) => {
             <p className='black-text'>
               You must <Link to="/login">LOG IN</Link> or <Link to="/signup">SIGNUP</Link> to Submit a Score.
             </p>
-          )}
-        </>
+          )
       )}
 
       <button className="submit-button-h" onClick={onHighScores}>

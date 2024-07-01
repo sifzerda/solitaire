@@ -616,7 +616,6 @@ if (showFinalScore) {
 {/* ----------------------------------------------------------------*/}
 </div>
 
-
           <div className="foundation-decks">
             {decks.map((deck) => (
               <div key={deck.id} className="foundation-deck">

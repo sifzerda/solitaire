@@ -1,6 +1,6 @@
 
 
-const StartScreen = ({ onStartGame, onHighScores }) => {  // add onFinalScore for debugging
+const StartScreen = ({ onStartGame, onHighScores, onFinalScore }) => {  // add onFinalScore for debugging
   
     return (
       <div className='start-container'>
@@ -15,7 +15,7 @@ const StartScreen = ({ onStartGame, onHighScores }) => {  // add onFinalScore fo
 
 {/*
   <button className="p-btn" onClick={onFinalScore}> Final Scores  - debugging </button>
-*/ }
+*/}
 
             </div>
           </div>   

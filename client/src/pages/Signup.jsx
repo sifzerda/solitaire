@@ -43,7 +43,7 @@ function Signup() {
   };
 
   return (
-    <div className="container my-1-9">
+    <div className="my-1-9">
       <Link to="/login" className="back-link">← Go to Login</Link>
 
       <h2 className="login-title">Signup</h2>
