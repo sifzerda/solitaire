@@ -75,17 +75,6 @@ li {
   color: white;
 }
 
-main.mx-3 {
-  height: 105vh;
-}
-
-.center-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
-
 .final-container {
   border: solid 2px var(--lblue);
   padding: 30px;
@@ -97,7 +86,7 @@ p.timer {
   font-size: 1.3rem;
   color: white;
   font-family: 'Rahjdhani', sans-serif;
-  padding: 40px;
+  flex: none;
 }
 
 /*----------------------- START SCREEN ----------------------------*/
@@ -146,10 +135,12 @@ h1.start-h1 {
 }
 
 .button-wrapper {
+  padding-top: 40px;
   display: flex;
-  justify-content: flex-end; 
-  padding-top: 20px;
-}
+  justify-content: space-between; 
+  align-items: center; 
+  margin-bottom: 10px; 
+  }
 
 .game-button {
   padding: 10px 20px;

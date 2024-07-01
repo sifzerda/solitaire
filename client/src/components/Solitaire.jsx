@@ -543,28 +543,35 @@ if (showFinalScore) {
 /* -------------------------- RETURN/RENDERING -----------------------------------*/
 
   return (
-<div className='solitaire-box'>
+<div className="s-container">
 { !gameStarted && <StartScreen onStartGame={handleStartGame} onHighScores={handleHighscores}  onFinalScore={handleFinalScore}  /> }
 
       {gameStarted && (
-        <div className='main-game-container'>
-
-{/* --------------- game exit and restart btns ----------------*/}
-        <div className="button-wrapper">
-        <button className="game-button restart-game" onClick={handleRestartGame}>Restart</button>
-        <button className="game-button exit-game" onClick={handleExitGame}>Exit</button>
-      </div>
-
-      <div className="timer">Time: {timer}</div>
  
-{/* --------------- --------------------- -----------------------*/}
 
     <DragDropContext onDragEnd={onDragEnd}>
-      <div className="s-container">
+
+        {/* --------------- game exit and restart btns ----------------*/}
+        <div className="button-wrapper">
+  <div className="timer">Time: {timer}</div>
+  <div className="button-container">
+    <button className="game-button restart-game" onClick={handleRestartGame}>Restart</button>
+    <button className="game-button exit-game" onClick={handleExitGame}>Exit</button>
+  </div>
+</div>
+
+{/* ------------------------------------------------------------------ */}
+
+{/* Foundation decks section ---------------------------------------------------------------------*/}
+
+        <div className="decks">
+
+        <div className="cards">
+{/* --------------- --------------------- -----------------------*/}
+        <button className='next-card-btn' onClick={nextCard}>Next Card</button>
 
         {/* Facedown stockpile section */}
         <div className="facedown-stockpile">
-        <button className='next-card-btn' onClick={nextCard}>Next Card</button>
 
           {cards.slice(currentCardIndex + 1).map((card, index) => (
             <div key={card.id} className="facedown-card">
@@ -573,21 +580,7 @@ if (showFinalScore) {
           ))}
         </div>
 
-{/* Visible only on final card ---------------------------------------*/}
-
-        {cards.slice(currentCardIndex + 1).length === 0 && (
-          <div className="last-card-container">
-            <div className="last-card-content">
-              <img className='refresh' src="https://img.icons8.com/matisse/100/rotate.png" alt="rotate" />
-            </div>
-          </div>
-        )}
-
-{/* ------------------------------------------------------------------ */}
-
-        <div className="cards">
-
-          <Droppable droppableId="revealed-cards">
+        <Droppable droppableId="revealed-cards">
             {(provided) => (
               <div className="card-list" {...provided.droppableProps} ref={provided.innerRef}>
                 {currentCardIndex < cards.length && (
@@ -614,9 +607,17 @@ if (showFinalScore) {
         </div>
 
 
-{/* Foundation decks section ---------------------------------------------------------------------*/}
+{/* Visible only on final card ---------------------------------------*/}
+<div className="last-card-container">
+        {cards.slice(currentCardIndex + 1).length === 0 && (
 
-        <div className="decks">
+            <div className="last-card-content">
+              <img className='refresh' src="https://img.icons8.com/matisse/100/rotate.png" alt="rotate" />
+            </div>
+
+        )}
+</div>
+          
           <div className="foundation-decks">
             {decks.map((deck) => (
               <div key={deck.id} className="foundation-deck">
@@ -649,6 +650,7 @@ if (showFinalScore) {
             ))}
           </div>
         </div>
+
 
 
 
@@ -725,9 +727,9 @@ if (showFinalScore) {
         </div>
         
 
-      </div>
+ 
     </DragDropContext>
-    </div>
+ 
   )}
 
 

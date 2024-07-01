@@ -1,13 +1,9 @@
 /* ------------------------- solitaire -------------------------*/
 
 .s-container {
-  display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  max-width: 1200px; /* Limiting the max width */
-  width: 100%;
   justify-content: center;
-  padding: 20px;
   box-sizing: border-box;
 }
 
@@ -17,25 +13,17 @@
   background-color: #2ecc71;
   border: 6px solid #229753;
   border-radius: 8px;
-  padding: 20px;
   justify-content: center;
   align-items: center;
   color: white;
   font-size: 24px;
   text-align: center;
-
-  flex-direction: column;
-  height: 100vh; /* Full viewport height */
 }
 
 .solitaire-section {
   flex: 1;
-  min-width: 0; /* Ensure contents can shrink properly */
-}
-
-.main-game-container {
-  justify-content: center;
-  align-items: center;
+  min-width: 0;
+  /* Ensure contents can shrink properly */
 }
 
 /* game win screen */
@@ -43,30 +31,32 @@
 .grid-container {
   border: 2px solid var(--lblue);
   border-radius: 5px;
-padding: 20px;
-margin-top: -400px;
-text-align: center;
+  padding: 20px;
+  margin-top: -400px;
+  text-align: center;
 }
 
 .start {
   font-size: 2rem;
   margin-bottom: 1rem;
-  color:  white;  
+  color: white;
 }
 
 .black-text {
-  color: white; 
+  color: white;
   font-size: 1.2rem;
   margin-bottom: 1rem;
 }
 
 span.red {
-  color: var(--light-red); /* user time and score*/  
+  color: var(--light-red);
+  /* user time and score*/
 }
 
-.submit-button-s {  /* submit score button */
-  background-color: #2da031; 
-  color: rgb(255, 255, 255); 
+.submit-button-s {
+  /* submit score button */
+  background-color: #2da031;
+  color: rgb(255, 255, 255);
   border: 2px solid rgb(255, 255, 255);
   padding: 10px 20px;
   text-align: center;
@@ -80,7 +70,7 @@ span.red {
 }
 
 .submit-button-s:hover {
-  background-color: var(--fluro); 
+  background-color: var(--fluro);
   color: black;
   border: 2px solid rgb(169, 172, 1);
 }
@@ -90,9 +80,10 @@ span.red {
   margin: 1rem 0;
 }
 
-.submit-button-h {   /* to highscores button */
-  background-color: var(--light-red); 
-  color: rgb(255, 255, 255); 
+.submit-button-h {
+  /* to highscores button */
+  background-color: var(--light-red);
+  color: rgb(255, 255, 255);
   border: 2px solid rgb(255, 255, 255);
   padding: 10px 20px;
   text-align: center;
@@ -106,14 +97,15 @@ span.red {
 }
 
 .submit-button-h:hover {
-  background-color: rgb(151, 23, 23); 
+  background-color: rgb(151, 23, 23);
   color: rgb(255, 255, 255);
   border: 2px solid rgb(255, 255, 255);
 }
 
-.submit-button-p { /* play again button */
-  background-color: var(--lblue);  
-  color: rgb(255, 255, 255); 
+.submit-button-p {
+  /* play again button */
+  background-color: var(--lblue);
+  color: rgb(255, 255, 255);
   border: 2px solid rgb(255, 255, 255);
   padding: 10px 20px;
   text-align: center;
@@ -127,7 +119,7 @@ span.red {
 }
 
 .submit-button-p:hover {
-  background-color: rgb(0, 64, 138); 
+  background-color: rgb(0, 64, 138);
   color: white;
   border: 2px solid white;
 }
@@ -138,24 +130,23 @@ span.red {
 .cards,
 .decks,
 .tableau {
-  margin: 10px;
+  padding: 20px;
 }
 
 .decks {
-  padding: 10px;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
+  margin-top: 80px;
 }
+
 
 .deck {
   background-color: #f0f0f0;
   border: 1px solid #ccc;
   border-radius: 5px;
-  padding: 10px;
-  margin-bottom: 10px;
-  width: 80px;
   text-align: center;
+  margin: auto;
 }
 
 .deck-content {
@@ -170,26 +161,22 @@ span.red {
 }
 
 .cards {
-  display: flex;
-  flex-direction: column;
   align-items: center;
   padding: 10px;
-  width: 300px;
-  margin-right: 60px;
-  margin-left: -40px;
-}
-
-.card-navigation {
-  margin-top: 10px;
-}
-
-.center-container {
+  margin: auto;
+  flex: 1;
   display: flex;
-  flex-direction: column;
+  position: relative;
+}
+
+.decks {
+  padding: 10px;
+  display: flex;
   align-items: center;
-  /* Center items horizontally */
-  justify-content: center;
-  /* Center items vertically */
+}
+
+.container {
+  display: flex;
 }
 
 .empty-deck-emoji {
@@ -274,6 +261,7 @@ span.red {
   /* Center vertically */
   height: 100%;
   /* Ensure it takes full height of its container */
+  width: 30%;
 }
 
 .card {
@@ -418,17 +406,15 @@ span.red {
 
 .next-card-btn {
   width: 120px;
-  height: 180px;
- margin-bottom: -100px;
-  padding: 8px 16px;
+  height: 210px;
   font-size: 16px;
   background-color: red;
   color: transparent;
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  margin-right: 900px;
-  transform: translateX(-83%) translateY(95%);
+  transform: translateX(133%) translateY(-20%);
+  z-index: 2;
 }
 
 .next-card-btn:hover {
@@ -440,16 +426,14 @@ span.red {
   cursor: not-allowed;
 }
 
-.facedown-pile {
+
+.facedown-stockpile {
+  height: 200px;
+  width: 200px;
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-.facedown-stockpile {
-  margin-right: -10px;
-  position: relative;
-  /* Adjust margin as needed */
+  z-index: 1;
 }
 
 .facedown-card {
@@ -458,14 +442,10 @@ span.red {
   border-radius: 5px;
   width: 120px;
   height: 180px;
-  margin-bottom: 5px;
   padding: 10px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
   /* Optional: add a shadow effect */
   color: black;
-  margin-left: 60px;
-  margin-right: 10px;
-  margin-top: 47px;
 }
 
 .facedown-card img {
@@ -480,16 +460,12 @@ span.red {
 }
 
 .last-card-container {
- margin-right: 65px;
-  bottom: -85px;
-  left: 50%;
   border: 3px dashed #606666;
   border-radius: 5px;
-  padding: 10px;
-  transform: translateX(-510%);
   width: 120px;
   height: 180px;
   color: white;
+  transform: translateX(-250%) translateY(-06%);
 }
 
 /* FOUNDATION --------------------------------------------*/
@@ -681,6 +657,7 @@ img.refresh {
 
 @media (max-width: 768px) {
   .solitaire-container {
-    flex-direction: column; /* Stack cards vertically on smaller screens */
+    flex-direction: column;
+    /* Stack cards vertically on smaller screens */
   }
 }
