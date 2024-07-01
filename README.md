@@ -62,7 +62,7 @@ Lessons learned from building this project:
 
 ## Visuals
 
-[Visit App deployed to Heroku](https://minesweeper10-611b154e8013.herokuapp.com/)
+[Visit App deployed to Heroku](https://solitaire-10-c835a42e5e11.herokuapp.com/)
 
 ![solitaire-screenshot-1](https://github.com/sifzerda/solitaire/assets/139626561/a82c2908-baa8-4085-89b9-f19f782646c9)
 
