@@ -151,7 +151,7 @@ Stuff to do once main game functioning (i.e. easier implementable latter tasks):
 - [x] reshuffle stockpile button, basically restarts game
 - [x] timer: restarts on game refresh
 - [ ] Points system, each time a card is placed on foundation, it adds points (if cards can be removed from foundation, don't forget to subtract points for that)
--  Points system: add time to points so the less time, the more points you get, *** put this in minesweeper
+-  [ ] Points system: add time to points so the less time, the more points you get, *** put this in minesweeper
 - [x] Handling upon: game win
 - [ ] Handling upon: game loss, or no valid moves left that would allow game win
 - [x] highscores comp
