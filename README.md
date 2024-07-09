@@ -169,7 +169,7 @@ Stuff to do once main game functioning (i.e. easier implementable latter tasks):
 - [ ] volume increase/decrease for music
 - [ ] play through albums as 8-bit, and can play next song in list
 
-## .(10) Support
+## (10) Support
 
 For support, users can contact tydamon@hotmail.com.
 
