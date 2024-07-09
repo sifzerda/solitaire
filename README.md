@@ -114,7 +114,7 @@ Other:
 ## (7) Bugs: 
 
 - Cards must be put onto tableau in specific position (i.e. on top) otherwise insert at some other point in the tableau pile
-- Very rarely a card will vanish entirely after dropping and game must be restarted
+- Very rarely a card will vanish entirely after dropping and game must be restarted. Card is removed from source but doesn't render onto destination.
 - Cards can be pulled from anywhere in the tableau pile.
 - Sometimes a card dropped onto a tableau pile will switch to facedown state. Clicking it will cause it to return to faceup state.
 
