@@ -80,7 +80,7 @@ npm run start
 
 ## (5) Usage
 
- The game executes a game of solitaire with traditional rules. Parts:
+ The app executes a game of solitaire with traditional rules. Parts:
  
  - Start screen
  - Game
