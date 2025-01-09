@@ -4,63 +4,62 @@ import StartScreen from './StartScreen';
 import Highscores from './Highscores';
 import FinalScore from './FinalScore';
 // facedown card image
-import cardBack from '../../public/images/cardBack.jpg';
-import heartA from '../../public/images/heartA.jpg';
-import heart2 from '../../public/images/heart2.jpg';
-import heart3 from '../../public/images/heart3.jpg';
-import heart4 from '../../public/images/heart4.jpg';
-import heart5 from '../../public/images/heart5.jpg';
-import heart6 from '../../public/images/heart6.jpg';
-import heart7 from '../../public/images/heart7.jpg';
-import heart8 from '../../public/images/heart8.jpg';
-import heart9 from '../../public/images/heart9.jpg';
-import heart10 from '../../public/images/heart10.jpg';
-import heartJ from '../../public/images/heartJ.jpg';
-import heartQ from '../../public/images/heartQ.jpg';
-import heartK from '../../public/images/heartK.jpg';
+import cardBack from '../assets/cardBack.jpg';
+import heartA from '../assets/heartA.jpg';
+import heart2 from '../assets/heart2.jpg';
+import heart3 from '../assets/heart3.jpg';
+import heart4 from '../assets/heart4.jpg';
+import heart5 from '../assets/heart5.jpg';
+import heart6 from '../assets/heart6.jpg';
+import heart7 from '../assets/heart7.jpg';
+import heart8 from '../assets/heart8.jpg';
+import heart9 from '../assets/heart9.jpg';
+import heart10 from '../assets/heart10.jpg';
+import heartJ from '../assets/heartJ.jpg';
+import heartQ from '../assets/heartQ.jpg';
+import heartK from '../assets/heartK.jpg';
 
-import diamondA from '../../public/images/diamondA.jpg';
-import diamond2 from '../../public/images/diamond2.jpg';
-import diamond3 from '../../public/images/diamond3.jpg';
-import diamond4 from '../../public/images/diamond4.jpg';
-import diamond5 from '../../public/images/diamond5.jpg';
-import diamond6 from '../../public/images/diamond6.jpg';
-import diamond7 from '../../public/images/diamond7.jpg';
-import diamond8 from '../../public/images/diamond8.jpg';
-import diamond9 from '../../public/images/diamond9.jpg';
-import diamond10 from '../../public/images/diamond10.jpg';
-import diamondJ from '../../public/images/diamondJ.jpg';
-import diamondQ from '../../public/images/diamondQ.jpg';
-import diamondK from '../../public/images/diamondK.jpg';
+import diamondA from '../assets/diamondA.jpg';
+import diamond2 from '../assets/diamond2.jpg';
+import diamond3 from '../assets/diamond3.jpg';
+import diamond4 from '../assets/diamond4.jpg';
+import diamond5 from '../assets/diamond5.jpg';
+import diamond6 from '../assets/diamond6.jpg';
+import diamond7 from '../assets/diamond7.jpg';
+import diamond8 from '../assets/diamond8.jpg';
+import diamond9 from '../assets/diamond9.jpg';
+import diamond10 from '../assets/diamond10.jpg';
+import diamondJ from '../assets/diamondJ.jpg';
+import diamondQ from '../assets/diamondQ.jpg';
+import diamondK from '../assets/diamondK.jpg';
 
-import clubA from '../../public/images/clubA.jpg';
-import club2 from '../../public/images/club2.jpg';
-import club3 from '../../public/images/club3.jpg';
-import club4 from '../../public/images/club4.jpg';
-import club5 from '../../public/images/club5.jpg';
-import club6 from '../../public/images/club6.jpg';
-import club7 from '../../public/images/club7.jpg';
-import club8 from '../../public/images/club8.jpg';
-import club9 from '../../public/images/club9.jpg';
-import club10 from '../../public/images/club10.jpg';
-import clubJ from '../../public/images/clubJ.jpg';
-import clubQ from '../../public/images/clubQ.jpg';
-import clubK from '../../public/images/clubK.jpg';
+import clubA from '../assets/clubA.jpg';
+import club2 from '../assets/club2.jpg';
+import club3 from '../assets/club3.jpg';
+import club4 from '../assets/club4.jpg';
+import club5 from '../assets/club5.jpg';
+import club6 from '../assets/club6.jpg';
+import club7 from '../assets/club7.jpg';
+import club8 from '../assets/club8.jpg';
+import club9 from '../assets/club9.jpg';
+import club10 from '../assets/club10.jpg';
+import clubJ from '../assets/clubJ.jpg';
+import clubQ from '../assets/clubQ.jpg';
+import clubK from '../assets/clubK.jpg';
 
-import spadeA from '../../public/images/spadeA.jpg';
-import spade2 from '../../public/images/spade2.jpg';
-import spade3 from '../../public/images/spade3.jpg';
-import spade4 from '../../public/images/spade4.jpg';
-import spade5 from '../../public/images/spade5.jpg';
-import spade6 from '../../public/images/spade6.jpg';
-import spade7 from '../../public/images/spade7.jpg';
-import spade8 from '../../public/images/spade8.jpg';
-import spade9 from '../../public/images/spade9.jpg';
-import spade10 from '../../public/images/spade10.jpg';
-import spadeJ from '../../public/images/spadeJ.jpg';
-import spadeQ from '../../public/images/spadeQ.jpg';
-import spadeK from '../../public/images/spadeK.jpg';
-
+import spadeA from '../assets/spadeA.jpg';
+import spade2 from '../assets/spade2.jpg';
+import spade3 from '../assets/spade3.jpg';
+import spade4 from '../assets/spade4.jpg';
+import spade5 from '../assets/spade5.jpg';
+import spade6 from '../assets/spade6.jpg';
+import spade7 from '../assets/spade7.jpg';
+import spade8 from '../assets/spade8.jpg';
+import spade9 from '../assets/spade9.jpg';
+import spade10 from '../assets/spade10.jpg';
+import spadeJ from '../assets/spadeJ.jpg';
+import spadeQ from '../assets/spadeQ.jpg';
+import spadeK from '../assets/spadeK.jpg';
 
 // Define initial squares and boxes data
 const initialCards = [
@@ -276,18 +275,19 @@ const handleRestartGame = () => {
     const isMoveValid = isMoveAllowed(draggedCard, targetFoundation);
 
     if (!isMoveValid) {
-      // Move is invalid, return to beginning of stockpile array
-      //setCards((prevCards) => [draggedCard, ...prevCards]); 
-      return; // go to next card in array
+      return; 
     }
 
+// Remove the card from the source and update the tableau or revealed cards
     if (source.droppableId === 'revealed-cards') {
       const updatedCards = cards.filter((card) => card.id !== draggedCard.id);
       setCards(updatedCards);
     } else {
       let updatedTableau = tableau.map((pile) => ({
         ...pile,
-        cards: pile.id === source.droppableId ? pile.cards.filter((_, index) => index !== source.index) : pile.cards,
+        cards: pile.id === source.droppableId 
+        ? pile.cards.filter((_, index) => index !== source.index) 
+        : pile.cards,
       }));
       setTableau(updatedTableau);
     }
