@@ -80,7 +80,7 @@ npm run start
 
 ## (5) Usage
 
- The game executes a game of solitaire with traditional rules. Parts:
+ The app executes a game of solitaire with traditional rules. Parts:
  
  - Start screen
  - Game
@@ -114,7 +114,7 @@ Other:
 ## (7) Bugs: 
 
 - Cards must be put onto tableau in specific position (i.e. on top) otherwise insert at some other point in the tableau pile
-- Very rarely a card will vanish entirely after dropping and game must be restarted
+- Very rarely a card will vanish entirely after dropping and game must be restarted. Card is removed from source but doesn't render onto destination.
 - Cards can be pulled from anywhere in the tableau pile.
 - Sometimes a card dropped onto a tableau pile will switch to facedown state. Clicking it will cause it to return to faceup state.
 
@@ -151,7 +151,7 @@ Stuff to do once main game functioning (i.e. easier implementable latter tasks):
 - [x] reshuffle stockpile button, basically restarts game
 - [x] timer: restarts on game refresh
 - [ ] Points system, each time a card is placed on foundation, it adds points (if cards can be removed from foundation, don't forget to subtract points for that)
--  Points system: add time to points so the less time, the more points you get, *** put this in minesweeper
+-  [ ] Points system: add time to points so the less time, the more points you get, *** put this in minesweeper
 - [x] Handling upon: game win
 - [ ] Handling upon: game loss, or no valid moves left that would allow game win
 - [x] highscores comp
@@ -169,7 +169,7 @@ Stuff to do once main game functioning (i.e. easier implementable latter tasks):
 - [ ] volume increase/decrease for music
 - [ ] play through albums as 8-bit, and can play next song in list
 
-## .(10) Support
+## (10) Support
 
 For support, users can contact tydamon@hotmail.com.
 
