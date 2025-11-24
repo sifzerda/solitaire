@@ -159,7 +159,6 @@ const Solitaire = () => {
   const [isActive, setIsActive] = useState(false);
   const [showFinalScore, setShowFinalScore] = useState(false);
 
-
     // Timer logic -------------------------------------------
 
     useEffect(() => {
@@ -264,7 +263,7 @@ const handleRestartGame = () => {
     setShowFinalScore(true);
   };
 
-  //-----------------------------------(F1) drag ANY TO FOUNDATION RULES -------------------------------------------------
+  //-----------------------------------(F1) drag ANY TO FOUNDATION rules -------------------------------------------------
 
   // Check if the move is valid to the foundation
   const handleFoundationDrop = (source, destination, draggedCard) => {
@@ -335,7 +334,7 @@ const handleRestartGame = () => {
     return ranks[currentIndex + 1];
   };
 
-  //-----------------------------------(S1) drag STOCKPILE TO TABLEAU RULES -------------------------------------------------
+  //-----------------------------------(S1) drag STOCKPILE TO TABLEAU rules -------------------------------------------------
 
   const handleStockpileToTableauDrop = (draggedCard, destination) => {
     const updatedCards = cards.filter((card) => card.id !== draggedCard.id);
