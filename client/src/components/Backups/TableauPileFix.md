@@ -1,3 +1,7 @@
+Beautiful DND has 2 types of drop zones: vertical list and single-slot droppables. This code changes the tableaus from vertical lists in DND to single slot drop zones.
+
+///////////////////////
+
 import { useState, useEffect } from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import StartScreen from './StartScreen';
